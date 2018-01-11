@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>https://ytlogos.github.io/2018/01/11/%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E7%BB%98%E5%88%B6GWAS%E4%B8%AD%E7%9A%84%E6%9B%BC%E5%93%88%E9%A1%BF%E5%9B%BE%E4%BB%A5%E5%8F%8AQQ%E5%9B%BE/</loc>
+    <lastmod>2018-01-11T04:18:15.117Z</lastmod>
+    <data>
+        <display>
+        <title>一步步教你如何绘制GWAS中的曼哈顿图以及QQ图</title>
+        <pubTime>2018-01-11T04:19:05.000Z</pubTime>
+        
+        <tag>GWAS</tag>
+         
+        <tag>QQ Plot</tag>
+         
+        <tag>Manhattan Plot</tag>
+         
+         
+           
+             
+              <breadCrumb title="GWAS" url="https://ytlogos.github.io/categories/GWAS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ytlogos.github.io/2018/01/07/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/</loc>
     <lastmod>2018-01-07T12:44:02.414Z</lastmod>
     <data>
@@ -550,18 +574,16 @@
 
     
   <url>
-    <loc>https://ytlogos.github.io/2017/09/19/ggplot2%E9%AB%98%E6%95%88%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/</loc>
+    <loc>https://ytlogos.github.io/2017/09/16/tidyverse%E5%AE%9E%E8%B7%B5%E4%B9%8B%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E5%9C%B0%E5%9B%BE/</loc>
     <lastmod>2017-09-19T04:22:05.904Z</lastmod>
     <data>
         <display>
-        <title>ggplot2高效实用指南</title>
-        <pubTime>2017-09-19T00:29:46.000Z</pubTime>
+        <title>tidyverse实践之绘制简单地图</title>
+        <pubTime>2017-09-16T02:47:05.000Z</pubTime>
         
-        <tag>R</tag>
+        <tag>tidyverse</tag>
          
-        <tag>visualization</tag>
-         
-        <tag>ggplot2</tag>
+        <tag>map</tag>
          
          
            
@@ -574,16 +596,18 @@
 
     
   <url>
-    <loc>https://ytlogos.github.io/2017/09/16/tidyverse%E5%AE%9E%E8%B7%B5%E4%B9%8B%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E5%9C%B0%E5%9B%BE/</loc>
+    <loc>https://ytlogos.github.io/2017/09/19/ggplot2%E9%AB%98%E6%95%88%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/</loc>
     <lastmod>2017-09-19T04:22:05.904Z</lastmod>
     <data>
         <display>
-        <title>tidyverse实践之绘制简单地图</title>
-        <pubTime>2017-09-16T02:47:05.000Z</pubTime>
+        <title>ggplot2高效实用指南</title>
+        <pubTime>2017-09-19T00:29:46.000Z</pubTime>
         
-        <tag>tidyverse</tag>
+        <tag>R</tag>
          
-        <tag>map</tag>
+        <tag>visualization</tag>
+         
+        <tag>ggplot2</tag>
          
          
            
