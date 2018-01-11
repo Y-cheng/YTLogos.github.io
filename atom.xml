@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-01-11T04:18:15.117Z</updated>
+  <updated>2018-01-11T04:22:08.954Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -20,13 +20,12 @@
     <link href="https://ytlogos.github.io/2018/01/11/%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E7%BB%98%E5%88%B6GWAS%E4%B8%AD%E7%9A%84%E6%9B%BC%E5%93%88%E9%A1%BF%E5%9B%BE%E4%BB%A5%E5%8F%8AQQ%E5%9B%BE/"/>
     <id>https://ytlogos.github.io/2018/01/11/一步步教你如何绘制GWAS中的曼哈顿图以及QQ图/</id>
     <published>2018-01-11T04:19:05.000Z</published>
-    <updated>2018-01-11T04:18:15.117Z</updated>
+    <updated>2018-01-11T04:22:08.954Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180111/EE3ce1m2L2.png?imageslim" alt="mark"></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>GWAS研究中的曼哈顿图以及QQ图可以说是标配了，至于具体如何理解这两个图，可以参考我以前的博客。上周我利用自己的数据跑了个GWAS，我是利用<strong>GAPIT</strong>跑的，出的图感觉真心丑，大家可以看看：</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>GWAS研究中的曼哈顿图以及QQ图可以说是标配了，至于具体如何理解这两个图，可以参考我以前的博客。上周我利用自己的数据跑了个GWAS，我是利用<strong>GAPIT</strong>跑的，出的图感觉真心丑，大家可以看看：<br><a id="more"></a></p>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180111/iAm97eG6FD.png?imageslim" alt="Manhattan plot"><br><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180111/im6b1iJ7FE.png?imageslim" alt="QQ plot"></p>
 <p>所以我利用<strong>GAPIT</strong>出来的数据重新画了图，用的就是包<strong>qqman</strong>。</p>
-<a id="more"></a>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Github主页上提供了三种安装方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Install the stable release from CRAn</div><div class="line">install.packages(&quot;qqman&quot;)</div><div class="line"># 直接从Github上安装</div><div class="line">devtools::install_github(&quot;stephenturner/qqman&quot;)</div><div class="line"># 从Github上安装最新的开发版</div><div class="line">devtools::install_github(&quot;stephenturner/qqman&quot;,ref=&quot;dev&quot;)</div></pre></td></tr></table></figure></p>
 <h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p><strong>qqman</strong>里内置了一套数据集<code>gwasResults</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(qqman)</div><div class="line">dim(gwasResults)</div><div class="line">## [1] 16470     4</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">head(gwasResults)</div></pre></td></tr></table></figure>
@@ -75,9 +74,7 @@
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180111/EE3ce1m2L2.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;GWAS研究中的曼哈顿图以及QQ图可以说是标配了，至于具体如何理解这两个图，可以参考我以前的博客。上周我利用自己的数据跑了个GWAS，我是利用&lt;strong&gt;GAPIT&lt;/strong&gt;跑的，出的图感觉真心丑，大家可以看看：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180111/iAm97eG6FD.png?imageslim&quot; alt=&quot;Manhattan plot&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180111/im6b1iJ7FE.png?imageslim&quot; alt=&quot;QQ plot&quot;&gt;&lt;/p&gt;
-&lt;p&gt;所以我利用&lt;strong&gt;GAPIT&lt;/strong&gt;出来的数据重新画了图，用的就是包&lt;strong&gt;qqman&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;GWAS研究中的曼哈顿图以及QQ图可以说是标配了，至于具体如何理解这两个图，可以参考我以前的博客。上周我利用自己的数据跑了个GWAS，我是利用&lt;strong&gt;GAPIT&lt;/strong&gt;跑的，出的图感觉真心丑，大家可以看看：&lt;br&gt;
     
     </summary>
     
