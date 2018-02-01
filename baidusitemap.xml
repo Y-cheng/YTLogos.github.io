@@ -5,16 +5,18 @@
     
   <url>
     <loc>https://ytlogos.github.io/2018/01/15/%20Lesson%2001%20for%20Plotting%20in%20R%20for%20Biologists/</loc>
-    <lastmod>2018-02-01T02:33:04.220Z</lastmod>
+    <lastmod>2018-02-01T02:39:12.694Z</lastmod>
     <data>
         <display>
         <title>Lesson 01 for Plotting in R for Biologists</title>
         <pubTime>2018-01-15T04:19:05.000Z</pubTime>
         
+        <tag>Biologists</tag>
+         
          
            
              
-              <breadCrumb title="GWAS" url="https://ytlogos.github.io/categories/GWAS/"/>
+              <breadCrumb title="可视化" url="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
           
         </display>
     </data>
@@ -183,9 +185,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
@@ -577,9 +579,9 @@
         
         <tag>R</tag>
          
-        <tag>scatter plot</tag>
-         
         <tag>visualization</tag>
+         
+        <tag>scatter plot</tag>
          
          
            
@@ -1007,9 +1009,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
