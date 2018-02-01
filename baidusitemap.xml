@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://ytlogos.github.io/2018/01/25/%20Lesson%2004%20for%20Plotting%20in%20R%20for%20Biologists/</loc>
+    <lastmod>2018-02-01T13:20:15.633Z</lastmod>
+    <data>
+        <display>
+        <title>Lesson 04 for Plotting in R for Biologists</title>
+        <pubTime>2018-01-25T04:19:05.000Z</pubTime>
+        
+        <tag>Biologists</tag>
+         
+         
+           
+             
+              <breadCrumb title="可视化" url="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ytlogos.github.io/2018/01/20/%20Lesson%2002&03%20for%20Plotting%20in%20R%20for%20Biologists/</loc>
     <lastmod>2018-02-01T12:37:07.349Z</lastmod>
     <data>
@@ -231,9 +251,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
@@ -297,9 +317,9 @@
         <title>生物信息学学习笔记（四）</title>
         <pubTime>2017-12-06T13:19:05.000Z</pubTime>
         
-        <tag>Hi-C</tag>
-         
         <tag>DHSs</tag>
+         
+        <tag>Hi-C</tag>
          
          
            
@@ -319,9 +339,9 @@
         <title>生物信息学学习笔记（三）</title>
         <pubTime>2017-12-04T13:19:05.000Z</pubTime>
         
-        <tag>Hi-C</tag>
-         
         <tag>DHSs</tag>
+         
+        <tag>Hi-C</tag>
          
          
            
@@ -341,9 +361,9 @@
         <title>生物信息学学习笔记（二）</title>
         <pubTime>2017-11-29T13:19:05.000Z</pubTime>
         
-        <tag>evolution</tag>
-         
         <tag>Hi-C</tag>
+         
+        <tag>evolution</tag>
          
          
            
@@ -625,31 +645,9 @@
         
         <tag>R</tag>
          
-        <tag>scatter plot</tag>
-         
         <tag>visualization</tag>
          
-         
-           
-             
-              <breadCrumb title="可视化" url="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://ytlogos.github.io/2017/09/16/tidyverse%E5%AE%9E%E8%B7%B5%E4%B9%8B%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E5%9C%B0%E5%9B%BE/</loc>
-    <lastmod>2017-09-19T04:22:05.904Z</lastmod>
-    <data>
-        <display>
-        <title>tidyverse实践之绘制简单地图</title>
-        <pubTime>2017-09-16T02:47:05.000Z</pubTime>
-        
-        <tag>tidyverse</tag>
-         
-        <tag>map</tag>
+        <tag>scatter plot</tag>
          
          
            
@@ -674,6 +672,28 @@
         <tag>visualization</tag>
          
         <tag>ggplot2</tag>
+         
+         
+           
+             
+              <breadCrumb title="可视化" url="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://ytlogos.github.io/2017/09/16/tidyverse%E5%AE%9E%E8%B7%B5%E4%B9%8B%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E5%9C%B0%E5%9B%BE/</loc>
+    <lastmod>2017-09-19T04:22:05.904Z</lastmod>
+    <data>
+        <display>
+        <title>tidyverse实践之绘制简单地图</title>
+        <pubTime>2017-09-16T02:47:05.000Z</pubTime>
+        
+        <tag>tidyverse</tag>
+         
+        <tag>map</tag>
          
          
            
@@ -1055,9 +1075,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            

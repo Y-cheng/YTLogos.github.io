@@ -75,6 +75,65 @@
   </entry>
   
   <entry>
+    <title>Lesson 04 for Plotting in R for Biologists</title>
+    <link href="https://ytlogos.github.io/2018/01/25/%20Lesson%2004%20for%20Plotting%20in%20R%20for%20Biologists/"/>
+    <id>https://ytlogos.github.io/2018/01/25/ Lesson 04 for Plotting in R for Biologists/</id>
+    <published>2018-01-25T04:19:05.000Z</published>
+    <updated>2018-02-01T13:20:15.633Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/gHcHm3FdLC.png?imageslim" alt="mark"></p>
+<p>上次将Lesson 02&amp;03一起讲解完了，在Lesson 04中主要解决下面几个问题</p>
+<ul>
+<li>剔除掉染色体前缀chr</li>
+<li>对染色体进行正确排序</li>
+<li>对数据进行过滤</li>
+<li>对部分type重命名</li>
+</ul>
+<a id="more"></a>
+<h2 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(tidyverse)</div><div class="line">my_data &lt;- read.csv(&quot;Encode_HMM_data.txt&quot;, sep = &quot;\t&quot;, header = FALSE)</div><div class="line">head(my_data[, c(1:6)])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##     V1    V2    V3                V4 V5 V6</div><div class="line">## 1 chr1 10000 10600 15_Repetitive/CNV  0  .</div><div class="line">## 2 chr1 10600 11137 13_Heterochrom/lo  0  .</div><div class="line">## 3 chr1 11137 11737       8_Insulator  0  .</div><div class="line">## 4 chr1 11737 11937       11_Weak_Txn  0  .</div><div class="line">## 5 chr1 11937 12137   7_Weak_Enhancer  0  .</div><div class="line">## 6 chr1 12137 14537       11_Weak_Txn  0  .</div></pre></td></tr></table></figure>
+<h3 id="对数据部分列进行重命名"><a href="#对数据部分列进行重命名" class="headerlink" title="对数据部分列进行重命名"></a>对数据部分列进行重命名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;, &quot;start&quot;, &quot;stop&quot;,&quot;type&quot;)</div><div class="line">head(my_data[, c(1:4)])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom start  stop              type</div><div class="line">## 1  chr1 10000 10600 15_Repetitive/CNV</div><div class="line">## 2  chr1 10600 11137 13_Heterochrom/lo</div><div class="line">## 3  chr1 11137 11737       8_Insulator</div><div class="line">## 4  chr1 11737 11937       11_Weak_Txn</div><div class="line">## 5  chr1 11937 12137   7_Weak_Enhancer</div><div class="line">## 6  chr1 12137 14537       11_Weak_Txn</div></pre></td></tr></table></figure>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/j2IB94I12k.png?imageslim" alt="mark"></p>
+<h2 id="数据调整"><a href="#数据调整" class="headerlink" title="数据调整"></a>数据调整</h2><p>主要是针对上面提出的几个问题对数据进行调整</p>
+<h3 id="剔除染色体前缀chr"><a href="#剔除染色体前缀chr" class="headerlink" title="剔除染色体前缀chr"></a>剔除染色体前缀chr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_data$chrom &lt;- factor(gsub(&quot;chr&quot;, &quot;&quot;, my_data$chrom))</div><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/2ibGfgm9Gg.png?imageslim" alt="mark"></p>
+<h3 id="对染色体进行排序"><a href="#对染色体进行排序" class="headerlink" title="对染色体进行排序"></a>对染色体进行排序</h3><p>这个关于人类的基因组数据，所以染色体顺序应该是1：22,X,Y。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_data$chrom &lt;- factor(my_data$chrom, levels = c(seq(1:22), &quot;X&quot;, &quot;Y&quot;))</div><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/G0i0aBH43a.png?imageslim" alt="mark"></p>
+<p>这下看起来相对好一点</p>
+<h3 id="选取type"><a href="#选取type" class="headerlink" title="选取type"></a>选取type</h3><p>只选取我们感兴趣的type进行可视化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my_data &lt;- my_data[my_data$type %in% c(&quot;1_Active_Promoter&quot;, &quot;4_Strong_Enhancer&quot;, &quot;8_Insulator&quot;), ]</div></pre></td></tr></table></figure>
+<h4 id="对选取的type进行重命名"><a href="#对选取的type进行重命名" class="headerlink" title="对选取的type进行重命名"></a>对选取的type进行重命名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(plyr)</div><div class="line">my_data$type &lt;- revalue(my_data$type,c(&quot;1_Active_Promoter&quot;=&quot;Promoter&quot;,&quot;4_Strong_Enhancer&quot;=&quot;Enhancer&quot;,&quot;8_Insulator&quot;=&quot;Insulator&quot;))</div><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/gHcHm3FdLC.png?imageslim" alt="mark"></p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">##  [1] plyr_1.8.4         forcats_0.2.0      stringr_1.2.0     </div><div class="line">##  [4] dplyr_0.7.4        purrr_0.2.4        readr_1.1.1       </div><div class="line">##  [7] tidyr_0.7.2        tibble_1.4.2       ggplot2_2.2.1.9000</div><div class="line">## [10] tidyverse_1.2.1   </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0     </div><div class="line">##  [4] compiler_3.4.3    bindr_0.1         tools_3.4.3      </div><div class="line">##  [7] digest_0.6.14     lubridate_1.7.1   jsonlite_1.5     </div><div class="line">## [10] evaluate_0.10.1   nlme_3.1-131      gtable_0.2.0     </div><div class="line">## [13] lattice_0.20-35   pkgconfig_2.0.1   rlang_0.1.6      </div><div class="line">## [16] psych_1.7.8       cli_1.0.0         rstudioapi_0.7   </div><div class="line">## [19] yaml_2.1.16       parallel_3.4.3    haven_1.1.1      </div><div class="line">## [22] bindrcpp_0.2      xml2_1.2.0        httr_1.3.1       </div><div class="line">## [25] knitr_1.18        hms_0.4.1         rprojroot_1.3-2  </div><div class="line">## [28] grid_3.4.3        glue_1.2.0        R6_2.2.2         </div><div class="line">## [31] readxl_1.0.0      foreign_0.8-69    rmarkdown_1.8    </div><div class="line">## [34] modelr_0.1.1      reshape2_1.4.3    magrittr_1.5     </div><div class="line">## [37] backports_1.1.2   scales_0.5.0.9000 htmltools_0.3.6  </div><div class="line">## [40] rvest_0.3.2       assertthat_0.2.0  mnormt_1.5-5     </div><div class="line">## [43] colorspace_1.3-2  labeling_0.3      stringi_1.1.6    </div><div class="line">## [46] lazyeval_0.2.1    munsell_0.4.3     broom_0.4.3      </div><div class="line">## [49] crayon_1.3.4</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/gHcHm3FdLC.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;p&gt;上次将Lesson 02&amp;amp;03一起讲解完了，在Lesson 04中主要解决下面几个问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;剔除掉染色体前缀chr&lt;/li&gt;
+&lt;li&gt;对染色体进行正确排序&lt;/li&gt;
+&lt;li&gt;对数据进行过滤&lt;/li&gt;
+&lt;li&gt;对部分type重命名&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+      <category term="Biologists" scheme="https://ytlogos.github.io/tags/Biologists/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lesson 02&amp;03 for Plotting in R for Biologists</title>
     <link href="https://ytlogos.github.io/2018/01/20/%20Lesson%2002&amp;03%20for%20Plotting%20in%20R%20for%20Biologists/"/>
     <id>https://ytlogos.github.io/2018/01/20/ Lesson 02&amp;03 for Plotting in R for Biologists/</id>
@@ -612,9 +671,9 @@
       <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
     
     
-      <category term="Hi-C" scheme="https://ytlogos.github.io/tags/Hi-C/"/>
-    
       <category term="DHSs" scheme="https://ytlogos.github.io/tags/DHSs/"/>
+    
+      <category term="Hi-C" scheme="https://ytlogos.github.io/tags/Hi-C/"/>
     
   </entry>
   
@@ -666,9 +725,9 @@
       <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
     
     
-      <category term="Hi-C" scheme="https://ytlogos.github.io/tags/Hi-C/"/>
-    
       <category term="DHSs" scheme="https://ytlogos.github.io/tags/DHSs/"/>
+    
+      <category term="Hi-C" scheme="https://ytlogos.github.io/tags/Hi-C/"/>
     
   </entry>
   
@@ -733,9 +792,9 @@
       <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
     
     
-      <category term="evolution" scheme="https://ytlogos.github.io/tags/evolution/"/>
-    
       <category term="Hi-C" scheme="https://ytlogos.github.io/tags/Hi-C/"/>
+    
+      <category term="evolution" scheme="https://ytlogos.github.io/tags/evolution/"/>
     
   </entry>
   
@@ -1383,74 +1442,6 @@
     
     
       <category term="sort" scheme="https://ytlogos.github.io/tags/sort/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux学习笔记（四）</title>
-    <link href="https://ytlogos.github.io/2017/11/13/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
-    <id>https://ytlogos.github.io/2017/11/13/Linux学习笔记（四）/</id>
-    <published>2017-11-13T05:19:05.000Z</published>
-    <updated>2017-11-12T06:21:31.888Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171112/894bbdhjmL.png?imageslim" alt="mark"></p>
-<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a><code>grep</code></h2><p><code>grep</code>全称是<strong>global search regular expression(RE) and print out the line</strong>，中文名即全面搜索正则表达式并把行打印出来。是一种强大的文本搜索工具，可以使用正则表达式搜索文本，并将匹配的行列打印出来。<strong>Unix</strong>的<code>grep</code>家族包括<code>grep</code>,<code>egrep</code>,<code>fgrep</code>以及<code>zgrep</code>等，<code>egrep</code>,<code>fgrep</code>与<code>grep</code>的差别很小，<code>egrep</code>支持更多的re元字符， <code>fgrep</code>就是<em>fixed grep</em>或<em>fast grep</em>，它们把所有的字母都看作单词，也就是说，正则表达式中的元字符表示其自身的字面意义，不再特殊<code>grep</code>可以通过-<em>G、</em>-<em>E、</em>-<em>F</em>命令行选项来使用<code>egrep</code>,<code>fgrep</code>的功能，<code>zgrep</code>可以用来处理<strong>ZIP</strong>格式文件。</p>
-<a id="more"></a>
-<h3 id="grep常用用法"><a href="#grep常用用法" class="headerlink" title="grep常用用法"></a><code>grep</code>常用用法</h3><p><code>grep</code>常用用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep [-acinv] [--color=auto] &apos;字符串或者正则表达式&apos; filename</div></pre></td></tr></table></figure></p>
-<p>选项参数：</p>
-<ul>
-<li>-a：将binary文件以text文件的方式搜索，即不要忽略二进制数据</li>
-<li>-A&lt;显示列数&gt;：除了显示匹配到的那一行之外，还显示该行之后的内容</li>
-<li>-b：除了显示匹配到的那一行之外，还显示该行之前的内容</li>
-<li>-c：计算匹配到<strong>字符串</strong>的次数</li>
-<li>-C&lt;显示列数&gt;：除了显示匹配到的那一列之外，还显示该列之前后的内容</li>
-<li>-d&lt;进行动作&gt; 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作</li>
-<li>-e&lt;范本样式&gt; 指定字符串作为查找文件内容的范本样式</li>
-<li>-E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式</li>
-<li>-f&lt;范本文件&gt; 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式</li>
-<li>-F 将范本样式视为固定字符串的列表</li>
-<li>-G 将范本样式视为普通的表示法来使用</li>
-<li>-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称 </li>
-<li>-H 在显示符合范本样式的那一列之前，标示该列的文件名称</li>
-<li>-l 列出文件内容符合指定的范本样式的文件名称。 </li>
-<li>-L 列出文件内容不符合指定的范本样式的文件名称。 </li>
-<li>-q 不显示任何信息。 </li>
-<li>-R/-r 此参数的效果和指定“-d recurse”参数相同。 </li>
-<li>-s 不显示错误信息。</li>
-<li>-w 只显示全字符合的列。 </li>
-<li>-x 只显示全列符合的列。 </li>
-<li>-y 此参数效果跟“-i”相同。 </li>
-<li>-o 只输出文件中匹配到的部分。</li>
-<li>-i：忽略大小写</li>
-<li>-n：输出行号</li>
-<li>-v：方向选择即显示出未匹配到<strong>字符串</strong>的那一行</li>
-<li>–color=auto：匹配到的字符串颜色高亮</li>
-</ul>
-<p>下面我们实战演练一下，我们要从<strong>GTF</strong>文件中搜索到匹配<code>Olfr418-ps1</code>的行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ grep &apos;Olfr418-ps1&apos; Mus_musculus.GRCm38.75_chr1_genes.txt</div><div class="line">ENSMUSG00000049605      Olfr418-ps1</div><div class="line">#打印出行号</div><div class="line">$ grep -n &apos;Olfr&apos; Mus_musculus.GRCm38.75_chr1_genes.txt|head -n 5</div><div class="line">548:ENSMUSG00000067064  Olfr1416</div><div class="line">549:ENSMUSG00000057464  Olfr1415</div><div class="line">550:ENSMUSG00000042849  Olfr1414</div><div class="line">551:ENSMUSG00000058904  Olfr1413</div><div class="line">552:ENSMUSG00000046300  Olfr1412</div></pre></td></tr></table></figure></p>
-<p>通过参数<code>-v</code>设置可以不匹配不需要的字符串或者正则表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ grep Olfr Mus_musculus.GRCm38.75_chr1_genes.txt|grep -v Olfr1413|head -n 5</div><div class="line">ENSMUSG00000067064      Olfr1416</div><div class="line">ENSMUSG00000057464      Olfr1415</div><div class="line">ENSMUSG00000042849      Olfr1414</div><div class="line">ENSMUSG00000046300      Olfr1412</div><div class="line">ENSMUSG00000062497      Olfr1411</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>需要注意的是，这里我们排除掉<code>Olfr1413</code>，但是如果数据集里存在类似于<code>Olfr1413a</code>这样的字符，<code>grep</code>也会将之剔除，因此我们需要设置参数<code>-w</code>进行精准匹配。下面举个例子说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ cat example.txt</div><div class="line">bio</div><div class="line">bioinfo</div><div class="line">bioinformatics</div><div class="line">computational biology</div><div class="line"># grep without -w</div><div class="line">$ grep -v bioinfo example.txt</div><div class="line">bio</div><div class="line">computational biology</div><div class="line">#可以看出这里将含有bioinfo字符串的bioinformatics也剔除掉了,使用参数-w可以避免</div><div class="line">$ grep -v -w bioinfo example.txt</div><div class="line">bio</div><div class="line">bioinformatics</div><div class="line">computational biology</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>我们平常接触的组学数据格式都是很复杂的，当我们匹配的时候我们希望能过浏览匹配到的字符串的前后文，<code>Linux</code>提供了参数设置：-B（前）、-A（后）以及-C（前后），每个参数后面都跟着一个数字，表示要显示几行,如果匹配到多行，则个匹配之间会用–分割开：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ grep -B2 &apos;AGATCGG&apos; contam.fastq|head -n 6</div><div class="line">@DJB775P1:248:D0MDGACXX:7:1202:12362:49613</div><div class="line">TGCTTACTCTGCGTTGATACCACTGCTTAGATCGGAAGAGCACACGTCTGAA</div><div class="line">--</div><div class="line">JJJJJIIJJJJJJHIHHHGHFFFFFFCEEEEEDBD?DDDDDDBDDDABDDCA</div><div class="line">@DJB775P1:248:D0MDGACXX:7:1202:12782:49716</div><div class="line">CTCTGCGTTGATACCACTGCTTACTCTGCGTTGATACCACTGCTTAGATCGG</div></pre></td></tr></table></figure></p>
-<p><code>grep</code>如果结合正则表达式则会显得十分强大，比如如果我们要匹配<code>Olfr1413</code>以及<code>Olfr1411</code>,可以使用简单的正则表达式完成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ grep &apos;Olfr141[13]&apos; Mus_musculus.GRCm38.75_chr1_genes.txt</div><div class="line">ENSMUSG00000058904      Olfr1413</div><div class="line">ENSMUSG00000062497      Olfr1411</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>当然如果我们要匹配的不具有相同的前缀，那就很尴尬了，这时我们可以利用<strong>POSIX Extended Regular Expressions(ERE)</strong>进行匹配，可以添加参数-E或者直接使用<code>egrep</code>都行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ grep -E &quot;(Olfr1413|Olfr12)&quot; Mus_musculus.GRCm38.75_chr1_genes.txt</div><div class="line">ENSMUSG00000058904      Olfr1413</div><div class="line">ENSMUSG00000061616      Olfr12</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>很多时候我们只需要将匹配到的行打印出来，此时我们可以使用参数-o：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ grep -o &quot;Olfr.*&quot; Mus_musculus.GRCm38.75_chr1_genes.txt|head -n 3</div><div class="line">Olfr1416</div><div class="line">Olfr1415</div><div class="line">Olfr1414</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171112/894bbdhjmL.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;grep&quot;&gt;&lt;a href=&quot;#grep&quot; class=&quot;headerlink&quot; title=&quot;grep&quot;&gt;&lt;/a&gt;&lt;code&gt;grep&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;grep&lt;/code&gt;全称是&lt;strong&gt;global search regular expression(RE) and print out the line&lt;/strong&gt;，中文名即全面搜索正则表达式并把行打印出来。是一种强大的文本搜索工具，可以使用正则表达式搜索文本，并将匹配的行列打印出来。&lt;strong&gt;Unix&lt;/strong&gt;的&lt;code&gt;grep&lt;/code&gt;家族包括&lt;code&gt;grep&lt;/code&gt;,&lt;code&gt;egrep&lt;/code&gt;,&lt;code&gt;fgrep&lt;/code&gt;以及&lt;code&gt;zgrep&lt;/code&gt;等，&lt;code&gt;egrep&lt;/code&gt;,&lt;code&gt;fgrep&lt;/code&gt;与&lt;code&gt;grep&lt;/code&gt;的差别很小，&lt;code&gt;egrep&lt;/code&gt;支持更多的re元字符， &lt;code&gt;fgrep&lt;/code&gt;就是&lt;em&gt;fixed grep&lt;/em&gt;或&lt;em&gt;fast grep&lt;/em&gt;，它们把所有的字母都看作单词，也就是说，正则表达式中的元字符表示其自身的字面意义，不再特殊&lt;code&gt;grep&lt;/code&gt;可以通过-&lt;em&gt;G、&lt;/em&gt;-&lt;em&gt;E、&lt;/em&gt;-&lt;em&gt;F&lt;/em&gt;命令行选项来使用&lt;code&gt;egrep&lt;/code&gt;,&lt;code&gt;fgrep&lt;/code&gt;的功能，&lt;code&gt;zgrep&lt;/code&gt;可以用来处理&lt;strong&gt;ZIP&lt;/strong&gt;格式文件。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
-    
     
   </entry>
   
