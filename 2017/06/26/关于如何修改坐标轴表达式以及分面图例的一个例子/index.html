@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="data management," />
+  <meta name="keywords" content="R,visualization,ggplot2,ggpubr," />
 
 
 
@@ -113,19 +113,21 @@
 
 
 
-<meta name="description" content="数据分析过程中我们常常需要从数据集中抽取部分数据，本文将介绍如何提取子数据集，主要利用R自带的函数，以后会专门介绍data manipulation包dplyr。 提取子数据集主要分为select以及exclude，这里主要介绍两种方法，一是利用操作符[]进行选取，二是利用subset()进行抽取。">
-<meta name="keywords" content="data management">
+<meta name="description" content="ggplot2绘制的图形如果需要修改细节的话，没有对ggplot2有一定的了解的话是十分困难的，毕竟连创建这个包的作者Hadley Wickham都自称自己使用ggplot2的时候都需要查文档。在对ggplot2有一定了解的基础上如果需要修改ggplot图的话稍微查查文档基本能解决。">
+<meta name="keywords" content="R,visualization,ggplot2,ggpubr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="R语言data manipulation学习笔记之subset data">
-<meta property="og:url" content="https://ytlogos.github.io/2017/06/29/R语言data-manipulation学习笔记之subset-data/index.html">
+<meta property="og:title" content="关于如何修改坐标轴表达式以及分面图例的一个例子">
+<meta property="og:url" content="https://ytlogos.github.io/2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/index.html">
 <meta property="og:site_name" content="Logos">
-<meta property="og:description" content="数据分析过程中我们常常需要从数据集中抽取部分数据，本文将介绍如何提取子数据集，主要利用R自带的函数，以后会专门介绍data manipulation包dplyr。 提取子数据集主要分为select以及exclude，这里主要介绍两种方法，一是利用操作符[]进行选取，二是利用subset()进行抽取。">
-<meta property="og:image" content="c:/Users/user/Desktop/下载.jpg">
-<meta property="og:updated_time" content="2017-09-19T00:39:01.421Z">
+<meta property="og:description" content="ggplot2绘制的图形如果需要修改细节的话，没有对ggplot2有一定的了解的话是十分困难的，毕竟连创建这个包的作者Hadley Wickham都自称自己使用ggplot2的时候都需要查文档。在对ggplot2有一定了解的基础上如果需要修改ggplot图的话稍微查查文档基本能解决。">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/ElKca96m2c.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/5fA4FDKGJB.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/ElKca96m2c.png?imageslim">
+<meta property="og:updated_time" content="2018-02-01T03:10:05.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="R语言data manipulation学习笔记之subset data">
-<meta name="twitter:description" content="数据分析过程中我们常常需要从数据集中抽取部分数据，本文将介绍如何提取子数据集，主要利用R自带的函数，以后会专门介绍data manipulation包dplyr。 提取子数据集主要分为select以及exclude，这里主要介绍两种方法，一是利用操作符[]进行选取，二是利用subset()进行抽取。">
-<meta name="twitter:image" content="c:/Users/user/Desktop/下载.jpg">
+<meta name="twitter:title" content="关于如何修改坐标轴表达式以及分面图例的一个例子">
+<meta name="twitter:description" content="ggplot2绘制的图形如果需要修改细节的话，没有对ggplot2有一定的了解的话是十分困难的，毕竟连创建这个包的作者Hadley Wickham都自称自己使用ggplot2的时候都需要查文档。在对ggplot2有一定了解的基础上如果需要修改ggplot图的话稍微查查文档基本能解决。">
+<meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/ElKca96m2c.png?imageslim">
 
 
 
@@ -153,7 +155,7 @@
 
 
 
-  <link rel="canonical" href="https://ytlogos.github.io/2017/06/29/R语言data-manipulation学习笔记之subset-data/"/>
+  <link rel="canonical" href="https://ytlogos.github.io/2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/"/>
 
 
 
@@ -174,7 +176,7 @@
     }
 </style>
 
-  <title>R语言data manipulation学习笔记之subset data | Logos</title>
+  <title>关于如何修改坐标轴表达式以及分面图例的一个例子 | Logos</title>
   
 
 
@@ -386,7 +388,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ytlogos.github.io/2017/06/29/R语言data-manipulation学习笔记之subset-data/">
+    <link itemprop="mainEntityOfPage" href="https://ytlogos.github.io/2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="TaoYan">
@@ -403,7 +405,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">R语言data manipulation学习笔记之subset data</h1>
+          <h1 class="post-title" itemprop="name headline">关于如何修改坐标轴表达式以及分面图例的一个例子</h1>
         
 
         <div class="post-meta">
@@ -415,8 +417,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T20:58:25+08:00">
-                2017-06-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T19:43:11+08:00">
+                2017-06-26
               </time>
             
 
@@ -431,8 +433,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-19T08:39:01+08:00">
-                2017-09-19
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-01T11:10:05+08:00">
+                2018-02-01
               </time>
             
           </span>
@@ -450,8 +452,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Manipulation/" itemprop="url" rel="index">
-                    <span itemprop="name">Data Manipulation</span>
+                  <a href="/categories/可视化/" itemprop="url" rel="index">
+                    <span itemprop="name">可视化</span>
                   </a>
                 </span>
 
@@ -468,9 +470,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/29/R语言data-manipulation学习笔记之subset-data/#comments" itemprop="discussionUrl">
+                <a href="/2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/29/R语言data-manipulation学习笔记之subset-data/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -478,7 +480,7 @@
 
           
           
-             <span id="/2017/06/29/R语言data-manipulation学习笔记之subset-data/" class="leancloud_visitors" data-flag-title="R语言data manipulation学习笔记之subset data">
+             <span id="/2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/" class="leancloud_visitors" data-flag-title="关于如何修改坐标轴表达式以及分面图例的一个例子">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -504,7 +506,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  982
+                  931
                 </span>
               
 
@@ -538,24 +540,36 @@
       
 
       
-        <center><img src="C:\Users\user\Desktop\下载.jpg" alt=""></center>
-
-<p>数据分析过程中我们常常需要从数据集中抽取部分数据，本文将介绍如何提取子数据集，主要利用R自带的函数，以后会专门介绍data manipulation包<strong>dplyr</strong>。 提取子数据集主要分为select以及exclude，这里主要介绍两种方法，一是利用操作符[]进行选取，二是利用subset()进行抽取。<br><a id="more"></a></p>
-<p>利用[]进行提取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#use the iris dataset</div><div class="line">head(iris)</div><div class="line">## Sepal.Length Sepal.Width Petal.Length Petal.Width Species </div><div class="line">## 1   5.1          3.5          1.4        0.2       setosa</div><div class="line">## 2   4.9          3.0          1.4        0.2       setosa</div><div class="line">## 3   4.7          3.2          1.3        0.2       setosa</div><div class="line">## 4   4.6          3.1          1.5        0.2       setosa</div><div class="line">## 5   5.0          3.6          1.4        0.2       setosa</div><div class="line">## 6   5.4          3.9          1.7        0.4       setosa</div><div class="line"># check the column namenames(iris)</div><div class="line"></div><div class="line">## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;</div></pre></td></tr></table></figure></p>
-<p>加入我们想要提取Sepal.Length、Sepal.Width两列数据，可以使用如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dt1 &lt;- iris[, c(&quot;Sepal.Length&quot;,&quot;Sepal.Width&quot;)]head(dt1)</div><div class="line"></div><div class="line">##   Sepal.Length Sepal.Width</div><div class="line">## 1      5.1         3.5</div><div class="line">## 2      4.9         3.0</div><div class="line">## 3      4.7         3.2</div><div class="line">## 4      4.6         3.1</div><div class="line">## 5      5.0         3.6</div><div class="line">## 6      5.4         3.9</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#也可以直接用列序号代替，比如这里我们想要提要前两列</div><div class="line">dt2 &lt;- iris[, c(1, 2)]head(dt2)</div><div class="line">##   Sepal.Length Sepal.Width</div><div class="line">## 1      5.1         3.5</div><div class="line">## 2      4.9         3.0</div><div class="line">## 3      4.7         3.2</div><div class="line">## 4      4.6         3.1</div><div class="line">## 5      5.0         3.6</div><div class="line">## 6      5.4         3.9</div></pre></td></tr></table></figure>
-<p>如果我们需要删除前两列，只需在序号之前添加符号 - 就行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dt3 &lt;- iris[, c(-1, -2)]head(dt3)</div><div class="line"></div><div class="line">##   Petal.Length Petal.Width Species  </div><div class="line">## 1     1.4          0.2      setosa</div><div class="line">## 2     1.4          0.2      setosa</div><div class="line">## 3     1.3          0.2      setosa</div><div class="line">## 4     1.5          0.2      setosa</div><div class="line">## 5     1.4          0.2      setosa</div><div class="line">## 6     1.7          0.4      setosa</div></pre></td></tr></table></figure></p>
-<p>可以看出十分简单就可以提取子数据集，下面介绍subset()<br>，subset()相比于[]主要是可以方便的根据条件提取子数据集。</p>
-<h2 id="利用subset-进行提取"><a href="#利用subset-进行提取" class="headerlink" title="利用subset()进行提取"></a>利用<strong>subset()</strong>进行提取</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#create a dataset</div><div class="line">fy &lt;- c(2010,2011,2012,2010,2011,2012,2010,2011,2012)</div><div class="line">company &lt;- c(&quot;Apple&quot;,&quot;Apple&quot;,&quot;Apple&quot;,&quot;Google&quot;,&quot;Google&quot;,&quot;Google&quot;,&quot;Microsoft&quot;,&quot;Microsoft&quot;,&quot;Microsoft&quot;)</div><div class="line">revenue &lt;- c(65225,108249,156508,29321,37905,50175,62484,69943,73723)</div><div class="line">profit &lt;- c(14013,25922,41733,8505,9737,10737,18760,23150,16978) </div><div class="line">companiesData &lt;- data.frame(fy, company, revenue, profit)</div><div class="line">head(companiesData)</div><div class="line">##    fy company revenue profit</div><div class="line">## 1 2010 Apple   65225 14013</div><div class="line">## 2 2011 Apple   108249 25922</div><div class="line">## 3 2012 Apple   156508 41733</div><div class="line">## 4 2010 Google   29321 8505</div><div class="line">## 5 2011 Google   37905 9737</div><div class="line">## 6 2012 Google   50175 10737</div></pre></td></tr></table></figure>
-<p>假如我们想要提取revenue超过十万的公司<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">com1 &lt;- subset(companiesData, revenue&gt;100000)</div><div class="line">head(com1)</div><div class="line"></div><div class="line">##    fy company revenue profit</div><div class="line">## 2 2011 Apple   108249 25922</div><div class="line">## 3 2012 Apple   156508 41733</div></pre></td></tr></table></figure></p>
-<p>或者我们想要提取在2012年revenue超过6万的公司<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">com2 &lt;- subset(companiesData, fy==&quot;2012&quot;&amp;revenue&gt;60000)</div><div class="line">head(com2)</div><div class="line"></div><div class="line">##    fy  company  revenue profit</div><div class="line">## 3 2012 Apple     156508 41733</div><div class="line">## 9 2012 Microsoft  73723 16978</div></pre></td></tr></table></figure></p>
-<p>或者提取在2012年revenue超过6万、profit超过4万的公司<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">com3 &lt;- subset(companiesData, fy==&quot;2012&quot;&amp;revenue&gt;60000&amp;profit&gt;40000)</div><div class="line">com3</div><div class="line"></div><div class="line">##    fy company revenue profit</div><div class="line">## 3 2012 Apple 156508 41733</div></pre></td></tr></table></figure></p>
-<p>条件选择也可以使用或，比如我们想要提取profit超过2万或者revenue低于5万的公司<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">com4 &lt;- subset(companiesData, revenue&lt;50000|profit&gt;20000)</div><div class="line">com4</div><div class="line">##    fy company   revenue profit </div><div class="line">## 2 2011 Apple     108249 25922</div><div class="line">## 3 2012 Apple     156508 41733</div><div class="line">## 4 2010 Google    29321 8505</div><div class="line">## 5 2011 Google    37905 9737</div><div class="line">## 8 2011 Microsoft 69943 23150</div></pre></td></tr></table></figure></p>
-<p>本文只是粗略的讲解，其实subset()的用法很广，有兴趣的朋友可以自行探索。</p>
-<h2 id="sessionInfo"><a href="#sessionInfo" class="headerlink" title="sessionInfo"></a>sessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div><div class="line"></div><div class="line">## R version 3.4.0 (2017-04-21)</div><div class="line">## Platform: x86_64-pc-linux-gnu (64-bit)</div><div class="line">## Running under: Ubuntu 16.04.2 LTS</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0</div><div class="line">## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C</div><div class="line">## [3] LC_TIME=en_US.UTF-8 LC_COLLATE=en_US.UTF-8 </div><div class="line">## [5] LC_MONETARY=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 </div><div class="line">## [7] LC_PAPER=en_US.UTF-8 LC_NAME=C </div><div class="line">## [9] LC_ADDRESS=C LC_TELEPHONE=C </div><div class="line">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats graphics grDevices utils datasets methods base </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">## [1] compiler_3.4.0 backports_1.1.0 magrittr_1.5 rprojroot_1.2 </div><div class="line">## [5] tools_3.4.0 htmltools_0.3.6 yaml_2.1.14 Rcpp_0.12.11 </div><div class="line">## [9] stringi_1.1.5 rmarkdown_1.6 knitr_1.16 stringr_1.2.0 </div><div class="line">## [13] digest_0.6.12 evaluate_0.10.1</div></pre></td></tr></table></figure>
+        <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/ElKca96m2c.png?imageslim" alt="mark"></p>
+<p><strong>ggplot2</strong>绘制的图形如果需要修改细节的话，没有对<strong>ggplot2</strong>有一定的了解的话是十分困难的，毕竟连创建这个包的作者<strong>Hadley Wickham</strong>都自称自己使用<strong>ggplot2</strong>的时候都需要查文档。在对<strong>ggplot2</strong>有一定了解的基础上如果需要修改ggplot图的话稍微查查文档基本能解决。</p>
+<a id="more"></a>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>这两天有人问我如何修改她的图形，她绘制的图如下：</p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/5fA4FDKGJB.png?imageslim" alt="mark"></p>
+<p>她希望修改三点：</p>
+<ul>
+<li>各个分面的图例比如DK、NL等是否可以修改，使得大一点</li>
+<li>Y轴标题中的-1如何变成上标</li>
+<li>平均值虚线如何针对不同物种画相对应的虚线平均值</li>
+</ul>
+<p>她是使用<strong>ggpubr</strong>包绘制的，这个包就是对一些<strong>ggplot2</strong>函数的一些封装及继承，本质上来说是可以通过<strong>ggplot2</strong>来修改参数的。我参考了一部分的官方文档之后解决了这三个问题，所以写了这篇博客。</p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(tidyverse)</div><div class="line">library(ggpubr)</div><div class="line">ICP&lt;-read.csv(&quot;C:/Users/taoyan/Desktop/element.csv&quot;)</div><div class="line">ICP$Order &lt;- factor(ICP$Species, levels = c(&quot;DK&quot;, &quot;NL&quot;, &quot;RO&quot;, &quot;IT&quot;, &quot;TL&quot;, &quot;AP&quot;, &quot;AD&quot;))</div><div class="line">head(ICP)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   Species Treatment       Na       Ca        P</div><div class="line">## 1      DK         A 268.4234 3021.933 1791.317</div><div class="line">## 2      DK         A 301.9390 3314.308 1595.479</div><div class="line">## 3      DK         A 261.1024 3417.643 1547.596</div><div class="line">## 4      DK         A 229.1169 3069.978 1735.703</div><div class="line">## 5      DK         A 265.1454 3205.965 1667.524</div><div class="line">## 6      DK         B 330.7135 4028.279 1638.113</div></pre></td></tr></table></figure>
+<h2 id="构造数据"><a href="#构造数据" class="headerlink" title="构造数据"></a>构造数据</h2><p>由于后面需要用到平均值，所以需要构造含有平均值的数据集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">meanvalue &lt;- ICP%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Na))</div><div class="line">data &lt;- left_join(ICP,meanvalue,by=c(&apos;Species&apos;=&apos;Species&apos;))</div><div class="line">head(data[,c(1:4,13)])</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   Species Treatment       Na       Ca     mean</div><div class="line">## 1      DK         A 268.4234 3021.933 426.6542</div><div class="line">## 2      DK         A 301.9390 3314.308 426.6542</div><div class="line">## 3      DK         A 261.1024 3417.643 426.6542</div><div class="line">## 4      DK         A 229.1169 3069.978 426.6542</div><div class="line">## 5      DK         A 265.1454 3205.965 426.6542</div><div class="line">## 6      DK         B 330.7135 4028.279 426.6542</div></pre></td></tr></table></figure>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggboxplot(ICP, x=&quot;Treatment&quot;, y=&quot;Na&quot;,group=&quot;Species&quot;, color=&quot;Treatment&quot;,</div><div class="line">add=&quot;mean_se&quot;,facet.by = &quot;Order&quot;,ncol=4, legend=&quot;none&quot;)+</div><div class="line">geom_hline(aes(yintercept=mean),data,linetype=2)+ #由于要在不同的分面里绘制水平线，这里要mapping</div><div class="line">stat_compare_means(method=&quot;anova&quot;,label=&quot;p.format&quot;,label.y=3500,size=8)+</div><div class="line">stat_compare_means(label=&quot;p.signif&quot;,size=8,method=&quot;wilcox.test&quot;,ref.group=&quot;.all.&quot;,hide.ns=TRUE)</div><div class="line">ggpar(p,palette = &quot;npg&quot;,font.tickslab = c(18,&quot;bold&quot;))+</div><div class="line">  theme(strip.text = element_text(size=15,face = &quot;bold&quot;))+ #调整分面legend</div><div class="line">  labs(x=&quot;Treatment&quot;, y=expression(bold(paste(&quot;Na (  &quot;, &apos;mg Kg&apos;^&#123;-1&#125;,&quot;)&quot;,&apos; DM&apos;))))+</div><div class="line">  theme(axis.title = element_text(face = &quot;bold&quot;, size=18))</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/ElKca96m2c.png?imageslim" alt="mark"></p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo()"></a>SessionInfo()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">##  [1] bindrcpp_0.2       ggpubr_0.1.6       magrittr_1.5      </div><div class="line">##  [4] forcats_0.2.0      stringr_1.2.0      dplyr_0.7.4       </div><div class="line">##  [7] purrr_0.2.4        readr_1.1.1        tidyr_0.7.2       </div><div class="line">## [10] tibble_1.4.2       ggplot2_2.2.1.9000 tidyverse_1.2.1   </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] tidyselect_0.2.3  reshape2_1.4.3    haven_1.1.1      </div><div class="line">##  [4] lattice_0.20-35   colorspace_1.3-2  htmltools_0.3.6  </div><div class="line">##  [7] yaml_2.1.16       rlang_0.1.6       pillar_1.1.0     </div><div class="line">## [10] foreign_0.8-69    glue_1.2.0        modelr_0.1.1     </div><div class="line">## [13] readxl_1.0.0      bindr_0.1         plyr_1.8.4       </div><div class="line">## [16] munsell_0.4.3     gtable_0.2.0      cellranger_1.1.0 </div><div class="line">## [19] rvest_0.3.2       ggsci_2.8         psych_1.7.8      </div><div class="line">## [22] evaluate_0.10.1   labeling_0.3      knitr_1.18       </div><div class="line">## [25] parallel_3.4.3    broom_0.4.3       Rcpp_0.12.15     </div><div class="line">## [28] scales_0.5.0.9000 backports_1.1.2   jsonlite_1.5     </div><div class="line">## [31] mnormt_1.5-5      hms_0.4.1         digest_0.6.14    </div><div class="line">## [34] stringi_1.1.6     grid_3.4.3        rprojroot_1.3-2  </div><div class="line">## [37] cli_1.0.0         tools_3.4.3       lazyeval_0.2.1   </div><div class="line">## [40] crayon_1.3.4      pkgconfig_2.0.1   xml2_1.2.0       </div><div class="line">## [43] lubridate_1.7.1   assertthat_0.2.0  rmarkdown_1.8    </div><div class="line">## [46] httr_1.3.1        rstudioapi_0.7    R6_2.2.2         </div><div class="line">## [49] nlme_3.1-131      compiler_3.4.3</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
+<p>Email: tyan@zju.edu.cn</p>
+<p>QQ: 1051927088</p>
+<p>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a></p>
+<p>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a></p>
+<p>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛</p>
+<p>浙江大学作物遗传育种在读研究生（生物信息学方向）</p>
+<p>伪码农，R语言爱好者，爱开源</p>
 
       
     </div>
@@ -629,7 +643,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/data-management/" rel="tag"><i class="fa fa-tag"></i> data management</a>
+            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+          
+            <a href="/tags/visualization/" rel="tag"><i class="fa fa-tag"></i> visualization</a>
+          
+            <a href="/tags/ggplot2/" rel="tag"><i class="fa fa-tag"></i> ggplot2</a>
+          
+            <a href="/tags/ggpubr/" rel="tag"><i class="fa fa-tag"></i> ggpubr</a>
           
         </div>
       
@@ -642,8 +662,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/28/R语言data-manipulation学习笔记之创建变量、重命名、数据融合/" rel="next" title="R语言data manipulation学习笔记之创建变量、重命名、数据融合">
-                <i class="fa fa-chevron-left"></i> R语言data manipulation学习笔记之创建变量、重命名、数据融合
+              <a href="/2017/06/26/R语言可视化学习笔记之ggpubr包/" rel="next" title="R语言可视化学习笔记之ggpubr包">
+                <i class="fa fa-chevron-left"></i> R语言可视化学习笔记之ggpubr包
               </a>
             
           </div>
@@ -652,8 +672,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/01/r4ds学习笔记之ggplot2/" rel="prev" title="r4ds学习笔记之ggplot2">
-                r4ds学习笔记之ggplot2 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/28/R语言data-manipulation学习笔记之创建变量、重命名、数据融合/" rel="prev" title="R语言data manipulation学习笔记之创建变量、重命名、数据融合">
+                R语言data manipulation学习笔记之创建变量、重命名、数据融合 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -879,7 +899,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用subset-进行提取"><span class="nav-number">1.</span> <span class="nav-text">利用subset()进行提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sessionInfo"><span class="nav-number">2.</span> <span class="nav-text">sessionInfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">3.</span> <span class="nav-text">联系方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人简介："><span class="nav-number">4.</span> <span class="nav-text">个人简介：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#来源"><span class="nav-number">1.</span> <span class="nav-text">来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造数据"><span class="nav-number">3.</span> <span class="nav-text">构造数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图"><span class="nav-number">4.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SessionInfo"><span class="nav-number">5.</span> <span class="nav-text">SessionInfo()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">6.</span> <span class="nav-text">联系方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人简介："><span class="nav-number">7.</span> <span class="nav-text">个人简介：</span></a></li></ol></div>
             
 
           </div>
@@ -1042,9 +1062,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://ytlogos.github.io/2017/06/29/R语言data-manipulation学习笔记之subset-data/';
-          this.page.identifier = '2017/06/29/R语言data-manipulation学习笔记之subset-data/';
-          this.page.title = 'R语言data manipulation学习笔记之subset data';
+          this.page.url = 'https://ytlogos.github.io/2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/';
+          this.page.identifier = '2017/06/26/关于如何修改坐标轴表达式以及分面图例的一个例子/';
+          this.page.title = '关于如何修改坐标轴表达式以及分面图例的一个例子';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Logos.disqus.com/embed.js';
