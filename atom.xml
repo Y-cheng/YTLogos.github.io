@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-01-11T04:22:08.954Z</updated>
+  <updated>2018-02-01T02:33:04.220Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lesson 01 for Plotting in R for Biologists</title>
+    <link href="https://ytlogos.github.io/2018/01/15/%20Lesson%2001%20for%20Plotting%20in%20R%20for%20Biologists/"/>
+    <id>https://ytlogos.github.io/2018/01/15/ Lesson 01 for Plotting in R for Biologists/</id>
+    <published>2018-01-15T04:19:05.000Z</published>
+    <updated>2018-02-01T02:33:04.220Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim" alt="mark"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>老早之前就知道了这门课<a href="http://omgenomics.com/plotting-in-r-for-biologists/" target="_blank" rel="external"><strong>Plotting in R for Biologists</strong></a>,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错<br>，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。</p>
+<a id="more"></a>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(ggplot2)</div><div class="line">filename &lt;- &quot;/home/taoyan/Plotting in R for Biologists/Lesson-01/Encode_HMM_data.txt&quot;</div><div class="line">my_data &lt;- read.csv(filename, sep=&quot;\t&quot;, header=FALSE)</div><div class="line"># 查看一下数据</div><div class="line">head(my_data)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##     V1    V2    V3                V4 V5 V6    V7    V8          V9</div><div class="line">## 1 chr1 10000 10600 15_Repetitive/CNV  0  . 10000 10600 245,245,245</div><div class="line">## 2 chr1 10600 11137 13_Heterochrom/lo  0  . 10600 11137 245,245,245</div><div class="line">## 3 chr1 11137 11737       8_Insulator  0  . 11137 11737  10,190,254</div><div class="line">## 4 chr1 11737 11937       11_Weak_Txn  0  . 11737 11937 153,255,102</div><div class="line">## 5 chr1 11937 12137   7_Weak_Enhancer  0  . 11937 12137   255,252,4</div><div class="line">## 6 chr1 12137 14537       11_Weak_Txn  0  . 12137 14537 153,255,102</div></pre></td></tr></table></figure>
+<p>对数据列名重命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;,&quot;start&quot;,&quot;end&quot;,&quot;type&quot;)</div><div class="line">head(my_data)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom start   end              type V5 V6    V7    V8          V9</div><div class="line">## 1  chr1 10000 10600 15_Repetitive/CNV  0  . 10000 10600 245,245,245</div><div class="line">## 2  chr1 10600 11137 13_Heterochrom/lo  0  . 10600 11137 245,245,245</div><div class="line">## 3  chr1 11137 11737       8_Insulator  0  . 11137 11737  10,190,254</div><div class="line">## 4  chr1 11737 11937       11_Weak_Txn  0  . 11737 11937 153,255,102</div><div class="line">## 5  chr1 11937 12137   7_Weak_Enhancer  0  . 11937 12137   255,252,4</div><div class="line">## 6  chr1 12137 14537       11_Weak_Txn  0  . 12137 14537 153,255,102</div></pre></td></tr></table></figure>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><p>对不同染色体上的不同type绘制柱形图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(data = my_data, aes(x= chrom, fill= type))+geom_bar()</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/A6geh7Hf22.png?imageslim" alt="mark"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><p>如果想直接保存图片到文件中，可以用<code>dev.off</code>，R语言支持多种图形类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">png(&quot;Lesson-01/plot.png&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">tiff(&quot;Lesson-01/plot.tiff&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">jpeg(&quot;Lesson-01/plot.jpg&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">pdf(&quot;Lesson-01/plot.pdf&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line"># 设置清晰度</div><div class="line">png(&quot;Lesson-01/plot_hi_res.png&quot;,1000,1000)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div></pre></td></tr></table></figure>
+<p>这节课比较简单，没什么知识点，当然如果R语言没入门的话读个数据都困难重重，所以如果基础不太好的可以直接去youtube看视频，讲的很详细。</p>
+<p>##SessionInfo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-pc-linux-gnu (64-bit)</div><div class="line">## Running under: Ubuntu 17.10</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## BLAS: /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3</div><div class="line">## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3</div><div class="line">## </div><div class="line">## locale:</div><div class="line">##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </div><div class="line">##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </div><div class="line">##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </div><div class="line">##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </div><div class="line">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </div><div class="line">## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] ggplot2_2.2.1</div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.14     digest_0.6.14    rprojroot_1.3-2  plyr_1.8.4      </div><div class="line">##  [5] grid_3.4.3       gtable_0.2.0     backports_1.1.2  magrittr_1.5    </div><div class="line">##  [9] evaluate_0.10.1  scales_0.5.0     pillar_1.1.0     rlang_0.1.6     </div><div class="line">## [13] stringi_1.1.6    lazyeval_0.2.1   rmarkdown_1.8    labeling_0.3    </div><div class="line">## [17] tools_3.4.3      stringr_1.2.0    munsell_0.4.3    yaml_2.1.16     </div><div class="line">## [21] compiler_3.4.3   colorspace_1.3-2 htmltools_0.3.6  knitr_1.18      </div><div class="line">## [25] tibble_1.4.1</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;老早之前就知道了这门课&lt;a href=&quot;http://omgenomics.com/plotting-in-r-for-biologists/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;Plotting in R for Biologists&lt;/strong&gt;&lt;/a&gt;,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错&lt;br&gt;，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="GWAS" scheme="https://ytlogos.github.io/categories/GWAS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>一步步教你如何绘制GWAS中的曼哈顿图以及QQ图</title>
@@ -1422,52 +1460,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171111/E3kF9hl9jj.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;p&gt;鉴于以后要大量使用&lt;code&gt;Linux&lt;/code&gt;系统处理生物信息学数据，因此加强自身linux系统的学习，开辟一个新的分类专门记录我学习&lt;code&gt;Linux&lt;/code&gt;的学习笔记，一是为了我自己以后方便查看，二也是希望能帮助到其他学习&lt;code&gt;Linux&lt;/code&gt;系统的人，共勉！！！&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux学习笔记（一）</title>
-    <link href="https://ytlogos.github.io/2017/11/09/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>https://ytlogos.github.io/2017/11/09/Linux学习笔记（一）/</id>
-    <published>2017-11-09T12:27:05.000Z</published>
-    <updated>2017-11-09T12:29:58.738Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171109/Jb7HLAJK63.png?imageslim" alt="mark"></p>
-<p>鉴于以后要大量使用<code>Linux</code>系统处理生物信息学数据，因此加强自身linux系统的学习，开辟一个新的分类专门记录我学习<code>Linux</code>的学习笔记，一是为了我自己以后方便查看，二也是希望能帮助到其他学习<code>Linux</code>系统的人，共勉！！！</p>
-<a id="more"></a>
-<ul>
-<li>创建含有当前时间的文件，如创建一个含有今天时间日期的文件夹</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir results-$(date +%F)</div><div class="line">$ ls</div><div class="line">results-2017-11-02</div></pre></td></tr></table></figure>
-<ul>
-<li>设置自己的快捷命令，比如我们要创建项目时，需要创建<code>data/seqs</code>,<code>scripts</code>以及<code>analysis</code>文件夹，我们可以写一个快捷命令符，以后就可以直接调用即可：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ alias mkpr=&quot;mkdir -p &#123;data/seqs,scripts,analysis&#125;&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>这样后面我们每次运行<em>mkpr</em>就会创建<code>data/seqs</code>,<code>scripts</code>以及<code>analysis</code>文件夹。将上述两点综合我们就可以很容易创建含有当前时期的文件，这里我们将<code>date +%F</code>设置成快捷命令<em>today</em>。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ alias today=&quot;date +%F&quot;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>这样我们以后只需要运行以下命令就可以创建含有当前时间日期的文件了。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir results-$(today)</div><div class="line">$ls</div><div class="line">results-2017-11-02</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意上述命令在我们重启终端时是无法再次作用的，要使得<strong>alias</strong>命令永久有效，我们可以将命令添加到<code>.bashrc</code>中，之后<code>source ~/.bashrc</code>即可生效。</p>
-</blockquote>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171109/Jb7HLAJK63.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
 &lt;p&gt;鉴于以后要大量使用&lt;code&gt;Linux&lt;/code&gt;系统处理生物信息学数据，因此加强自身linux系统的学习，开辟一个新的分类专门记录我学习&lt;code&gt;Linux&lt;/code&gt;的学习笔记，一是为了我自己以后方便查看，二也是希望能帮助到其他学习&lt;code&gt;Linux&lt;/code&gt;系统的人，共勉！！！&lt;/p&gt;
     
     </summary>

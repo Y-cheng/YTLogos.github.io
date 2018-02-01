@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="visualization,ggpubr," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -113,47 +113,19 @@
 
 
 
-<meta name="description" content="简介越学习包ggpubr越感觉其功能强大，本文主要讲解一下如何修改图形参数，我们知道ggplot2有着十分强大的绘图功能，但是其参数之复杂足以让人望而却步。ggpubr提供的函数ggpar()可以十分轻松地让我们修改图形参数，并且可以无缝对接到ggplot图形中。ggpar()可以修改以下图形参数：">
-<meta name="keywords" content="visualization,ggpubr">
+<meta name="description" content="简介老早之前就知道了这门课Plotting in R for Biologists,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggpubr包学习笔记之轻松修改图形参数">
-<meta property="og:url" content="https://ytlogos.github.io/2017/09/13/ggpubr包学习笔记之轻松修改图形参数/index.html">
+<meta property="og:title" content="Lesson 01 for Plotting in R for Biologists">
+<meta property="og:url" content="https://ytlogos.github.io/2018/01/15/ Lesson 01 for Plotting in R for Biologists/index.html">
 <meta property="og:site_name" content="Logos">
-<meta property="og:description" content="简介越学习包ggpubr越感觉其功能强大，本文主要讲解一下如何修改图形参数，我们知道ggplot2有着十分强大的绘图功能，但是其参数之复杂足以让人望而却步。ggpubr提供的函数ggpar()可以十分轻松地让我们修改图形参数，并且可以无缝对接到ggplot图形中。ggpar()可以修改以下图形参数：">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/dm80Clb7Eh.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/7hKdEb1ehB.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/f77I1FIlbB.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/cGa2dj6AB8.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/jAIc0AjBi8.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/5K7D23dIcC.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/dm80Clb7Eh.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/6EHIKCbjdB.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/K5Hh142DDJ.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/66Fl04A1Eg.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/j04LBcgCFf.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/gg16gmeE3D.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/3h1K0f5aaK.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/13fcD9GfDC.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/aD2IK0b75D.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Jj9BG7J24h.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/ah3ed5b1Ai.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/1H7KBAdKLd.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/kCaHdmcG6i.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/FHKlGj4H8F.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CFamb4cglg.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Deh1KddGKj.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/IgF4D3LFiL.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/lfk8D0i00d.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/DhAlF966Cb.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/c6cHkJj7Hk.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/k49JlfLfDg.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/G53edij9j4.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CciAa0JEhH.png?imageslim">
-<meta property="og:updated_time" content="2017-09-19T00:39:01.449Z">
+<meta property="og:description" content="简介老早之前就知道了这门课Plotting in R for Biologists,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/A6geh7Hf22.png?imageslim">
+<meta property="og:updated_time" content="2018-02-01T02:33:04.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggpubr包学习笔记之轻松修改图形参数">
-<meta name="twitter:description" content="简介越学习包ggpubr越感觉其功能强大，本文主要讲解一下如何修改图形参数，我们知道ggplot2有着十分强大的绘图功能，但是其参数之复杂足以让人望而却步。ggpubr提供的函数ggpar()可以十分轻松地让我们修改图形参数，并且可以无缝对接到ggplot图形中。ggpar()可以修改以下图形参数：">
-<meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/dm80Clb7Eh.png?imageslim">
+<meta name="twitter:title" content="Lesson 01 for Plotting in R for Biologists">
+<meta name="twitter:description" content="简介老早之前就知道了这门课Plotting in R for Biologists,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。">
+<meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim">
 
 
 
@@ -181,7 +153,7 @@
 
 
 
-  <link rel="canonical" href="https://ytlogos.github.io/2017/09/13/ggpubr包学习笔记之轻松修改图形参数/"/>
+  <link rel="canonical" href="https://ytlogos.github.io/2018/01/15/ Lesson 01 for Plotting in R for Biologists/"/>
 
 
 
@@ -202,7 +174,7 @@
     }
 </style>
 
-  <title>ggpubr包学习笔记之轻松修改图形参数 | Logos</title>
+  <title>Lesson 01 for Plotting in R for Biologists | Logos</title>
   
 
 
@@ -414,7 +386,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ytlogos.github.io/2017/09/13/ggpubr包学习笔记之轻松修改图形参数/">
+    <link itemprop="mainEntityOfPage" href="https://ytlogos.github.io/2018/01/15/ Lesson 01 for Plotting in R for Biologists/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="TaoYan">
@@ -431,7 +403,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ggpubr包学习笔记之轻松修改图形参数</h1>
+          <h1 class="post-title" itemprop="name headline">Lesson 01 for Plotting in R for Biologists</h1>
         
 
         <div class="post-meta">
@@ -443,8 +415,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-13T13:00:55+08:00">
-                2017-09-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T12:19:05+08:00">
+                2018-01-15
               </time>
             
 
@@ -459,8 +431,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-19T08:39:01+08:00">
-                2017-09-19
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-01T10:33:04+08:00">
+                2018-02-01
               </time>
             
           </span>
@@ -478,8 +450,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/可视化/" itemprop="url" rel="index">
-                    <span itemprop="name">可视化</span>
+                  <a href="/categories/GWAS/" itemprop="url" rel="index">
+                    <span itemprop="name">GWAS</span>
                   </a>
                 </span>
 
@@ -496,9 +468,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/13/ggpubr包学习笔记之轻松修改图形参数/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/15/ Lesson 01 for Plotting in R for Biologists/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/13/ggpubr包学习笔记之轻松修改图形参数/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/15/ Lesson 01 for Plotting in R for Biologists/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -506,7 +478,7 @@
 
           
           
-             <span id="/2017/09/13/ggpubr包学习笔记之轻松修改图形参数/" class="leancloud_visitors" data-flag-title="ggpubr包学习笔记之轻松修改图形参数">
+             <span id="/2018/01/15/ Lesson 01 for Plotting in R for Biologists/" class="leancloud_visitors" data-flag-title="Lesson 01 for Plotting in R for Biologists">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -532,7 +504,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,138
+                  778
                 </span>
               
 
@@ -548,7 +520,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  6
+                  4
                 </span>
               
             </div>
@@ -566,64 +538,22 @@
       
 
       
-        <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/dm80Clb7Eh.png?imageslim" alt="mark"></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>越学习包<strong>ggpubr</strong>越感觉其功能强大，本文主要讲解一下如何修改图形参数，我们知道<strong>ggplot2</strong>有着十分强大的绘图功能，但是其参数之复杂足以让人望而却步。<strong>ggpubr</strong>提供的函数ggpar()可以十分轻松地让我们修改图形参数，并且可以无缝对接到ggplot图形中。ggpar()可以修改以下图形参数：<br><a id="more"></a></p>
-<ul>
-<li>图形标题，包括坐标轴标题以及图例标题</li>
-<li>图例的位置以及外观</li>
-<li>颜色必需的能修改</li>
-<li>坐标轴limits</li>
-<li>坐标转换</li>
-<li>坐标刻度</li>
-<li>主题</li>
-<li>翻转等</li>
-</ul>
-<h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#two ways to isntall the ggpubr package</div><div class="line">install.packages(&quot;ggpubr&quot;)</div><div class="line">#install the packages from the Github</div><div class="line">devtools::install_github(&quot;kassambara/ggpubr&quot;)</div></pre></td></tr></table></figure>
-<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">library(ggpubr)#load ggpubr</div><div class="line">#basic plots</div><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color=&quot;dose&quot;)</div><div class="line">p</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/7hKdEb1ehB.png?imageslim" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#add grids by the function grids()</div><div class="line">p+grids(linetype=&quot;dashed&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/f77I1FIlbB.png?imageslim" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#add panel borders lines by the function border()</div><div class="line">p+border(&quot;black&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/cGa2dj6AB8.png?imageslim" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#change background color</div><div class="line">p+bgcolor(&quot;#BFD5E3&quot;)+border(&quot;#BFD5E3&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/jAIc0AjBi8.png?imageslim" alt=""></p>
-<h2 id="修改标题以及坐标轴标签"><a href="#修改标题以及坐标轴标签" class="headerlink" title="修改标题以及坐标轴标签"></a>修改标题以及坐标轴标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">p2 &lt;- ggpar(p,</div><div class="line">            title = &quot;Box plot created with ggpubr&quot;,</div><div class="line">            subtitle = &quot;Length by dose&quot;,</div><div class="line">            caption = &quot;Source: ggpubr&quot;,</div><div class="line">            xlab = &quot;Dose (mg)&quot;,</div><div class="line">            ylab = &quot;Teeth length&quot;,</div><div class="line">            legend.title = &quot;Dose (mg)&quot;)</div><div class="line">p2</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/5K7D23dIcC.png?imageslim" alt="mark"></p>
-<h2 id="修改标题以及标签的字体"><a href="#修改标题以及标签的字体" class="headerlink" title="修改标题以及标签的字体"></a>修改标题以及标签的字体</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ggpar(p2, </div><div class="line">      font.title = c(14, &quot;bold.italic&quot;, &quot;red&quot;),</div><div class="line">      font.subtitle = c(10, &quot;orange&quot;),</div><div class="line">      font.caption = c(10, &quot;orange&quot;),</div><div class="line">      font.x = c(14, &quot;blue&quot;),</div><div class="line">      font.y = c(14, &quot;#993333&quot;))</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/dm80Clb7Eh.png?imageslim" alt="mark"></p>
-<p>当然也可以直接用函数font()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p2+</div><div class="line">  font(&quot;title&quot;, size = 14, color = &quot;red&quot;, face = &quot;bold.italic&quot;)+</div><div class="line">  font(&quot;subtitle&quot;, size = 10, color = &quot;orange&quot;)+</div><div class="line">  font(&quot;caption&quot;, size = 10, color = &quot;orange&quot;)+</div><div class="line">  font(&quot;xlab&quot;, size = 12, color = &quot;blue&quot;)+</div><div class="line">  font(&quot;ylab&quot;, size = 12, color = &quot;#993333&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/6EHIKCbjdB.png?imageslim" alt="mark"></p>
-<p>从上面可以看出我们可以一次性完成添加标题以及修改字体<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ggpar(p,</div><div class="line">      title = &quot;Plot of length \n by dose&quot;,</div><div class="line">      xlab = &quot;Dose (mg)&quot;,</div><div class="line">      legend.title = &quot;Dose (mg)&quot;,</div><div class="line">      font.title = c(14, &quot;bold.italic&quot;, &quot;red&quot;),</div><div class="line">      font.x = c(14, &quot;bold&quot;, &quot;#2E9FDF&quot;),</div><div class="line">      font.y = c(14, &quot;bold&quot;, &quot;#E7B800&quot;))</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/K5Hh142DDJ.png?imageslim" alt="mark"></p>
-<h2 id="修改图例位置与外观"><a href="#修改图例位置与外观" class="headerlink" title="修改图例位置与外观"></a>修改图例位置与外观</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggpar(p,</div><div class="line">      legend = &quot;right&quot;, legend.title = &quot;Dose (mg)&quot;)+</div><div class="line">  font(&quot;legend.title&quot;, color=&quot;blue&quot;, face = &quot;bold&quot;)+</div><div class="line">  font(&quot;legend.text&quot;, color = &quot;red&quot;)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/66Fl04A1Eg.png?imageslim" alt="mark"></p>
-<h2 id="颜色修改"><a href="#颜色修改" class="headerlink" title="颜色修改"></a>颜色修改</h2><p>ggpar()中有一个参数palette，即调色板，除了可以我们自定义颜色外，还可以调用RColorBrewer中的调色板以及包<strong>ggsci</strong>中的专门用于学术杂志的配色。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use custom color palette</div><div class="line">ggpar(p, palette = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;))</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/j04LBcgCFf.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use the RColorBrewer palette</div><div class="line">ggpar(p, palette = &quot;Dark2&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/gg16gmeE3D.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggpar(p, palette = &quot;grey&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/3h1K0f5aaK.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use the ggsci palette</div><div class="line">ggpar(p, palette = &quot;npg&quot;)#nature</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/13fcD9GfDC.png?imageslim" alt="mark"></p>
-<p>当然也可以直接用<strong>ggpubr</strong>中的函数color_palette()以及fill_palette()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#jco color palette</div><div class="line">p+color_palette(&quot;jco&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/aD2IK0b75D.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#custom color</div><div class="line">p+color_palette(c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;))</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Jj9BG7J24h.png?imageslim" alt="mark"></p>
-<h2 id="颜色梯度"><a href="#颜色梯度" class="headerlink" title="颜色梯度"></a>颜色梯度</h2><p><strong>ggpubr</strong>提供了两个函数用来处理颜色梯度：gradient_color()和gradient_fill()<br>通过一个例子来看如何运作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#first create a scatter plot</div><div class="line">p3 &lt;- ggscatter(mtcars, x=&quot;wt&quot;, y=&quot;mpg&quot;, color=&quot;mpg&quot;, size = 2)</div><div class="line">#change the gradient color</div><div class="line">#use one custom color</div><div class="line">p3+gradient_color(&quot;red&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/ah3ed5b1Ai.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use two colors</div><div class="line">p3+gradient_color(c(&quot;blue&quot;, &quot;red&quot;))</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/1H7KBAdKLd.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#three colors</div><div class="line">p3+gradient_color(c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;))</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/kCaHdmcG6i.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use the RColorBrewer palette</div><div class="line">p3+gradient_color(&quot;RdYlBu&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/FHKlGj4H8F.png?imageslim" alt="mark"><br>gradient_fill()用法也一样，不过是填充，这里就不演示了。</p>
-<h2 id="修改坐标轴limits、scales"><a href="#修改坐标轴limits、scales" class="headerlink" title="修改坐标轴limits、scales"></a>修改坐标轴limits、scales</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#change y axis limits</div><div class="line">ggpar(p, ylim = c(0, 50))</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CFamb4cglg.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#change y axis cale to log2</div><div class="line">ggpar(p, yscale = &quot;log2&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Deh1KddGKj.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#format  axis scale</div><div class="line">ggpar(p, yscale = &quot;log2&quot;, format.scale = TRUE)#format.scale=TRUE说明y轴刻度也会scale</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/IgF4D3LFiL.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#也可以直接用yscale()</div><div class="line">p+yscale(&quot;log2&quot;, .format = TRUE)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/lfk8D0i00d.png?imageslim" alt="mark"></p>
-<h2 id="自定义坐标轴标签及刻度"><a href="#自定义坐标轴标签及刻度" class="headerlink" title="自定义坐标轴标签及刻度"></a>自定义坐标轴标签及刻度</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#change the font of x and y axis texts</div><div class="line">#rotate x and y texts</div><div class="line">p+</div><div class="line">  font(&quot;xy.text&quot;, size = 12, color = &quot;blue&quot;, face = &quot;bold&quot;)+</div><div class="line">  rotate_x_text(45)+</div><div class="line">  rotate_y_text(45)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/DhAlF966Cb.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#remove ticks and axis texts</div><div class="line">p+rremove(&quot;ticks&quot;)+</div><div class="line">  rremove(&quot;axis.text&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/c6cHkJj7Hk.png?imageslim" alt="mark"></p>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>默认主题为theme_pubr(),可以调用包<strong>ggthemes</strong>里面的主题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">library(ggthemes)</div><div class="line">p+ggthemes::theme_economist()</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/k49JlfLfDg.png?imageslim" alt="mark"></p>
-<h2 id="移除ggplot组件"><a href="#移除ggplot组件" class="headerlink" title="移除ggplot组件"></a>移除ggplot组件</h2><p>通过ggpubr::rremove()可以移除组件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, ggtheme = theme_igray())</div><div class="line">p</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/G53edij9j4.png?imageslim" alt="mark"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p+rremove(&quot;grid&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CciAa0JEhH.png?imageslim" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.1 (2017-06-30)</div><div class="line">## Platform: x86_64-pc-linux-gnu (64-bit)</div><div class="line">## Running under: Ubuntu 16.04.3 LTS</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0</div><div class="line">## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0</div><div class="line">## </div><div class="line">## locale:</div><div class="line">##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </div><div class="line">##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </div><div class="line">##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </div><div class="line">##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </div><div class="line">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </div><div class="line">## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] ggthemes_3.4.0 ggpubr_0.1.5   magrittr_1.5   ggplot2_2.2.1 </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.12       bindr_0.1          knitr_1.17        </div><div class="line">##  [4] munsell_0.4.3      colorspace_1.3-2   R6_2.2.2          </div><div class="line">##  [7] rlang_0.1.2        stringr_1.2.0      plyr_1.8.4        </div><div class="line">## [10] dplyr_0.7.3        tools_3.4.1        grid_3.4.1        </div><div class="line">## [13] gtable_0.2.0       htmltools_0.3.6    yaml_2.1.14       </div><div class="line">## [16] lazyeval_0.2.0     rprojroot_1.2      digest_0.6.12     </div><div class="line">## [19] assertthat_0.2.0   tibble_1.3.4       bindrcpp_0.2      </div><div class="line">## [22] ggsci_2.7          RColorBrewer_1.1-2 purrr_0.2.3       </div><div class="line">## [25] glue_1.1.1         evaluate_0.10.1    rmarkdown_1.6     </div><div class="line">## [28] labeling_0.3       stringi_1.1.5      compiler_3.4.1    </div><div class="line">## [31] scales_0.5.0       backports_1.1.0    pkgconfig_2.0.1</div></pre></td></tr></table></figure>
+        <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim" alt="mark"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>老早之前就知道了这门课<a href="http://omgenomics.com/plotting-in-r-for-biologists/" target="_blank" rel="external"><strong>Plotting in R for Biologists</strong></a>,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错<br>，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。</p>
+<a id="more"></a>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(ggplot2)</div><div class="line">filename &lt;- &quot;/home/taoyan/Plotting in R for Biologists/Lesson-01/Encode_HMM_data.txt&quot;</div><div class="line">my_data &lt;- read.csv(filename, sep=&quot;\t&quot;, header=FALSE)</div><div class="line"># 查看一下数据</div><div class="line">head(my_data)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##     V1    V2    V3                V4 V5 V6    V7    V8          V9</div><div class="line">## 1 chr1 10000 10600 15_Repetitive/CNV  0  . 10000 10600 245,245,245</div><div class="line">## 2 chr1 10600 11137 13_Heterochrom/lo  0  . 10600 11137 245,245,245</div><div class="line">## 3 chr1 11137 11737       8_Insulator  0  . 11137 11737  10,190,254</div><div class="line">## 4 chr1 11737 11937       11_Weak_Txn  0  . 11737 11937 153,255,102</div><div class="line">## 5 chr1 11937 12137   7_Weak_Enhancer  0  . 11937 12137   255,252,4</div><div class="line">## 6 chr1 12137 14537       11_Weak_Txn  0  . 12137 14537 153,255,102</div></pre></td></tr></table></figure>
+<p>对数据列名重命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;,&quot;start&quot;,&quot;end&quot;,&quot;type&quot;)</div><div class="line">head(my_data)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom start   end              type V5 V6    V7    V8          V9</div><div class="line">## 1  chr1 10000 10600 15_Repetitive/CNV  0  . 10000 10600 245,245,245</div><div class="line">## 2  chr1 10600 11137 13_Heterochrom/lo  0  . 10600 11137 245,245,245</div><div class="line">## 3  chr1 11137 11737       8_Insulator  0  . 11137 11737  10,190,254</div><div class="line">## 4  chr1 11737 11937       11_Weak_Txn  0  . 11737 11937 153,255,102</div><div class="line">## 5  chr1 11937 12137   7_Weak_Enhancer  0  . 11937 12137   255,252,4</div><div class="line">## 6  chr1 12137 14537       11_Weak_Txn  0  . 12137 14537 153,255,102</div></pre></td></tr></table></figure>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><p>对不同染色体上的不同type绘制柱形图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(data = my_data, aes(x= chrom, fill= type))+geom_bar()</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/A6geh7Hf22.png?imageslim" alt="mark"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><p>如果想直接保存图片到文件中，可以用<code>dev.off</code>，R语言支持多种图形类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">png(&quot;Lesson-01/plot.png&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">tiff(&quot;Lesson-01/plot.tiff&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">jpeg(&quot;Lesson-01/plot.jpg&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">pdf(&quot;Lesson-01/plot.pdf&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line"># 设置清晰度</div><div class="line">png(&quot;Lesson-01/plot_hi_res.png&quot;,1000,1000)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div></pre></td></tr></table></figure>
+<p>这节课比较简单，没什么知识点，当然如果R语言没入门的话读个数据都困难重重，所以如果基础不太好的可以直接去youtube看视频，讲的很详细。</p>
+<p>##SessionInfo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-pc-linux-gnu (64-bit)</div><div class="line">## Running under: Ubuntu 17.10</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## BLAS: /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3</div><div class="line">## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3</div><div class="line">## </div><div class="line">## locale:</div><div class="line">##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </div><div class="line">##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </div><div class="line">##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </div><div class="line">##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </div><div class="line">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </div><div class="line">## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] ggplot2_2.2.1</div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.14     digest_0.6.14    rprojroot_1.3-2  plyr_1.8.4      </div><div class="line">##  [5] grid_3.4.3       gtable_0.2.0     backports_1.1.2  magrittr_1.5    </div><div class="line">##  [9] evaluate_0.10.1  scales_0.5.0     pillar_1.1.0     rlang_0.1.6     </div><div class="line">## [13] stringi_1.1.6    lazyeval_0.2.1   rmarkdown_1.8    labeling_0.3    </div><div class="line">## [17] tools_3.4.3      stringr_1.2.0    munsell_0.4.3    yaml_2.1.16     </div><div class="line">## [21] compiler_3.4.3   colorspace_1.3-2 htmltools_0.3.6  knitr_1.18      </div><div class="line">## [25] tibble_1.4.1</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
 
       
@@ -696,14 +626,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/visualization/" rel="tag"><i class="fa fa-tag"></i> visualization</a>
-          
-            <a href="/tags/ggpubr/" rel="tag"><i class="fa fa-tag"></i> ggpubr</a>
-          
-        </div>
-      
 
       
       
@@ -713,8 +635,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/12/一篇关于国旗与奥运会奖牌的可视化笔记/" rel="next" title="一篇关于国旗与奥运会奖牌的可视化笔记">
-                <i class="fa fa-chevron-left"></i> 一篇关于国旗与奥运会奖牌的可视化笔记
+              <a href="/2018/01/11/一步步教你如何绘制GWAS中的曼哈顿图以及QQ图/" rel="next" title="一步步教你如何绘制GWAS中的曼哈顿图以及QQ图">
+                <i class="fa fa-chevron-left"></i> 一步步教你如何绘制GWAS中的曼哈顿图以及QQ图
               </a>
             
           </div>
@@ -722,10 +644,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/14/创建及自定义ggplot分面图形参数/" rel="prev" title="创建及自定义ggplot分面图形参数">
-                创建及自定义ggplot分面图形参数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -950,7 +868,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装包"><span class="nav-number">2.</span> <span class="nav-text">安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图"><span class="nav-number">3.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改标题以及坐标轴标签"><span class="nav-number">4.</span> <span class="nav-text">修改标题以及坐标轴标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改标题以及标签的字体"><span class="nav-number">5.</span> <span class="nav-text">修改标题以及标签的字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改图例位置与外观"><span class="nav-number">6.</span> <span class="nav-text">修改图例位置与外观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色修改"><span class="nav-number">7.</span> <span class="nav-text">颜色修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色梯度"><span class="nav-number">8.</span> <span class="nav-text">颜色梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改坐标轴limits、scales"><span class="nav-number">9.</span> <span class="nav-text">修改坐标轴limits、scales</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义坐标轴标签及刻度"><span class="nav-number">10.</span> <span class="nav-text">自定义坐标轴标签及刻度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主题"><span class="nav-number">11.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移除ggplot组件"><span class="nav-number">12.</span> <span class="nav-text">移除ggplot组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SessionInfo"><span class="nav-number">13.</span> <span class="nav-text">SessionInfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">14.</span> <span class="nav-text">联系方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人简介："><span class="nav-number">15.</span> <span class="nav-text">个人简介：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图"><span class="nav-number">3.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存"><span class="nav-number">4.</span> <span class="nav-text">保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">5.</span> <span class="nav-text">联系方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人简介："><span class="nav-number">6.</span> <span class="nav-text">个人简介：</span></a></li></ol></div>
             
 
           </div>
@@ -1113,9 +1031,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://ytlogos.github.io/2017/09/13/ggpubr包学习笔记之轻松修改图形参数/';
-          this.page.identifier = '2017/09/13/ggpubr包学习笔记之轻松修改图形参数/';
-          this.page.title = 'ggpubr包学习笔记之轻松修改图形参数';
+          this.page.url = 'https://ytlogos.github.io/2018/01/15/ Lesson 01 for Plotting in R for Biologists/';
+          this.page.identifier = '2018/01/15/ Lesson 01 for Plotting in R for Biologists/';
+          this.page.title = 'Lesson 01 for Plotting in R for Biologists';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Logos.disqus.com/embed.js';
