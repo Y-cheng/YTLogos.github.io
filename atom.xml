@@ -79,7 +79,7 @@
     <link href="https://ytlogos.github.io/2018/01/28/%20Lesson%2005%20for%20Plotting%20in%20R%20for%20Biologists/"/>
     <id>https://ytlogos.github.io/2018/01/28/ Lesson 05 for Plotting in R for Biologists/</id>
     <published>2018-01-28T04:19:05.000Z</published>
-    <updated>2018-02-02T10:39:27.241Z</updated>
+    <updated>2018-02-02T10:45:23.792Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/g2ed2h7ckd.png?imageslim" alt="mark"></p>
 <p>这节课作者命名为”Tweaking everything in a plot”。主要是对图形细节进行优化，包括：</p>
@@ -125,7 +125,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">basic+scale_fill_manual(values = c(&quot;green&quot;, &quot;blue&quot;, &quot;red&quot;))</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/e0J65fm8IL.png?imageslim" alt="mark"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">head(colors())</div></pre></td></tr></table></figure>
-<h2 id="1-“white”-“aliceblue”-“antiquewhite”-“antiquewhite1”"><a href="#1-“white”-“aliceblue”-“antiquewhite”-“antiquewhite1”" class="headerlink" title="[1] “white”         “aliceblue”     “antiquewhite”  “antiquewhite1”"></a>[1] “white”         “aliceblue”     “antiquewhite”  “antiquewhite1”</h2><h2 id="5-“antiquewhite2”-“antiquewhite3”"><a href="#5-“antiquewhite2”-“antiquewhite3”" class="headerlink" title="[5] “antiquewhite2” “antiquewhite3”"></a>[5] “antiquewhite2” “antiquewhite3”</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">有的时候我们需要很多种颜色，多到一个调色板都满足不了时怎么办？</div><div class="line">```&#123;r&#125;</div><div class="line">chrom_plot &lt;- ggplot(my_data, aes(x=type, fill=chrom))+geom_bar()</div><div class="line">chrom_plot</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## [1] &quot;white&quot;         &quot;aliceblue&quot;     &quot;antiquewhite&quot;  &quot;antiquewhite1&quot;</div><div class="line">## [5] &quot;antiquewhite2&quot; &quot;antiquewhite3&quot;</div></pre></td></tr></table></figure>
+<p>有的时候我们需要很多种颜色，多到一个调色板都满足不了时怎么办？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chrom_plot &lt;- ggplot(my_data, aes(x=type, fill=chrom))+geom_bar()</div><div class="line">chrom_plot</div></pre></td></tr></table></figure></p>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/4bhEI643Lb.png?imageslim" alt="mark"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrom_plot+scale_fill_brewer(type = &quot;qual&quot;, palette = 1)</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/mFkFIEJKk7.png?imageslim" alt="mark"></p>
