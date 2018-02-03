@@ -130,7 +130,7 @@
 <meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/k0d1H4Fahj.png?imageslim">
 <meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/d4hLf0EfgF.png?imageslim">
 <meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Jfea06AiAF.png?imageslim">
-<meta property="og:updated_time" content="2018-02-03T07:55:37.477Z">
+<meta property="og:updated_time" content="2018-02-03T07:57:05.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lesson 08 for Plotting in R for Biologists">
 <meta name="twitter:description" content="这节课是最后一节课，主要将如何绘制热图(heatmap)。实际上关于热图的绘制，我以前写了一篇博客：R语言学习笔记之热图绘制，里面写的十分详细。但是今天热图绘制主要利用一个新的R包ComplexHeatmap进行绘制。">
@@ -440,7 +440,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-03T15:55:37+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-03T15:57:05+08:00">
                 2018-02-03
               </time>
             
@@ -566,7 +566,7 @@
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/FAIF0CElla.png?imageslim" alt="mark"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;))</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/c34HgC083C.png?imageslim" alt="mark"></p>
-<p>热图绘制的时候可以使用不同的距离计算方式以及聚类方法，具体的用法可以参考我以前的博客：<a href="https://ytlogos.github.io/2017/08/21/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%83%AD%E5%9B%BE%E7%BB%98%E5%88%B6/">R语言学习笔记之热土绘制</a>。</p>
+<p>热图绘制的时候可以使用不同的距离计算方式以及聚类方法，具体的用法可以参考我以前的博客：<a href="https://ytlogos.github.io/2017/08/21/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%83%AD%E5%9B%BE%E7%BB%98%E5%88%B6/">R语言学习笔记之热图绘制</a>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;),</div><div class="line">        clustering_distance_rows = &quot;maximum&quot;,</div><div class="line">        clustering_method_rows = &quot;ward.D&quot;)</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/iEiafB44Ad.png?imageslim" alt="mark"></p>
 <h2 id="热图注释"><a href="#热图注释" class="headerlink" title="热图注释"></a>热图注释</h2><p>主要是对聚成的类进行颜色标记<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">library(dendextend)</div><div class="line">dend &lt;- hclust(dist(my_matrix, method = &quot;maximum&quot;), method = &quot;ward.D&quot;)</div><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;),</div><div class="line">        cluster_rows = color_branches(dend, k=3))</div></pre></td></tr></table></figure></p>
