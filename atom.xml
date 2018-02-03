@@ -75,6 +75,64 @@
   </entry>
   
   <entry>
+    <title>Lesson 08 for Plotting in R for Biologists</title>
+    <link href="https://ytlogos.github.io/2018/01/31/%20Lesson%2008%20for%20Plotting%20in%20R%20for%20Biologists/"/>
+    <id>https://ytlogos.github.io/2018/01/31/ Lesson 08 for Plotting in R for Biologists/</id>
+    <published>2018-01-31T04:19:05.000Z</published>
+    <updated>2018-02-03T07:28:24.302Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Jfea06AiAF.png?imageslim" alt="mark"></p>
+<p>这节课是最后一节课，主要将如何绘制热图(heatmap)。实际上关于热图的绘制，我以前写了一篇博客：<a href="https://ytlogos.github.io/2017/08/21/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%83%AD%E5%9B%BE%E7%BB%98%E5%88%B6/">R语言学习笔记之热土绘制</a>，里面写的十分详细。但是今天热图绘制主要利用一个新的R包<strong>ComplexHeatmap</strong>进行绘制。</p>
+<a id="more"></a>
+<h2 id="包安装"><a href="#包安装" class="headerlink" title="包安装"></a>包安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">source(&quot;https://bioconductor.org/biocLite.R&quot;)</div><div class="line">options(BioC_mirror=&quot;http://mirrors.ustc.edu.cn/bioc/&quot;)</div><div class="line">biocLite(&quot;ComplexHeatmap&quot;)</div></pre></td></tr></table></figure>
+<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(ComplexHeatmap)</div><div class="line">my_data &lt;- read.table(&quot;copy_number_data.txt&quot;, sep = &quot;\t&quot;, quote=&quot;&quot;, stringsAsFactors = FALSE, header = TRUE)</div><div class="line">head(my_data[,1:6])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##    CHR     START       END X.SRR089523. X.SRR089526. X.SRR089529.</div><div class="line">## 1 chr1  53440429  53494914    1.1002112    1.1000844    1.0487301</div><div class="line">## 2 chr1 105459037 105514187    1.1860780    0.6553897    0.4980016</div><div class="line">## 3 chr1 183998520 184048557    1.3791250    1.2024487    0.5735184</div><div class="line">## 4 chr1 236135655 236186012    0.8987158    1.1182392    0.6396842</div><div class="line">## 5 chr2  38944803  38996507    1.0788216    0.9663390    1.0473623</div><div class="line">## 6 chr2  97248366  97298651    1.0459629    1.0658991    1.0473623</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#绘制热图前先进行矩阵化</div><div class="line">my_matrix &lt;- as.matrix(my_data[, c(4:100)])</div><div class="line">head(my_matrix[,1:4])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##      X.SRR089523. X.SRR089526. X.SRR089529. X.SRR089533.</div><div class="line">## [1,]    1.1002112    1.1000844    1.0487301    0.5656784</div><div class="line">## [2,]    1.1860780    0.6553897    0.4980016    0.5656784</div><div class="line">## [3,]    1.3791250    1.2024487    0.5735184    1.0362551</div><div class="line">## [4,]    0.8987158    1.1182392    0.6396842    0.4659238</div><div class="line">## [5,]    1.0788216    0.9663390    1.0473623    1.1702930</div><div class="line">## [6,]    1.0459629    1.0658991    1.0473623    1.2298119</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#将染色体信息存储好以便后续热图注释</div><div class="line">chromosome_info &lt;- data.frame(chrom=my_data$CHR)</div></pre></td></tr></table></figure>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Aj4Gc126K4.png?imageslim" alt="mark"></p>
+<p>可以看到使用默认参数热图时十分不美观，可以进行部分调整<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#坐标旋转</div><div class="line">my_matrix &lt;- t(my_matrix)</div><div class="line">Heatmap(my_matrix)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/f2bambd0De.png?imageslim" alt="mark"></p>
+<p>坐标标签还是十分乱，还得进行调整<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix, cluster_columns = FALSE)#列不聚类</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/j5Aabgh1hH.png?imageslim" alt="mark"></p>
+<p>将坐标标签位置置于左边<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix, </div><div class="line">        cluster_columns = FALSE, </div><div class="line">        row_names_side = &quot;left&quot;, </div><div class="line">        row_hclust_side = &quot;left&quot;, </div><div class="line">        row_names_gp = gpar(cex=0.6)</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/FAIF0CElla.png?imageslim" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;))</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/c34HgC083C.png?imageslim" alt="mark"></p>
+<p>热图绘制的时候可以使用不同的距离计算方式以及聚类方法，具体的用法可以参考我以前的博客：<a href="https://ytlogos.github.io/2017/08/21/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%83%AD%E5%9B%BE%E7%BB%98%E5%88%B6/">R语言学习笔记之热土绘制</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;),</div><div class="line">        clustering_distance_rows = &quot;maximum&quot;,</div><div class="line">        clustering_method_rows = &quot;ward.D&quot;)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/iEiafB44Ad.png?imageslim" alt="mark"></p>
+<h2 id="热图注释"><a href="#热图注释" class="headerlink" title="热图注释"></a>热图注释</h2><p>主要是对聚成的类进行颜色标记<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">library(dendextend)</div><div class="line">dend &lt;- hclust(dist(my_matrix, method = &quot;maximum&quot;), method = &quot;ward.D&quot;)</div><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;),</div><div class="line">        cluster_rows = color_branches(dend, k=3))</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/k0d1H4Fahj.png?imageslim" alt="mark"></p>
+<h3 id="将热图分类"><a href="#将热图分类" class="headerlink" title="将热图分类"></a>将热图分类</h3><p>随便你先分成几类，但是一般来说有一个最佳分类数，可参考我的另一篇博客：<a href="https://ytlogos.github.io/2017/06/25/R语言学习笔记之聚类分析/">R语言学习笔记之聚类分析</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;),</div><div class="line">        clustering_distance_rows = &quot;maximum&quot;,</div><div class="line">        clustering_method_rows = &quot;ward.D&quot;,</div><div class="line">        km=2)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/d4hLf0EfgF.png?imageslim" alt="mark"></p>
+<h3 id="根据染色体信息进行注释"><a href="#根据染色体信息进行注释" class="headerlink" title="根据染色体信息进行注释"></a>根据染色体信息进行注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">chromosome_colors &lt;- c(rep(c(&quot;black&quot;,&quot;white&quot;),11), &quot;red&quot;)</div><div class="line">names(chromosome_colors) &lt;- paste(&quot;chr&quot;,c(seq(1:22), &quot;X&quot;), sep = &quot;&quot;)</div><div class="line">Heatmap(my_matrix,</div><div class="line">        cluster_columns = FALSE,</div><div class="line">        row_names_side = &quot;left&quot;,</div><div class="line">        row_hclust_side = &quot;left&quot;,</div><div class="line">        row_names_gp = gpar(cex=0.6),</div><div class="line">        row_hclust_width = unit(3, &quot;cm&quot;),</div><div class="line">        clustering_distance_rows = &quot;maximum&quot;,</div><div class="line">        clustering_method_rows = &quot;ward.D&quot;,</div><div class="line">        km=2,</div><div class="line">        bottom_annotation = HeatmapAnnotation(chromosome_info, col = list(chrom=chromosome_colors), show_legend = FALSE))</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Jfea06AiAF.png?imageslim" alt="mark"></p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] grid      stats     graphics  grDevices utils     datasets  methods  </div><div class="line">## [8] base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] dendextend_1.6.0      ComplexHeatmap_1.17.1</div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.15         DEoptimR_1.0-8       compiler_3.4.3      </div><div class="line">##  [4] pillar_1.1.0         RColorBrewer_1.1-2   plyr_1.8.4          </div><div class="line">##  [7] viridis_0.4.1        class_7.3-14         prabclus_2.2-6      </div><div class="line">## [10] tools_3.4.3          digest_0.6.15        mclust_5.4          </div><div class="line">## [13] viridisLite_0.3.0    evaluate_0.10.1      tibble_1.4.2        </div><div class="line">## [16] gtable_0.2.0         lattice_0.20-35      rlang_0.1.6         </div><div class="line">## [19] yaml_2.1.16          mvtnorm_1.0-7        gridExtra_2.3       </div><div class="line">## [22] trimcluster_0.1-2    stringr_1.2.0        knitr_1.19          </div><div class="line">## [25] cluster_2.0.6        GlobalOptions_0.0.12 fpc_2.1-11          </div><div class="line">## [28] diptest_0.75-7       nnet_7.3-12          stats4_3.4.3        </div><div class="line">## [31] rprojroot_1.3-2      robustbase_0.92-8    GetoptLong_0.1.6    </div><div class="line">## [34] flexmix_2.3-14       rmarkdown_1.8        kernlab_0.9-25      </div><div class="line">## [37] ggplot2_2.2.1.9000   magrittr_1.5         whisker_0.3-2       </div><div class="line">## [40] modeltools_0.2-21    backports_1.1.2      scales_0.5.0.9000   </div><div class="line">## [43] htmltools_0.3.6      MASS_7.3-48          shape_1.4.3         </div><div class="line">## [46] circlize_0.4.3       colorspace_1.3-2     stringi_1.1.6       </div><div class="line">## [49] lazyeval_0.2.1       munsell_0.4.3        rjson_0.2.15</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Jfea06AiAF.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这节课是最后一节课，主要将如何绘制热图(heatmap)。实际上关于热图的绘制，我以前写了一篇博客：&lt;a href=&quot;https://ytlogos.github.io/2017/08/21/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%83%AD%E5%9B%BE%E7%BB%98%E5%88%B6/&quot;&gt;R语言学习笔记之热土绘制&lt;/a&gt;，里面写的十分详细。但是今天热图绘制主要利用一个新的R包&lt;strong&gt;ComplexHeatmap&lt;/strong&gt;进行绘制。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+      <category term="Biologists" scheme="https://ytlogos.github.io/tags/Biologists/"/>
+    
+      <category term="heatmap" scheme="https://ytlogos.github.io/tags/heatmap/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lesson 07 for Plotting in R for Biologists</title>
     <link href="https://ytlogos.github.io/2018/01/30/%20Lesson%2007%20for%20Plotting%20in%20R%20for%20Biologists/"/>
     <id>https://ytlogos.github.io/2018/01/30/ Lesson 07 for Plotting in R for Biologists/</id>
@@ -1243,114 +1301,6 @@
     
       &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/B6jBAEJ3k8.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;sed实例讲解&quot;&gt;&lt;a href=&quot;#sed实例讲解&quot; class=&quot;headerlink&quot; title=&quot;sed实例讲解&quot;&gt;&lt;/a&gt;sed实例讲解&lt;/h2&gt;&lt;p&gt;上篇&lt;a href=&quot;https://ytlogos.github.io/2017/11/20/Linux学习笔记（八）/&quot;&gt;博客&lt;/a&gt;已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sed [-n] [-e] &amp;apos;command(s)&amp;apos; files&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sed [-n] -f scriptfile files&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
-    
-    
-      <category term="sed" scheme="https://ytlogos.github.io/tags/sed/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux学习笔记（八）</title>
-    <link href="https://ytlogos.github.io/2017/11/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/"/>
-    <id>https://ytlogos.github.io/2017/11/20/Linux学习笔记（八）/</id>
-    <published>2017-11-20T09:19:05.000Z</published>
-    <updated>2017-11-20T09:48:40.764Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/B6jBAEJ3k8.png?imageslim" alt="mark"></p>
-<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>sed是一种功能强大的流式文本编辑器，能够完美结合正则表达式使用。处理时sed将当前处理的行储存在临时缓冲区中，称为模式空间（pattern space），接着sed命令处理缓冲区的内容，处理完成后打印到屏幕，接着继续处理下一行，不断重复直到文件结束。</p>
-<a id="more"></a>
-<h2 id="sed的用途"><a href="#sed的用途" class="headerlink" title="sed的用途"></a>sed的用途</h2><p>sed用途十分广泛：</p>
-<ul>
-<li>文本替换</li>
-<li>选择性的文件输出</li>
-<li>从文本特定位置进行编辑</li>
-<li>无交互式的文本编辑</li>
-</ul>
-<h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>sed遵循简单的工作流：读取、执行以及显示，下图显示sed的工作流程：<br><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/4556AfHI7k.png?imageslim" alt="mark"></p>
-<ul>
-<li>读取：sed从输入流（文件、管道、标准输入STDIN等）中读取一行并且存储到模式空间的内部缓冲区</li>
-<li>执行：默认情况下所有的sed命令都在模式空间中按顺序执行，除非指定了行的地址，否则sed命令将会在所有的行上依次执行</li>
-<li>显示：发送修改后的内容到输出流，之后模式空间将被清空，继续重复上述过程直到文件结束</li>
-</ul>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
-<li>模式空间（pattern space）是一块活跃的缓冲区，在sed编辑器执行命令时它会保存待检查的文本</li>
-<li>默认情况下所有的sed命令都是在模式空间中执行，因此输入文件不会发生改变</li>
-<li>另外一个缓冲区是保持空间（hold buffer），在处理模式空间中的某些行时，可以利用保持空间来临时保存一些行，在每一个循环结束的时候，sed将会移除模式空间的内容，但是保持空间的内容在所有循环过程中是持久存储的，sed命令无法直接在保持空间中执行，因此sed允许数据在模式空间与保持空间之间切换</li>
-<li>初始情况下模式空间和保持空间都是空的</li>
-<li>如果没有提供输入文件的话sed将会从标准输入接收请求</li>
-<li>如果没有提供地址范围的话，默认情况下sed将对所有的行进行操作</li>
-</ul>
-<h2 id="sed的选型、命令、替换标记"><a href="#sed的选型、命令、替换标记" class="headerlink" title="sed的选型、命令、替换标记"></a>sed的选型、命令、替换标记</h2><p>sed作为一个强大的流式编辑器，具有其特有的格式</p>
-<h3 id="sed命令格式"><a href="#sed命令格式" class="headerlink" title="sed命令格式"></a>sed命令格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sed [options] &apos;commands&apos; file(s)</div><div class="line">sed [options] -f scriptfile file(s)</div></pre></td></tr></table></figure>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><ul>
-<li>-e：以选项中指定的script来处理输入的文本文件</li>
-<li>-f：以选项中指定的script文本来处理输入的文本文件</li>
-<li>-n或者–quiet或者–silent：仅显示script处理后的结果</li>
-</ul>
-<h3 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a>sed命令</h3><ul>
-<li>a\：在当前行下面插入文本</li>
-<li>i\：在当前行上面插入文本</li>
-<li>c\：将选定的行改为新的版本</li>
-<li>d：删除选择的行</li>
-<li>D：删除模板块的第一行</li>
-<li>s：替换指定字符</li>
-<li>h：拷贝模板块中的内容到内存中的缓冲区</li>
-<li>H：追加模板块中的内容到内存中的缓冲区</li>
-<li>g：获取缓冲区的内容并替代当前模板块的内容</li>
-<li>G：获取缓存区的内容，并追加到当前模板块文本后面</li>
-<li>l：列出不能打印字符的清单</li>
-<li>n：读取下一个输入行，并用下一个命令处理新的行而不是用第一个命令</li>
-<li>N：追加下一个输入行到模板块后面并在两者间嵌入一个新行，改变当前行号码</li>
-<li>p：打印模板块的行</li>
-<li>P：打印模板块的第一行</li>
-<li>q：退出sed</li>
-<li>b label：分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾</li>
-<li>r file：从file中读取行</li>
-<li>t table：if分支，从最后一行开始，条件一旦满足或者T、t命令，将导致分支到带有标号的命令处或者到脚本的末尾</li>
-<li>T table：错误分支，从最后一行开始，一旦发生错误或者T、t命令，将导致分支到带有标号的命令处或者到脚本的末尾</li>
-<li>w file：写并追加到file末尾</li>
-<li>W file：写并追加模板块的第一行到file末尾</li>
-<li>！：表示后面的命令对所有没有被选定的行发生作用</li>
-<li>=：打印当前行号码</li>
-</ul>
-<h3 id="sed替换标记"><a href="#sed替换标记" class="headerlink" title="sed替换标记"></a>sed替换标记</h3><ul>
-<li>g：表示行内全面替换</li>
-<li>p：表示打印行</li>
-<li>w：表示将行写入一个文件</li>
-<li>x：表示互换模板块中的文本和缓冲区的文本</li>
-<li>y：表示将一个字符翻译为另外的字符（不用于正则表达式）</li>
-<li>\l：子串匹配标记</li>
-<li>&amp;：已匹配字符串标记</li>
-</ul>
-<h3 id="sed元字符集（就是一些正则表达式）"><a href="#sed元字符集（就是一些正则表达式）" class="headerlink" title="sed元字符集（就是一些正则表达式）"></a>sed元字符集（就是一些正则表达式）</h3><ul>
-<li>^：匹配行的开始，如/^sed/匹配所有以sed开头的行</li>
-<li>$：匹配行结束，如/sed$/匹配所有以sed结尾的行</li>
-<li>.：匹配一个非换行符的任意字符，如/s.d/匹配在sd之间接一个任意字符</li>
-<li><em>：匹配0个或多个字符，如/</em>sed/匹配所有模板是一个或多个字符后接sed的行</li>
-<li>[]：匹配一个指定范围内的字符，如/[sH]ed/匹配sed和Hed</li>
-<li>[^]：匹配一个不在指定范围内的字符，如/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字符开头紧跟sed的行</li>
-<li>\(..\)：匹配子串，保存匹配的字符，如s/(love)able/\1rs，loveabel被替换成了lovers</li>
-<li>&amp;：保存搜索字符用来替换其它字符，如s/love/**&amp;**/，love替换成了**love**</li>
-<li>\&lt;：匹配单词的开始，如/\&lt;love/匹配包含以love开头的单词的行</li>
-<li>\&gt;：匹配单词的结束，如/love\&gt;/匹配包含以love结尾的单词的行</li>
-<li>x\{m\}：重复字符x，m次，如/0\{5\}匹配包含5个0的行】</li>
-<li>x\{m,\}：重复字符x至少m次，如/0\{5,\}/匹配至少5个0的行</li>
-<li>x\{m,n\}：重复字符x至少m次，之多n次，如/0\{5,10\}/匹配5-10个0的行</li>
-</ul>
-<p>后面将讲解sed实例进行解释各个选项及其使用。</p>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/B6jBAEJ3k8.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;sed&quot;&gt;&lt;a href=&quot;#sed&quot; class=&quot;headerlink&quot; title=&quot;sed&quot;&gt;&lt;/a&gt;sed&lt;/h2&gt;&lt;p&gt;sed是一种功能强大的流式文本编辑器，能够完美结合正则表达式使用。处理时sed将当前处理的行储存在临时缓冲区中，称为模式空间（pattern space），接着sed命令处理缓冲区的内容，处理完成后打印到屏幕，接着继续处理下一行，不断重复直到文件结束。&lt;/p&gt;
     
     </summary>
     
