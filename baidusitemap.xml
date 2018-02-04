@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>https://ytlogos.github.io/2018/02/01/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2018-02-04T10:48:08.456Z</lastmod>
+    <data>
+        <display>
+        <title>Shell编程：简介</title>
+        <pubTime>2018-02-01T13:19:05.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Shell" url="https://ytlogos.github.io/categories/Shell/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ytlogos.github.io/2018/01/31/%20Lesson%2008%20for%20Plotting%20in%20R%20for%20Biologists/</loc>
     <lastmod>2018-02-03T07:57:05.975Z</lastmod>
     <data>
@@ -737,9 +755,9 @@
         <title>生物信息学学习笔记（四）</title>
         <pubTime>2017-12-06T13:19:05.000Z</pubTime>
         
-        <tag>Hi-C</tag>
-         
         <tag>DHSs</tag>
+         
+        <tag>Hi-C</tag>
          
          
            
@@ -759,9 +777,9 @@
         <title>生物信息学学习笔记（三）</title>
         <pubTime>2017-12-04T13:19:05.000Z</pubTime>
         
-        <tag>Hi-C</tag>
-         
         <tag>DHSs</tag>
+         
+        <tag>Hi-C</tag>
          
          
            
@@ -781,9 +799,9 @@
         <title>生物信息学学习笔记（二）</title>
         <pubTime>2017-11-29T13:19:05.000Z</pubTime>
         
-        <tag>evolution</tag>
-         
         <tag>Hi-C</tag>
+         
+        <tag>evolution</tag>
          
          
            
