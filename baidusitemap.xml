@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>https://ytlogos.github.io/2018/02/03/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%BC%A0%E5%8F%82/</loc>
+    <lastmod>2018-02-05T12:10:34.289Z</lastmod>
+    <data>
+        <display>
+        <title>Shell编程：变量</title>
+        <pubTime>2018-02-03T13:19:05.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Shell" url="https://ytlogos.github.io/categories/Shell/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ytlogos.github.io/2018/02/05/R%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8Bggridges%E5%8C%85/</loc>
     <lastmod>2018-02-05T06:47:15.776Z</lastmod>
     <data>
@@ -333,9 +351,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
@@ -727,9 +745,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
@@ -793,9 +811,9 @@
         <title>生物信息学学习笔记（四）</title>
         <pubTime>2017-12-06T13:19:05.000Z</pubTime>
         
-        <tag>DHSs</tag>
-         
         <tag>Hi-C</tag>
+         
+        <tag>DHSs</tag>
          
          
            
@@ -815,9 +833,9 @@
         <title>生物信息学学习笔记（三）</title>
         <pubTime>2017-12-04T13:19:05.000Z</pubTime>
         
-        <tag>DHSs</tag>
-         
         <tag>Hi-C</tag>
+         
+        <tag>DHSs</tag>
          
          
            
@@ -837,9 +855,9 @@
         <title>生物信息学学习笔记（二）</title>
         <pubTime>2017-11-29T13:19:05.000Z</pubTime>
         
-        <tag>Hi-C</tag>
-         
         <tag>evolution</tag>
+         
+        <tag>Hi-C</tag>
          
          
            
@@ -1121,9 +1139,9 @@
         
         <tag>R</tag>
          
-        <tag>scatter plot</tag>
-         
         <tag>visualization</tag>
+         
+        <tag>scatter plot</tag>
          
          
            
