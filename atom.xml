@@ -79,7 +79,7 @@
     <link href="https://ytlogos.github.io/2018/02/03/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%BC%A0%E5%8F%82/"/>
     <id>https://ytlogos.github.io/2018/02/03/Shell编程：传参/</id>
     <published>2018-02-03T13:19:05.000Z</published>
-    <updated>2018-02-05T12:13:58.199Z</updated>
+    <updated>2018-02-05T12:18:46.856Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/gfihd4EIE0.png?imageslim" alt="mark"></p>
 <h2 id="shell传递参数"><a href="#shell传递参数" class="headerlink" title="shell传递参数"></a>shell传递参数</h2><p>执行shell脚本时，向脚本传递参数，脚本内获取参数的格式为：$n。n代表数字，1为执行脚本的第一个参数，2为第二个，以此类推。</p>
