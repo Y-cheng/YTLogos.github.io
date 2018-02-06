@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-02-05T06:47:15.776Z</updated>
+  <updated>2018-02-06T09:30:29.592Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>R语言可视化学习笔记之gganimate包</title>
+    <link href="https://ytlogos.github.io/2018/02/06/R%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8Bgganimate%E5%8C%85/"/>
+    <id>https://ytlogos.github.io/2018/02/06/R语言可视化学习笔记之gganimate包/</id>
+    <published>2018-02-06T06:19:05.000Z</published>
+    <updated>2018-02-06T09:30:29.592Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/kHCkkicfkh.gif" alt="mark"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/dgrtwo/gganimate" target="_blank" rel="external"><strong>gganimate</strong></a>包是<strong>ggplot2</strong>的扩展包，主要用于绘制动画。它在<strong>ggplot2</strong>的基础上了补充了一个美学映射<code>frame</code>，就像x,y,size,color,fill一样进行映射。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if(!require(devtools)) install.packages(&quot;devtools&quot;)</div><div class="line">devtools::install_github(&quot;dgrtwo/gganimate&quot;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是这个包依赖于<strong>ImageMagick</strong>来产生动画，如果自行安装的话在调用<strong>ImageMagick</strong>很容易出错，所以推荐在<strong>RStudio</strong>里面安装。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">install.packages(&quot;installr&quot;)</div><div class="line">installr::install.ImageMagick(&quot;http://www.imagemagick.org/script/download.php&quot;)</div></pre></td></tr></table></figure>
+<p>安装好之后以管理员身份运行<strong>RStudio</strong></p>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>这里我们使用<strong>gapminder</strong>包里的数据集<code>gapminder</code>进行可视化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(gapminder)</div><div class="line">library(ggplot2)</div><div class="line">library(gganimate)</div><div class="line">theme_set(theme_bw())</div><div class="line">head(gapminder)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># A tibble: 6 x 6</div><div class="line">  country     continent  year lifeExp      pop gdpPercap</div><div class="line">  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;</div><div class="line">1 Afghanistan Asia       1952    28.8  8425333       779</div><div class="line">2 Afghanistan Asia       1957    30.3  9240934       821</div><div class="line">3 Afghanistan Asia       1962    32.0 10267083       853</div><div class="line">4 Afghanistan Asia       1967    34.0 11537966       836</div><div class="line">5 Afghanistan Asia       1972    36.1 13079460       740</div><div class="line">6 Afghanistan Asia       1977    38.4 14880372       786</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop, color=continent,frame=year))+</div><div class="line">  geom_point()+</div><div class="line">  scale_x_log10()</div><div class="line"> gganimate(p)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/cIEhbkd1CE.gif" alt="mark"></p>
+<p>不管动画中的图形如何移动，坐标轴、图例等都是固定的。</p>
+<h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>将<strong>gganimate</strong>与<strong>ggplot2</strong>结合起来可以定制化很多复杂的动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p2 &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop))+</div><div class="line">  geom_point()+</div><div class="line">  geom_point(aes(frame=year), color=&quot;red&quot;)+</div><div class="line">  scale_x_log10()</div><div class="line">gganimate(p2)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/lcD6kdcA73.gif" alt="mark"></p>
+<p>如果要绘制累积效果图，<strong>gganimate</strong>提供了<code>cumalative</code>参数，这对于路径图来说十分是有效的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p3 &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, frame=year, color=continent))+</div><div class="line">  geom_path(aes(cumulative=TRUE, group=country))+</div><div class="line">  scale_x_log10()+</div><div class="line">  facet_wrap(~continent)</div><div class="line">gganimate(p3)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/D2g6l8d18K.gif" alt="mark"></p>
+<p>一般来说我们都是将时间映射给<code>frame</code>，这也符合我们的直觉，但是这并不意味着我们只能将时间映射给<code>frame</code>，我们可以将任何想要的变量映射给<code>frame</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p4 &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop, frame=continent))+</div><div class="line">  geom_point(color=&quot;blue&quot;)+</div><div class="line">  scale_x_log10()</div><div class="line">gganimate(p4)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/jcbklhff47.gif" alt="mark"></p>
+<blockquote>
+<p>需要注意的是如何我们绘制的图形涉及到统计汇总比如geom_smooth()，那么在geom_smooth()图层中需要添加group映射。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p5 &lt;- ggplot(gapminder,aes(gdpPercap, lifeExp, size=pop, frame=year))+</div><div class="line">  geom_point()+</div><div class="line">  geom_smooth(aes(group=year),method = &quot;lm&quot;, show.legend = FALSE)+</div><div class="line">  facet_wrap(~continent, scales = &quot;free&quot;)+</div><div class="line">  scale_x_log10()</div><div class="line">gganimate(p5)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/Hb2aac620H.gif" alt="mark"></p>
+<p>最后如果需要控制动画播放速度，使用<code>interval</code>参数控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gganimate(p, interval = .2)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/kHCkkicfkh.gif" alt="mark"></p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">R version 3.4.3 (2017-11-30)</div><div class="line">Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">Running under: Windows &gt;= 8 x64 (build 9200)</div><div class="line"></div><div class="line">Matrix products: default</div><div class="line"></div><div class="line">locale:</div><div class="line">[1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">[2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">[3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">[4] LC_NUMERIC=C                              </div><div class="line">[5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line"></div><div class="line">attached base packages:</div><div class="line">[1] stats     graphics  grDevices utils     datasets  methods  </div><div class="line">[7] base     </div><div class="line"></div><div class="line">other attached packages:</div><div class="line">[1] gganimate_0.1.0.9000 ggplot2_2.2.1.9000  </div><div class="line">[3] gapminder_0.3.0     </div><div class="line"></div><div class="line">loaded via a namespace (and not attached):</div><div class="line"> [1] Rcpp_0.12.15      rstudioapi_0.7    magrittr_1.5     </div><div class="line"> [4] munsell_0.4.3     colorspace_1.3-2  rlang_0.1.6      </div><div class="line"> [7] stringr_1.2.0     plyr_1.8.4        tools_3.4.3      </div><div class="line">[10] grid_3.4.3        gtable_0.2.0      utf8_1.1.3       </div><div class="line">[13] cli_1.0.0         withr_2.1.1.9000  htmltools_0.3.6  </div><div class="line">[16] yaml_2.1.16       lazyeval_0.2.1    assertthat_0.2.0 </div><div class="line">[19] digest_0.6.15     tibble_1.4.2      crayon_1.3.4     </div><div class="line">[22] base64enc_0.1-3   animation_2.5     labeling_0.3     </div><div class="line">[25] stringi_1.1.6     compiler_3.4.3    pillar_1.1.0     </div><div class="line">[28] installr_0.19.0   scales_0.5.0.9000</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
+<p>Email: tyan@zju.edu.cn</p>
+<p>QQ: 1051927088</p>
+<p>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a></p>
+<p>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a></p>
+<p>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/kHCkkicfkh.gif&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/dgrtwo/gganimate&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;gganimate&lt;/strong&gt;&lt;/a&gt;包是&lt;strong&gt;ggplot2&lt;/strong&gt;的扩展包，主要用于绘制动画。它在&lt;strong&gt;ggplot2&lt;/strong&gt;的基础上了补充了一个美学映射&lt;code&gt;frame&lt;/code&gt;，就像x,y,size,color,fill一样进行映射。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+      <category term="gganimate" scheme="https://ytlogos.github.io/tags/gganimate/"/>
+    
+  </entry>
   
   <entry>
     <title>R语言可视化学习笔记之ggridges包</title>
@@ -1283,67 +1345,6 @@
     
     
       <category term="LD" scheme="https://ytlogos.github.io/tags/LD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>生物信息学学习笔记（四）</title>
-    <link href="https://ytlogos.github.io/2017/12/06/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
-    <id>https://ytlogos.github.io/2017/12/06/生物信息学学习笔记（四）/</id>
-    <published>2017-12-06T13:19:05.000Z</published>
-    <updated>2017-12-06T14:06:51.094Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171204/lGak1jll4j.png?imageslim" alt="mark"></p>
-<p>最近看了华中农业大学张献龙老师发在<strong>Nature Genetics</strong>上的文章<a href="https://www.nature.com/articles/ng.3807" target="_blank" rel="external">Asymmetric subgenome selection and cis-regulatory divergence during cotton domestication</a>以及第一作者王茂军博士的博士毕业论文，十分精彩，故学习之并做适当笔记。<br><a id="more"></a></p>
-<ul>
-<li>通过分析四倍体棉花At和Dt亚组同源基因甲基化和表达量之间的关系，推测不同亚组基因的表观修饰差异可能是基因偏向性表达的原因之一</li>
-<li><p>部分名词解释：</p>
-<ul>
-<li>H3K27me3：组蛋白H3上第27位赖氨酸三甲基化</li>
-<li>H3K4me1：组蛋白H3上第4位赖氨酸一甲基化</li>
-<li>H3K4me3：组蛋白H3上第4位赖氨酸三甲基化</li>
-<li>H3K9me2：组蛋白H3上第9位赖氨酸二甲基化</li>
-</ul>
-</li>
-<li><p>不同作物基因组大小差异非常大，这主要是由于重复序列和转座子的插入与丢失造成的。对于二倍体来说，不同作物基因数量与基因组大小并不显著相关，基因数量一般在3万到4万之间</p>
-</li>
-<li>不同作物生物学特性与其对应的基因的扩增与丢失，基因表达的差异有关</li>
-<li>同一作物的不同材料之间基因组序列变异非常大，因此需要测序群体基因组去研究</li>
-<li>DNA甲基化是一种重要的表观调控机制。在植物中发生在胞嘧啶上的DNA甲基化主要存在三种形式：对称形式的CG，CHG和非对称形式的CHH(H=A,T或者C)</li>
-<li>植物种DNA甲基化主要发生在转座子区域和其他高度重复序列区域</li>
-<li>组蛋白修饰是另外一种非常重要的表观遗传修饰，参与异染色质区域转座子的失活调控，同时调控植物发育和环境响应相关途径。组蛋白甲基化存在于赖氨酸和精氨酸上，通过依赖组蛋白赖氨酸甲基转移酶和精氨酸甲基转移酶建立，这些酶都被称为写入器，组蛋白甲基化之后能够被特定蛋白识别，然后参与不同生物学过程的调控，这些识别蛋白被称为阅读器。组蛋白甲基化的存在是动态的，可以被一些蛋白清除，这些蛋白被称为清除器</li>
-<li>DNA甲基化和组蛋白修饰在基因上的分布和对基因表达的影响<br><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171205/Cbb3BIfc95.png?imageslim" alt="mark"></li>
-<li>利用DNase Ⅰ酶切染色质并收集酶切片段进行测序(DNase-Seq),可以高通量鉴定顺式调控元件。DNase-Seq可以用于鉴定DNase Ⅰ酶切超敏感位点，这些位点通常对应顺式调控元件。DNase Ⅰ酶切位点不是均匀的，被转录因子结合的位点会阻止酶切，这些位点的酶切效率很低。通过分析DNase Ⅰ酶切足迹，可以在单核苷酸水平鉴定转录因子结合位点</li>
-<li>顺式作用元件调控基因转录的模式图</li>
-</ul>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171205/643Bk42CEm.png?imageslim" alt="mark"></p>
-<p>除了启动子区域外，增强子是另外一种重要的顺势调控元件。DNase-Seq鉴定的DHS包含大量增强子区域，增强子能够招募装录因子，从而促进靶标基因的表达，这种作用常常以细胞特异或组织特异的形式存在。增强子的作用与靶标基因的物理位置和方向关系较小，因此增强子元件可以位于基因组的不同位置。</p>
-<ul>
-<li>基因表达的可变剪接是在pri-mRNA水平进行的能增强蛋白多样性的一种机制。可变剪接事件可以分为五种基本类型，包含内含子保留(IR)，外显子跳跃(ES),可变供体(AD)，可变受体(AA)和可变位置(AP)，其中IR在植物中占据绝大部分</li>
-<li>祖先染色体构建</li>
-</ul>
-<p>为了分析驯化选择在不同亚基因祖上的差异性，构建棉花的At和Dt亚组的祖先染色体。因为两个亚组的基因组大小差异巨大，在构建祖先染色体的时候，只使用了共线性区段的基因对。共线性区段是通过MCScanX软件鉴定出来的，规定最小共线性区段必须包括5个基因。同时将两个亚组的基因做相互blastp分析，保留最好的匹配结果。结合共线性区段和blastp的结果，得到最终的亚组之间的同源基因。这些同源基因必须同时被这两种方法检测。提取这些同源基因上下游2kb的区段与基因区域一起构建祖先染色体。祖先染色体上的基因顺序依据于Dt亚基因祖上的基因排列顺序</p>
-<ul>
-<li>可以通过DNase-Seq测序鉴定棉花基因组上的顺式调控元件主要是根据顺式调控元件通常位于开放的染色质区域，很容易被核酸酶切</li>
-</ul>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171204/lGak1jll4j.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;p&gt;最近看了华中农业大学张献龙老师发在&lt;strong&gt;Nature Genetics&lt;/strong&gt;上的文章&lt;a href=&quot;https://www.nature.com/articles/ng.3807&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Asymmetric subgenome selection and cis-regulatory divergence during cotton domestication&lt;/a&gt;以及第一作者王茂军博士的博士毕业论文，十分精彩，故学习之并做适当笔记。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
-    
-    
-      <category term="DHSs" scheme="https://ytlogos.github.io/tags/DHSs/"/>
-    
-      <category term="Hi-C" scheme="https://ytlogos.github.io/tags/Hi-C/"/>
     
   </entry>
   
