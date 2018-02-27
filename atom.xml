@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-02-08T06:02:39.920Z</updated>
+  <updated>2018-02-27T14:20:11.014Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,209 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Shell编程：运算符</title>
+    <link href="https://ytlogos.github.io/2018/02/09/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://ytlogos.github.io/2018/02/09/Shell编程：运算符/</id>
+    <published>2018-02-09T13:19:05.000Z</published>
+    <updated>2018-02-27T14:20:11.014Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://os3hnmzbp.bkt.clouddn.com/yunsuanfu.jpeg" alt=""></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Shell支持多种运算符：</p>
+<ul>
+<li>算术运算符</li>
+<li>布尔运算符</li>
+<li>关系运算符</li>
+<li>字符串运算符</li>
+<li>文件测试运算符</li>
+</ul>
+<p>原生bash不支持简单的数学运算，但是可以通过expr等来实现。例如两个数相加：</p>
+<blockquote>
+<p>需要注意的是使用的是反引号`，而不是单引号’。另外表达式与运算符之间要有空格。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#创建测试脚本test.sh</div><div class="line"></div><div class="line">add=`expr 3 + 5`</div><div class="line">echo &quot;两数之和为：$add&quot;</div></pre></td></tr></table></figure>
+<p>运行脚本之后结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh        </div><div class="line">两数之和为：4</div></pre></td></tr></table></figure>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>算术运算符主要如下：假设a=10,b=20</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>加法</td>
+<td>`expr \$a + \$b`结果为30</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+<td>`expr \$a + \$b`结果为-10</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+<td>`expr \$a*\$b`结果为200</td>
+</tr>
+<tr>
+<td>/</td>
+<td>除法</td>
+<td>`expr \$b/\$a`结果为2</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取余</td>
+<td>`expr \$b\%\$a`结果为0</td>
+</tr>
+<tr>
+<td>=</td>
+<td>赋值</td>
+<td>a=$b将变量b的值赋值给a</td>
+</tr>
+<tr>
+<td>==</td>
+<td>相等，用于比较两个数字是否相等，是则返回TRUE，否则返回FALSE</td>
+<td>[ \$a==\$b ]结果返回FALSE</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不相等</td>
+<td>[ \$a!=\$b ]结果返回TRUE</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意的是表达式要放在括号之间，并且要有空格。</p>
+</blockquote>
+<h3 id="举个例子说明"><a href="#举个例子说明" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#创建测试脚本test.sh</div><div class="line">m=12</div><div class="line">n=5</div><div class="line">#加法</div><div class="line">val=`expr $m + $n`</div><div class="line">echo &quot;m+n= $val&quot;</div><div class="line">#减法</div><div class="line">val=`expr $m - $n`</div><div class="line">echo &quot;m-n= $val&quot;</div><div class="line">#乘法</div><div class="line">val=`expr $m \* $n`</div><div class="line">echo &quot;m*n= $val&quot;</div><div class="line">#乘法</div><div class="line">val=`expr $m / $n`</div><div class="line">echo &quot;m/n= $val&quot;</div><div class="line">#乘法</div><div class="line">val=`expr $m % $n`</div><div class="line">echo &quot;m%n= $val&quot;</div><div class="line"></div><div class="line">#相等</div><div class="line">if [ $m == $n ]</div><div class="line">then</div><div class="line">        echo &quot;m=n&quot;</div><div class="line">fi</div><div class="line">#不相等</div><div class="line">if [ $m != $n ]</div><div class="line">then</div><div class="line">        echo &quot;m!=n&quot;</div></pre></td></tr></table></figure>
+<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">m+n= 17</div><div class="line">m-n= 7</div><div class="line">m*n= 60</div><div class="line">m/n= 2</div><div class="line">m%n= 2</div><div class="line">m!=n</div></pre></td></tr></table></figure></p>
+<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符只支持数字，假设a=10,b=20:</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-eq</td>
+<td>是否相等</td>
+<td>[ \$a -eq \$b ]结果返回FALSE</td>
+</tr>
+<tr>
+<td>-ne</td>
+<td>是否不相等</td>
+<td>[ \$a -ne \$b ]结果返回TRUE</td>
+</tr>
+<tr>
+<td>-gt</td>
+<td>左边是否大于右边</td>
+<td>[ \$a -gt \$b ]结果返回FALSE</td>
+</tr>
+<tr>
+<td>-lt</td>
+<td>左边是否小于是否右边</td>
+<td>[ \$a -lt \$b ]结果返回TRUE</td>
+</tr>
+<tr>
+<td>-ge</td>
+<td>左边是否大于等于右边</td>
+<td>[ \$a -ge \$b ]结果返回FALSE</td>
+</tr>
+<tr>
+<td>-eq</td>
+<td>左边是否小于等于右边</td>
+<td>[ \$a -le \$b ]结果返回TRUE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="举个例子说明-1"><a href="#举个例子说明-1" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line">if [ $a -eq $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -eq $b : a 等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -eq $b: a 不等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -ne $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -ne $b: a 不等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -ne $b : a 等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -gt $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -gt $b: a 大于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -gt $b: a 不大于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -lt $b: a 小于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -lt $b: a 不小于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -ge $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -ge $b: a 大于或等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -ge $b: a 小于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -le $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -le $b: a 小于或等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -le $b: a 大于 b&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">10 -eq 20: a 不等于 b</div><div class="line">10 -ne 20: a 不等于 b</div><div class="line">10 -gt 20: a 不大于 b</div><div class="line">10 -lt 20: a 小于 b</div><div class="line">10 -ge 20: a 小于 b</div><div class="line">10 -le 20: a 小于或等于 b</div></pre></td></tr></table></figure></p>
+<h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><p>假设a=10,b=20</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>！</td>
+<td>非运算</td>
+<td>[ !false ]返回TRUE</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>或运算</td>
+<td>[ \$a -lt 20 -o \$b -gt 100 ] 返回true。</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>与运算</td>
+<td>[ \$a -lt 20 -a \$b -gt 100 ] 返回false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line">if [ $a != $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a != $b : a 不等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a != $b: a 等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt 100 -a $b -gt 15 ]</div><div class="line">then</div><div class="line">   echo &quot;$a 小于 100 且 $b 大于 15 : 返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a 小于 100 且 $b 大于 15 : 返回 false&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt 100 -o $b -gt 100 ]</div><div class="line">then</div><div class="line">   echo &quot;$a 小于 100 或 $b 大于 100 : 返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a 小于 100 或 $b 大于 100 : 返回 false&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt 5 -o $b -gt 100 ]</div><div class="line">then</div><div class="line">   echo &quot;$a 小于 5 或 $b 大于 100 : 返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a 小于 5 或 $b 大于 100 : 返回 false&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">10 != 20 : a 不等于 b</div><div class="line">10 小于 100 且 20 大于 15 : 返回 true</div><div class="line">10 小于 100 或 20 大于 100 : 返回 true</div><div class="line">10 小于 5 或 20 大于 100 : 返回 false</div></pre></td></tr></table></figure></p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>假设a=10,b=20</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑的AND</td>
+<td>[[ \$a -lt 100 &amp;&amp; \$b -gt 100 ]] 返回 false</td>
+</tr>
+<tr>
+<td>\</td>
+<td>\</td>
+<td></td>
+<td>逻辑的OR</td>
+<td>[[ \$a -lt 100 \</td>
+<td>\</td>
+<td>\$b -gt 100 ]] 返回 true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="举例说明-1"><a href="#举例说明-1" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line">if [[ $a -lt 100 &amp;&amp; $b -gt 100 ]]</div><div class="line">then</div><div class="line">   echo &quot;返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;返回 false&quot;</div><div class="line">fi</div><div class="line"></div><div class="line">if [[ $a -lt 100 || $b -gt 100 ]]</div><div class="line">then</div><div class="line">   echo &quot;返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;返回 false&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">返回 false</div><div class="line">返回 true</div></pre></td></tr></table></figure></p>
+<h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><p>下表列出了常用的字符串运算符，假定变量 a 为 “abc”，变量 b 为 “efg”：<br>运算符|说明|例子<br>—|—-|—–<br>=|相等|[ \$a = \$b ] 返回 false<br>!=|不相等|[ \$a != \$b ] 返回 true<br>-z|字符串长度是否为0|[ -z \$a ] 返回 false<br>-n|字符串长度是否不为0|[ -n \$a ] 返回 true<br>str|字符串是否不为空|[ \$a ] 返回 true</p>
+<h3 id="举例说明-2"><a href="#举例说明-2" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=&quot;abc&quot;</div><div class="line">b=&quot;efg&quot;</div><div class="line"></div><div class="line">if [ $a = $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a = $b : a 等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a = $b: a 不等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a != $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a != $b : a 不等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a != $b: a 等于 b&quot;</div><div class="line">fi</div><div class="line">if [ -z $a ]</div><div class="line">then</div><div class="line">   echo &quot;-z $a : 字符串长度为 0&quot;</div><div class="line">else</div><div class="line">   echo &quot;-z $a : 字符串长度不为 0&quot;</div><div class="line">fi</div><div class="line">if [ -n $a ]</div><div class="line">then</div><div class="line">   echo &quot;-n $a : 字符串长度不为 0&quot;</div><div class="line">else</div><div class="line">   echo &quot;-n $a : 字符串长度为 0&quot;</div><div class="line">fi</div><div class="line">if [ $a ]</div><div class="line">then</div><div class="line">   echo &quot;$a : 字符串不为空&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a : 字符串为空&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">abc = efg: a 不等于 b</div><div class="line">abc != efg : a 不等于 b</div><div class="line">-z abc : 字符串长度不为 0</div><div class="line">-n abc : 字符串长度不为 0</div><div class="line">abc : 字符串不为空</div></pre></td></tr></table></figure></p>
+<h2 id="文件运算符"><a href="#文件运算符" class="headerlink" title="文件运算符"></a>文件运算符</h2><p>文件运算符主要用于检测文件属性。这里就不讲解了。</p>
+<p>本文主要参考<a href="http://www.runoob.com/linux/linux-shell-basic-operators.html" target="_blank" rel="external">菜鸟教程</a></p>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://os3hnmzbp.bkt.clouddn.com/yunsuanfu.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2
+    
+    </summary>
+    
+      <category term="Shell" scheme="https://ytlogos.github.io/categories/Shell/"/>
+    
+    
+      <category term="运算符" scheme="https://ytlogos.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>利用gganimate可视化R-Ladies发展情况</title>
@@ -235,6 +438,56 @@
     
     
       <category term="ggridges" scheme="https://ytlogos.github.io/tags/ggridges/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shell编程：数组</title>
+    <link href="https://ytlogos.github.io/2018/02/04/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%95%B0%E7%BB%84/"/>
+    <id>https://ytlogos.github.io/2018/02/04/Shell编程：数组/</id>
+    <published>2018-02-04T13:19:05.000Z</published>
+    <updated>2018-02-27T14:20:11.009Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://os3hnmzbp.bkt.clouddn.com/数组.png" alt="数组"></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组中可以存放多个值。Bash只支持一维数组，初始化时无需定义数组大小，数组元素下标从0开始。Shell数组用括号表示，元素之间由空号隔开：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array_name=(value1 value2 ... valuen)</div></pre></td></tr></table></figure>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">my_array=(A B &quot;C&quot; D)</div></pre></td></tr></table></figure>
+<p>也可以通过下标赋值来定义数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array_name[0]=value0</div><div class="line">array_name[1]=value1</div><div class="line">array_name[2]=value2</div></pre></td></tr></table></figure>
+<h3 id="读取数组"><a href="#读取数组" class="headerlink" title="读取数组"></a>读取数组</h3><p>读取数组的一般格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$&#123;array_name[index]&#125;</div></pre></td></tr></table></figure>
+<p>现在创建一个脚本<code>test.sh</code>来演示一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#！/bin/bash</div><div class="line">#创建脚本test.sh</div><div class="line">my_array=(A B &quot;C&quot; D)</div><div class="line">echo &quot;第一个元素为：$&#123;my_array[0]&#125;&quot;</div><div class="line">echo &quot;第二个元素为：$&#123;my_array[1]&#125;&quot;</div><div class="line">echo &quot;第三个元素为：$&#123;my_array[2]&#125;&quot;</div><div class="line">echo &quot;第四个元素为：$&#123;my_array[3]&#125;&quot;</div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ chmod +x test.sh </div><div class="line">$ ./test.sh </div><div class="line">第一个元素为：A</div><div class="line">第二个元素为：B</div><div class="line">第三个元素为：C</div><div class="line">第四个元素为：D</div></pre></td></tr></table></figure></p>
+<h3 id="获取数组中所有元素"><a href="#获取数组中所有元素" class="headerlink" title="获取数组中所有元素"></a>获取数组中所有元素</h3><p>使用@或者*可以获取数组中的所有元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建脚本test.sh</div><div class="line"></div><div class="line">my_array[0]=A</div><div class="line">my_array[1]=B</div><div class="line">my_array[2]=C</div><div class="line">my_array[3]=D</div><div class="line"></div><div class="line">echo &quot;数组的元素为: $&#123;my_array[*]&#125;&quot;</div><div class="line">echo &quot;数组的元素为: $&#123;my_array[@]&#125;&quot;</div></pre></td></tr></table></figure>
+<p>执行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">数组的元素为: A B C D</div><div class="line">数组的元素为: A B C D</div></pre></td></tr></table></figure></p>
+<h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>获取数组长度的方法与获取字符串长度的方法相同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建脚本test.sh</div><div class="line"></div><div class="line">my_array[0]=A</div><div class="line">my_array[1]=B</div><div class="line">my_array[2]=C</div><div class="line">my_array[3]=D</div><div class="line"></div><div class="line">echo &quot;数组元素个数为: $&#123;#my_array[*]&#125;&quot;</div><div class="line">echo &quot;数组元素个数为: $&#123;#my_array[@]&#125;&quot;</div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">数组元素个数为: 4</div><div class="line">数组元素个数为: 4</div></pre></td></tr></table></figure></p>
+<h3 id="数组的值也可以写入变量"><a href="#数组的值也可以写入变量" class="headerlink" title="数组的值也可以写入变量"></a>数组的值也可以写入变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建脚本test.sh</div><div class="line"></div><div class="line">A=1</div><div class="line">my_array=($A B C D)</div><div class="line">echo &quot;第一个元素为：$&#123;my_array[0]&#125;&quot;</div><div class="line">echo &quot;第二个元素为：$&#123;my_array[1]&#125;&quot;</div><div class="line">echo &quot;第三个元素为：$&#123;my_array[2]&#125;&quot;</div><div class="line">echo &quot;第四个元素为：$&#123;my_array[3]&#125;&quot;</div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">第一个元素为：1</div><div class="line">第二个元素为：B</div><div class="line">第三个元素为：C</div><div class="line">第四个元素为：D</div></pre></td></tr></table></figure></p>
+<h3 id="数组下标也可以为变量"><a href="#数组下标也可以为变量" class="headerlink" title="数组下标也可以为变量"></a>数组下标也可以为变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建脚本test.sh</div><div class="line"></div><div class="line">my_array=(A B C D)</div><div class="line"></div><div class="line">i=2</div><div class="line">echo $&#123;my_array[i]&#125;</div></pre></td></tr></table></figure>
+<p>执行脚本结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">C</div></pre></td></tr></table></figure>
+<h3 id="数组遍历"><a href="#数组遍历" class="headerlink" title="数组遍历"></a>数组遍历</h3><p>这里讲解几种方法用于数据遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建演示脚本test.sh</div><div class="line">my_array=(A B C D E F G)</div><div class="line">echo &quot;---------for循环遍历数组-----------&quot;</div><div class="line">for i in $&#123;my_array[@]&#125;</div><div class="line">do</div><div class="line">        echo $i</div><div class="line">done</div><div class="line"></div><div class="line">echo &quot;--------while循环遍历数组，使用let i++自增-------------&quot;</div><div class="line">i=0</div><div class="line">#注意[与$之间要有空格，否则报错,下同</div><div class="line">while [ $i -lt $&#123;#my_array[@]&#125; ]</div><div class="line">do</div><div class="line">        echo $&#123;my_array[$i]&#125;</div><div class="line">        let i++</div><div class="line">done</div><div class="line"></div><div class="line">echo &quot;-------while循环遍历数组，使用let &quot;n++ &quot;自增：双引号可有可无，推荐加上双引号-----------&quot;</div><div class="line">n=0</div><div class="line">while [ $n -lt $&#123;#my_array[@]&#125; ]</div><div class="line">do</div><div class="line">        echo $&#123;my_array[$n]&#125;</div><div class="line">        let &quot;n++&quot;</div><div class="line">done</div><div class="line"></div><div class="line">echo &quot;-----------while循环遍历数组，使用let m+=1自增--------------&quot;</div><div class="line"></div><div class="line">m=0</div><div class="line">while [ $m -lt $&#123;#my_array[@]&#125; ]</div><div class="line">do</div><div class="line">        echo $&#123;my_array[$m]&#125;</div><div class="line">        let m+=1</div><div class="line">done</div><div class="line"></div><div class="line">echo &quot;------------------while循环遍历数组，使用a=$[$a+1]自增------------------&quot;</div><div class="line">a=0</div><div class="line">while [ $a -lt $&#123;#my_array[@]&#125; ]</div><div class="line">do</div><div class="line">        echo $&#123;my_array[$a]&#125;</div><div class="line">        a=$[$a+1]</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">---------for循环遍历数组-----------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line">D</div><div class="line">E</div><div class="line">F</div><div class="line">G</div><div class="line">--------while循环遍历数组，使用let i++自增-------------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line">D</div><div class="line">E</div><div class="line">F</div><div class="line">G</div><div class="line">-------while循环遍历数组，使用let n++ 自增：双引号可有可无，推荐加上双引号-----------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line">D</div><div class="line">E</div><div class="line">F</div><div class="line">G</div><div class="line">-----------while循环遍历数组，使用let m+=1自增--------------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line">D</div><div class="line">E</div><div class="line">F</div><div class="line">G</div><div class="line">------------------while循环遍历数组，使用a=$[$a+1]自增------------------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line">D</div><div class="line">E</div><div class="line">F</div><div class="line">G</div></pre></td></tr></table></figure></p>
+<p>可以看出各种遍历方法大同小异，区别就在于自增方式的不同</p>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://os3hnmzbp.bkt.clouddn.com/数组.png&quot; alt=&quot;数组&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;数组&quot;&gt;&lt;a href=&quot;#数组&quot; class=&quot;headerlink&quot; title=&quot;数组&quot;&gt;&lt;/a&gt;数组&lt;/h2&gt;&lt;p&gt;数组
+    
+    </summary>
+    
+      <category term="Shell" scheme="https://ytlogos.github.io/categories/Shell/"/>
+    
+    
+      <category term="数组" scheme="https://ytlogos.github.io/tags/%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
@@ -1242,66 +1495,6 @@
       <category term="地图" scheme="https://ytlogos.github.io/tags/%E5%9C%B0%E5%9B%BE/"/>
     
       <category term="ggmap" scheme="https://ytlogos.github.io/tags/ggmap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习概念及算法类型</title>
-    <link href="https://ytlogos.github.io/2017/12/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E7%B1%BB%E5%9E%8B%E5%88%9D%E6%8E%A2/"/>
-    <id>https://ytlogos.github.io/2017/12/25/机器学习定义以及算法类型初探/</id>
-    <published>2017-12-25T12:19:05.000Z</published>
-    <updated>2017-12-25T12:56:28.672Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171225/929l1BKmhH.png?imageslim" alt="mark"></p>
-<h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><p>机器学习是什么？Arthur Samuel在1959年将机器学习定义为在特定编程的情况下，给予计算机学习能力的领域。他编写了一个西洋棋程序让计算机自己不断下棋进而进行学习，最后棋艺大涨，远远超过了Samuel自己的水平。<br>来自卡内基梅隆大学的Tom Mitchell在1998年将机器学习定义为：一个程序被认为能够从经验E中学习，解决了任务T，达到性能度量值P，当且仅当有了经验E后经过P评判，程序在处理T时的性能有所提升。E也就是计算机自己不断学习，学会了如何解决问题T，并且达到了一定的成功率P。<br><a id="more"></a></p>
-<p>目前存在几种不同类型的学习算法，主要的两种类型为监督学习(Supervised learning)以及无监督学习(Unsuoervised learning)。</p>
-<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>监督学习又叫回归问题，意指要预测一个连续值的输出，也可以用于分类问题预测，在监督学习中，数据集中的每个例子，算法将预测得到例子的“正确答案”，比如预测房价、肿瘤类型等。监督学习实际运用中我们需合理判断出我们要解决的问题是回归问题还是分类问题。</p>
-<h2 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h2><p>监督学习中的数据集我们知道每一个数据代表的意思，比如房子多大对应房价多少，肿瘤多大对应是恶性肿瘤。但是在无监督学习中只有数据集，我们对这个数据集完全不了解，数据集中的数据没有属性或标签这一概念。也就是说数据集中的数据都是一样的没有区别。<br><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171225/IIla4J06b4.png?imageslim" alt="mark"></p>
-<h2 id="比如上图中我们看到所有的数据都是一样的，没有属性与标签的区别，计算机通过无监督学习可能会将数据分成两类，也就是聚类。"><a href="#比如上图中我们看到所有的数据都是一样的，没有属性与标签的区别，计算机通过无监督学习可能会将数据分成两类，也就是聚类。" class="headerlink" title="比如上图中我们看到所有的数据都是一样的，没有属性与标签的区别，计算机通过无监督学习可能会将数据分成两类，也就是聚类。"></a>比如上图中我们看到所有的数据都是一样的，没有属性与标签的区别，计算机通过无监督学习可能会将数据分成两类，也就是聚类。</h2><h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171225/929l1BKmhH.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;机器学习&quot;&gt;&lt;a href=&quot;#机器学习&quot; class=&quot;headerlink&quot; title=&quot;机器学习&quot;&gt;&lt;/a&gt;机器学习&lt;/h2&gt;&lt;p&gt;机器学习是什么？Arthur Samuel在1959年将机器学习定义为在特定编程的情况下，给予计算机学习能力的领域。他编写了一个西洋棋程序让计算机自己不断下棋进而进行学习，最后棋艺大涨，远远超过了Samuel自己的水平。&lt;br&gt;来自卡内基梅隆大学的Tom Mitchell在1998年将机器学习定义为：一个程序被认为能够从经验E中学习，解决了任务T，达到性能度量值P，当且仅当有了经验E后经过P评判，程序在处理T时的性能有所提升。E也就是计算机自己不断学习，学会了如何解决问题T，并且达到了一定的成功率P。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="machine learning" scheme="https://ytlogos.github.io/categories/machine-learning/"/>
-    
-    
-      <category term="机器学习" scheme="https://ytlogos.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>生物信息学学习笔记（六）</title>
-    <link href="https://ytlogos.github.io/2017/12/24/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/"/>
-    <id>https://ytlogos.github.io/2017/12/24/生物信息学学习笔记（六）/</id>
-    <published>2017-12-24T13:19:05.000Z</published>
-    <updated>2017-12-25T11:15:14.542Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171210/JBeFfJL8KD.png?imageslim" alt="mark"></p>
-<h2 id="Tajima’s-D值检验"><a href="#Tajima’s-D值检验" class="headerlink" title="Tajima’s D值检验"></a>Tajima’s D值检验</h2><p>Tajima’s D值检验的目的是鉴定目标DNA序列在进化过程中是否遵循中性进化模型。当Tajima’s D显著大于0时，可用于推断瓶颈效应和平衡选择，当Tajima’s D显著小于0时，可用于推断群体规模放大和定向选择。由于平衡选择和定向选择均属于正选择的范畴，因此只要D值显著背离0，就可能是自然选择的结果，当D值不显著背离0时，中性假说则不能被排除。<br>连锁不平衡程度高的染色体可能是由于在现代育种和栽培过程中那些与重要农艺性状相关的QTLs或基因被人工或自然选择保留下来，进而使得这些染色体受到强选择增强了其LD程度。另外LD的衰减距离也决定了关联分析所需要的标记密度和作图精度，LD衰减越快关联分析所需要的标记就越多，作图精度也越高。<br><a id="more"></a></p>
-<h2 id="遗传渗透分析"><a href="#遗传渗透分析" class="headerlink" title="遗传渗透分析"></a>遗传渗透分析</h2><p>亚洲栽培油菜(主要是中国半冬性油菜)从欧洲引入亚洲之后导入了油菜亲本之一白菜的遗传成分，这样拓宽了半冬性油菜A亚基因组的遗传多样性，导致半冬性油菜在A亚基因组上的遗传距离增加，LD衰减加快。半冬性油菜在上世纪30-40年代从欧洲直接或间接通过日本引进中国之后正在经历群体扩张，而且这种扩张还在继续。甘蓝和油菜杂交是不亲和的，油菜在栽培驯化中A、C亚基因组间存在很强的基因流渗透现象。</p>
-<h2 id="选择性消除分析"><a href="#选择性消除分析" class="headerlink" title="选择性消除分析"></a>选择性消除分析</h2><p>选择性消除(Selective sweep)是由于某一位点受到强选择后，其周围的位点的多态性因受该位点牵连而发生多态性降低的现象。也可以认为某个位点发生突变，突变后的位点因对物种在特定的情况下有利或者受到了人为选择，那么该突变位点在群体中的频率必然提高，但是其附近和它处在同一单体型或者block的其它位点同样跟着受到了选择，频率发生了提高，也就是单体型内的其它多态位点的某一多态形式比率大大提高，从而降低了整个周围区域的多态性。</p>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/171210/JBeFfJL8KD.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Tajima’s-D值检验&quot;&gt;&lt;a href=&quot;#Tajima’s-D值检验&quot; class=&quot;headerlink&quot; title=&quot;Tajima’s D值检验&quot;&gt;&lt;/a&gt;Tajima’s D值检验&lt;/h2&gt;&lt;p&gt;Tajima’s D值检验的目的是鉴定目标DNA序列在进化过程中是否遵循中性进化模型。当Tajima’s D显著大于0时，可用于推断瓶颈效应和平衡选择，当Tajima’s D显著小于0时，可用于推断群体规模放大和定向选择。由于平衡选择和定向选择均属于正选择的范畴，因此只要D值显著背离0，就可能是自然选择的结果，当D值不显著背离0时，中性假说则不能被排除。&lt;br&gt;连锁不平衡程度高的染色体可能是由于在现代育种和栽培过程中那些与重要农艺性状相关的QTLs或基因被人工或自然选择保留下来，进而使得这些染色体受到强选择增强了其LD程度。另外LD的衰减距离也决定了关联分析所需要的标记密度和作图精度，LD衰减越快关联分析所需要的标记就越多，作图精度也越高。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
-    
-    
-      <category term="evolution" scheme="https://ytlogos.github.io/tags/evolution/"/>
     
   </entry>
   
