@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-03-21T03:27:44.135Z</updated>
+  <updated>2018-03-28T11:56:26.070Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>油菜形成、进化及基因家族概况</title>
+    <link href="https://ytlogos.github.io/2018/03/20/%E6%B2%B9%E8%8F%9C%E5%BD%A2%E6%88%90%E5%8F%8A%E8%BF%9B%E5%8C%96/"/>
+    <id>https://ytlogos.github.io/2018/03/20/油菜形成及进化/</id>
+    <published>2018-03-20T13:19:05.000Z</published>
+    <updated>2018-03-28T11:56:26.070Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180328/JK3HalKdab.png?imageslim" alt="mark"></p>
+<h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>十字花科祖先于2400-4000万年前出现，然后拟南芥与芸薹属在1200-2000万年前分化，之后不久芸薹属经历了特有的基因组三倍化，而后又经历了大规模的基因丢失、基因获得和包括部分复制和部分丢失的染色体重排。芸薹属两个重要的二倍体基本种白菜油菜(AA,2n=20)与甘蓝(CC,2n=18)于460万年前分化。甘蓝型油菜是由白菜型油菜和甘蓝通过种间自然杂交后又经染色体加倍而形成的一个异源四倍体。因此甘蓝型油菜基因组中通常会含有2个或2个以上的重复基因序列。</p>
+<a id="more"></a>
+<h2 id="转录因子"><a href="#转录因子" class="headerlink" title="转录因子"></a>转录因子</h2><p>在植物生长发育过程中，植物体需要对各种功能相关基因表达进行精确调控，从而对不同环境、组织和发育信号等作出相应的调节反应，其中转录因子在基因的表达调控中起着关键性作用。大部分真核生物中基因的表达很大程度上为转录水平的调控，这一调控是由多个不同蛋白质族群间的相互协调来达到，这些蛋白统称为转录因子，一般来说可以识别它们所调控的基因的启动子区域内特定的DNA序列的蛋白。通过蛋白之间的相互作用，转录因子调节RNA聚合酶Ⅱ的激活以及mRNA的合成。</p>
+<h3 id="转录因子结构"><a href="#转录因子结构" class="headerlink" title="转录因子结构"></a>转录因子结构</h3><p>转录因子一般由4个功能区域组成：DNA结合域、转录调控区、寡聚化位点以及核定位信号。转录因子通过这些功能区域进入细胞核，与启动子中的顺式作用元件或其它转录因子的功能区域相互作用来调控基因转录表达。DNA结合域是指转录因子中能够识别并结合DNA顺式作用元件的一段氨基酸序列。同类型转录因子中DNA结合域的氨基酸序列是比较保守的，这决定了转录因子与顺式作用元件间识别与结合的特异性。转录调控区包括转录激活区以及转录抑制区，这一区域决定了同类转录因子间的差异，使之具有不同的功能。核定位信号控制转录因子进入细胞核的过程，该区域富含精氨酸和赖氨酸残基。寡聚化位点具有很保守的氨基酸序列，它是不同转录因子借以发生相互作用的功能域，形成同源或异源二聚体。<br>转录因子基因结构可以通过<strong>Gene Structure Display Server 2.0(GSDS2.0)</strong>进行分析。</p>
+<h3 id="串联复制"><a href="#串联复制" class="headerlink" title="串联复制"></a>串联复制</h3><p>如果两个基因中间间隔有不多于5个基因且属于同一个基因家族，那么这两个基因称为串联复制。用<strong>MCScanX</strong>中的<code>mcscanx</code>对拟南芥基因组和甘蓝型油菜基因组分别做共线性分析，若一个基因与另一个基因有共线性关系，其周围有两对以上基因都是共线性关系，则这两个基因为部分复制。另外利用<strong>MCScanX</strong>中的<code>add ka and ks to collinearity</code>模块计算共线性关系基因对的Ks(同义替换)值，再利用T=Ks/2λ来推测部分复制发生的时间，对于十字花科而言，λ为1.5*10<sup>-8</sup>。</p>
+<h3 id="转录因子理化性质"><a href="#转录因子理化性质" class="headerlink" title="转录因子理化性质"></a>转录因子理化性质</h3><p>在<strong>ExPASy</strong>中对拟南芥和推测出来的甘蓝型油菜基因家族成员的氨基酸序列进行分析，获得它们的理论等电点(pIs)以及蛋白质的相对分子量(Mw)。</p>
+<h2 id="多倍化"><a href="#多倍化" class="headerlink" title="多倍化"></a>多倍化</h2><p>多倍化是物种进化的重要动力，多数高等植物在进化过程中都经历了不同水平的多倍化。十字花科物种都经历了三倍化。拟南芥与白菜分化自同一祖先物种。大约20-40M，拟南芥与白菜的共同祖先发生了一次基因组水平上的复制事件，称为α事件。芸薹属物种在此后又经历了一次基因组水平三倍化事件。在5-9M，甘蓝与白菜的共同祖先经历了一次基因组水平三倍化，白菜与甘蓝分化时间大约在4M。相较于拟南芥，甘蓝和白菜各发生了一次基因组复制。甘蓝型油菜大约在7500~12500年前由白菜和甘蓝天然杂交形成。物种的进化实质是基因的进化，多倍体事件是基因家族扩张的主要动力，在多倍化之后，基因数目呈倍数增长。</p>
+<h2 id="进化分析"><a href="#进化分析" class="headerlink" title="进化分析"></a>进化分析</h2><h3 id="基因家族聚类"><a href="#基因家族聚类" class="headerlink" title="基因家族聚类"></a>基因家族聚类</h3><p>同源的蛋白质可以分为直系同源与旁系同源，当同源是基因复制的结果，两份拷贝在一个物种的历史上是平行演化的，这样的基因被称为旁系同源基因。当同源是物种形成的结果，基因的历史反映了物种的历史，被称为直系同源；直系同源是不同物种内的同源序列，它们是来自于物种形成时的共同祖先基因，通常认为直系同源基因具有相似的生物学功能。</p>
+<h3 id="假基因"><a href="#假基因" class="headerlink" title="假基因"></a>假基因</h3><p>对不能转录或转录后生成无功能蛋白质的基因。假基因在及基因组中形成稳定的和无活性的拷贝，由活化的原始基因突变而来(复制突变或者加工型假基因)。这是因为存在着在某个阶段伤及基因表达的一种或多种缺陷(如启动子错误、有缺陷的剪接信号、框架中有终止信号等)之故。</p>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>伪码农，R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180328/JK3HalKdab.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;起源&quot;&gt;&lt;a href=&quot;#起源&quot; class=&quot;headerlink&quot; title=&quot;起源&quot;&gt;&lt;/a&gt;起源&lt;/h2&gt;&lt;p&gt;十字花科祖先于2400-4000万年前出现，然后拟南芥与芸薹属在1200-2000万年前分化，之后不久芸薹属经历了特有的基因组三倍化，而后又经历了大规模的基因丢失、基因获得和包括部分复制和部分丢失的染色体重排。芸薹属两个重要的二倍体基本种白菜油菜(AA,2n=20)与甘蓝(CC,2n=18)于460万年前分化。甘蓝型油菜是由白菜型油菜和甘蓝通过种间自然杂交后又经染色体加倍而形成的一个异源四倍体。因此甘蓝型油菜基因组中通常会含有2个或2个以上的重复基因序列。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
+    
+    
+      <category term="Brassica" scheme="https://ytlogos.github.io/tags/Brassica/"/>
+    
+  </entry>
   
   <entry>
     <title>生物信息学学习笔记（八）</title>
@@ -1491,46 +1527,6 @@
     
       &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/dBhf13K3Ge.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Lesson02主要讲了如何从Excel导入数据以及如何从UCSC、ENSEMBL和RENCODE上下载数据，因此我就将Lesson02并入Lesson03一起讲了。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-    
-      <category term="Biologists" scheme="https://ytlogos.github.io/tags/Biologists/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lesson 01 for Plotting in R for Biologists</title>
-    <link href="https://ytlogos.github.io/2018/01/15/%20Lesson%2001%20for%20Plotting%20in%20R%20for%20Biologists/"/>
-    <id>https://ytlogos.github.io/2018/01/15/ Lesson 01 for Plotting in R for Biologists/</id>
-    <published>2018-01-15T04:19:05.000Z</published>
-    <updated>2018-02-01T02:40:18.262Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim" alt="mark"></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>老早之前就知道了这门课<a href="http://omgenomics.com/plotting-in-r-for-biologists/" target="_blank" rel="external"><strong>Plotting in R for Biologists</strong></a>,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。</p>
-<a id="more"></a>
-<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(ggplot2)</div><div class="line">filename &lt;- &quot;/home/taoyan/Plotting in R for Biologists/Lesson-01/Encode_HMM_data.txt&quot;</div><div class="line">my_data &lt;- read.csv(filename, sep=&quot;\t&quot;, header=FALSE)</div><div class="line"># 查看一下数据</div><div class="line">head(my_data)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##     V1    V2    V3                V4 V5 V6    V7    V8          V9</div><div class="line">## 1 chr1 10000 10600 15_Repetitive/CNV  0  . 10000 10600 245,245,245</div><div class="line">## 2 chr1 10600 11137 13_Heterochrom/lo  0  . 10600 11137 245,245,245</div><div class="line">## 3 chr1 11137 11737       8_Insulator  0  . 11137 11737  10,190,254</div><div class="line">## 4 chr1 11737 11937       11_Weak_Txn  0  . 11737 11937 153,255,102</div><div class="line">## 5 chr1 11937 12137   7_Weak_Enhancer  0  . 11937 12137   255,252,4</div><div class="line">## 6 chr1 12137 14537       11_Weak_Txn  0  . 12137 14537 153,255,102</div></pre></td></tr></table></figure>
-<p>对数据列名重命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;,&quot;start&quot;,&quot;end&quot;,&quot;type&quot;)</div><div class="line">head(my_data)</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom start   end              type V5 V6    V7    V8          V9</div><div class="line">## 1  chr1 10000 10600 15_Repetitive/CNV  0  . 10000 10600 245,245,245</div><div class="line">## 2  chr1 10600 11137 13_Heterochrom/lo  0  . 10600 11137 245,245,245</div><div class="line">## 3  chr1 11137 11737       8_Insulator  0  . 11137 11737  10,190,254</div><div class="line">## 4  chr1 11737 11937       11_Weak_Txn  0  . 11737 11937 153,255,102</div><div class="line">## 5  chr1 11937 12137   7_Weak_Enhancer  0  . 11937 12137   255,252,4</div><div class="line">## 6  chr1 12137 14537       11_Weak_Txn  0  . 12137 14537 153,255,102</div></pre></td></tr></table></figure>
-<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><p>对不同染色体上的不同type绘制柱形图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(data = my_data, aes(x= chrom, fill= type))+geom_bar()</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/A6geh7Hf22.png?imageslim" alt="mark"></p>
-<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><p>如果想直接保存图片到文件中，可以用<code>dev.off</code>，R语言支持多种图形类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">png(&quot;Lesson-01/plot.png&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">tiff(&quot;Lesson-01/plot.tiff&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">jpeg(&quot;Lesson-01/plot.jpg&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line">pdf(&quot;Lesson-01/plot.pdf&quot;)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div><div class="line"></div><div class="line"># 设置清晰度</div><div class="line">png(&quot;Lesson-01/plot_hi_res.png&quot;,1000,1000)</div><div class="line">ggplot(my_data,aes(x=chrom,fill=type)) + geom_bar()</div><div class="line">dev.off()</div></pre></td></tr></table></figure>
-<p>这节课比较简单，没什么知识点，当然如果R语言没入门的话读个数据都困难重重，所以如果基础不太好的可以直接去youtube看视频，讲的很详细。</p>
-<p>##SessionInfo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-pc-linux-gnu (64-bit)</div><div class="line">## Running under: Ubuntu 17.10</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## BLAS: /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3</div><div class="line">## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3</div><div class="line">## </div><div class="line">## locale:</div><div class="line">##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </div><div class="line">##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </div><div class="line">##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </div><div class="line">##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </div><div class="line">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </div><div class="line">## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] ggplot2_2.2.1</div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.14     digest_0.6.14    rprojroot_1.3-2  plyr_1.8.4      </div><div class="line">##  [5] grid_3.4.3       gtable_0.2.0     backports_1.1.2  magrittr_1.5    </div><div class="line">##  [9] evaluate_0.10.1  scales_0.5.0     pillar_1.1.0     rlang_0.1.6     </div><div class="line">## [13] stringi_1.1.6    lazyeval_0.2.1   rmarkdown_1.8    labeling_0.3    </div><div class="line">## [17] tools_3.4.3      stringr_1.2.0    munsell_0.4.3    yaml_2.1.16     </div><div class="line">## [21] compiler_3.4.3   colorspace_1.3-2 htmltools_0.3.6  knitr_1.18      </div><div class="line">## [25] tibble_1.4.1</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/f6L6BHLm15.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;老早之前就知道了这门课&lt;a href=&quot;http://omgenomics.com/plotting-in-r-for-biologists/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;Plotting in R for Biologists&lt;/strong&gt;&lt;/a&gt;,一直没有去学习一下，最近花时间看了一遍videos，发现讲的很不错，虽然有一节有一知识点讲的不是很清楚。学了一遍之后记点笔记，这是lesson1的学习笔记。这一节主要讲了数据读取、快速绘图以及图形保存。&lt;/p&gt;
     
     </summary>
     
