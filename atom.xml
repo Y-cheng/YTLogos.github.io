@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-03-28T11:56:26.070Z</updated>
+  <updated>2018-03-29T03:45:27.124Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>油菜形成、进化及基因家族概况(二)</title>
+    <link href="https://ytlogos.github.io/2018/03/21/%E6%B2%B9%E8%8F%9C%E5%BD%A2%E6%88%90%E5%8F%8A%E8%BF%9B%E5%8C%96(%E4%BA%8C)/"/>
+    <id>https://ytlogos.github.io/2018/03/21/油菜形成及进化(二)/</id>
+    <published>2018-03-21T13:19:05.000Z</published>
+    <updated>2018-03-29T03:45:27.124Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180329/0L8a4haFDJ.png?imageslim" alt="mark"></p>
+<h2 id="基因家族"><a href="#基因家族" class="headerlink" title="基因家族"></a>基因家族</h2><p>由一个共同的祖先基因经过重复(duplication)和突变(mutation)产生的、外显子中具有相似的序列的一组相关基因称为基因家族(gene family)。基因重复主要有三种形式：片段复制、串联重复和逆转录转座或其它转座事件等，基因重复后可以彼此形成基因簇(gene clusters)，同一家族中的成员有时紧密排列在一起成为一个基因簇；更多时候他们却分散在同一染色体的不同部位，甚至位于不同染色体上，具有不同的表达调控模式。</p>
+<a id="more"></a>
+<h2 id="假基因"><a href="#假基因" class="headerlink" title="假基因"></a>假基因</h2><p>在多基因家族中，某些成员并不产生有功能的基因产物，这些基因称为假基因(pseudogene)。假基因与有功能的基因同源，原来可能是有功能的基因，但由于缺失、倒位或点突变，使这一基因失去活性，成为无功能基因。与相应的正常基因相比，假基因往往缺少正常基因的内含子，两侧具有顺向重复序列。据推测假基因的来源之一可能是基因经过转录后生成的RNA的前体通过剪切失去内含子形成mRNA，如果mRNA经反复转录产生cDNA，再整合到染色体DNA中，便有可能成为假基因，因此该假基因是没有内含子的，在这个过程中，可能同时会发生缺失、倒位或点突变等变化，从而使假基因不能表达。假基因一般缺乏必要的启动子序列和缺乏一个或多个具有活性的成员中特有的内含子序列。</p>
+<h2 id="DNA重复"><a href="#DNA重复" class="headerlink" title="DNA重复"></a>DNA重复</h2><p>DNA重复通常是指DNA片段数的增加，它可以是一个完整基因的重复(基因重复)、基因的一部分重复、一个完整染色体的重复(非整倍体)或整个基因组的重复(多倍体)。基因家族是由于连续的基因重复所造成的。非整倍体常导致生物体不育，而基因组重复只是增加基因拷贝数，并不产生新的基因，对基因组的复杂性并没有改变。从基因组计划的角度来看，更多的是考虑单个基因或一些基因的重复，而不是整个基因组的重复。</p>
+<h2 id="超基因家族"><a href="#超基因家族" class="headerlink" title="超基因家族"></a>超基因家族</h2><p>多基因家族是一类具有序列同源性及功能相似性的基因；而超基因家族是一类具有序列同源性而不具有相似功能的基因。</p>
+<h2 id="基因簇"><a href="#基因簇" class="headerlink" title="基因簇"></a>基因簇</h2><p>许多重要的基因家族在基因组中成簇存在，也即同一基因家族的不同成员在基因组中重复串联排列。这些成簇存在的基因是种系生殖细胞在减数分裂过程中通过染色体不等交换和基因转换形成的。成簇存在的基因(通常组成多基因家族)具有相似的功能，而分散存在的基因往往具有不同的功能，当然也有例外。分散存在的基因家族一般认为是通过RNA逆转录、随后整合到基因组中形成的。整合序列(integrated sequence)或逆转录序列(retrosequence)来源于基因的RNA转录本，因此无内含子。大多数逆转录序列变为不具功能的逆转录假基因(retropesudogene)，只有极少数逆转录序列保留了功能。</p>
+<h2 id="基因家族形成的分子机制"><a href="#基因家族形成的分子机制" class="headerlink" title="基因家族形成的分子机制"></a>基因家族形成的分子机制</h2><ul>
+<li>基因重复和点突变</li>
+</ul>
+<p>基因发生重复的主要分子机制包括多倍体化、串联重复及逆转录转座。多倍体化导致了许多基因家族的形成，串联重复参与了成簇存在的基因家族的进化，重复的DNA区域可以小于或大于一个基因的长度，但在基因家族的进化过程中，整个基因的重复尤为重要。在种系减数分裂过程中，染色体不等交换引起基因串联重复，一旦一个基因簇形成，不等交换率就会升高。在具有相似功能成员的多基因家族中，频繁的染色体不等交换导致了家族成员的协同进化。</p>
+<ul>
+<li>自然选择和随机漂变</li>
+</ul>
+<p>任何重复基因或多拷贝基因，如果被表达且具有功能，则正经历着纯化性自然选择(purifying selection)，多拷贝基因的进化率比单个基因的突变率低很多。自然选择限制程度随基因冗余而减弱，只要有一个基因保留其功能，有害的突变就有可能富集。对于大对数基因家族来说，有害突变的积累可被纯化性选择阻止，纯化性自然选择可以检测到具有功能的完整基因的数目。使突变基因拷贝数增加或减少的协同进化有利于自然选择。<br>正向自然选择(positive selection)是在重复基因获得新功能时发生的。许多重复基因产生后加快了氨基酸的替代，氨基酸替代可以通过同义及非同义突变的频率进行估计。<br>基因重复的另一后果是基因表达模式的变化，也即多拷贝基因的功能特化或亚功能化。这种变化对于参与发育过程的转录因子及其他蛋白尤为重要，这类基因功能的变化与生物的形态学进化直接相关。</p>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>伪码农，R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180329/0L8a4haFDJ.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;基因家族&quot;&gt;&lt;a href=&quot;#基因家族&quot; class=&quot;headerlink&quot; title=&quot;基因家族&quot;&gt;&lt;/a&gt;基因家族&lt;/h2&gt;&lt;p&gt;由一个共同的祖先基因经过重复(duplication)和突变(mutation)产生的、外显子中具有相似的序列的一组相关基因称为基因家族(gene family)。基因重复主要有三种形式：片段复制、串联重复和逆转录转座或其它转座事件等，基因重复后可以彼此形成基因簇(gene clusters)，同一家族中的成员有时紧密排列在一起成为一个基因簇；更多时候他们却分散在同一染色体的不同部位，甚至位于不同染色体上，具有不同的表达调控模式。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
+    
+    
+      <category term="Brassica" scheme="https://ytlogos.github.io/tags/Brassica/"/>
+    
+  </entry>
   
   <entry>
     <title>油菜形成、进化及基因家族概况</title>
@@ -1476,57 +1517,6 @@
 &lt;li&gt;对数据进行过滤&lt;/li&gt;
 &lt;li&gt;对部分type重命名&lt;/li&gt;
 &lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-    
-      <category term="Biologists" scheme="https://ytlogos.github.io/tags/Biologists/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lesson 02&amp;03 for Plotting in R for Biologists</title>
-    <link href="https://ytlogos.github.io/2018/01/20/%20Lesson%2002&amp;03%20for%20Plotting%20in%20R%20for%20Biologists/"/>
-    <id>https://ytlogos.github.io/2018/01/20/ Lesson 02&amp;03 for Plotting in R for Biologists/</id>
-    <published>2018-01-20T04:19:05.000Z</published>
-    <updated>2018-02-01T12:37:07.349Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/dBhf13K3Ge.png?imageslim" alt="mark"></p>
-<p>Lesson02主要讲了如何从Excel导入数据以及如何从UCSC、ENSEMBL和RENCODE上下载数据，因此我就将Lesson02并入Lesson03一起讲了。</p>
-<a id="more"></a>
-<h2 id="从ECXEl中导入数据"><a href="#从ECXEl中导入数据" class="headerlink" title="从ECXEl中导入数据"></a>从ECXEl中导入数据</h2><p>数据来源于文献<a href="https://www.nature.com/articles/1209254" target="_blank" rel="external">“Gene expression profiling of breast cell lines identifies potential new basal markers”</a>的补充数据集Supplementary Table 1。将之下载到工作目录区。数据读取的话只需要用<code>read.csv()</code>即可，指定<code>sep</code>。<strong>gtf</strong>、<strong>bed</strong>文件都可以通过<code>read.csv()</code>读取。即使是没有后缀的文件，只要知道其分隔符，就可以通过设置<code>sep</code>来读取数据。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_data &lt;- read.csv(&quot;micro_array_results_table1.txt&quot;, sep = &apos;\t&apos;, header = TRUE)</div><div class="line">head(my_data[,c(1:6)])</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   Probe.Set.ID Gene.Symbol Type  X184B5 BrCa.MZ.01   BT.20</div><div class="line">## 1    1007_s_at        DDR1 gene 1113.91     815.53 1564.76</div><div class="line">## 2      1053_at        RFC2 gene  159.02     253.24  320.22</div><div class="line">## 3       117_at       HSPA6 gene   60.76      33.91   26.39</div><div class="line">## 4       121_at        PAX8 gene  197.76     121.33  122.81</div><div class="line">## 5    1255_g_at      GUCA1A gene    6.73       7.88    6.28</div><div class="line">## 6      1294_at       UBE1L gene  118.82      57.24  432.24</div></pre></td></tr></table></figure>
-<p>试试读取<strong>gtf</strong>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Brassica_gtf &lt;- read.csv(&quot;E:/Brassica napus database/Brassica_napus.annotation_v5.gtf&quot;, sep = &quot;\t&quot;, header = FALSE)</div><div class="line">head(Brassica_gtf)</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##       V1     V2   V3   V4   V5   V6 V7 V8                           V9</div><div class="line">## 1 chrA01 GazeA2 exon  831 1437 7.80  +  . transcript_id BnaA01g00010D;</div><div class="line">## 2 chrA01 GazeA2  CDS 1070 1345    .  +  0 transcript_id BnaA01g00010D;</div><div class="line">## 3 chrA01 GazeA2 exon 1487 2124 2.15  -  . transcript_id BnaA01g00020D;</div><div class="line">## 4 chrA01 GazeA2 exon 2256 2436 3.19  -  . transcript_id BnaA01g00020D;</div><div class="line">## 5 chrA01 GazeA2  CDS 1645 2124    .  -  0 transcript_id BnaA01g00020D;</div><div class="line">## 6 chrA01 GazeA2  CDS 2256 2282    .  -  0 transcript_id BnaA01g00020D;</div></pre></td></tr></table></figure>
-<p>其他格式文件我这里就不试了，有兴趣的话可以自己去尝试。</p>
-<h2 id="数据探索"><a href="#数据探索" class="headerlink" title="数据探索"></a>数据探索</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">library(tidyverse)</div><div class="line">#读取数据</div><div class="line">my_data &lt;- read.csv(&quot;Encode_HMM_data.txt&quot;, sep = &quot;\t&quot;, header = FALSE)</div><div class="line">dim(my_data)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">## [1] 571339      9</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">head(my_data[, c(1:6)])</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##     V1    V2    V3                V4 V5 V6</div><div class="line">## 1 chr1 10000 10600 15_Repetitive/CNV  0  .</div><div class="line">## 2 chr1 10600 11137 13_Heterochrom/lo  0  .</div><div class="line">## 3 chr1 11137 11737       8_Insulator  0  .</div><div class="line">## 4 chr1 11737 11937       11_Weak_Txn  0  .</div><div class="line">## 5 chr1 11937 12137   7_Weak_Enhancer  0  .</div><div class="line">## 6 chr1 12137 14537       11_Weak_Txn  0  .</div></pre></td></tr></table></figure>
-<p>对数据部分列进行重命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;, &quot;start&quot;, &quot;stop&quot;, &quot;type&quot;)</div></pre></td></tr></table></figure></p>
-<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>先初步看一下不同染色体上的type类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/dBhf13K3Ge.png?imageslim" alt="mark"></p>
-<p>从这个图中可以看到还有很多缺陷</p>
-<ul>
-<li>染色体顺序错乱，前缀chr在坐标轴上排列乱</li>
-<li>类型太多了，我们只需要可视化我们感兴趣的type</li>
-<li>类型的名字乱</li>
-</ul>
-<p>这几个问题将在Lesson04解决</p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo()"></a>SessionInfo()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] forcats_0.2.0      stringr_1.2.0      dplyr_0.7.4       </div><div class="line">## [4] purrr_0.2.4        readr_1.1.1        tidyr_0.7.2       </div><div class="line">## [7] tibble_1.4.2       ggplot2_2.2.1.9000 tidyverse_1.2.1   </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0     </div><div class="line">##  [4] compiler_3.4.3    plyr_1.8.4        bindr_0.1        </div><div class="line">##  [7] tools_3.4.3       digest_0.6.14     lubridate_1.7.1  </div><div class="line">## [10] jsonlite_1.5      evaluate_0.10.1   nlme_3.1-131     </div><div class="line">## [13] gtable_0.2.0      lattice_0.20-35   pkgconfig_2.0.1  </div><div class="line">## [16] rlang_0.1.6       psych_1.7.8       cli_1.0.0        </div><div class="line">## [19] rstudioapi_0.7    yaml_2.1.16       parallel_3.4.3   </div><div class="line">## [22] haven_1.1.1       bindrcpp_0.2      xml2_1.2.0       </div><div class="line">## [25] httr_1.3.1        knitr_1.18        hms_0.4.1        </div><div class="line">## [28] rprojroot_1.3-2   grid_3.4.3        glue_1.2.0       </div><div class="line">## [31] R6_2.2.2          readxl_1.0.0      foreign_0.8-69   </div><div class="line">## [34] rmarkdown_1.8     modelr_0.1.1      reshape2_1.4.3   </div><div class="line">## [37] magrittr_1.5      backports_1.1.2   scales_0.5.0.9000</div><div class="line">## [40] htmltools_0.3.6   rvest_0.3.2       assertthat_0.2.0 </div><div class="line">## [43] mnormt_1.5-5      colorspace_1.3-2  labeling_0.3     </div><div class="line">## [46] stringi_1.1.6     lazyeval_0.2.1    munsell_0.4.3    </div><div class="line">## [49] broom_0.4.3       crayon_1.3.4</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/dBhf13K3Ge.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Lesson02主要讲了如何从Excel导入数据以及如何从UCSC、ENSEMBL和RENCODE上下载数据，因此我就将Lesson02并入Lesson03一起讲了。&lt;/p&gt;
     
     </summary>
     
