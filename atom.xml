@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-04-14T07:53:34.867Z</updated>
+  <updated>2018-04-14T08:39:32.809Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>全基因组加倍及串联重复基因</title>
+    <link href="https://ytlogos.github.io/2018/04/05/%E5%85%A8%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8A%A0%E5%80%8D%E5%8F%8A%E4%B8%B2%E8%81%94%E9%87%8D%E5%A4%8D%E5%9F%BA%E5%9B%A0/"/>
+    <id>https://ytlogos.github.io/2018/04/05/全基因组加倍及串联重复基因/</id>
+    <published>2018-04-05T13:19:05.000Z</published>
+    <updated>2018-04-14T08:39:32.809Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180414/ADC8bKhGm4.png?imageslim" alt="mark"></p>
+<blockquote>
+<p>串联重复基因是植物基因组中一类具有功能的串联重复序列，在植物基因组进化和环境适应的过程中起着十分重要的作用。串联重复基因主要是由串联重复事件产生的。在植物基因组中，串联重复事件的发生频率比较高，为植物基因组带来了基因拷贝数的增加以及等位基因变异。串联重复事件伴随着拟南芥和芸薹属物种的整个进化过程，而且芸薹属物种的多倍化事件并没有影响串联重复事件的发生。</p>
+</blockquote>
+<a id="more"></a>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180405/2h8a9544k1.png?imageslim" alt="mark"></p>
+<ul>
+<li>基因共线性分析</li>
+</ul>
+<p>拟南芥在进化过程中先后经历了三次基因组加倍事件(α、β和γ多倍化事件)。通过对拟南芥基因组的三次基因组加倍事件产生的共线性基因对分析，获得了α、β和γ多倍化事件后分别产生的3530，1421和505共线性基因对。在拟南芥细胞色素P450基因家族的进化分析发现，仅有CYP94基因家族中一对基因在γ基因组加倍化事件后产生的共线性基因对中被保留下来。这可能意味着CYP94基因家族的这两个成员在双子叶植物的祖先在经历γ基因组多倍化事件之前就存在。对于β基因组多倍化事件，CYP86、CYP72和CYP81基因家族中各有一对基因对被检测到保留下来，这意味着这些P450基因在β基因组多倍化事件之前就存在并在β基因组多倍化事件之后被保留下来。对于α基因组加倍事件产生的共线性基因对，共获得了11个P450基因对在α基因组加倍化事件后被保留下来，意味着这22个P450基因在α基因组多倍化事件之前就已存在并在α基因组加倍事件后保留下来。</p>
+<blockquote>
+<p>在拟南芥和芸薹属的祖先物种分化之后，芸薹属祖先物种经历了自身的三倍化事件，然后进一步产生了现在的白菜和甘蓝，通过与拟南芥基因组中24个十字花科保守区段的共线性关系构建了白菜和甘蓝基因组中的三倍化区段。根据三倍化区段上基因密度的差异，两个芸薹属物种中的三倍化区段划分为三个亚基因组：MF1(中度丢失)、NF2(高度丢失)和LF(低度丢失)。</p>
+</blockquote>
+<ul>
+<li><p>通过古基因组学研究可追溯源到由7931条原基因模型和7条染色体构成的双子叶植物祖先基因组，以及由9138条原基因模型和5条染色体构成的单子叶植物祖先基因组。显花植物研究表明，被子植物基因组经历二倍化(α)、四倍化(β)和六倍化(γ)3次古全基因组复制(WGD)事件。</p>
+</li>
+<li><p>同源多倍体来源于种内WGD事件，异源多倍体来源于种间杂交。芸薹属(<em>Brassica</em>)植物经历了3次基因组WGD事件(α、β和γ)和种系全基因组三倍化事件，是基因组多倍化研究的重要模式物种。</p>
+</li>
+</ul>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180414/ADC8bKhGm4.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;串联重复基因是植物基因组中一类具有功能的串联重复序列，在植物基因组进化和环境适应的过程中起着十分重要的作用。串联重复基因主要是由串联重复事件产生的。在植物基因组中，串联重复事件的发生频率比较高，为植物基因组带来了基因拷贝数的增加以及等位基因变异。串联重复事件伴随着拟南芥和芸薹属物种的整个进化过程，而且芸薹属物种的多倍化事件并没有影响串联重复事件的发生。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
+    
+    
+      <category term="重复基因" scheme="https://ytlogos.github.io/tags/%E9%87%8D%E5%A4%8D%E5%9F%BA%E5%9B%A0/"/>
+    
+      <category term="古基因组学" scheme="https://ytlogos.github.io/tags/%E5%8F%A4%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>跨物种单拷贝直系同源基因</title>
@@ -1323,59 +1372,6 @@
       <category term="Biologists" scheme="https://ytlogos.github.io/tags/Biologists/"/>
     
       <category term="heatmap" scheme="https://ytlogos.github.io/tags/heatmap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lesson 07 for Plotting in R for Biologists</title>
-    <link href="https://ytlogos.github.io/2018/01/30/%20Lesson%2007%20for%20Plotting%20in%20R%20for%20Biologists/"/>
-    <id>https://ytlogos.github.io/2018/01/30/ Lesson 07 for Plotting in R for Biologists/</id>
-    <published>2018-01-30T04:19:05.000Z</published>
-    <updated>2018-02-03T06:12:06.932Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/BcHLAECm5L.png?imageslim" alt="mark"></p>
-<p>这节课主要两个知识点，一个是图形分面，一个是图形嵌入。</p>
-<a id="more"></a>
-<h2 id="数据加载及清洗"><a href="#数据加载及清洗" class="headerlink" title="数据加载及清洗"></a>数据加载及清洗</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(tidyverse)</div><div class="line">theme_set(theme_gray())</div><div class="line">my_data &lt;- read.csv(&quot;variants_from_assembly.bed&quot;, sep = &quot;\t&quot;, quote = &apos;&apos;, stringsAsFactors = TRUE, header = FALSE)</div><div class="line">names(my_data) &lt;- c(&quot;chrom&quot;,&quot;start&quot;,&quot;stop&quot;,&quot;name&quot;,&quot;size&quot;,&quot;strand&quot;,&quot;type&quot;,&quot;ref.dist&quot;,&quot;query.dist&quot;)</div><div class="line">head(my_data)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom     start      stop name size strand      type ref.dist query.dist</div><div class="line">## 1     6 103832058 103832059  SV1  185      + Insertion        0        185</div><div class="line">## 2     6 102958468 102958469  SV2  317      + Insertion      -14        303</div><div class="line">## 3     6 102741692 102741693  SV3  130      +  Deletion      130          0</div><div class="line">## 4     6 102283759 102283760  SV4 1271      + Insertion      -12       1259</div><div class="line">## 5     6 101194032 101194033  SV5 2864      + Insertion      -13       2851</div><div class="line">## 6     6 101056644 101056645  SV6  265      + Insertion        0        265</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my_data &lt;- my_data[my_data$chrom %in% c(seq(1:22), &quot;X&quot;,&quot;Y&quot;), ]</div><div class="line">my_data$chrom &lt;- factor(gsub(&quot;chr&quot;, &quot;&quot;,my_data$chrom), levels = c(seq(1:22),&quot;X&quot;,&quot;Y&quot;))</div><div class="line">my_data$type &lt;- factor(my_data$type, levels = c(&quot;Insertion&quot;,&quot;Deletion&quot;,&quot;Expansion&quot;,&quot;Contraction&quot;))</div></pre></td></tr></table></figure>
-<h2 id="可视化-amp-分面"><a href="#可视化-amp-分面" class="headerlink" title="可视化&amp;分面"></a>可视化&amp;分面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density(alpha=0.5)+xlim(0,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Ella96CC28.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density(alpha=0.5)+xlim(0,500)+facet_grid(type~.)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/G1jDEc7HFj.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density(alpha=0.5)+xlim(0,500)+facet_grid(.~type)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/e9jJEl1EHl.png?imageslim" alt="mark"></p>
-<p>分面的规则语法是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plot+facet_grid(rows~columns)</div></pre></td></tr></table></figure></p>
-<p>比如下面的图按染色体为行、type为列进行分面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density()+xlim(0,500)+facet_grid(chrom~type)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/BG7kecbglg.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#也可以反过来</div><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density()+xlim(0,500)+facet_grid(type~chrom)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/lIL4kkDecH.png?imageslim" alt="mark"></p>
-<blockquote>
-<p>可以根据自己的喜好以及数据的分布进行分面，有的时候数据不是很适合分面操作，需要慎重，不然越分越乱，无法直观地展示数据。</p>
-</blockquote>
-<h2 id="图形嵌入"><a href="#图形嵌入" class="headerlink" title="图形嵌入"></a>图形嵌入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#先设置主题</div><div class="line">theme_set(theme_gray()+</div><div class="line">            theme(</div><div class="line">              axis.line = element_line(size=0.5),</div><div class="line">              panel.background = element_rect(fill=NA, size = rel(20)),</div><div class="line">              panel.grid.minor = element_line(colour = NA),</div><div class="line">              axis.text = element_text(size = 16),</div><div class="line">              axis.title = element_text(size = 16)</div><div class="line">            )</div><div class="line">          )</div><div class="line">big_plot &lt;- ggplot(my_data, aes(x=size, fill=type))+</div><div class="line">  geom_bar(binwidth = 100)+</div><div class="line">  guides(fill=FALSE)+</div><div class="line">  scale_y_continuous(expand = c(0,0))</div><div class="line">big_plot</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Jj3lGDhBE1.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">small_plot &lt;- ggplot(my_data, aes(x=size, fill=type))+</div><div class="line">  geom_bar(binwidth = 5)+</div><div class="line">  xlim(0, 500)+</div><div class="line">  theme(axis.title = element_blank())+</div><div class="line">  scale_y_continuous(expand = c(0,0))</div><div class="line">small_plot</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/Af79gm2c4B.png?imageslim" alt="mark"></p>
-<p>图形嵌入需要使用包<strong>grid</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">library(grid)</div><div class="line">#构造画布，这一步需要不断调整位置</div><div class="line">vp &lt;- viewport(width = 0.8, height = 0.7, x=0.65, y=0.65)#分别设置需要嵌入的图形的宽度、高度以及坐标位置</div><div class="line">png(&quot;insert_plot.png&quot;)</div><div class="line">print(big_plot)</div><div class="line">print(small_plot, vp = vp)</div><div class="line">dev.off()</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/BcHLAECm5L.png?imageslim" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] grid      stats     graphics  grDevices utils     datasets  methods  </div><div class="line">## [8] base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] forcats_0.2.0      stringr_1.2.0      dplyr_0.7.4       </div><div class="line">## [4] purrr_0.2.4        readr_1.1.1        tidyr_0.7.2       </div><div class="line">## [7] tibble_1.4.2       ggplot2_2.2.1.9000 tidyverse_1.2.1   </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0     </div><div class="line">##  [4] compiler_3.4.3    plyr_1.8.4        bindr_0.1        </div><div class="line">##  [7] tools_3.4.3       digest_0.6.15     lubridate_1.7.1  </div><div class="line">## [10] jsonlite_1.5      evaluate_0.10.1   nlme_3.1-131     </div><div class="line">## [13] gtable_0.2.0      lattice_0.20-35   pkgconfig_2.0.1  </div><div class="line">## [16] rlang_0.1.6       psych_1.7.8       cli_1.0.0        </div><div class="line">## [19] rstudioapi_0.7    yaml_2.1.16       parallel_3.4.3   </div><div class="line">## [22] haven_1.1.1       bindrcpp_0.2      xml2_1.2.0       </div><div class="line">## [25] httr_1.3.1        knitr_1.19        hms_0.4.1        </div><div class="line">## [28] rprojroot_1.3-2   glue_1.2.0        R6_2.2.2         </div><div class="line">## [31] readxl_1.0.0      foreign_0.8-69    rmarkdown_1.8    </div><div class="line">## [34] modelr_0.1.1      reshape2_1.4.3    magrittr_1.5     </div><div class="line">## [37] backports_1.1.2   scales_0.5.0.9000 htmltools_0.3.6  </div><div class="line">## [40] rvest_0.3.2       assertthat_0.2.0  mnormt_1.5-5     </div><div class="line">## [43] colorspace_1.3-2  labeling_0.3      stringi_1.1.6    </div><div class="line">## [46] lazyeval_0.2.1    munsell_0.4.3     broom_0.4.3      </div><div class="line">## [49] crayon_1.3.4</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180203/BcHLAECm5L.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这节课主要两个知识点，一个是图形分面，一个是图形嵌入。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-    
-      <category term="Biologists" scheme="https://ytlogos.github.io/tags/Biologists/"/>
     
   </entry>
   
