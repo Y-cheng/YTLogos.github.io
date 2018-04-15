@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://ytlogos.github.io/2018/04/08/%E5%88%A9%E7%94%A8ComplexHeatmap%E7%BB%98%E5%88%B6%E7%83%AD%E5%9B%BE(%E4%B8%80)/</loc>
+    <lastmod>2018-04-15T07:27:51.313Z</lastmod>
+    <data>
+        <display>
+        <title>利用ComplexHeatmap绘制热图(一)</title>
+        <pubTime>2018-04-08T13:19:05.000Z</pubTime>
+        
+        <tag>Complexheatmap</tag>
+         
+         
+           
+             
+              <breadCrumb title="可视化" url="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ytlogos.github.io/2018/04/05/%E5%85%A8%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8A%A0%E5%80%8D%E5%8F%8A%E4%B8%B2%E8%81%94%E9%87%8D%E5%A4%8D%E5%9F%BA%E5%9B%A0/</loc>
     <lastmod>2018-04-14T08:39:32.809Z</lastmod>
     <data>
@@ -638,9 +658,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
@@ -1032,9 +1052,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>ggrepel</tag>
+         
+        <tag>visualization</tag>
          
          
            
@@ -1426,9 +1446,9 @@
         
         <tag>R</tag>
          
-        <tag>scatter plot</tag>
-         
         <tag>visualization</tag>
+         
+        <tag>scatter plot</tag>
          
          
            
