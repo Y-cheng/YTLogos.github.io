@@ -501,7 +501,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  835
+                  788
                 </span>
               
 
@@ -536,125 +536,25 @@
 
       
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171113/Fjbj28bH1F.png?imageslim" alt="mark"><br><a id="more"></a></p>
-<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>linux命令<code>uniq</code>可以将<strong>连续重复</strong>去除掉，举个例子说明：</p>
-<pre><code>$ cat letters.txt
-A
-A
-B
-C
-B
-C
-C
-C
-</code></pre><p>里面存有重复数据，利用<code>uniq</code>可以有效的去除连续重复：</p>
-<pre><code>$ uniq letters.txt
-A
-B
-C
-B
-C
-</code></pre><blockquote>
+<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>linux命令<code>uniq</code>可以将<strong>连续重复</strong>去除掉，举个例子说明：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cat letters.txt</div><div class="line">A</div><div class="line">A</div><div class="line">B</div><div class="line"><span class="keyword">C</span></div><div class="line">B</div><div class="line"><span class="keyword">C</span></div><div class="line"><span class="keyword">C</span></div><div class="line"><span class="keyword">C</span></div></pre></td></tr></table></figure></p>
+<p>里面存有重复数据，利用<code>uniq</code>可以有效的去除连续重复：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ uniq letters.txt</div><div class="line">A</div><div class="line"><span class="keyword">B</span></div><div class="line">C</div><div class="line"><span class="keyword">B</span></div><div class="line">C</div></pre></td></tr></table></figure></p>
+<blockquote>
 <p>可以看到只有连续重复才被执行只剩下一个，如果我们要去除所有的重复只保留一个，不管是不是连不连续，可以先进行排序再去重</p>
 </blockquote>
-<pre><code>$ sort letters.txt|uniq
-A
-B
-C
-</code></pre><p>如果存在大小写字母，可以添加参数-i来忽略大小写。还有一个选项-c可以用来统计连续重复次数，同理要统计所有重复次数先进行排序：</p>
-<pre><code>$ uniq -c letters.txt
-      2 A
-      1 B
-      1 C
-      1 B
-      3 C
-# sort then uniq
-$ sort letters.txt|uniq -c
-      2 A
-      2 B
-      4 C
-</code></pre><p>再来一个，统计gtf文件中CDS、UTR等数目：</p>
-<pre><code>$ grep -v &quot;^#&quot; Mus_musculus.GRCm38.75_chr1.gtf|cut -f3|sort|uniq -c|column -t
-25901  CDS
-36128  exon
-2027   gene
-2290   start_codon
-2299   stop_codon
-4993   transcript
-7588   UTR
-</code></pre><p>根据数目从大到小进行排序：</p>
-<pre><code>$ grep -v &quot;^#&quot; Mus_musculus.GRCm38.75_chr1.gtf|cut -f3|sort|uniq -c|sort -rn |column -t
-36128  exon
-25901  CDS
-7588   UTR
-4993   transcript
-2299   stop_codon
-2290   start_codon
-2027   gene
-</code></pre><p>再深入一点展示不停链上的数目</p>
-<pre><code>$ grep -v &quot;^#&quot; Mus_musculus.GRCm38.75_chr1.gtf|cut -f3,7|sort|uniq -c|sort -rn|column -t
-18134  exon         +
-17994  exon         -
-13010  CDS          -
-12891  CDS          +
-3834   UTR          -
-3754   UTR          +
-2511   transcript   -
-2482   transcript   +
-1155   stop_codon   -
-1155   start_codon  -
-1144   stop_codon   +
-1135   start_codon  +
-1034   gene         +
-993    gene         -
-</code></pre><p>还可以查看特定基因上的CDS等数目</p>
-<pre><code>$ grep &quot;ENSMUSG00000033793&quot; Mus_musculus.GRCm38.75_chr1.gtf|cut -f3|sort|uniq -c|sort -rn |column -t
-14  exon
-13  CDS
-3   UTR
-1   transcript
-1   stop_codon
-1   start_codon
-1   gene
-</code></pre><p>参数选项-d提供了一个数据集中的重复项</p>
-<pre><code>$ uniq -d mm_gene_names.txt|wc -l
-0
-</code></pre><p>这个数据集中没有重复项！！！</p>
-<h2 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h2><p>join顾名思义就是将不同数据集根据相同的列合并在一起，需要注意的是两个文件需要经过排序才能合并在一起，因此第一步需要检查数据集有没有排序，没有的话需要进行排序。<br>join基本语法：</p>
-<pre><code>join -1 &lt;file_1_field&gt; -2 &lt;file_2_field&gt; &lt;file_1&gt; &lt;file_2&gt;
-</code></pre><p>其中file_1和file_2是两个需要合并的文件，file_1_field表示file_1中合并的列，file_2_field同理。</p>
-<pre><code>$ sort -k1,1 example.bed &gt; example_sorted.bed
-$ sort -c -k1,1 example_lengths.txt
-</code></pre><p>经验证两个数据集都已经排过序了。</p>
-<pre><code>$ join -1 1 -2 1 example_sorted.bed example_lengths.txt &gt; example_with_lengths.txt
-$ cat example_with_lengths.txt|column -t
-chr1  10  19  58352
-chr1  26  39  58352
-chr1  32  47  58352
-chr1  40  49  58352
-chr1  9   28  58352
-chr2  35  54  39521
-chr3  11  28  24859
-chr3  16  27  24859
-</code></pre><p>如果我们将<em>example_lengths.txt</em>中的chr3去除掉再进行合并，结果会怎么样呢？</p>
-<pre><code>$ head -n2 example_lengths.txt &gt; example_lengths_alt.txt
-$ join -1 1 -2 1 example_sorted.bed example_lengths_alt.txt
-chr1 10 19 58352
-chr1 26 39 58352
-chr1 32 47 58352
-chr1 40 49 58352
-chr1 9 28 58352
-chr2 35 54 39521
-</code></pre><p>结果发现chr3被join剔除掉了，因此join只会合并文件共有的项，如果想要保留chr3可以添加参数选项-a实现：</p>
-<pre><code>$ join -1 1 -2 1 -a 1 example_sorted.bed example_lengths_alt.txt|column -t
-chr1  10  19  58352
-chr1  26  39  58352
-chr1  32  47  58352
-chr1  40  49  58352
-chr1  9   28  58352
-chr2  35  54  39521
-chr3  11  28
-chr3  16  27
-</code></pre><hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> sort letters.txt|uniq</span></div><div class="line">A</div><div class="line">B</div><div class="line">C</div></pre></td></tr></table></figure>
+<p>如果存在大小写字母，可以添加参数-i来忽略大小写。还有一个选项-c可以用来统计连续重复次数，同理要统计所有重复次数先进行排序：<br><figure class="highlight tap"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ uniq -c letters.txt</div><div class="line">     <span class="number"> 2 </span>A</div><div class="line">     <span class="number"> 1 </span>B</div><div class="line">     <span class="number"> 1 </span>C</div><div class="line">     <span class="number"> 1 </span>B</div><div class="line">     <span class="number"> 3 </span>C</div><div class="line"><span class="comment"># sort then uniq</span></div><div class="line">$ sort letters.txt|uniq -c</div><div class="line">     <span class="number"> 2 </span>A</div><div class="line">     <span class="number"> 2 </span>B</div><div class="line">     <span class="number"> 4 </span>C</div></pre></td></tr></table></figure></p>
+<p>再来一个，统计gtf文件中CDS、UTR等数目：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ grep -v <span class="string">"^#"</span> Mus_musculus.GRCm38<span class="number">.75</span>_chr1.gtf|cut -f3|sort|uniq -c|column -t</div><div class="line"><span class="number">25901</span>  CDS</div><div class="line"><span class="number">36128</span>  exon</div><div class="line"><span class="number">2027</span>   gene</div><div class="line"><span class="number">2290</span>   start_codon</div><div class="line"><span class="number">2299</span>   stop_codon</div><div class="line"><span class="number">4993</span>   transcript</div><div class="line"><span class="number">7588</span>   UTR</div></pre></td></tr></table></figure></p>
+<p>根据数目从大到小进行排序：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ grep -v <span class="string">"^#"</span> Mus_musculus.GRCm38<span class="number">.75</span>_chr1.gtf|cut -f3|sort|uniq -c|sort -rn |column -t</div><div class="line"><span class="number">36128</span>  exon</div><div class="line"><span class="number">25901</span>  CDS</div><div class="line"><span class="number">7588</span>   UTR</div><div class="line"><span class="number">4993</span>   transcript</div><div class="line"><span class="number">2299</span>   stop_codon</div><div class="line"><span class="number">2290</span>   start_codon</div><div class="line"><span class="number">2027</span>   gene</div></pre></td></tr></table></figure></p>
+<p>再深入一点展示不停链上的数目<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ grep -v <span class="string">"^#"</span> Mus_musculus.GRCm38<span class="number">.75</span>_chr1.gtf|cut -f3,<span class="number">7</span>|sort|uniq -c|sort -rn|column -t</div><div class="line"><span class="number">18134</span>  exon         +</div><div class="line"><span class="number">17994</span>  exon         -</div><div class="line"><span class="number">13010</span>  CDS          -</div><div class="line"><span class="number">12891</span>  CDS          +</div><div class="line"><span class="number">3834</span>   UTR          -</div><div class="line"><span class="number">3754</span>   UTR          +</div><div class="line"><span class="number">2511</span>   transcript   -</div><div class="line"><span class="number">2482</span>   transcript   +</div><div class="line"><span class="number">1155</span>   stop_codon   -</div><div class="line"><span class="number">1155</span>   start_codon  -</div><div class="line"><span class="number">1144</span>   stop_codon   +</div><div class="line"><span class="number">1135</span>   start_codon  +</div><div class="line"><span class="number">1034</span>   gene         +</div><div class="line"><span class="number">993</span>    gene         -</div></pre></td></tr></table></figure></p>
+<p>还可以查看特定基因上的CDS等数目<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ grep <span class="string">"ENSMUSG00000033793"</span> Mus_musculus.GRCm38<span class="number">.75</span>_chr1.gtf|cut -f3|sort|uniq -c|sort -rn |column -t</div><div class="line"><span class="number">14</span>  exon</div><div class="line"><span class="number">13</span>  CDS</div><div class="line"><span class="number">3</span>   UTR</div><div class="line"><span class="number">1</span>   transcript</div><div class="line"><span class="number">1</span>   stop_codon</div><div class="line"><span class="number">1</span>   start_codon</div><div class="line"><span class="number">1</span>   gene</div></pre></td></tr></table></figure></p>
+<p>参数选项-d提供了一个数据集中的重复项<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> uniq -d mm_gene_names.txt|wc -l</span></div><div class="line">0</div></pre></td></tr></table></figure></p>
+<p>这个数据集中没有重复项！！！</p>
+<h2 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h2><p>join顾名思义就是将不同数据集根据相同的列合并在一起，需要注意的是两个文件需要经过排序才能合并在一起，因此第一步需要检查数据集有没有排序，没有的话需要进行排序。<br>join基本语法：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">join</span> -<span class="number">1</span> <span class="symbol">&lt;file_1_field&gt;</span> -<span class="number">2</span> <span class="symbol">&lt;file_2_field&gt;</span> <span class="symbol">&lt;file_1&gt;</span> <span class="symbol">&lt;file_2&gt;</span></div></pre></td></tr></table></figure></p>
+<p>其中file_1和file_2是两个需要合并的文件，file_1_field表示file_1中合并的列，file_2_field同理。<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sort -<span class="built_in">k1</span>,<span class="number">1</span> example.<span class="keyword">bed </span>&gt; example_sorted.<span class="keyword">bed</span></div><div class="line">$ sort -c -<span class="built_in">k1</span>,<span class="number">1</span> example_lengths.txt</div></pre></td></tr></table></figure></p>
+<p>经验证两个数据集都已经排过序了。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ join <span class="number">-1</span> <span class="number">1</span> <span class="number">-2</span> <span class="number">1</span> example_sorted.bed example_lengths.txt &gt; example_with_lengths.txt</div><div class="line">$ cat example_with_lengths.txt|column -t</div><div class="line">chr1  <span class="number">10</span>  <span class="number">19</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">26</span>  <span class="number">39</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">32</span>  <span class="number">47</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">40</span>  <span class="number">49</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">9</span>   <span class="number">28</span>  <span class="number">58352</span></div><div class="line">chr2  <span class="number">35</span>  <span class="number">54</span>  <span class="number">39521</span></div><div class="line">chr3  <span class="number">11</span>  <span class="number">28</span>  <span class="number">24859</span></div><div class="line">chr3  <span class="number">16</span>  <span class="number">27</span>  <span class="number">24859</span></div></pre></td></tr></table></figure></p>
+<p>如果我们将<em>example_lengths.txt</em>中的chr3去除掉再进行合并，结果会怎么样呢？<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ head -n2 example_lengths.txt &gt; example_lengths_alt.txt</div><div class="line">$ join <span class="number">-1</span> <span class="number">1</span> <span class="number">-2</span> <span class="number">1</span> example_sorted.bed example_lengths_alt.txt</div><div class="line">chr1 <span class="number">10</span> <span class="number">19</span> <span class="number">58352</span></div><div class="line">chr1 <span class="number">26</span> <span class="number">39</span> <span class="number">58352</span></div><div class="line">chr1 <span class="number">32</span> <span class="number">47</span> <span class="number">58352</span></div><div class="line">chr1 <span class="number">40</span> <span class="number">49</span> <span class="number">58352</span></div><div class="line">chr1 <span class="number">9</span> <span class="number">28</span> <span class="number">58352</span></div><div class="line">chr2 <span class="number">35</span> <span class="number">54</span> <span class="number">39521</span></div></pre></td></tr></table></figure></p>
+<p>结果发现chr3被join剔除掉了，因此join只会合并文件共有的项，如果想要保留chr3可以添加参数选项-a实现：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ join <span class="number">-1</span> <span class="number">1</span> <span class="number">-2</span> <span class="number">1</span> -a <span class="number">1</span> example_sorted.bed example_lengths_alt.txt|column -t</div><div class="line">chr1  <span class="number">10</span>  <span class="number">19</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">26</span>  <span class="number">39</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">32</span>  <span class="number">47</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">40</span>  <span class="number">49</span>  <span class="number">58352</span></div><div class="line">chr1  <span class="number">9</span>   <span class="number">28</span>  <span class="number">58352</span></div><div class="line">chr2  <span class="number">35</span>  <span class="number">54</span>  <span class="number">39521</span></div><div class="line">chr3  <span class="number">11</span>  <span class="number">28</span></div><div class="line">chr3  <span class="number">16</span>  <span class="number">27</span></div></pre></td></tr></table></figure></p>
+<hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
 

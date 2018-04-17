@@ -502,7 +502,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  974
+                  982
                 </span>
               
 
@@ -537,119 +537,19 @@
 
       
         <p>数据分析过程中我们常常需要从数据集中抽取部分数据，本文将介绍如何提取子数据集，主要利用R自带的函数，以后会专门介绍data manipulation包<strong>dplyr</strong>。 提取子数据集主要分为select以及exclude，这里主要介绍两种方法，一是利用操作符[]进行选取，二是利用subset()进行抽取。<br><a id="more"></a></p>
-<h2 id="利用-进行提取"><a href="#利用-进行提取" class="headerlink" title="利用[]进行提取"></a>利用[]进行提取</h2><pre><code>#use the iris dataset
-head(iris)
-## Sepal.Length Sepal.Width Petal.Length Petal.Width Species 
-## 1   5.1          3.5          1.4        0.2       setosa
-## 2   4.9          3.0          1.4        0.2       setosa
-## 3   4.7          3.2          1.3        0.2       setosa
-## 4   4.6          3.1          1.5        0.2       setosa
-## 5   5.0          3.6          1.4        0.2       setosa
-## 6   5.4          3.9          1.7        0.4       setosa
-# check the column namenames(iris)
-
-## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;
-</code></pre><p>加入我们想要提取Sepal.Length、Sepal.Width两列数据，可以使用如下代码：</p>
-<pre><code>dt1 &lt;- iris[, c(&quot;Sepal.Length&quot;,&quot;Sepal.Width&quot;)]head(dt1)
-
-##   Sepal.Length Sepal.Width
-## 1      5.1         3.5
-## 2      4.9         3.0
-## 3      4.7         3.2
-## 4      4.6         3.1
-## 5      5.0         3.6
-## 6      5.4         3.9
-</code></pre><pre><code>#也可以直接用列序号代替，比如这里我们想要提要前两列
-dt2 &lt;- iris[, c(1, 2)]head(dt2)
-##   Sepal.Length Sepal.Width
-## 1      5.1         3.5
-## 2      4.9         3.0
-## 3      4.7         3.2
-## 4      4.6         3.1
-## 5      5.0         3.6
-## 6      5.4         3.9
-</code></pre><p>如果我们需要删除前两列，只需在序号之前添加符号 - 就行</p>
-<pre><code>dt3 &lt;- iris[, c(-1, -2)]head(dt3)
-
-##   Petal.Length Petal.Width Species  
-## 1     1.4          0.2      setosa
-## 2     1.4          0.2      setosa
-## 3     1.3          0.2      setosa
-## 4     1.5          0.2      setosa
-## 5     1.4          0.2      setosa
-## 6     1.7          0.4      setosa
-</code></pre><p>可以看出十分简单就可以提取子数据集，下面介绍subset()<br>，subset()相比于[]主要是可以方便的根据条件提取子数据集。</p>
-<h2 id="利用subset-进行提取"><a href="#利用subset-进行提取" class="headerlink" title="利用subset()进行提取"></a>利用subset()进行提取</h2><pre><code>#create a dataset
-fy &lt;- c(2010,2011,2012,2010,2011,2012,2010,2011,2012)
-company &lt;- c(&quot;Apple&quot;,&quot;Apple&quot;,&quot;Apple&quot;,&quot;Google&quot;,&quot;Google&quot;,&quot;Google&quot;,&quot;Microsoft&quot;,&quot;Microsoft&quot;,&quot;Microsoft&quot;)
-revenue &lt;- c(65225,108249,156508,29321,37905,50175,62484,69943,73723)
-profit &lt;- c(14013,25922,41733,8505,9737,10737,18760,23150,16978) 
-companiesData &lt;- data.frame(fy, company, revenue, profit)
-head(companiesData)
-##    fy company revenue profit
-## 1 2010 Apple   65225 14013
-## 2 2011 Apple   108249 25922
-## 3 2012 Apple   156508 41733
-## 4 2010 Google   29321 8505
-## 5 2011 Google   37905 9737
-## 6 2012 Google   50175 10737
-</code></pre><p>假如我们想要提取revenue超过十万的公司</p>
-<pre><code>com1 &lt;- subset(companiesData, revenue&gt;100000)
-head(com1)
-
-##    fy company revenue profit
-## 2 2011 Apple   108249 25922
-## 3 2012 Apple   156508 41733
-</code></pre><p>或者我们想要提取在2012年revenue超过6万的公司</p>
-<pre><code>com2 &lt;- subset(companiesData, fy==&quot;2012&quot;&amp;revenue&gt;60000)
-head(com2)
-
-##    fy  company  revenue profit
-## 3 2012 Apple     156508 41733
-## 9 2012 Microsoft  73723 16978
-</code></pre><p>或者提取在2012年revenue超过6万、profit超过4万的公司</p>
-<pre><code>com3 &lt;- subset(companiesData, fy==&quot;2012&quot;&amp;revenue&gt;60000&amp;profit&gt;40000)
-com3
-
-##    fy company revenue profit
-## 3 2012 Apple 156508 41733
-</code></pre><p>条件选择也可以使用或，比如我们想要提取profit超过2万或者revenue低于5万的公司</p>
-<pre><code>com4 &lt;- subset(companiesData, revenue&lt;50000|profit&gt;20000)
-com4
-##    fy company   revenue profit 
-## 2 2011 Apple     108249 25922
-## 3 2012 Apple     156508 41733
-## 4 2010 Google    29321 8505
-## 5 2011 Google    37905 9737
-## 8 2011 Microsoft 69943 23150
-</code></pre><p>本文只是粗略的讲解，其实subset()的用法很广，有兴趣的朋友可以自行探索。</p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code>sessionInfo()
-
-## R version 3.4.0 (2017-04-21)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.2 LTS
-## 
-## Matrix products: default
-## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0
-## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0
-## 
-## locale:
-## [1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C
-## [3] LC_TIME=en_US.UTF-8 LC_COLLATE=en_US.UTF-8 
-## [5] LC_MONETARY=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 
-## [7] LC_PAPER=en_US.UTF-8 LC_NAME=C 
-## [9] LC_ADDRESS=C LC_TELEPHONE=C 
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C 
-## 
-## attached base packages:
-## [1] stats graphics grDevices utils datasets methods base 
-## 
-## loaded via a namespace (and not attached):
-## [1] compiler_3.4.0 backports_1.1.0 magrittr_1.5 rprojroot_1.2 
-## [5] tools_3.4.0 htmltools_0.3.6 yaml_2.1.14 Rcpp_0.12.11 
-## [9] stringi_1.1.5 rmarkdown_1.6 knitr_1.16 stringr_1.2.0 
-## [13] digest_0.6.12 evaluate_0.10.1
-</code></pre><hr>
+<h2 id="利用-进行提取"><a href="#利用-进行提取" class="headerlink" title="利用[]进行提取"></a>利用[]进行提取</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#use the iris dataset</div><div class="line">head(iris)</div><div class="line">## Sepal.Length Sepal.Width Petal.Length Petal.Width Species </div><div class="line">## <span class="number">1</span>   <span class="number">5.1</span>          <span class="number">3.5</span>          <span class="number">1.4</span>        <span class="number">0.2</span>       setosa</div><div class="line">## <span class="number">2</span>   <span class="number">4.9</span>          <span class="number">3.0</span>          <span class="number">1.4</span>        <span class="number">0.2</span>       setosa</div><div class="line">## <span class="number">3</span>   <span class="number">4.7</span>          <span class="number">3.2</span>          <span class="number">1.3</span>        <span class="number">0.2</span>       setosa</div><div class="line">## <span class="number">4</span>   <span class="number">4.6</span>          <span class="number">3.1</span>          <span class="number">1.5</span>        <span class="number">0.2</span>       setosa</div><div class="line">## <span class="number">5</span>   <span class="number">5.0</span>          <span class="number">3.6</span>          <span class="number">1.4</span>        <span class="number">0.2</span>       setosa</div><div class="line">## <span class="number">6</span>   <span class="number">5.4</span>          <span class="number">3.9</span>          <span class="number">1.7</span>        <span class="number">0.4</span>       setosa</div><div class="line"># check the column namenames(iris)</div><div class="line"></div><div class="line">## [<span class="number">1</span>] <span class="string">"Sepal.Length"</span> <span class="string">"Sepal.Width"</span> <span class="string">"Petal.Length"</span> <span class="string">"Petal.Width"</span>  <span class="string">"Species"</span></div></pre></td></tr></table></figure>
+<p>加入我们想要提取Sepal.Length、Sepal.Width两列数据，可以使用如下代码：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dt1 &lt;- iris[, c("Sepal.Length","Sepal.Width")]head(dt1)</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"><span class="comment">#   Sepal.Length Sepal.Width</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1      5.1         3.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2      4.9         3.0</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3      4.7         3.2</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 4      4.6         3.1</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 5      5.0         3.6</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 6      5.4         3.9</span></span></div></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">也可以直接用列序号代替，比如这里我们想要提要前两列</span></div><div class="line">dt2 &lt;- iris[, c(1, 2)]head(dt2)</div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#   Sepal.Length Sepal.Width</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1      5.1         3.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2      4.9         3.0</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3      4.7         3.2</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 4      4.6         3.1</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 5      5.0         3.6</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 6      5.4         3.9</span></span></div></pre></td></tr></table></figure>
+<p>如果我们需要删除前两列，只需在序号之前添加符号 - 就行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dt3 &lt;- iris[, c(-1, -2)]head(dt3)</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"><span class="comment">#   Petal.Length Petal.Width Species  </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1     1.4          0.2      setosa</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2     1.4          0.2      setosa</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3     1.3          0.2      setosa</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 4     1.5          0.2      setosa</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 5     1.4          0.2      setosa</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 6     1.7          0.4      setosa</span></span></div></pre></td></tr></table></figure></p>
+<p>可以看出十分简单就可以提取子数据集，下面介绍subset()<br>，subset()相比于[]主要是可以方便的根据条件提取子数据集。</p>
+<h2 id="利用subset-进行提取"><a href="#利用subset-进行提取" class="headerlink" title="利用subset()进行提取"></a>利用subset()进行提取</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#create a dataset</div><div class="line">fy &lt;- c(<span class="number">2010</span>,<span class="number">2011</span>,<span class="number">2012</span>,<span class="number">2010</span>,<span class="number">2011</span>,<span class="number">2012</span>,<span class="number">2010</span>,<span class="number">2011</span>,<span class="number">2012</span>)</div><div class="line">company &lt;- c(<span class="string">"Apple"</span>,<span class="string">"Apple"</span>,<span class="string">"Apple"</span>,<span class="string">"Google"</span>,<span class="string">"Google"</span>,<span class="string">"Google"</span>,<span class="string">"Microsoft"</span>,<span class="string">"Microsoft"</span>,<span class="string">"Microsoft"</span>)</div><div class="line">revenue &lt;- c(<span class="number">65225</span>,<span class="number">108249</span>,<span class="number">156508</span>,<span class="number">29321</span>,<span class="number">37905</span>,<span class="number">50175</span>,<span class="number">62484</span>,<span class="number">69943</span>,<span class="number">73723</span>)</div><div class="line">profit &lt;- c(<span class="number">14013</span>,<span class="number">25922</span>,<span class="number">41733</span>,<span class="number">8505</span>,<span class="number">9737</span>,<span class="number">10737</span>,<span class="number">18760</span>,<span class="number">23150</span>,<span class="number">16978</span>) </div><div class="line">companiesData &lt;- data.frame(fy, company, revenue, profit)</div><div class="line">head(companiesData)</div><div class="line">##    fy company revenue profit</div><div class="line">## <span class="number">1</span> <span class="number">2010</span> Apple   <span class="number">65225</span> <span class="number">14013</span></div><div class="line">## <span class="number">2</span> <span class="number">2011</span> Apple   <span class="number">108249</span> <span class="number">25922</span></div><div class="line">## <span class="number">3</span> <span class="number">2012</span> Apple   <span class="number">156508</span> <span class="number">41733</span></div><div class="line">## <span class="number">4</span> <span class="number">2010</span> Google   <span class="number">29321</span> <span class="number">8505</span></div><div class="line">## <span class="number">5</span> <span class="number">2011</span> Google   <span class="number">37905</span> <span class="number">9737</span></div><div class="line">## <span class="number">6</span> <span class="number">2012</span> Google   <span class="number">50175</span> <span class="number">10737</span></div></pre></td></tr></table></figure>
+<p>假如我们想要提取revenue超过十万的公司<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">com1 &lt;- subset(companiesData, revenue&gt;<span class="number">100000</span>)</div><div class="line">head(com1)</div><div class="line"></div><div class="line">##    fy company revenue profit</div><div class="line">## <span class="number">2</span> <span class="number">2011</span> Apple   <span class="number">108249</span> <span class="number">25922</span></div><div class="line">## <span class="number">3</span> <span class="number">2012</span> Apple   <span class="number">156508</span> <span class="number">41733</span></div></pre></td></tr></table></figure></p>
+<p>或者我们想要提取在2012年revenue超过6万的公司<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">com2 &lt;- subset(companiesData, fy==<span class="string">"2012"</span>&amp;revenue&gt;<span class="number">60000</span>)</div><div class="line">head(com2)</div><div class="line"></div><div class="line">##    fy  company  revenue profit</div><div class="line">## <span class="number">3</span> <span class="number">2012</span> Apple     <span class="number">156508</span> <span class="number">41733</span></div><div class="line">## <span class="number">9</span> <span class="number">2012</span> Microsoft  <span class="number">73723</span> <span class="number">16978</span></div></pre></td></tr></table></figure></p>
+<p>或者提取在2012年revenue超过6万、profit超过4万的公司<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">com3 &lt;- subset(companiesData, fy==<span class="string">"2012"</span>&amp;revenue&gt;<span class="number">60000</span>&amp;profit&gt;<span class="number">40000</span>)</div><div class="line">com3</div><div class="line"></div><div class="line">##    fy company revenue profit</div><div class="line">## <span class="number">3</span> <span class="number">2012</span> Apple <span class="number">156508</span> <span class="number">41733</span></div></pre></td></tr></table></figure></p>
+<p>条件选择也可以使用或，比如我们想要提取profit超过2万或者revenue低于5万的公司<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">com4 &lt;- subset(companiesData, revenue&lt;<span class="number">50000</span>|profit&gt;<span class="number">20000</span>)</div><div class="line">com4</div><div class="line">##    fy company   revenue profit </div><div class="line">## <span class="number">2</span> <span class="number">2011</span> Apple     <span class="number">108249</span> <span class="number">25922</span></div><div class="line">## <span class="number">3</span> <span class="number">2012</span> Apple     <span class="number">156508</span> <span class="number">41733</span></div><div class="line">## <span class="number">4</span> <span class="number">2010</span> Google    <span class="number">29321</span> <span class="number">8505</span></div><div class="line">## <span class="number">5</span> <span class="number">2011</span> Google    <span class="number">37905</span> <span class="number">9737</span></div><div class="line">## <span class="number">8</span> <span class="number">2011</span> Microsoft <span class="number">69943</span> <span class="number">23150</span></div></pre></td></tr></table></figure></p>
+<p>本文只是粗略的讲解，其实subset()的用法很广，有兴趣的朋友可以自行探索。</p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"><span class="comment"># R version 3.4.0 (2017-04-21)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Platform: x86_64-pc-linux-gnu (64-bit)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Running under: Ubuntu 16.04.2 LTS</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Matrix products: default</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># locale:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [3] LC_TIME=en_US.UTF-8 LC_COLLATE=en_US.UTF-8 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [5] LC_MONETARY=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [7] LC_PAPER=en_US.UTF-8 LC_NAME=C </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [9] LC_ADDRESS=C LC_TELEPHONE=C </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># attached base packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] stats graphics grDevices utils datasets methods base </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># loaded via a namespace (and not attached):</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] compiler_3.4.0 backports_1.1.0 magrittr_1.5 rprojroot_1.2 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [5] tools_3.4.0 htmltools_0.3.6 yaml_2.1.14 Rcpp_0.12.11 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [9] stringi_1.1.5 rmarkdown_1.6 knitr_1.16 stringr_1.2.0 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [13] digest_0.6.12 evaluate_0.10.1</span></span></div></pre></td></tr></table></figure>
+<hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
 

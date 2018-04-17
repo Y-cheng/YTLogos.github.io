@@ -503,7 +503,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  416
+                  418
                 </span>
               
 
@@ -543,24 +543,20 @@
 <ul>
 <li>创建含有当前时间的文件，如创建一个含有今天时间日期的文件夹</li>
 </ul>
-<pre><code>$ mkdir results-$(date +%F)
-$ ls
-results-2017-11-02
-</code></pre><ul>
-<li>设置自己的快捷命令，比如我们要创建项目时，需要创建<code>data/seqs</code>,<code>scripts</code>以及<code>analysis</code>文件夹，我们可以写一个快捷命令符，以后就可以直接调用即可：<pre><code>$ alias mkpr=&quot;mkdir -p {data/seqs,scripts,analysis}&quot;
-</code></pre><blockquote>
-<p>这样后面我们每次运行<em>mkpr</em>就会创建<code>data/seqs</code>,<code>scripts</code>以及<code>analysis</code>文件夹。将上述两点综合我们就可以很容易创建含有当前时期的文件，这里我们将<code>date +%F</code>设置成快捷命令<em>today</em>。</p>
-</blockquote>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir results-$(<span class="keyword">date</span> +%F)</div><div class="line">$ <span class="keyword">ls</span></div><div class="line">results<span class="number">-2017</span><span class="number">-11</span><span class="number">-02</span></div></pre></td></tr></table></figure>
+<ul>
+<li>设置自己的快捷命令，比如我们要创建项目时，需要创建<code>data/seqs</code>,<code>scripts</code>以及<code>analysis</code>文件夹，我们可以写一个快捷命令符，以后就可以直接调用即可：<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> mkpr=<span class="string">"mkdir -p &#123;data/seqs,scripts,analysis&#125;"</span></span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<pre><code>$ alias today=&quot;date +%F&quot;
-</code></pre><blockquote>
+<blockquote>
+<p>这样后面我们每次运行<em>mkpr</em>就会创建<code>data/seqs</code>,<code>scripts</code>以及<code>analysis</code>文件夹。将上述两点综合我们就可以很容易创建含有当前时期的文件，这里我们将<code>date +%F</code>设置成快捷命令<em>today</em>。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> today=<span class="string">"date +%F"</span></span></div></pre></td></tr></table></figure>
+<blockquote>
 <p>这样我们以后只需要运行以下命令就可以创建含有当前时间日期的文件了。</p>
 </blockquote>
-<pre><code>$ mkdir results-$(today)
-$ls
-results-2017-11-02
-</code></pre><blockquote>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> mkdir results-<span class="symbol">$</span>(today)</div><div class="line"><span class="meta"><span class="meta-keyword">$ls</span></span></div><div class="line">results<span class="number">-2017</span><span class="number">-11</span><span class="number">-02</span></div></pre></td></tr></table></figure>
+<blockquote>
 <p>注意上述命令在我们重启终端时是无法再次作用的，要使得<strong>alias</strong>命令永久有效，我们可以将命令添加到<code>.bashrc</code>中，之后<code>source ~/.bashrc</code>即可生效。</p>
 </blockquote>
 <hr>

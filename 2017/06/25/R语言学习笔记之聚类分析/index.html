@@ -519,7 +519,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  818
+                  824
                 </span>
               
 
@@ -560,74 +560,38 @@
 <li>cluster</li>
 </ul>
 <a id="more"></a>
-<h2 id="加载包"><a href="#加载包" class="headerlink" title="加载包"></a>加载包</h2><pre><code>library(factoextra)
-library(cluster)
-</code></pre><h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用内置的R数据集<code>USArrests</code></p>
-<pre><code>#load the dataset
-data(&quot;USArrests&quot;)
-#remove any missing value (i.e, NA values for not available)
-#That might be present in the data
-USArrests &lt;- na.omit(USArrests)#view the first 6 rows of the data
-head(USArrests, n=6)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-2abe5fa13d02d884.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>在此数据集中，列是变量，行是观测值</strong><br>在聚类之前我们可以先进行一些必要的数据检查即数据描述性统计，如平均值、标准差等</p>
-<pre><code>desc_stats &lt;- data.frame( Min=apply(USArrests, 2, min),#minimum
-Med=apply(USArrests, 2, median),#median 
-Mean=apply(USArrests, 2, mean),#mean 
-SD=apply(USArrests, 2, sd),#Standard deviation 
-Max=apply(USArrests, 2, max)#maximum
-)
-desc_stats &lt;- round(desc_stats, 1)#保留小数点后一位head(desc_stats)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-c28a99b3efe41ca6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>变量有很大的方差及均值时需进行标准化</strong></p>
-<pre><code>df &lt;- scale(USArrests)
-</code></pre><h2 id="数据集群性评估"><a href="#数据集群性评估" class="headerlink" title="数据集群性评估"></a>数据集群性评估</h2><p>使用<code>get_clust_tendency()</code>计算<code>Hopkins</code>统计量</p>
-<pre><code>res &lt;- get_clust_tendency(df, 40, graph = TRUE)
-res$hopkins_stat
-## [1] 0.3440875
-</code></pre><pre><code>#Visualize the dissimilarity matrix
-res$plot
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-7ab1c23eb38f6cb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="加载包"><a href="#加载包" class="headerlink" title="加载包"></a>加载包</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">library</span><span class="params">(factoextra)</span></span></div><div class="line"><span class="function"><span class="title">library</span><span class="params">(cluster)</span></span></div></pre></td></tr></table></figure>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用内置的R数据集<code>USArrests</code><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#load</span> the dataset</div><div class="line"><span class="function"><span class="title">data</span><span class="params">(<span class="string">"USArrests"</span>)</span></span></div><div class="line"><span class="selector-id">#remove</span> any missing value (<span class="selector-tag">i</span><span class="selector-class">.e</span>, NA values <span class="keyword">for</span> not available)</div><div class="line"><span class="selector-id">#That</span> might be present <span class="keyword">in</span> the data</div><div class="line">USArrests &lt;- na.omit(USArrests)<span class="selector-id">#view</span> the first <span class="number">6</span> rows of the data</div><div class="line"><span class="function"><span class="title">head</span><span class="params">(USArrests, n=<span class="number">6</span>)</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-2abe5fa13d02d884.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>在此数据集中，列是变量，行是观测值</strong><br>在聚类之前我们可以先进行一些必要的数据检查即数据描述性统计，如平均值、标准差等<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">desc_stats &lt;- data.frame( Min=apply(USArrests, 2, min),<span class="comment">#minimum</span></div><div class="line">Med=apply(USArrests, 2, median),<span class="comment">#median </span></div><div class="line">Mean=apply(USArrests, 2, mean),<span class="comment">#mean </span></div><div class="line">SD=apply(USArrests, 2, sd),<span class="comment">#Standard deviation </span></div><div class="line">Max=apply(USArrests, 2, max)<span class="comment">#maximum</span></div><div class="line">)</div><div class="line">desc_stats &lt;- round(desc_stats, 1)<span class="comment">#保留小数点后一位head(desc_stats)</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-c28a99b3efe41ca6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>变量有很大的方差及均值时需进行标准化</strong><br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df &lt;- scale(<span class="name">USArrests</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="数据集群性评估"><a href="#数据集群性评估" class="headerlink" title="数据集群性评估"></a>数据集群性评估</h2><p>使用<code>get_clust_tendency()</code>计算<code>Hopkins</code>统计量<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">res &lt;- get_clust_tendency(df, 40, graph = TRUE)</div><div class="line"><span class="meta">res$</span><span class="bash">hopkins_stat</span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] 0.3440875</span></span></div></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">Visualize the dissimilarity matrix</span></div><div class="line"><span class="meta">res$</span><span class="bash">plot</span></div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-7ab1c23eb38f6cb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <blockquote>
 <p>Hopkins统计量的值&lt;0.5，表明数据是高度可聚合的。另外，从图中也可以看出数据可聚合。</p>
 </blockquote>
-<h2 id="估计聚合簇数"><a href="#估计聚合簇数" class="headerlink" title="估计聚合簇数"></a>估计聚合簇数</h2><p>由于k均值聚类需要指定要生成的聚类数量，因此我们将使用函数<code>clusGap()</code>来计算用于估计最优聚类数。函数<code>fviz_gap_stat()</code>用于可视化。</p>
-<pre><code>set.seed(123)
-## Compute the gap statistic
-gap_stat &lt;- clusGap(df, FUN = kmeans, nstart = 25, K.max = 10, B = 500) 
-# Plot the result
-fviz_gap_stat(gap_stat)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-64e6e37dc513b2be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="估计聚合簇数"><a href="#估计聚合簇数" class="headerlink" title="估计聚合簇数"></a>估计聚合簇数</h2><p>由于k均值聚类需要指定要生成的聚类数量，因此我们将使用函数<code>clusGap()</code>来计算用于估计最优聚类数。函数<code>fviz_gap_stat()</code>用于可视化。<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span>.seed<span class="params">(123)</span></div><div class="line"><span class="comment">## Compute the gap statistic</span></div><div class="line">gap_stat &lt;- clusGap<span class="params">(df, <span class="attr">FUN</span> = kmeans, <span class="attr">nstart</span> = 25, K.<span class="attr">max</span> = 10, <span class="attr">B</span> = 500)</span> </div><div class="line"><span class="comment"># Plot the result</span></div><div class="line">fviz_gap_stat<span class="params">(gap_stat)</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-64e6e37dc513b2be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <blockquote>
 <p>图中显示最佳为聚成四类（k=4）</p>
 </blockquote>
-<h2 id="进行聚类"><a href="#进行聚类" class="headerlink" title="进行聚类"></a>进行聚类</h2><pre><code>set.seed(123)
-km.res &lt;- kmeans(df, 4, nstart = 25)
-head(km.res$cluster, 20)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-61fe2e1a139e3b9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code># Visualize clusters using factoextra
-fviz_cluster(km.res, USArrests)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-2e39c93b63af2161.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="进行聚类"><a href="#进行聚类" class="headerlink" title="进行聚类"></a>进行聚类</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set.seed(<span class="number">123</span>)</div><div class="line">km<span class="selector-class">.res</span> &lt;- kmeans(df, <span class="number">4</span>, nstart = <span class="number">25</span>)</div><div class="line"><span class="function"><span class="title">head</span><span class="params">(km.res<span class="variable">$cluster</span>, <span class="number">20</span>)</span></span></div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-61fe2e1a139e3b9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Visualize clusters using factoextra</div><div class="line">fviz_cluster(<span class="name">km</span>.res, USArrests)</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-2e39c93b63af2161.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="检查cluster-silhouette图"><a href="#检查cluster-silhouette图" class="headerlink" title="检查cluster silhouette图"></a>检查<code>cluster silhouette</code>图</h2><blockquote>
 <p>Recall that the silhouette measures (SiSi) how similar an object ii is to the the other objects in its own cluster versus those in the neighbor cluster. SiSi values range from 1 to - 1:</p>
 </blockquote>
 <ul>
 <li>A value of SiSi close to 1 indicates that the object is well clustered. In the other words, the object ii is similar to the other objects in its group.</li>
-<li>A value of SiSi close to -1 indicates that the object is poorly clustered, and that assignment to some other cluster would probably improve the overall results.<pre><code>sil &lt;- silhouette(km.res$cluster, dist(df))
-rownames(sil) &lt;- rownames(USArrests)
-head(sil[, 1:3])
-</code></pre></li>
+<li>A value of SiSi close to -1 indicates that the object is poorly clustered, and that assignment to some other cluster would probably improve the overall results.<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sil &lt;- silhouette(<span class="name">km</span>.res$cluster, dist(<span class="name">df</span>))</div><div class="line">rownames(<span class="name">sil</span>) &lt;- rownames(<span class="name">USArrests</span>)</div><div class="line">head(<span class="name">sil</span>[, <span class="number">1</span>:<span class="number">3</span>])</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-e2752fd444968a90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code>#Visualize 
-fviz_silhouette(sil)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-a01f551c35d38d0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-b2554b235caf0420.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>图中可以看出有负值，可以通过函数<code>silhouette()</code>确定是哪个观测值</p>
-<pre><code>neg_sil_index &lt;- which(sil[, &quot;sil_width&quot;] &lt; 0)
-sil[neg_sil_index, , drop = FALSE]
-##          cluster    neighbor     sil_width
-## Missouri    3          2        -0.07318144
-</code></pre><h2 id="eclust-增强的聚类分析"><a href="#eclust-增强的聚类分析" class="headerlink" title="eclust():增强的聚类分析"></a><strong>eclust()</strong>:增强的聚类分析</h2><blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-e2752fd444968a90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#Visualize</span> </div><div class="line"><span class="function"><span class="title">fviz_silhouette</span><span class="params">(sil)</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-a01f551c35d38d0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-b2554b235caf0420.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>图中可以看出有负值，可以通过函数<code>silhouette()</code>确定是哪个观测值<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">neg_sil_index &lt;- which(sil[, <span class="string">"sil_width"</span>] &lt; <span class="number">0</span>)</div><div class="line">sil[neg_sil_index, , drop = FALSE]</div><div class="line">##          cluster    neighbor     sil_width</div><div class="line">## Missouri    <span class="number">3</span>          <span class="number">2</span>        <span class="number">-0.07318144</span></div></pre></td></tr></table></figure></p>
+<h2 id="eclust-增强的聚类分析"><a href="#eclust-增强的聚类分析" class="headerlink" title="eclust():增强的聚类分析"></a><strong>eclust()</strong>:增强的聚类分析</h2><blockquote>
 <p>与其他聚类分析包相比，<code>eclust()</code>有以下优点：</p>
 </blockquote>
 <ul>
@@ -637,32 +601,14 @@ sil[neg_sil_index, , drop = FALSE]
 <li>自动提供Silhouette plot</li>
 <li>可以结合ggplot2绘制优美的图形</li>
 </ul>
-<h2 id="使用eclust-的K均值聚类"><a href="#使用eclust-的K均值聚类" class="headerlink" title="使用eclust()的K均值聚类"></a>使用eclust()的<strong>K</strong>均值聚类</h2><pre><code># Compute k-means
-res.km &lt;- eclust(df, &quot;kmeans&quot;)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-448668d5d66b746c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code># Gap statistic plot
-fviz_gap_stat(res.km$gap_stat)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-8abcb70ddd53cc9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code># Silhouette plotfviz_silhouette(res.km)
-
-##    cluster size ave.sil.width
-## 1     1     13      0.31
-## 2     2     29      0.38
-## 3     3      8      0.39
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-ef8922f5d288768f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="使用eclust（）的层次聚类"><a href="#使用eclust（）的层次聚类" class="headerlink" title="使用eclust（）的层次聚类"></a>使用<strong>eclust（）</strong>的层次聚类</h2><pre><code># Enhanced hierarchical clustering
-res.hc &lt;- eclust(df, &quot;hclust&quot;) # compute hclust
-fviz_dend(res.hc, rect = TRUE) # dendrogam
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-f5f4fb4aa3f23466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code>#下面的R代码生成Silhouette plot和分层聚类散点图。
-fviz_silhouette(res.hc) # silhouette plot
-##   cluster size ave.sil.width
-## 1    1     19      0.26
-## 2    2     19      0.28
-## 3    3     12      0.43
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-cdae172ce885358a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<pre><code>fviz_cluster(res.hc) # scatter plot
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-be9e7cd89ccec3bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="使用eclust-的K均值聚类"><a href="#使用eclust-的K均值聚类" class="headerlink" title="使用eclust()的K均值聚类"></a>使用eclust()的<strong>K</strong>均值聚类</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Compute k-means</div><div class="line">res.km &lt;- eclust(df, <span class="string">"kmeans"</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-448668d5d66b746c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># Gap statistic plot</span></div><div class="line">fviz_gap_stat(res.km$gap_stat)</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-8abcb70ddd53cc9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> Silhouette plotfviz_silhouette(res.km)</span></div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"><span class="comment">#    cluster size ave.sil.width</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1     1     13      0.31</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2     2     29      0.38</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3     3      8      0.39</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-ef8922f5d288768f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="使用eclust（）的层次聚类"><a href="#使用eclust（）的层次聚类" class="headerlink" title="使用eclust（）的层次聚类"></a>使用<strong>eclust（）</strong>的层次聚类</h2><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># Enhanced hierarchical clustering</span></div><div class="line">res.hc &lt;- eclust(df, <span class="string">"hclust"</span>) <span class="meta"># compute hclust</span></div><div class="line">fviz_dend(res.hc, rect = <span class="literal">TRUE</span>) <span class="meta"># dendrogam</span></div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-f5f4fb4aa3f23466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">下面的R代码生成Silhouette plot和分层聚类散点图。</span></div><div class="line">fviz_silhouette(res.hc) # silhouette plot</div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#   cluster size ave.sil.width</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1    1     19      0.26</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2    2     19      0.28</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3    3     12      0.43</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-cdae172ce885358a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fviz_cluster(<span class="name">res</span>.hc) # scatter plot</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2084719-be9e7cd89ccec3bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="Infos"><a href="#Infos" class="headerlink" title="Infos"></a>Infos</h2><blockquote>
 <p>This analysis has been performed using R software (R version 3.3.2)</p>
 </blockquote>

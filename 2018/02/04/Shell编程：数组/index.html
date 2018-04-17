@@ -504,7 +504,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  914
+                  872
                 </span>
               
 
@@ -541,171 +541,30 @@
         <p><img src="http://os3hnmzbp.bkt.clouddn.com/数组.png" alt="数组"></p>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组中可以存放多个值。Bash只支持一维数组，初始化时无需定义数组大小，数组元素下标从0开始。Shell数组用括号表示，元素之间由空号隔开：</p>
 <a id="more"></a>
-<pre><code>array_name=(value1 value2 ... valuen)
-</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h3><pre><code>#!/bin/bash
-my_array=(A B &quot;C&quot; D)
-</code></pre><p>也可以通过下标赋值来定义数组</p>
-<pre><code>array_name[0]=value0
-array_name[1]=value1
-array_name[2]=value2
-</code></pre><h3 id="读取数组"><a href="#读取数组" class="headerlink" title="读取数组"></a>读取数组</h3><p>读取数组的一般格式为：</p>
-<pre><code>${array_name[index]}
-</code></pre><p>现在创建一个脚本<code>test.sh</code>来演示一下：</p>
-<pre><code>#！/bin/bash
-#创建脚本test.sh
-my_array=(A B &quot;C&quot; D)
-echo &quot;第一个元素为：${my_array[0]}&quot;
-echo &quot;第二个元素为：${my_array[1]}&quot;
-echo &quot;第三个元素为：${my_array[2]}&quot;
-echo &quot;第四个元素为：${my_array[3]}&quot;
-</code></pre><p>执行脚本结果如下</p>
-<pre><code>$ chmod +x test.sh 
-$ ./test.sh 
-第一个元素为：A
-第二个元素为：B
-第三个元素为：C
-第四个元素为：D
-</code></pre><h3 id="获取数组中所有元素"><a href="#获取数组中所有元素" class="headerlink" title="获取数组中所有元素"></a>获取数组中所有元素</h3><p>使用@或者*可以获取数组中的所有元素</p>
-<pre><code>#!/bin/bash
-# 创建脚本test.sh
-
-my_array[0]=A
-my_array[1]=B
-my_array[2]=C
-my_array[3]=D
-
-echo &quot;数组的元素为: ${my_array[*]}&quot;
-echo &quot;数组的元素为: ${my_array[@]}&quot;
-</code></pre><p>执行脚本结果如下：</p>
-<pre><code>$ ./test.sh 
-数组的元素为: A B C D
-数组的元素为: A B C D
-</code></pre><h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>获取数组长度的方法与获取字符串长度的方法相同</p>
-<pre><code>#!/bin/bash
-# 创建脚本test.sh
-
-my_array[0]=A
-my_array[1]=B
-my_array[2]=C
-my_array[3]=D
-
-echo &quot;数组元素个数为: ${#my_array[*]}&quot;
-echo &quot;数组元素个数为: ${#my_array[@]}&quot;
-</code></pre><p>执行脚本结果如下</p>
-<pre><code>$ ./test.sh 
-数组元素个数为: 4
-数组元素个数为: 4
-</code></pre><h3 id="数组的值也可以写入变量"><a href="#数组的值也可以写入变量" class="headerlink" title="数组的值也可以写入变量"></a>数组的值也可以写入变量</h3><pre><code>#!/bin/bash
-# 创建脚本test.sh
-
-A=1
-my_array=($A B C D)
-echo &quot;第一个元素为：${my_array[0]}&quot;
-echo &quot;第二个元素为：${my_array[1]}&quot;
-echo &quot;第三个元素为：${my_array[2]}&quot;
-echo &quot;第四个元素为：${my_array[3]}&quot;
-</code></pre><p>执行脚本结果如下</p>
-<pre><code>$ ./test.sh 
-第一个元素为：1
-第二个元素为：B
-第三个元素为：C
-第四个元素为：D
-</code></pre><h3 id="数组下标也可以为变量"><a href="#数组下标也可以为变量" class="headerlink" title="数组下标也可以为变量"></a>数组下标也可以为变量</h3><pre><code>#!/bin/bash
-# 创建脚本test.sh
-
-my_array=(A B C D)
-
-i=2
-echo ${my_array[i]}
-</code></pre><p>执行脚本结果如下</p>
-<pre><code>$ ./test.sh 
-C
-</code></pre><h3 id="数组遍历"><a href="#数组遍历" class="headerlink" title="数组遍历"></a>数组遍历</h3><p>这里讲解几种方法用于数据遍历</p>
-<pre><code>#!/bin/bash
-# 创建演示脚本test.sh
-my_array=(A B C D E F G)
-echo &quot;---------for循环遍历数组-----------&quot;
-for i in ${my_array[@]}
-do
-        echo $i
-done
-
-echo &quot;--------while循环遍历数组，使用let i++自增-------------&quot;
-i=0
-#注意[与$之间要有空格，否则报错,下同
-while [ $i -lt ${#my_array[@]} ]
-do
-        echo ${my_array[$i]}
-        let i++
-done
-
-echo &quot;-------while循环遍历数组，使用let &quot;n++ &quot;自增：双引号可有可无，推荐加上双引号-----------&quot;
-n=0
-while [ $n -lt ${#my_array[@]} ]
-do
-        echo ${my_array[$n]}
-        let &quot;n++&quot;
-done
-
-echo &quot;-----------while循环遍历数组，使用let m+=1自增--------------&quot;
-
-m=0
-while [ $m -lt ${#my_array[@]} ]
-do
-        echo ${my_array[$m]}
-        let m+=1
-done
-
-echo &quot;------------------while循环遍历数组，使用a=$[$a+1]自增------------------&quot;
-a=0
-while [ $a -lt ${#my_array[@]} ]
-do
-        echo ${my_array[$a]}
-        a=$[$a+1]
-done
-</code></pre><p>执行脚本结果如下</p>
-<pre><code>$ ./test.sh 
----------for循环遍历数组-----------
-A
-B
-C
-D
-E
-F
-G
---------while循环遍历数组，使用let i++自增-------------
-A
-B
-C
-D
-E
-F
-G
--------while循环遍历数组，使用let n++ 自增：双引号可有可无，推荐加上双引号-----------
-A
-B
-C
-D
-E
-F
-G
------------while循环遍历数组，使用let m+=1自增--------------
-A
-B
-C
-D
-E
-F
-G
-------------------while循环遍历数组，使用a=$[$a+1]自增------------------
-A
-B
-C
-D
-E
-F
-G
-</code></pre><p>可以看出各种遍历方法大同小异，区别就在于自增方式的不同</p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array<span class="number">_n</span>ame=(<span class="keyword">value</span><span class="number">1</span> <span class="keyword">value</span><span class="number">2</span> ... valuen)</div></pre></td></tr></table></figure>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">my_array=(A B <span class="string">"C"</span> D)</div></pre></td></tr></table></figure>
+<p>也可以通过下标赋值来定义数组</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">array_name[0]</span>=value0</div><div class="line"><span class="attr">array_name[1]</span>=value1</div><div class="line"><span class="attr">array_name[2]</span>=value2</div></pre></td></tr></table></figure>
+<h3 id="读取数组"><a href="#读取数组" class="headerlink" title="读取数组"></a>读取数组</h3><p>读取数组的一般格式为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash">&#123;array_name[index]&#125;</span></div></pre></td></tr></table></figure>
+<p>现在创建一个脚本<code>test.sh</code>来演示一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#！/bin/bash</span></div><div class="line"><span class="comment">#创建脚本test.sh</span></div><div class="line">my_array=(A B <span class="string">"C"</span> D)</div><div class="line"><span class="built_in">echo</span> <span class="string">"第一个元素为：<span class="variable">$&#123;my_array[0]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第二个元素为：<span class="variable">$&#123;my_array[1]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第三个元素为：<span class="variable">$&#123;my_array[2]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第四个元素为：<span class="variable">$&#123;my_array[3]&#125;</span>"</span></div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ chmod +x <span class="keyword">test</span>.<span class="keyword">sh</span> </div><div class="line">$ ./<span class="keyword">test</span>.<span class="keyword">sh</span> </div><div class="line">第一个元素为：A</div><div class="line">第二个元素为：B</div><div class="line">第三个元素为：C</div><div class="line">第四个元素为：<span class="built_in">D</span></div></pre></td></tr></table></figure></p>
+<h3 id="获取数组中所有元素"><a href="#获取数组中所有元素" class="headerlink" title="获取数组中所有元素"></a>获取数组中所有元素</h3><p>使用@或者*可以获取数组中的所有元素</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建脚本test.sh</span></div><div class="line"></div><div class="line">my_array[0]=A</div><div class="line">my_array[1]=B</div><div class="line">my_array[2]=C</div><div class="line">my_array[3]=D</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"数组的元素为: <span class="variable">$&#123;my_array[*]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"数组的元素为: <span class="variable">$&#123;my_array[@]&#125;</span>"</span></div></pre></td></tr></table></figure>
+<p>执行脚本结果如下：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">数组的元素为: A B <span class="keyword">C</span> <span class="keyword">D</span></div><div class="line">数组的元素为: A B <span class="keyword">C</span> <span class="keyword">D</span></div></pre></td></tr></table></figure></p>
+<h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>获取数组长度的方法与获取字符串长度的方法相同</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建脚本test.sh</span></div><div class="line"></div><div class="line">my_array[0]=A</div><div class="line">my_array[1]=B</div><div class="line">my_array[2]=C</div><div class="line">my_array[3]=D</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"数组元素个数为: <span class="variable">$&#123;#my_array[*]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"数组元素个数为: <span class="variable">$&#123;#my_array[@]&#125;</span>"</span></div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line"><span class="section">数组元素个数为: 4</span></div><div class="line"><span class="section">数组元素个数为: 4</span></div></pre></td></tr></table></figure></p>
+<h3 id="数组的值也可以写入变量"><a href="#数组的值也可以写入变量" class="headerlink" title="数组的值也可以写入变量"></a>数组的值也可以写入变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建脚本test.sh</span></div><div class="line"></div><div class="line">A=1</div><div class="line">my_array=(<span class="variable">$A</span> B C D)</div><div class="line"><span class="built_in">echo</span> <span class="string">"第一个元素为：<span class="variable">$&#123;my_array[0]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第二个元素为：<span class="variable">$&#123;my_array[1]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第三个元素为：<span class="variable">$&#123;my_array[2]&#125;</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第四个元素为：<span class="variable">$&#123;my_array[3]&#125;</span>"</span></div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ./<span class="keyword">test</span>.<span class="keyword">sh</span> </div><div class="line">第一个元素为：1</div><div class="line">第二个元素为：B</div><div class="line">第三个元素为：C</div><div class="line">第四个元素为：<span class="built_in">D</span></div></pre></td></tr></table></figure></p>
+<h3 id="数组下标也可以为变量"><a href="#数组下标也可以为变量" class="headerlink" title="数组下标也可以为变量"></a>数组下标也可以为变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建脚本test.sh</span></div><div class="line"></div><div class="line">my_array=(A B C D)</div><div class="line"></div><div class="line">i=2</div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;my_array[i]&#125;</span></div></pre></td></tr></table></figure>
+<p>执行脚本结果如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> ./test.sh </span></div><div class="line">C</div></pre></td></tr></table></figure>
+<h3 id="数组遍历"><a href="#数组遍历" class="headerlink" title="数组遍历"></a>数组遍历</h3><p>这里讲解几种方法用于数据遍历</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建演示脚本test.sh</span></div><div class="line">my_array=(A B C D E F G)</div><div class="line"><span class="built_in">echo</span> <span class="string">"---------for循环遍历数组-----------"</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$&#123;my_array[@]&#125;</span></div><div class="line"><span class="keyword">do</span></div><div class="line">        <span class="built_in">echo</span> <span class="variable">$i</span></div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"--------while循环遍历数组，使用let i++自增-------------"</span></div><div class="line">i=0</div><div class="line"><span class="comment">#注意[与$之间要有空格，否则报错,下同</span></div><div class="line"><span class="keyword">while</span> [ <span class="variable">$i</span> -lt <span class="variable">$&#123;#my_array[@]&#125;</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line">        <span class="built_in">echo</span> <span class="variable">$&#123;my_array[$i]&#125;</span></div><div class="line">        <span class="built_in">let</span> i++</div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"-------while循环遍历数组，使用let "</span>n++ <span class="string">"自增：双引号可有可无，推荐加上双引号-----------"</span></div><div class="line">n=0</div><div class="line"><span class="keyword">while</span> [ <span class="variable">$n</span> -lt <span class="variable">$&#123;#my_array[@]&#125;</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line">        <span class="built_in">echo</span> <span class="variable">$&#123;my_array[$n]&#125;</span></div><div class="line">        <span class="built_in">let</span> <span class="string">"n++"</span></div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"-----------while循环遍历数组，使用let m+=1自增--------------"</span></div><div class="line"></div><div class="line">m=0</div><div class="line"><span class="keyword">while</span> [ <span class="variable">$m</span> -lt <span class="variable">$&#123;#my_array[@]&#125;</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line">        <span class="built_in">echo</span> <span class="variable">$&#123;my_array[$m]&#125;</span></div><div class="line">        <span class="built_in">let</span> m+=1</div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"------------------while循环遍历数组，使用a=$[<span class="variable">$a</span>+1]自增------------------"</span></div><div class="line">a=0</div><div class="line"><span class="keyword">while</span> [ <span class="variable">$a</span> -lt <span class="variable">$&#123;#my_array[@]&#125;</span> ]</div><div class="line"><span class="keyword">do</span></div><div class="line">        <span class="built_in">echo</span> <span class="variable">$&#123;my_array[$a]&#125;</span></div><div class="line">        a=$[<span class="variable">$a</span>+1]</div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+<p>执行脚本结果如下<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">$ ./<span class="keyword">test</span>.<span class="keyword">sh</span> </div><div class="line">---------<span class="keyword">for</span>循环遍历数组-----------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line"><span class="built_in">D</span></div><div class="line"><span class="built_in">E</span></div><div class="line"><span class="built_in">F</span></div><div class="line"><span class="keyword">G</span></div><div class="line">--------<span class="keyword">while</span>循环遍历数组，使用let i++自增-------------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line"><span class="built_in">D</span></div><div class="line"><span class="built_in">E</span></div><div class="line"><span class="built_in">F</span></div><div class="line"><span class="keyword">G</span></div><div class="line">-------<span class="keyword">while</span>循环遍历数组，使用let <span class="keyword">n</span>++ 自增：双引号可有可无，推荐加上双引号-----------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line"><span class="built_in">D</span></div><div class="line"><span class="built_in">E</span></div><div class="line"><span class="built_in">F</span></div><div class="line"><span class="keyword">G</span></div><div class="line">-----------<span class="keyword">while</span>循环遍历数组，使用let <span class="keyword">m</span>+=1自增--------------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line"><span class="built_in">D</span></div><div class="line"><span class="built_in">E</span></div><div class="line"><span class="built_in">F</span></div><div class="line"><span class="keyword">G</span></div><div class="line">------------------<span class="keyword">while</span>循环遍历数组，使用a=$[<span class="variable">$a</span>+1]自增------------------</div><div class="line">A</div><div class="line">B</div><div class="line">C</div><div class="line"><span class="built_in">D</span></div><div class="line"><span class="built_in">E</span></div><div class="line"><span class="built_in">F</span></div><div class="line"><span class="keyword">G</span></div></pre></td></tr></table></figure></p>
+<p>可以看出各种遍历方法大同小异，区别就在于自增方式的不同</p>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 
       

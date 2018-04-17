@@ -503,7 +503,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  471
+                  474
                 </span>
               
 
@@ -541,28 +541,23 @@
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Shell是一个用C语言编写的程序，提供用户使用linux的桥梁。它既是一种命令语言，又是一种程序设计语言。Shell脚本(Shell script)shiyizhongweiShel编写的脚本程序。通常我们说的Shell就是指的Shell脚本，但是应该记住的是Shell与Shell脚本是两个不同的概念。linux的Shell种类众多，但是我们常用的是bash。</p>
 <a id="more"></a>
 <h2 id="Shell脚本"><a href="#Shell脚本" class="headerlink" title="Shell脚本"></a>Shell脚本</h2><p>由于Shell种类众多，所以我们编写Shell脚本的时候解释该脚本的Shell程序。所以第一行我们通常写成这样：</p>
-<pre><code>#!/bin/bash
-</code></pre><p><strong>#!</strong>是一个约定的标记，用来告诉系统这个脚本用什么解释器来执行，也就是使用哪一种Shell来执行，这里我们指定由bash来执行。</p>
-<pre><code>!#/bin/bash
-echo &quot;Hello World !&quot;
-</code></pre><p><code>echo</code>命令用于向窗口输出文本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div></pre></td></tr></table></figure>
+<p><strong>#!</strong>是一个约定的标记，用来告诉系统这个脚本用什么解释器来执行，也就是使用哪一种Shell来执行，这里我们指定由bash来执行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">!<span class="comment">#/bin/bash</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Hello World !"</span></div></pre></td></tr></table></figure>
+<p><code>echo</code>命令用于向窗口输出文本。</p>
 <h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>运行脚本有两种方法</p>
 <ul>
 <li>作为可执行程序</li>
 </ul>
-<p>将上面的代码保存为hello.sh，然后进入其所在的目录</p>
-<pre><code>#使脚本具有执行权限
-chmod +x ./hello.sh
-#执行脚本
-./hello.sh
-</code></pre><blockquote>
+<p>将上面的代码保存为hello.sh，然后进入其所在的目录<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#使脚本具有执行权限</span></div><div class="line">chmod +x <span class="string">./hello.sh</span></div><div class="line"><span class="comment">#执行脚本</span></div><div class="line"><span class="string">./hello.sh</span></div></pre></td></tr></table></figure></p>
+<blockquote>
 <p>需要注意的是，一定要写成./hello.sh，而不是./hello.sh，运行其他二进制的程序也一样。如果直接写成hello.sh的话，linux系统会去PATH里寻找有没有hello.sh这个文本，但是只有/bin,/sbin,/usr/bin等在PATH里，当前目录通常不在PATH里，所以写成hello.sh是找不到命令的，要用./hello.sh告诉系统就在当前目录找。</p>
 </blockquote>
 <ul>
 <li>作为解释器参数<br>这种运行方式是直接运行解释器，参数就是shell脚本文件名。</li>
 </ul>
-<pre><code>/bin/sh hello.sh
-</code></pre><p>此时就无需声明解释器了，因为已经在命令中指定了</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/bin/<span class="keyword">sh</span> hello.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
+<p>此时就无需声明解释器了，因为已经在命令中指定了</p>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 
       

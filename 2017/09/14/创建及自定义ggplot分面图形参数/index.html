@@ -509,7 +509,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  630
+                  635
                 </span>
               
 
@@ -546,36 +546,16 @@
         <p><img src="http://os3hnmzbp.bkt.clouddn.com/5.png" alt=""></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>ggplot2</strong>有一个十分重要的功能就是分面，而今天要讲得R包<strong>ggpubr</strong>中也有一个函数facet()专门用来进行分面操作。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>install.packages(&quot;ggpubr&quot;)
-#or
-if(!require(devtools)) install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;kassambara/ggpubr&quot;)
-</code></pre><h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><pre><code class="{r}">library(ggpubr)
-df &lt;- ToothGrowth
-df$dose &lt;- as.factor(df$dose)
-head(df)
-</code></pre>
-<pre><code>##    len supp dose
-## 1  4.2   VC  0.5
-## 2 11.5   VC  0.5
-## 3  7.3   VC  0.5
-## 4  5.8   VC  0.5
-## 5  6.4   VC  0.5
-## 6 10.0   VC  0.5
-</code></pre><pre><code>p &lt;- ggdensity(df, x=&quot;len&quot;, fill = &quot;dose&quot;, palette = &quot;jco&quot;, ggtheme = theme_light(), legend=&quot;top&quot;)
-p
-</code></pre><p><img src="http://os3hnmzbp.bkt.clouddn.com/1.png" alt=""></p>
-<h2 id="分面"><a href="#分面" class="headerlink" title="分面"></a>分面</h2><h3 id="水平方向分面"><a href="#水平方向分面" class="headerlink" title="水平方向分面"></a>水平方向分面</h3><p>按照变量<code>supp</code>进行水平方向的分面</p>
-<pre><code class="{r}">facet(p, facet.by = &quot;supp&quot;)
-</code></pre>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">install.packages(<span class="string">"ggpubr"</span>)</div><div class="line"><span class="selector-id">#or</span></div><div class="line"><span class="function"><span class="title">if</span><span class="params">(!require(devtools)</span></span>) install.packages(<span class="string">"devtools"</span>)</div><div class="line">devtools::install_github(<span class="string">"kassambara/ggpubr"</span>)</div></pre></td></tr></table></figure>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">library(ggpubr)</div><div class="line">df &lt;- ToothGrowth</div><div class="line">df$dose &lt;- as.factor(df$dose)</div><div class="line">head(df)</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#    len supp dose</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1  4.2   VC  0.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2 11.5   VC  0.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3  7.3   VC  0.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 4  5.8   VC  0.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 5  6.4   VC  0.5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 6 10.0   VC  0.5</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggdensity(df, x=<span class="string">"len"</span>,<span class="built_in"> fill </span>= <span class="string">"dose"</span>, palette = <span class="string">"jco"</span>, ggtheme = theme_light(), legend=<span class="string">"top"</span>)</div><div class="line">p</div></pre></td></tr></table></figure>
+<p><img src="http://os3hnmzbp.bkt.clouddn.com/1.png" alt=""></p>
+<h2 id="分面"><a href="#分面" class="headerlink" title="分面"></a>分面</h2><h3 id="水平方向分面"><a href="#水平方向分面" class="headerlink" title="水平方向分面"></a>水平方向分面</h3><p>按照变量<code>supp</code>进行水平方向的分面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">facet(p, facet.by = &quot;supp&quot;)</div></pre></td></tr></table></figure></p>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/2.png" alt=""></p>
-<h3 id="竖直方向分面"><a href="#竖直方向分面" class="headerlink" title="竖直方向分面"></a>竖直方向分面</h3><p>按照变量<code>supp</code>进行竖直方向的分面</p>
-<pre><code class="{r}">facet(p, facet.by = &quot;supp&quot;, ncol = 1)
-</code></pre>
+<h3 id="竖直方向分面"><a href="#竖直方向分面" class="headerlink" title="竖直方向分面"></a>竖直方向分面</h3><p>按照变量<code>supp</code>进行竖直方向的分面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">facet(p, facet.by = &quot;supp&quot;, ncol = 1)</div></pre></td></tr></table></figure></p>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/3.png" alt=""></p>
-<h3 id="双变量分面"><a href="#双变量分面" class="headerlink" title="双变量分面"></a>双变量分面</h3><pre><code class="{r}">#divide with &quot;supp&quot; vertical, &quot;dose&quot; horizontal
-facet(p, facet.by = c(&quot;supp&quot;, &quot;dose&quot;), short.panel.labs = FALSE)
-</code></pre>
+<h3 id="双变量分面"><a href="#双变量分面" class="headerlink" title="双变量分面"></a>双变量分面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#divide with &quot;supp&quot; vertical, &quot;dose&quot; horizontal</div><div class="line">facet(p, facet.by = c(&quot;supp&quot;, &quot;dose&quot;), short.panel.labs = FALSE)</div></pre></td></tr></table></figure>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/4.png" alt=""></p>
 <h2 id="修改面板外观"><a href="#修改面板外观" class="headerlink" title="修改面板外观"></a>修改面板外观</h2><p>主要有以下参数进行修改：</p>
 <ul>
@@ -585,53 +565,9 @@ facet(p, facet.by = c(&quot;supp&quot;, &quot;dose&quot;), short.panel.labs = FA
 <li>panel.labs.font: 设置字体</li>
 </ul>
 <p>下面演示一下</p>
-<pre><code class="{r}">#divide with &quot;supp&quot; vertical, &quot;sode&quot; horizontal
-facet(p, facet.by = c(&quot;supp&quot;, &quot;dose&quot;),
-      panel.labs = list(
-        supp=c(&quot;Orange Juice&quot;, &quot;Vitamin C&quot;),
-        dose=c(&quot;D0.5&quot;, &quot;D1&quot;, &quot;D2&quot;)),
-      panel.labs.background = list(
-        color=&quot;steelblue&quot;, 
-        fill=&quot;steelblue&quot;,
-        size=0.5),
-      panel.labs.font = list(color=&quot;white&quot;),
-      panel.labs.font.x = list(angle=45, color=&quot;white&quot;))
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#divide with &quot;supp&quot; vertical, &quot;sode&quot; horizontal</div><div class="line">facet(p, facet.by = c(&quot;supp&quot;, &quot;dose&quot;),</div><div class="line">      panel.labs = list(</div><div class="line">        supp=c(&quot;Orange Juice&quot;, &quot;Vitamin C&quot;),</div><div class="line">        dose=c(&quot;D0.5&quot;, &quot;D1&quot;, &quot;D2&quot;)),</div><div class="line">      panel.labs.background = list(</div><div class="line">        color=&quot;steelblue&quot;, </div><div class="line">        fill=&quot;steelblue&quot;,</div><div class="line">        size=0.5),</div><div class="line">      panel.labs.font = list(color=&quot;white&quot;),</div><div class="line">      panel.labs.font.x = list(angle=45, color=&quot;white&quot;))</div></pre></td></tr></table></figure>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/5.png" alt=""></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code class="{r}">sessionInfo()
-## R version 3.4.1 (2017-06-30)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.3 LTS
-## 
-## Matrix products: default
-## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0
-## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0
-## 
-## locale:
-##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    
-##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   
-##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-## [1] ggpubr_0.1.5  magrittr_1.5  ggplot2_2.2.1
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.12     bindr_0.1        knitr_1.17       munsell_0.4.3   
-##  [5] colorspace_1.3-2 R6_2.2.2         rlang_0.1.2      stringr_1.2.0   
-##  [9] plyr_1.8.4       dplyr_0.7.3      tools_3.4.1      grid_3.4.1      
-## [13] gtable_0.2.0     htmltools_0.3.6  yaml_2.1.14      lazyeval_0.2.0  
-## [17] rprojroot_1.2    digest_0.6.12    assertthat_0.2.0 tibble_1.3.4    
-## [21] bindrcpp_0.2     ggsci_2.7        reshape2_1.4.2   purrr_0.2.3     
-## [25] glue_1.1.1       evaluate_0.10.1  rmarkdown_1.6    labeling_0.3    
-## [29] stringi_1.1.5    compiler_3.4.1   scales_0.5.0     backports_1.1.0 
-## [33] pkgconfig_2.0.1
-</code></pre>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div><div class="line">## R version 3.4.1 (2017-06-30)</div><div class="line">## Platform: x86_64-pc-linux-gnu (64-bit)</div><div class="line">## Running under: Ubuntu 16.04.3 LTS</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0</div><div class="line">## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0</div><div class="line">## </div><div class="line">## locale:</div><div class="line">##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </div><div class="line">##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </div><div class="line">##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </div><div class="line">##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </div><div class="line">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </div><div class="line">## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] ggpubr_0.1.5  magrittr_1.5  ggplot2_2.2.1</div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.12     bindr_0.1        knitr_1.17       munsell_0.4.3   </div><div class="line">##  [5] colorspace_1.3-2 R6_2.2.2         rlang_0.1.2      stringr_1.2.0   </div><div class="line">##  [9] plyr_1.8.4       dplyr_0.7.3      tools_3.4.1      grid_3.4.1      </div><div class="line">## [13] gtable_0.2.0     htmltools_0.3.6  yaml_2.1.14      lazyeval_0.2.0  </div><div class="line">## [17] rprojroot_1.2    digest_0.6.12    assertthat_0.2.0 tibble_1.3.4    </div><div class="line">## [21] bindrcpp_0.2     ggsci_2.7        reshape2_1.4.2   purrr_0.2.3     </div><div class="line">## [25] glue_1.1.1       evaluate_0.10.1  rmarkdown_1.6    labeling_0.3    </div><div class="line">## [29] stringi_1.1.5    compiler_3.4.1   scales_0.5.0     backports_1.1.0 </div><div class="line">## [33] pkgconfig_2.0.1</div></pre></td></tr></table></figure>
 <hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>

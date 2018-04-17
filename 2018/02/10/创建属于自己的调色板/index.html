@@ -511,7 +511,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,494
+                  1,520
                 </span>
               
 
@@ -558,200 +558,43 @@
 <li>访问调用调色板</li>
 <li>创建兼容<strong>ggplot2</strong>的尺度函数</li>
 </ul>
-<p>首先我们创建一个颜色变量</p>
-<pre><code class="{r}">library(ggplot2)
-theme_set(theme_minimal())
-my_colors &lt;- c(
-  `purple` = &quot;#7b0099&quot;,
-  `yellow` = &quot;#ff9900&quot;,
-  `black`  = &quot;#221f1f&quot;,
-  `white`  = &quot;#f5f5f1&quot;,
-  `red`    = &quot;#e50914&quot;
-)
-</code></pre>
-<p>后续如果需要对颜色进行修改或添加都可以在这个颜色变量中进行。<br>下面创建一个可以从该变量中提取颜色对应的十六进制的函数</p>
-<pre><code class="{r}">#&#39; Function to extract my_colors as hex codes
-#&#39;
-#&#39; @param ... Character names of my_colors
-#&#39;
-my_cols &lt;- function(...){
-  cols &lt;- c(...)
-
-  if (is.null(cols))
-    return(my_colors)
-  my_colors[cols]
-}
-</code></pre>
-<p>此时我们可以十分方便获取颜色的十六进制，下面演示一下：</p>
-<pre><code class="{r}">my_cols()
-</code></pre>
-<pre><code>##    purple    yellow     black     white       red 
-## &quot;#7b0099&quot; &quot;#ff9900&quot; &quot;#221f1f&quot; &quot;#f5f5f1&quot; &quot;#e50914&quot;
-</code></pre><pre><code>my_cols(&quot;purple&quot;)
-</code></pre><pre><code>##    purple 
-## &quot;#7b0099&quot;
-</code></pre><pre><code>my_cols(&quot;purple&quot;,&quot;yellow&quot;)
-</code></pre><pre><code>##    purple    yellow 
-## &quot;#7b0099&quot; &quot;#ff9900&quot;
-</code></pre><pre><code>my_cols(&quot;yellow&quot;,&quot;purple&quot;)
-</code></pre><pre><code>##    yellow    purple 
-## &quot;#ff9900&quot; &quot;#7b0099&quot;
-</code></pre><p>此时我们可以在<strong>ggplot2</strong>中调用这些颜色</p>
-<pre><code class="{r}">#使用gapminder包中的数据集gapminder来演示
-library(gapminder)
-head(gapminder)
-</code></pre>
-<pre><code>## # A tibble: 6 x 6
-##   country     continent  year lifeExp      pop gdpPercap
-##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
-## 1 Afghanistan Asia       1952    28.8  8425333       779
-## 2 Afghanistan Asia       1957    30.3  9240934       821
-## 3 Afghanistan Asia       1962    32.0 10267083       853
-## 4 Afghanistan Asia       1967    34.0 11537966       836
-## 5 Afghanistan Asia       1972    36.1 13079460       740
-## 6 Afghanistan Asia       1977    38.4 14880372       786
-</code></pre><pre><code>ggplot(gapminder, aes(gdpPercap, lifeExp))+
-  geom_point(color=my_cols(&quot;purple&quot;), size=2, alpha=0.8)+
-  scale_x_log10()
-</code></pre><p><img src="http://os3hnmzbp.bkt.clouddn.com/1-1.png" alt=""></p>
-<h2 id="创建调色板"><a href="#创建调色板" class="headerlink" title="创建调色板"></a>创建调色板</h2><p>调色板就是一个颜色列表方便我们后面使用，将各种颜色组合搭配</p>
-<pre><code class="{r}">my_palettes &lt;- list(
-  `main`  = my_cols(&quot;purple&quot;,&quot;yellow&quot;,&quot;red&quot;),
-  `cool`  = my_cols(&quot;purple&quot;,&quot;yellow&quot;),
-  `hot`   = my_cols(&quot;yellow&quot;,&quot;black&quot;,&quot;red&quot;),
-  `mixed` = my_cols(&quot;purple&quot;,&quot;yellow&quot;,&quot;white&quot;,&quot;red&quot;),
-  `bw`    = my_cols(&quot;black&quot;,&quot;white&quot;)
-)
-</code></pre>
-<p>在这个颜色列表中实际上我们创建了好几种颜色组合，下面创建一个函数来访问并调用它们</p>
-<pre><code class="{r}">#&#39; Return function to interpolate a my_palettes
-#&#39;
-#&#39; @param palette Character name of palette in my_palettes
-#&#39; @param reverse Boolean indicating whether the palette should be reversed
-#&#39; @param ... Additional arguments to pass to colorRampPalette()
-#&#39;
-my_pal &lt;- function(palette=&quot;main&quot;, reverse=FALSE, ...){
-  pal &lt;- my_palettes[[palette]]
-  if (reverse) pal &lt;- rev(pal)
-  colorRampPalette(pal, ...)
-}
-</code></pre>
-<p>该函数通过不同颜色组合名称从列表中获取一个颜色组合（默认条件下是<code>main</code>），同时可以设置是否颠倒颜色顺序，之后传递给函数colorRampPaette()创建调色板。因此其返回的是一个函数。</p>
-<pre><code class="{r}">my_pal(&quot;cool&quot;)
-</code></pre>
-<pre><code>## function (n) 
-## {
-##     x &lt;- ramp(seq.int(0, 1, length.out = n))
-##     if (ncol(x) == 4L) 
-##         rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255)
-##     else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255)
-## }
-## &lt;bytecode: 0x55ade91b4b70&gt;
-## &lt;environment: 0x55ade91b3e20&gt;
-</code></pre><p>通过这个函数可以基于调色板返回不同数目的颜色，进而可以在原始颜色之间创建多级颜色梯度</p>
-<pre><code class="{r}">my_pal(&quot;cool&quot;)(10)
-</code></pre>
-<pre><code>##  [1] &quot;#7B0099&quot; &quot;#891188&quot; &quot;#982277&quot; &quot;#A73266&quot; &quot;#B54455&quot; &quot;#C45544&quot; &quot;#D36533&quot;
-##  [8] &quot;#E17622&quot; &quot;#F08810&quot; &quot;#FF9900&quot;
-</code></pre><pre><code>pie(rep(1,10), col = my_pal(&quot;cool&quot;)(10))
-</code></pre><p><img src="http://os3hnmzbp.bkt.clouddn.com/2-1.png" alt=""></p>
+<p>首先我们创建一个颜色变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">library(ggplot2)</div><div class="line">theme_set(theme_minimal())</div><div class="line">my_colors &lt;- c(</div><div class="line">  `purple` = &quot;#7b0099&quot;,</div><div class="line">  `yellow` = &quot;#ff9900&quot;,</div><div class="line">  `black`  = &quot;#221f1f&quot;,</div><div class="line">  `white`  = &quot;#f5f5f1&quot;,</div><div class="line">  `red`    = &quot;#e50914&quot;</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>后续如果需要对颜色进行修改或添加都可以在这个颜色变量中进行。<br>下面创建一个可以从该变量中提取颜色对应的十六进制的函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#&apos; Function to extract my_colors as hex codes</div><div class="line">#&apos;</div><div class="line">#&apos; @param ... Character names of my_colors</div><div class="line">#&apos;</div><div class="line">my_cols &lt;- function(...)&#123;</div><div class="line">  cols &lt;- c(...)</div><div class="line">  </div><div class="line">  if (is.null(cols))</div><div class="line">    return(my_colors)</div><div class="line">  my_colors[cols]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此时我们可以十分方便获取颜色的十六进制，下面演示一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my_cols()</div></pre></td></tr></table></figure></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">##    purple    yellow     black     white       red </div><div class="line">## <span class="string">"#7b0099"</span> <span class="string">"#ff9900"</span> <span class="string">"#221f1f"</span> <span class="string">"#f5f5f1"</span> <span class="string">"#e50914"</span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">my_cols</span><span class="params">(<span class="string">"purple"</span>)</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#    purple </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># "#7b0099"</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">my_cols</span><span class="params">(<span class="string">"purple"</span>,<span class="string">"yellow"</span>)</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">##    purple    yellow </div><div class="line">## <span class="string">"#7b0099"</span> <span class="string">"#ff9900"</span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">my_cols</span><span class="params">(<span class="string">"yellow"</span>,<span class="string">"purple"</span>)</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">##    yellow    purple </div><div class="line">## <span class="string">"#ff9900"</span> <span class="string">"#7b0099"</span></div></pre></td></tr></table></figure>
+<p>此时我们可以在<strong>ggplot2</strong>中调用这些颜色<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#使用gapminder包中的数据集gapminder来演示</div><div class="line">library(gapminder)</div><div class="line">head(gapminder)</div></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># # A tibble: 6 x 6</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#   country     continent  year lifeExp      pop gdpPercap</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1 Afghanistan Asia       1952    28.8  8425333       779</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2 Afghanistan Asia       1957    30.3  9240934       821</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3 Afghanistan Asia       1962    32.0 10267083       853</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 4 Afghanistan Asia       1967    34.0 11537966       836</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 5 Afghanistan Asia       1972    36.1 13079460       740</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 6 Afghanistan Asia       1977    38.4 14880372       786</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ggplot(<span class="name">gapminder</span>, aes(<span class="name">gdpPercap</span>, lifeExp))+</div><div class="line">  geom_point(<span class="name">color=my_cols</span>(<span class="string">"purple"</span>), size=2, alpha=0.<span class="number">8</span>)+</div><div class="line">  scale_x_log10()</div></pre></td></tr></table></figure>
+<p><img src="http://os3hnmzbp.bkt.clouddn.com/1-1.png" alt=""></p>
+<h2 id="创建调色板"><a href="#创建调色板" class="headerlink" title="创建调色板"></a>创建调色板</h2><p>调色板就是一个颜色列表方便我们后面使用，将各种颜色组合搭配<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my_palettes &lt;- list(</div><div class="line">  `main`  = my_cols(&quot;purple&quot;,&quot;yellow&quot;,&quot;red&quot;),</div><div class="line">  `cool`  = my_cols(&quot;purple&quot;,&quot;yellow&quot;),</div><div class="line">  `hot`   = my_cols(&quot;yellow&quot;,&quot;black&quot;,&quot;red&quot;),</div><div class="line">  `mixed` = my_cols(&quot;purple&quot;,&quot;yellow&quot;,&quot;white&quot;,&quot;red&quot;),</div><div class="line">  `bw`    = my_cols(&quot;black&quot;,&quot;white&quot;)</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>在这个颜色列表中实际上我们创建了好几种颜色组合，下面创建一个函数来访问并调用它们<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#&apos; Return function to interpolate a my_palettes</div><div class="line">#&apos;</div><div class="line">#&apos; @param palette Character name of palette in my_palettes</div><div class="line">#&apos; @param reverse Boolean indicating whether the palette should be reversed</div><div class="line">#&apos; @param ... Additional arguments to pass to colorRampPalette()</div><div class="line">#&apos;</div><div class="line">my_pal &lt;- function(palette=&quot;main&quot;, reverse=FALSE, ...)&#123;</div><div class="line">  pal &lt;- my_palettes[[palette]]</div><div class="line">  if (reverse) pal &lt;- rev(pal)</div><div class="line">  colorRampPalette(pal, ...)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该函数通过不同颜色组合名称从列表中获取一个颜色组合（默认条件下是<code>main</code>），同时可以设置是否颠倒颜色顺序，之后传递给函数colorRampPaette()创建调色板。因此其返回的是一个函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my_pal(&quot;cool&quot;)</div></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># function (n) </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># &#123;</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#     x &lt;- ramp(seq.int(0, 1, length.out = n))</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#     if (ncol(x) == 4L) </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#         rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#     else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># &#125;</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># &lt;bytecode: 0x55ade91b4b70&gt;</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># &lt;environment: 0x55ade91b3e20&gt;</span></span></div></pre></td></tr></table></figure>
+<p>通过这个函数可以基于调色板返回不同数目的颜色，进而可以在原始颜色之间创建多级颜色梯度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my_pal(&quot;cool&quot;)(10)</div></pre></td></tr></table></figure></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">##  [<span class="number">1</span>] <span class="string">"#7B0099"</span> <span class="string">"#891188"</span> <span class="string">"#982277"</span> <span class="string">"#A73266"</span> <span class="string">"#B54455"</span> <span class="string">"#C45544"</span> <span class="string">"#D36533"</span></div><div class="line">##  [<span class="number">8</span>] <span class="string">"#E17622"</span> <span class="string">"#F08810"</span> <span class="string">"#FF9900"</span></div></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pie(<span class="name">rep</span>(<span class="number">1</span>,<span class="number">10</span>), col = my_pal(<span class="string">"cool"</span>)(<span class="number">10</span>))</div></pre></td></tr></table></figure>
+<p><img src="http://os3hnmzbp.bkt.clouddn.com/2-1.png" alt=""></p>
 <p>上图展示的10种颜色就是<code>my_pal(&quot;cool&quot;)(10)</code>返回的十六进制对应的颜色，这就为<strong>ggplot2</strong>中的尺度颜色函数创造了可能</p>
-<h2 id="Scales-for-ggplot2"><a href="#Scales-for-ggplot2" class="headerlink" title="Scales for ggplot2"></a>Scales for ggplot2</h2><p><strong>ggplot2</strong>中颜色映射有<code>color</code>和<code>fill</code>即颜色和填充。</p>
-<pre><code class="{r}">#&#39; Color scale constructor for my_colors
-#&#39; 
-#&#39; @param palette Character name of palette in my_palettes
-#&#39; @param discrete Boolean indicating whether color aesthetic is discrete or not
-#&#39; @param reverse Boolean indicating whether the palette should be reversed
-#&#39; @param ... Additional arguments passed to discrete_scale() or scale_color_gradientn(), used #&#39; #&#39; respectively when discrete is TRUE or FALSE
-#&#39; 
-scale_color_my &lt;- function(palette=&quot;main&quot;, discrete=TRUE, reverse=FALSE, ...){
-  pal &lt;- my_pal(palette = palette, reverse = reverse)
-
-  if (discrete){
-    discrete_scale(&quot;colour&quot;, paste0(&quot;my_&quot;, palette), palette = pal, ...)
-  }else{
-    scale_color_gradientn(colours = pal(256), ...)
-  }
-}
-
-#&#39; Fill scale constructor for my_colors
-#&#39;
-#&#39; @param palette Character name of palette in my_palettes
-#&#39; @param discrete Boolean indicating whether color aesthetic is discrete or not
-#&#39; @param reverse Boolean indicating whether the palette should be reversed
-#&#39; @param ... Additional arguments passed to discrete_scale() or scale_color_gradientn(), used #&#39; #&#39; respectively when discrete is TRUE or FALSE
-#&#39; 
-scale_fill_my &lt;- function(palette=&quot;main&quot;, discrete=TRUE, reverse=FALSE, ...){
-  pal &lt;- my_pal(palette = palette, reverse = reverse)
-  if (discrete){
-    discrete_scale(&quot;fill&quot;,paste0(&quot;my_&quot;, palette), palette = pal, ...)
-  }else{
-    scale_fill_gradientn(colours = pal(256), ...)
-  }
-}
-</code></pre>
-<p>上面每个函数都制定一个调色板（默认是<code>main</code>），调色板是基于离散变量或连续变量，以及是否颠倒颜色顺序，同时还传递给了相关的<strong>ggplot2</strong>函数。下面可以试试它们在绘图过程中的表现</p>
-<pre><code class="{r}">ggplot(gapminder,aes(gdpPercap, lifeExp, color=continent))+
-  geom_point(size=2, alpha=0.8)+
-  scale_x_log10()+
-  scale_color_my()
-</code></pre>
+<h2 id="Scales-for-ggplot2"><a href="#Scales-for-ggplot2" class="headerlink" title="Scales for ggplot2"></a>Scales for ggplot2</h2><p><strong>ggplot2</strong>中颜色映射有<code>color</code>和<code>fill</code>即颜色和填充。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">#&apos; Color scale constructor for my_colors</div><div class="line">#&apos; </div><div class="line">#&apos; @param palette Character name of palette in my_palettes</div><div class="line">#&apos; @param discrete Boolean indicating whether color aesthetic is discrete or not</div><div class="line">#&apos; @param reverse Boolean indicating whether the palette should be reversed</div><div class="line">#&apos; @param ... Additional arguments passed to discrete_scale() or scale_color_gradientn(), used #&apos; #&apos; respectively when discrete is TRUE or FALSE</div><div class="line">#&apos; </div><div class="line">scale_color_my &lt;- function(palette=&quot;main&quot;, discrete=TRUE, reverse=FALSE, ...)&#123;</div><div class="line">  pal &lt;- my_pal(palette = palette, reverse = reverse)</div><div class="line">  </div><div class="line">  if (discrete)&#123;</div><div class="line">    discrete_scale(&quot;colour&quot;, paste0(&quot;my_&quot;, palette), palette = pal, ...)</div><div class="line">  &#125;else&#123;</div><div class="line">    scale_color_gradientn(colours = pal(256), ...)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#&apos; Fill scale constructor for my_colors</div><div class="line">#&apos;</div><div class="line">#&apos; @param palette Character name of palette in my_palettes</div><div class="line">#&apos; @param discrete Boolean indicating whether color aesthetic is discrete or not</div><div class="line">#&apos; @param reverse Boolean indicating whether the palette should be reversed</div><div class="line">#&apos; @param ... Additional arguments passed to discrete_scale() or scale_color_gradientn(), used #&apos; #&apos; respectively when discrete is TRUE or FALSE</div><div class="line">#&apos; </div><div class="line">scale_fill_my &lt;- function(palette=&quot;main&quot;, discrete=TRUE, reverse=FALSE, ...)&#123;</div><div class="line">  pal &lt;- my_pal(palette = palette, reverse = reverse)</div><div class="line">  if (discrete)&#123;</div><div class="line">    discrete_scale(&quot;fill&quot;,paste0(&quot;my_&quot;, palette), palette = pal, ...)</div><div class="line">  &#125;else&#123;</div><div class="line">    scale_fill_gradientn(colours = pal(256), ...)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面每个函数都制定一个调色板（默认是<code>main</code>），调色板是基于离散变量或连续变量，以及是否颠倒颜色顺序，同时还传递给了相关的<strong>ggplot2</strong>函数。下面可以试试它们在绘图过程中的表现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggplot(gapminder,aes(gdpPercap, lifeExp, color=continent))+</div><div class="line">  geom_point(size=2, alpha=0.8)+</div><div class="line">  scale_x_log10()+</div><div class="line">  scale_color_my()</div></pre></td></tr></table></figure></p>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/3-1.png" alt=""></p>
 <p>我们可以更换调色板试试</p>
-<pre><code class="{r}">ggplot(gapminder,aes(gdpPercap, lifeExp, color=continent))+
-  geom_point(size=2, alpha=0.8)+
-  scale_x_log10()+
-  scale_color_my(palette = &quot;hot&quot;)
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggplot(gapminder,aes(gdpPercap, lifeExp, color=continent))+</div><div class="line">  geom_point(size=2, alpha=0.8)+</div><div class="line">  scale_x_log10()+</div><div class="line">  scale_color_my(palette = &quot;hot&quot;)</div></pre></td></tr></table></figure>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/4-1.png" alt=""></p>
-<p>如果是连续变量的话</p>
-<pre><code class="{r}">ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
-    geom_point(size = 4, alpha = .8) +
-    scale_color_my(discrete = FALSE, palette = &quot;bw&quot;, reverse = TRUE)
-</code></pre>
+<p>如果是连续变量的话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +</div><div class="line">    geom_point(size = 4, alpha = .8) +</div><div class="line">    scale_color_my(discrete = FALSE, palette = &quot;bw&quot;, reverse = TRUE)</div></pre></td></tr></table></figure></p>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/5-1.png" alt=""></p>
-<p>上面是颜色，下面试试填充</p>
-<pre><code class="{r}">ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
-    geom_bar() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    scale_fill_my(palette = &quot;mixed&quot;, guide = &quot;none&quot;)
-</code></pre>
+<p>上面是颜色，下面试试填充<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggplot(mpg, aes(manufacturer, fill = manufacturer)) +</div><div class="line">    geom_bar() +</div><div class="line">    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +</div><div class="line">    scale_fill_my(palette = &quot;mixed&quot;, guide = &quot;none&quot;)</div></pre></td></tr></table></figure></p>
 <p><img src="http://os3hnmzbp.bkt.clouddn.com/6-1.png" alt=""></p>
 <h2 id="包的创建"><a href="#包的创建" class="headerlink" title="包的创建"></a>包的创建</h2><p>通过上面的内容可以看出，如果我们会创建包的话，将上述代码封装在一起再加上一些元素就形成了一个包，可以方便自己或他人后续使用。如果要创建包的话，可以学习<a href="https://twitter.com/hadleywickham" target="_blank" rel="external">Hadley Wickham</a>的书<a href="http://r-pkgs.had.co.nz/" target="_blank" rel="external">R packages</a>。</p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code class="{r}">sessionInfo()
-</code></pre>
-<pre><code>## R version 3.4.3 (2017-11-30)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 17.10
-## 
-## Matrix products: default
-## BLAS: /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
-## 
-## locale:
-##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    
-##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   
-##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-## [1] gapminder_0.3.0 ggplot2_2.2.1  
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.15     knitr_1.20       magrittr_1.5     munsell_0.4.3   
-##  [5] colorspace_1.3-2 rlang_0.2.0      stringr_1.3.0    plyr_1.8.4      
-##  [9] tools_3.4.3      grid_3.4.3       gtable_0.2.0     utf8_1.1.3      
-## [13] cli_1.0.0        htmltools_0.3.6  assertthat_0.2.0 yaml_2.1.16     
-## [17] lazyeval_0.2.1   rprojroot_1.3-2  digest_0.6.15    tibble_1.4.2    
-## [21] crayon_1.3.4     evaluate_0.10.1  rmarkdown_1.8    labeling_0.3    
-## [25] stringi_1.1.6    compiler_3.4.3   pillar_1.1.0     scales_0.5.0    
-## [29] backports_1.1.2
-</code></pre><hr>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># R version 3.4.3 (2017-11-30)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Platform: x86_64-pc-linux-gnu (64-bit)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Running under: Ubuntu 17.10</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Matrix products: default</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># BLAS: /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># locale:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># attached base packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># other attached packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] gapminder_0.3.0 ggplot2_2.2.1  </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># loaded via a namespace (and not attached):</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [1] Rcpp_0.12.15     knitr_1.20       magrittr_1.5     munsell_0.4.3   </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [5] colorspace_1.3-2 rlang_0.2.0      stringr_1.3.0    plyr_1.8.4      </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [9] tools_3.4.3      grid_3.4.3       gtable_0.2.0     utf8_1.1.3      </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [13] cli_1.0.0        htmltools_0.3.6  assertthat_0.2.0 yaml_2.1.16     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [17] lazyeval_0.2.1   rprojroot_1.3-2  digest_0.6.15    tibble_1.4.2    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [21] crayon_1.3.4     evaluate_0.10.1  rmarkdown_1.8    labeling_0.3    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [25] stringi_1.1.6    compiler_3.4.3   pillar_1.1.0     scales_0.5.0    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [29] backports_1.1.2</span></span></div></pre></td></tr></table></figure>
+<hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
 <p>Email: tyan@zju.edu.cn</p>
 <p>QQ: 1051927088</p>

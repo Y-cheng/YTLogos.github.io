@@ -532,7 +532,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,126
+                  1,138
                 </span>
               
 
@@ -578,180 +578,51 @@
 <li>主题</li>
 <li>翻转等</li>
 </ul>
-<h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><pre><code>#two ways to isntall the ggpubr package
-install.packages(&quot;ggpubr&quot;)
-#install the packages from the Github
-devtools::install_github(&quot;kassambara/ggpubr&quot;)
-</code></pre><h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><pre><code class="{r}">library(ggpubr)#load ggpubr
-#basic plots
-p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color=&quot;dose&quot;)
-p
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/7hKdEb1ehB.png?imageslim" alt=""></p>
-<pre><code>#add grids by the function grids()
-p+grids(linetype=&quot;dashed&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/f77I1FIlbB.png?imageslim" alt=""></p>
-<pre><code>#add panel borders lines by the function border()
-p+border(&quot;black&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/cGa2dj6AB8.png?imageslim" alt=""></p>
-<pre><code>#change background color
-p+bgcolor(&quot;#BFD5E3&quot;)+border(&quot;#BFD5E3&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/jAIc0AjBi8.png?imageslim" alt=""></p>
-<h2 id="修改标题以及坐标轴标签"><a href="#修改标题以及坐标轴标签" class="headerlink" title="修改标题以及坐标轴标签"></a>修改标题以及坐标轴标签</h2><pre><code class="{r}">p2 &lt;- ggpar(p,
-            title = &quot;Box plot created with ggpubr&quot;,
-            subtitle = &quot;Length by dose&quot;,
-            caption = &quot;Source: ggpubr&quot;,
-            xlab = &quot;Dose (mg)&quot;,
-            ylab = &quot;Teeth length&quot;,
-            legend.title = &quot;Dose (mg)&quot;)
-p2
-</code></pre>
+<h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#two ways to isntall the ggpubr package</span></div><div class="line"><span class="keyword">install</span>.packages(<span class="string">"ggpubr"</span>)</div><div class="line"><span class="comment">#install the packages from the Github</span></div><div class="line">devtools::install_github(<span class="string">"kassambara/ggpubr"</span>)</div></pre></td></tr></table></figure>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">library(ggpubr)#load ggpubr</div><div class="line">#basic plots</div><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color=&quot;dose&quot;)</div><div class="line">p</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/7hKdEb1ehB.png?imageslim" alt=""><br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">add</span> grids <span class="keyword">by</span> the <span class="function"><span class="keyword">function</span> <span class="title">grids</span><span class="params">()</span></span></div><div class="line"><span class="title">p</span>+<span class="title">grids</span><span class="params">(linetype="dashed")</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/f77I1FIlbB.png?imageslim" alt=""><br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#add panel borders <span class="built_in">lines</span> by the <span class="function"><span class="keyword">function</span> <span class="title">border</span><span class="params">()</span></span></div><div class="line">p+border(<span class="string">"black"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/cGa2dj6AB8.png?imageslim" alt=""><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#change</span> <span class="attribute">background</span> color</div><div class="line">p+bgcolor(<span class="string">"#BFD5E3"</span>)+<span class="attribute">border</span>(<span class="string">"#BFD5E3"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/jAIc0AjBi8.png?imageslim" alt=""></p>
+<h2 id="修改标题以及坐标轴标签"><a href="#修改标题以及坐标轴标签" class="headerlink" title="修改标题以及坐标轴标签"></a>修改标题以及坐标轴标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">p2 &lt;- ggpar(p,</div><div class="line">            title = &quot;Box plot created with ggpubr&quot;,</div><div class="line">            subtitle = &quot;Length by dose&quot;,</div><div class="line">            caption = &quot;Source: ggpubr&quot;,</div><div class="line">            xlab = &quot;Dose (mg)&quot;,</div><div class="line">            ylab = &quot;Teeth length&quot;,</div><div class="line">            legend.title = &quot;Dose (mg)&quot;)</div><div class="line">p2</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/5K7D23dIcC.png?imageslim" alt="mark"></p>
-<h2 id="修改标题以及标签的字体"><a href="#修改标题以及标签的字体" class="headerlink" title="修改标题以及标签的字体"></a>修改标题以及标签的字体</h2><pre><code class="{r}">ggpar(p2, 
-      font.title = c(14, &quot;bold.italic&quot;, &quot;red&quot;),
-      font.subtitle = c(10, &quot;orange&quot;),
-      font.caption = c(10, &quot;orange&quot;),
-      font.x = c(14, &quot;blue&quot;),
-      font.y = c(14, &quot;#993333&quot;))
-</code></pre>
+<h2 id="修改标题以及标签的字体"><a href="#修改标题以及标签的字体" class="headerlink" title="修改标题以及标签的字体"></a>修改标题以及标签的字体</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ggpar(p2, </div><div class="line">      font.title = c(14, &quot;bold.italic&quot;, &quot;red&quot;),</div><div class="line">      font.subtitle = c(10, &quot;orange&quot;),</div><div class="line">      font.caption = c(10, &quot;orange&quot;),</div><div class="line">      font.x = c(14, &quot;blue&quot;),</div><div class="line">      font.y = c(14, &quot;#993333&quot;))</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/dm80Clb7Eh.png?imageslim" alt="mark"></p>
-<p>当然也可以直接用函数font()</p>
-<pre><code class="{r}">p2+
-  font(&quot;title&quot;, size = 14, color = &quot;red&quot;, face = &quot;bold.italic&quot;)+
-  font(&quot;subtitle&quot;, size = 10, color = &quot;orange&quot;)+
-  font(&quot;caption&quot;, size = 10, color = &quot;orange&quot;)+
-  font(&quot;xlab&quot;, size = 12, color = &quot;blue&quot;)+
-  font(&quot;ylab&quot;, size = 12, color = &quot;#993333&quot;)
-</code></pre>
+<p>当然也可以直接用函数font()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p2+</div><div class="line">  font(&quot;title&quot;, size = 14, color = &quot;red&quot;, face = &quot;bold.italic&quot;)+</div><div class="line">  font(&quot;subtitle&quot;, size = 10, color = &quot;orange&quot;)+</div><div class="line">  font(&quot;caption&quot;, size = 10, color = &quot;orange&quot;)+</div><div class="line">  font(&quot;xlab&quot;, size = 12, color = &quot;blue&quot;)+</div><div class="line">  font(&quot;ylab&quot;, size = 12, color = &quot;#993333&quot;)</div></pre></td></tr></table></figure></p>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/6EHIKCbjdB.png?imageslim" alt="mark"></p>
-<p>从上面可以看出我们可以一次性完成添加标题以及修改字体</p>
-<pre><code class="{r}">ggpar(p,
-      title = &quot;Plot of length \n by dose&quot;,
-      xlab = &quot;Dose (mg)&quot;,
-      legend.title = &quot;Dose (mg)&quot;,
-      font.title = c(14, &quot;bold.italic&quot;, &quot;red&quot;),
-      font.x = c(14, &quot;bold&quot;, &quot;#2E9FDF&quot;),
-      font.y = c(14, &quot;bold&quot;, &quot;#E7B800&quot;))
-</code></pre>
+<p>从上面可以看出我们可以一次性完成添加标题以及修改字体<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ggpar(p,</div><div class="line">      title = &quot;Plot of length \n by dose&quot;,</div><div class="line">      xlab = &quot;Dose (mg)&quot;,</div><div class="line">      legend.title = &quot;Dose (mg)&quot;,</div><div class="line">      font.title = c(14, &quot;bold.italic&quot;, &quot;red&quot;),</div><div class="line">      font.x = c(14, &quot;bold&quot;, &quot;#2E9FDF&quot;),</div><div class="line">      font.y = c(14, &quot;bold&quot;, &quot;#E7B800&quot;))</div></pre></td></tr></table></figure></p>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/K5Hh142DDJ.png?imageslim" alt="mark"></p>
-<h2 id="修改图例位置与外观"><a href="#修改图例位置与外观" class="headerlink" title="修改图例位置与外观"></a>修改图例位置与外观</h2><pre><code class="{r}">ggpar(p,
-      legend = &quot;right&quot;, legend.title = &quot;Dose (mg)&quot;)+
-  font(&quot;legend.title&quot;, color=&quot;blue&quot;, face = &quot;bold&quot;)+
-  font(&quot;legend.text&quot;, color = &quot;red&quot;)
-</code></pre>
+<h2 id="修改图例位置与外观"><a href="#修改图例位置与外观" class="headerlink" title="修改图例位置与外观"></a>修改图例位置与外观</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggpar(p,</div><div class="line">      legend = &quot;right&quot;, legend.title = &quot;Dose (mg)&quot;)+</div><div class="line">  font(&quot;legend.title&quot;, color=&quot;blue&quot;, face = &quot;bold&quot;)+</div><div class="line">  font(&quot;legend.text&quot;, color = &quot;red&quot;)</div></pre></td></tr></table></figure>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/66Fl04A1Eg.png?imageslim" alt="mark"></p>
-<h2 id="颜色修改"><a href="#颜色修改" class="headerlink" title="颜色修改"></a>颜色修改</h2><p>ggpar()中有一个参数palette，即调色板，除了可以我们自定义颜色外，还可以调用RColorBrewer中的调色板以及包<strong>ggsci</strong>中的专门用于学术杂志的配色。</p>
-<pre><code class="{r}">#use custom color palette
-ggpar(p, palette = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;))
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/j04LBcgCFf.png?imageslim" alt="mark"></p>
-<pre><code>#use the RColorBrewer palette
-ggpar(p, palette = &quot;Dark2&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/gg16gmeE3D.png?imageslim" alt="mark"></p>
-<pre><code>ggpar(p, palette = &quot;grey&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/3h1K0f5aaK.png?imageslim" alt="mark"></p>
-<pre><code>#use the ggsci palette
-ggpar(p, palette = &quot;npg&quot;)#nature
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/13fcD9GfDC.png?imageslim" alt="mark"></p>
-<p>当然也可以直接用<strong>ggpubr</strong>中的函数color_palette()以及fill_palette()</p>
-<pre><code class="{r}">#jco color palette
-p+color_palette(&quot;jco&quot;)
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/aD2IK0b75D.png?imageslim" alt="mark"></p>
-<pre><code>#custom color
-p+color_palette(c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;))
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Jj9BG7J24h.png?imageslim" alt="mark"></p>
-<h2 id="颜色梯度"><a href="#颜色梯度" class="headerlink" title="颜色梯度"></a>颜色梯度</h2><p><strong>ggpubr</strong>提供了两个函数用来处理颜色梯度：gradient_color()和gradient_fill()<br>通过一个例子来看如何运作</p>
-<pre><code class="{r}">#first create a scatter plot
-p3 &lt;- ggscatter(mtcars, x=&quot;wt&quot;, y=&quot;mpg&quot;, color=&quot;mpg&quot;, size = 2)
-#change the gradient color
-#use one custom color
-p3+gradient_color(&quot;red&quot;)
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/ah3ed5b1Ai.png?imageslim" alt="mark"></p>
-<pre><code>#use two colors
-p3+gradient_color(c(&quot;blue&quot;, &quot;red&quot;))
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/1H7KBAdKLd.png?imageslim" alt="mark"></p>
-<pre><code>#three colors
-p3+gradient_color(c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;))
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/kCaHdmcG6i.png?imageslim" alt="mark"></p>
-<pre><code>#use the RColorBrewer palette
-p3+gradient_color(&quot;RdYlBu&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/FHKlGj4H8F.png?imageslim" alt="mark"><br>gradient_fill()用法也一样，不过是填充，这里就不演示了。</p>
-<h2 id="修改坐标轴limits、scales"><a href="#修改坐标轴limits、scales" class="headerlink" title="修改坐标轴limits、scales"></a>修改坐标轴limits、scales</h2><pre><code class="{r}">#change y axis limits
-ggpar(p, ylim = c(0, 50))
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CFamb4cglg.png?imageslim" alt="mark"></p>
-<pre><code>#change y axis cale to log2
-ggpar(p, yscale = &quot;log2&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Deh1KddGKj.png?imageslim" alt="mark"></p>
-<pre><code>#format  axis scale
-ggpar(p, yscale = &quot;log2&quot;, format.scale = TRUE)#format.scale=TRUE说明y轴刻度也会scale
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/IgF4D3LFiL.png?imageslim" alt="mark"></p>
-<pre><code>#也可以直接用yscale()
-p+yscale(&quot;log2&quot;, .format = TRUE)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/lfk8D0i00d.png?imageslim" alt="mark"></p>
-<h2 id="自定义坐标轴标签及刻度"><a href="#自定义坐标轴标签及刻度" class="headerlink" title="自定义坐标轴标签及刻度"></a>自定义坐标轴标签及刻度</h2><pre><code class="{r}">#change the font of x and y axis texts
-#rotate x and y texts
-p+
-  font(&quot;xy.text&quot;, size = 12, color = &quot;blue&quot;, face = &quot;bold&quot;)+
-  rotate_x_text(45)+
-  rotate_y_text(45)
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/DhAlF966Cb.png?imageslim" alt="mark"></p>
-<pre><code>#remove ticks and axis texts
-p+rremove(&quot;ticks&quot;)+
-  rremove(&quot;axis.text&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/c6cHkJj7Hk.png?imageslim" alt="mark"></p>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>默认主题为theme_pubr(),可以调用包<strong>ggthemes</strong>里面的主题</p>
-<pre><code class="{r}">library(ggthemes)
-p+ggthemes::theme_economist()
-</code></pre>
+<h2 id="颜色修改"><a href="#颜色修改" class="headerlink" title="颜色修改"></a>颜色修改</h2><p>ggpar()中有一个参数palette，即调色板，除了可以我们自定义颜色外，还可以调用RColorBrewer中的调色板以及包<strong>ggsci</strong>中的专门用于学术杂志的配色。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use custom color palette</div><div class="line">ggpar(p, palette = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;))</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/j04LBcgCFf.png?imageslim" alt="mark"><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#use</span> the RColorBrewer palette</div><div class="line"><span class="function"><span class="title">ggpar</span><span class="params">(p, palette = <span class="string">"Dark2"</span>)</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/gg16gmeE3D.png?imageslim" alt="mark"><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">ggpar</span><span class="params">(p, palette = <span class="string">"grey"</span>)</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/3h1K0f5aaK.png?imageslim" alt="mark"><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#use</span> the ggsci palette</div><div class="line"><span class="function"><span class="title">ggpar</span><span class="params">(p, palette = <span class="string">"npg"</span>)</span></span>#nature</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/13fcD9GfDC.png?imageslim" alt="mark"></p>
+<p>当然也可以直接用<strong>ggpubr</strong>中的函数color_palette()以及fill_palette()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#jco color palette</div><div class="line">p+color_palette(&quot;jco&quot;)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/aD2IK0b75D.png?imageslim" alt="mark"><br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#custom color</div><div class="line">p+color_palette(<span class="name">c</span>(<span class="string">"#00AFBB"</span>, <span class="string">"#E7B800"</span>, <span class="string">"#FC4E07"</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Jj9BG7J24h.png?imageslim" alt="mark"></p>
+<h2 id="颜色梯度"><a href="#颜色梯度" class="headerlink" title="颜色梯度"></a>颜色梯度</h2><p><strong>ggpubr</strong>提供了两个函数用来处理颜色梯度：gradient_color()和gradient_fill()<br>通过一个例子来看如何运作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#first create a scatter plot</div><div class="line">p3 &lt;- ggscatter(mtcars, x=&quot;wt&quot;, y=&quot;mpg&quot;, color=&quot;mpg&quot;, size = 2)</div><div class="line">#change the gradient color</div><div class="line">#use one custom color</div><div class="line">p3+gradient_color(&quot;red&quot;)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/ah3ed5b1Ai.png?imageslim" alt="mark"><br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#use two colors</div><div class="line">p3+gradient_color(<span class="name">c</span>(<span class="string">"blue"</span>, <span class="string">"red"</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/1H7KBAdKLd.png?imageslim" alt="mark"><br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#three colors</div><div class="line">p3+gradient_color(<span class="name">c</span>(<span class="string">"blue"</span>, <span class="string">"white"</span>, <span class="string">"red"</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/kCaHdmcG6i.png?imageslim" alt="mark"><br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#use the RColorBrewer palette</span></div><div class="line"><span class="attribute">p3</span>+gradient_color(<span class="string">"RdYlBu"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/FHKlGj4H8F.png?imageslim" alt="mark"><br>gradient_fill()用法也一样，不过是填充，这里就不演示了。</p>
+<h2 id="修改坐标轴limits、scales"><a href="#修改坐标轴limits、scales" class="headerlink" title="修改坐标轴limits、scales"></a>修改坐标轴limits、scales</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#change y axis limits</div><div class="line">ggpar(p, ylim = c(0, 50))</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CFamb4cglg.png?imageslim" alt="mark"><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#change</span> y axis cale to log2</div><div class="line"><span class="function"><span class="title">ggpar</span><span class="params">(p, yscale = <span class="string">"log2"</span>)</span></span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/Deh1KddGKj.png?imageslim" alt="mark"><br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">format</span>  axis <span class="keyword">scale</span></div><div class="line">ggpar(p, yscale = <span class="string">"log2"</span>, <span class="keyword">format</span>.<span class="keyword">scale</span> = TRUE)#<span class="keyword">format</span>.<span class="keyword">scale</span>=TRUE说明y轴刻度也会<span class="keyword">scale</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/IgF4D3LFiL.png?imageslim" alt="mark"><br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#也可以直接用yscale()</span></div><div class="line">p+yscale(<span class="string">"log2"</span>, .<span class="built_in">format</span> = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/lfk8D0i00d.png?imageslim" alt="mark"></p>
+<h2 id="自定义坐标轴标签及刻度"><a href="#自定义坐标轴标签及刻度" class="headerlink" title="自定义坐标轴标签及刻度"></a>自定义坐标轴标签及刻度</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#change the font of x and y axis texts</div><div class="line">#rotate x and y texts</div><div class="line">p+</div><div class="line">  font(&quot;xy.text&quot;, size = 12, color = &quot;blue&quot;, face = &quot;bold&quot;)+</div><div class="line">  rotate_x_text(45)+</div><div class="line">  rotate_y_text(45)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/DhAlF966Cb.png?imageslim" alt="mark"><br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#remove</span> <span class="selector-tag">ticks</span> <span class="selector-tag">and</span> <span class="selector-tag">axis</span> <span class="selector-tag">texts</span></div><div class="line"><span class="selector-tag">p</span>+<span class="selector-tag">rremove</span>(<span class="string">"ticks"</span>)+</div><div class="line">  <span class="selector-tag">rremove</span>(<span class="string">"axis.text"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/c6cHkJj7Hk.png?imageslim" alt="mark"></p>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>默认主题为theme_pubr(),可以调用包<strong>ggthemes</strong>里面的主题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">library(ggthemes)</div><div class="line">p+ggthemes::theme_economist()</div></pre></td></tr></table></figure></p>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/k49JlfLfDg.png?imageslim" alt="mark"></p>
-<h2 id="移除ggplot组件"><a href="#移除ggplot组件" class="headerlink" title="移除ggplot组件"></a>移除ggplot组件</h2><p>通过ggpubr::rremove()可以移除组件：</p>
-<pre><code class="{r}">p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, ggtheme = theme_igray())
-p
-</code></pre>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/G53edij9j4.png?imageslim" alt="mark"></p>
-<pre><code>p+rremove(&quot;grid&quot;)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CciAa0JEhH.png?imageslim" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code class="{r}">sessionInfo()
-</code></pre>
-<pre><code>## R version 3.4.1 (2017-06-30)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.3 LTS
-## 
-## Matrix products: default
-## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0
-## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0
-## 
-## locale:
-##  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    
-##  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   
-##  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-## [1] ggthemes_3.4.0 ggpubr_0.1.5   magrittr_1.5   ggplot2_2.2.1 
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.12       bindr_0.1          knitr_1.17        
-##  [4] munsell_0.4.3      colorspace_1.3-2   R6_2.2.2          
-##  [7] rlang_0.1.2        stringr_1.2.0      plyr_1.8.4        
-## [10] dplyr_0.7.3        tools_3.4.1        grid_3.4.1        
-## [13] gtable_0.2.0       htmltools_0.3.6    yaml_2.1.14       
-## [16] lazyeval_0.2.0     rprojroot_1.2      digest_0.6.12     
-## [19] assertthat_0.2.0   tibble_1.3.4       bindrcpp_0.2      
-## [22] ggsci_2.7          RColorBrewer_1.1-2 purrr_0.2.3       
-## [25] glue_1.1.1         evaluate_0.10.1    rmarkdown_1.6     
-## [28] labeling_0.3       stringi_1.1.5      compiler_3.4.1    
-## [31] scales_0.5.0       backports_1.1.0    pkgconfig_2.0.1
-</code></pre><hr>
+<h2 id="移除ggplot组件"><a href="#移除ggplot组件" class="headerlink" title="移除ggplot组件"></a>移除ggplot组件</h2><p>通过ggpubr::rremove()可以移除组件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, ggtheme = theme_igray())</div><div class="line">p</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/G53edij9j4.png?imageslim" alt="mark"><br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>+<span class="selector-tag">rremove</span>(<span class="string">"grid"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/170913/CciAa0JEhH.png?imageslim" alt="mark"></p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># R version 3.4.1 (2017-06-30)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Platform: x86_64-pc-linux-gnu (64-bit)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Running under: Ubuntu 16.04.3 LTS</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Matrix products: default</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># locale:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C              </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8   </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C                 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C       </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># attached base packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># other attached packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] ggthemes_3.4.0 ggpubr_0.1.5   magrittr_1.5   ggplot2_2.2.1 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># loaded via a namespace (and not attached):</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [1] Rcpp_0.12.12       bindr_0.1          knitr_1.17        </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [4] munsell_0.4.3      colorspace_1.3-2   R6_2.2.2          </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [7] rlang_0.1.2        stringr_1.2.0      plyr_1.8.4        </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [10] dplyr_0.7.3        tools_3.4.1        grid_3.4.1        </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [13] gtable_0.2.0       htmltools_0.3.6    yaml_2.1.14       </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [16] lazyeval_0.2.0     rprojroot_1.2      digest_0.6.12     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [19] assertthat_0.2.0   tibble_1.3.4       bindrcpp_0.2      </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [22] ggsci_2.7          RColorBrewer_1.1-2 purrr_0.2.3       </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [25] glue_1.1.1         evaluate_0.10.1    rmarkdown_1.6     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [28] labeling_0.3       stringi_1.1.5      compiler_3.4.1    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [31] scales_0.5.0       backports_1.1.0    pkgconfig_2.0.1</span></span></div></pre></td></tr></table></figure>
+<hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
 

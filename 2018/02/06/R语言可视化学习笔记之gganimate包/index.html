@@ -510,7 +510,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  740
+                  746
                 </span>
               
 
@@ -547,102 +547,36 @@
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/kHCkkicfkh.gif" alt="mark"></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/dgrtwo/gganimate" target="_blank" rel="external"><strong>gganimate</strong></a>包是<strong>ggplot2</strong>的扩展包，主要用于绘制动画。它在<strong>ggplot2</strong>的基础上了补充了一个美学映射<code>frame</code>，就像x,y,size,color,fill一样进行映射。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>if(!require(devtools)) install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;dgrtwo/gganimate&quot;)
-</code></pre><blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="keyword">require</span>(devtools)) install.packages(<span class="string">"devtools"</span>)</div><div class="line">devtools::install_github(<span class="string">"dgrtwo/gganimate"</span>)</div></pre></td></tr></table></figure>
+<blockquote>
 <p>需要注意的是这个包依赖于<strong>ImageMagick</strong>来产生动画，如果自行安装的话在调用<strong>ImageMagick</strong>很容易出错，所以推荐在<strong>RStudio</strong>里面安装。</p>
 </blockquote>
-<pre><code>install.packages(&quot;installr&quot;)
-installr::install.ImageMagick(&quot;http://www.imagemagick.org/script/download.php&quot;)
-</code></pre><p>安装好之后以管理员身份运行<strong>RStudio</strong></p>
-<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>这里我们使用<strong>gapminder</strong>包里的数据集<code>gapminder</code>进行可视化</p>
-<pre><code>library(gapminder)
-library(ggplot2)
-library(gganimate)
-theme_set(theme_bw())
-head(gapminder)
-</code></pre><pre><code># A tibble: 6 x 6
-  country     continent  year lifeExp      pop gdpPercap
-  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
-1 Afghanistan Asia       1952    28.8  8425333       779
-2 Afghanistan Asia       1957    30.3  9240934       821
-3 Afghanistan Asia       1962    32.0 10267083       853
-4 Afghanistan Asia       1967    34.0 11537966       836
-5 Afghanistan Asia       1972    36.1 13079460       740
-6 Afghanistan Asia       1977    38.4 14880372       786
-</code></pre><pre><code>p &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop, color=continent,frame=year))+
-  geom_point()+
-  scale_x_log10()
- gganimate(p)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/cIEhbkd1CE.gif" alt="mark"></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">install</span>.packages(<span class="string">"installr"</span>)</div><div class="line">installr::<span class="keyword">install</span>.ImageMagick(<span class="string">"http://www.imagemagick.org/script/download.php"</span>)</div></pre></td></tr></table></figure>
+<p>安装好之后以管理员身份运行<strong>RStudio</strong></p>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>这里我们使用<strong>gapminder</strong>包里的数据集<code>gapminder</code>进行可视化<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">library</span><span class="params">(gapminder)</span></span></div><div class="line"><span class="function"><span class="title">library</span><span class="params">(ggplot2)</span></span></div><div class="line"><span class="function"><span class="title">library</span><span class="params">(gganimate)</span></span></div><div class="line"><span class="function"><span class="title">theme_set</span><span class="params">(theme_bw()</span></span>)</div><div class="line"><span class="function"><span class="title">head</span><span class="params">(gapminder)</span></span></div></pre></td></tr></table></figure></p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A tibble: 6 x 6</span></div><div class="line">  country     continent  year lifeExp      pop gdpPercap</div><div class="line">  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;</div><div class="line">1 Afghanistan Asia      <span class="number"> 1952 </span>   28.8 <span class="number"> 8425333 </span>      779</div><div class="line">2 Afghanistan Asia      <span class="number"> 1957 </span>   30.3 <span class="number"> 9240934 </span>      821</div><div class="line">3 Afghanistan Asia      <span class="number"> 1962 </span>   32.0<span class="number"> 10267083 </span>      853</div><div class="line">4 Afghanistan Asia      <span class="number"> 1967 </span>   34.0<span class="number"> 11537966 </span>      836</div><div class="line">5 Afghanistan Asia      <span class="number"> 1972 </span>   36.1<span class="number"> 13079460 </span>      740</div><div class="line">6 Afghanistan Asia      <span class="number"> 1977 </span>   38.4<span class="number"> 14880372 </span>      786</div></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggplot(<span class="name">gapminder</span>, aes(<span class="name">gdpPercap</span>, lifeExp, size=pop, color=continent,frame=year))+</div><div class="line">  geom_point()+</div><div class="line">  scale_x_log10()</div><div class="line"> gganimate(<span class="name">p</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/cIEhbkd1CE.gif" alt="mark"></p>
 <p>不管动画中的图形如何移动，坐标轴、图例等都是固定的。</p>
 <h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>将<strong>gganimate</strong>与<strong>ggplot2</strong>结合起来可以定制化很多复杂的动画</p>
-<pre><code>p2 &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop))+
-  geom_point()+
-  geom_point(aes(frame=year), color=&quot;red&quot;)+
-  scale_x_log10()
-gganimate(p2)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/lcD6kdcA73.gif" alt="mark"></p>
-<p>如果要绘制累积效果图，<strong>gganimate</strong>提供了<code>cumalative</code>参数，这对于路径图来说十分是有效的</p>
-<pre><code>p3 &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, frame=year, color=continent))+
-  geom_path(aes(cumulative=TRUE, group=country))+
-  scale_x_log10()+
-  facet_wrap(~continent)
-gganimate(p3)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/D2g6l8d18K.gif" alt="mark"></p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p2 &lt;- ggplot(<span class="name">gapminder</span>, aes(<span class="name">gdpPercap</span>, lifeExp, size=pop))+</div><div class="line">  geom_point()+</div><div class="line">  geom_point(<span class="name">aes</span>(<span class="name">frame=year</span>), color=<span class="string">"red"</span>)+</div><div class="line">  scale_x_log10()</div><div class="line">gganimate(<span class="name">p2</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/lcD6kdcA73.gif" alt="mark"></p>
+<p>如果要绘制累积效果图，<strong>gganimate</strong>提供了<code>cumalative</code>参数，这对于路径图来说十分是有效的<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p3 &lt;- ggplot(<span class="name">gapminder</span>, aes(<span class="name">gdpPercap</span>, lifeExp, frame=year, color=continent))+</div><div class="line">  geom_path(<span class="name">aes</span>(<span class="name">cumulative=TRUE</span>, group=country))+</div><div class="line">  scale_x_log10()+</div><div class="line">  facet_wrap(~continent)</div><div class="line">gganimate(<span class="name">p3</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/D2g6l8d18K.gif" alt="mark"></p>
 <p>一般来说我们都是将时间映射给<code>frame</code>，这也符合我们的直觉，但是这并不意味着我们只能将时间映射给<code>frame</code>，我们可以将任何想要的变量映射给<code>frame</code>。</p>
-<pre><code>p4 &lt;- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop, frame=continent))+
-  geom_point(color=&quot;blue&quot;)+
-  scale_x_log10()
-gganimate(p4)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/jcbklhff47.gif" alt="mark"></p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p4 &lt;- ggplot(<span class="name">gapminder</span>, aes(<span class="name">gdpPercap</span>, lifeExp, size=pop, frame=continent))+</div><div class="line">  geom_point(<span class="name">color=</span><span class="string">"blue"</span>)+</div><div class="line">  scale_x_log10()</div><div class="line">gganimate(<span class="name">p4</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/jcbklhff47.gif" alt="mark"></p>
 <blockquote>
 <p>需要注意的是如何我们绘制的图形涉及到统计汇总比如geom_smooth()，那么在geom_smooth()图层中需要添加group映射。</p>
 </blockquote>
-<pre><code>p5 &lt;- ggplot(gapminder,aes(gdpPercap, lifeExp, size=pop, frame=year))+
-  geom_point()+
-  geom_smooth(aes(group=year),method = &quot;lm&quot;, show.legend = FALSE)+
-  facet_wrap(~continent, scales = &quot;free&quot;)+
-  scale_x_log10()
-gganimate(p5)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/Hb2aac620H.gif" alt="mark"></p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p5 &lt;- ggplot(<span class="name">gapminder</span>,aes(<span class="name">gdpPercap</span>, lifeExp, size=pop, frame=year))+</div><div class="line">  geom_point()+</div><div class="line">  geom_smooth(<span class="name">aes</span>(<span class="name">group=year</span>),method = <span class="string">"lm"</span>, show.legend = FALSE)+</div><div class="line">  facet_wrap(~continent, scales = <span class="string">"free"</span>)+</div><div class="line">  scale_x_log10()</div><div class="line">gganimate(<span class="name">p5</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/Hb2aac620H.gif" alt="mark"></p>
 <p>最后如果需要控制动画播放速度，使用<code>interval</code>参数控制</p>
-<pre><code>gganimate(p, interval = .2)
-</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/kHCkkicfkh.gif" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code>sessionInfo()
-</code></pre><pre><code>R version 3.4.3 (2017-11-30)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows &gt;= 8 x64 (build 9200)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=Chinese (Simplified)_China.936 
-[2] LC_CTYPE=Chinese (Simplified)_China.936   
-[3] LC_MONETARY=Chinese (Simplified)_China.936
-[4] LC_NUMERIC=C                              
-[5] LC_TIME=Chinese (Simplified)_China.936    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods  
-[7] base     
-
-other attached packages:
-[1] gganimate_0.1.0.9000 ggplot2_2.2.1.9000  
-[3] gapminder_0.3.0     
-
-loaded via a namespace (and not attached):
- [1] Rcpp_0.12.15      rstudioapi_0.7    magrittr_1.5     
- [4] munsell_0.4.3     colorspace_1.3-2  rlang_0.1.6      
- [7] stringr_1.2.0     plyr_1.8.4        tools_3.4.3      
-[10] grid_3.4.3        gtable_0.2.0      utf8_1.1.3       
-[13] cli_1.0.0         withr_2.1.1.9000  htmltools_0.3.6  
-[16] yaml_2.1.16       lazyeval_0.2.1    assertthat_0.2.0 
-[19] digest_0.6.15     tibble_1.4.2      crayon_1.3.4     
-[22] base64enc_0.1-3   animation_2.5     labeling_0.3     
-[25] stringi_1.1.6     compiler_3.4.3    pillar_1.1.0     
-[28] installr_0.19.0   scales_0.5.0.9000
-</code></pre><hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">gganimate</span><span class="params">(p, interval = .<span class="number">2</span>)</span></span></div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180206/kHCkkicfkh.gif" alt="mark"></p>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">sessionInfo</span><span class="params">()</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">R version <span class="number">3.4</span><span class="meta">.3</span> (<span class="number">2017</span>-<span class="number">11</span>-<span class="number">30</span>)</div><div class="line"><span class="symbol">Platform:</span> x86_64-w64-mingw32/x64 (<span class="number">64</span>-bit)</div><div class="line">Running under: Windows &gt;= <span class="number">8</span> x64 (build <span class="number">9200</span>)</div><div class="line"></div><div class="line">Matrix products: <span class="meta">default</span></div><div class="line"><span class="symbol"></span></div><div class="line">locale:</div><div class="line">[<span class="number">1</span>] LC_COLLATE=Chinese (Simplified)_China<span class="meta">.936</span> </div><div class="line">[<span class="number">2</span>] LC_CTYPE=Chinese (Simplified)_China<span class="meta">.936</span>   </div><div class="line">[<span class="number">3</span>] LC_MONETARY=Chinese (Simplified)_China<span class="meta">.936</span></div><div class="line">[<span class="number">4</span>] LC_NUMERIC=C                              </div><div class="line">[<span class="number">5</span>] LC_TIME=Chinese (Simplified)_China<span class="meta">.936</span>    </div><div class="line"></div><div class="line">attached base packages:</div><div class="line">[<span class="number">1</span>] stats     graphics  grDevices utils     datasets  methods  </div><div class="line">[<span class="number">7</span>] base     </div><div class="line"></div><div class="line">other attached packages:</div><div class="line">[<span class="number">1</span>] gganimate_0<span class="meta">.1</span><span class="meta">.0</span><span class="meta">.9000</span> ggplot2_2<span class="meta">.2</span><span class="meta">.1</span><span class="meta">.9000</span>  </div><div class="line">[<span class="number">3</span>] gapminder_0<span class="meta">.3</span><span class="meta">.0</span>     </div><div class="line"></div><div class="line">loaded via a namespace (<span class="keyword">and</span> <span class="keyword">not</span> attached):</div><div class="line"> [<span class="number">1</span>] Rcpp_0<span class="meta">.12</span><span class="meta">.15</span>      rstudioapi_0<span class="meta">.7</span>    magrittr_1<span class="meta">.5</span>     </div><div class="line"> [<span class="number">4</span>] munsell_0<span class="meta">.4</span><span class="meta">.3</span>     colorspace_1<span class="meta">.3</span>-<span class="number">2</span>  rlang_0<span class="meta">.1</span><span class="meta">.6</span>      </div><div class="line"> [<span class="number">7</span>] stringr_1<span class="meta">.2</span><span class="meta">.0</span>     plyr_1<span class="meta">.8</span><span class="meta">.4</span>        tools_3<span class="meta">.4</span><span class="meta">.3</span>      </div><div class="line">[<span class="number">10</span>] grid_3<span class="meta">.4</span><span class="meta">.3</span>        gtable_0<span class="meta">.2</span><span class="meta">.0</span>      utf8_1<span class="meta">.1</span><span class="meta">.3</span>       </div><div class="line">[<span class="number">13</span>] cli_1<span class="meta">.0</span><span class="meta">.0</span>         withr_2<span class="meta">.1</span><span class="meta">.1</span><span class="meta">.9000</span>  htmltools_0<span class="meta">.3</span><span class="meta">.6</span>  </div><div class="line">[<span class="number">16</span>] yaml_2<span class="meta">.1</span><span class="meta">.16</span>       lazyeval_0<span class="meta">.2</span><span class="meta">.1</span>    assertthat_0<span class="meta">.2</span><span class="meta">.0</span> </div><div class="line">[<span class="number">19</span>] digest_0<span class="meta">.6</span><span class="meta">.15</span>     tibble_1<span class="meta">.4</span><span class="meta">.2</span>      crayon_1<span class="meta">.3</span><span class="meta">.4</span>     </div><div class="line">[<span class="number">22</span>] base64enc_0<span class="meta">.1</span>-<span class="number">3</span>   animation_2<span class="meta">.5</span>     labeling_0<span class="meta">.3</span>     </div><div class="line">[<span class="number">25</span>] stringi_1<span class="meta">.1</span><span class="meta">.6</span>     compiler_3<span class="meta">.4</span><span class="meta">.3</span>    pillar_1<span class="meta">.1</span><span class="meta">.0</span>     </div><div class="line">[<span class="number">28</span>] installr_0<span class="meta">.19</span><span class="meta">.0</span>   scales_0<span class="meta">.5</span><span class="meta">.0</span><span class="meta">.9000</span></div></pre></td></tr></table></figure>
+<hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
 <p>Email: tyan@zju.edu.cn</p>
 <p>QQ: 1051927088</p>

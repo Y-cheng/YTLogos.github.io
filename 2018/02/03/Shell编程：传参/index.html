@@ -503,7 +503,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  577
+                  571
                 </span>
               
 
@@ -541,20 +541,9 @@
 <h2 id="shell传递参数"><a href="#shell传递参数" class="headerlink" title="shell传递参数"></a>shell传递参数</h2><p>执行shell脚本时，向脚本传递参数，脚本内获取参数的格式为：$n。n代表数字，1为执行脚本的第一个参数，2为第二个，以此类推。</p>
 <a id="more"></a>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>下面实例我们向脚本传递三个参数并分别输出，其中$0为执行的文件名：<br>新建一个脚本canshu.sh</p>
-<pre><code>#!/bin/bash
-echo &quot;Shell 传递参数实例！&quot;
-echo &quot;执行的文件名：$0&quot;
-echo &quot;第一个参数为：$1&quot;
-echo &quot;第二个参数为：$2&quot;
-echo &quot;第三个参数为：$3&quot;
-</code></pre><p>运行：</p>
-<pre><code>$ ./canshu.sh 1 2 3
-Shell 传递参数实例！
-执行的文件名：./canshu.sh
-第一个参数为：1
-第二个参数为：2
-第三个参数为：3
-</code></pre><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Shell 传递参数实例！"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"执行的文件名：<span class="variable">$0</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第一个参数为：<span class="variable">$1</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第二个参数为：<span class="variable">$2</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第三个参数为：<span class="variable">$3</span>"</span></div></pre></td></tr></table></figure>
+<p>运行：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ./canshu.sh <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div><div class="line">Shell 传递参数实例！</div><div class="line">执行的文件名：./canshu.sh</div><div class="line">第一个参数为：<span class="number">1</span></div><div class="line">第二个参数为：<span class="number">2</span></div><div class="line">第三个参数为：<span class="number">3</span></div></pre></td></tr></table></figure></p>
+<blockquote>
 <p>特殊字符处理参数</p>
 </blockquote>
 <table>
@@ -595,45 +584,18 @@ Shell 传递参数实例！
 </tr>
 </tbody>
 </table>
-<p>修改上述脚本canshu.sh</p>
-<pre><code>#!/bin/bash
-echo &quot;Shell 传递参数实例！&quot;
-echo &quot;第一个参数为：$1&quot;
-echo &quot;参数个数为：$#&quot;
-echo &quot;传递的参数作为一个字符串显示：$*&quot;
-</code></pre><p>运行：</p>
-<pre><code>$ ./canshu.sh 1 2 3
-Shell 传递参数实例！
-第一个参数为：1
-参数个数为：3
-传递的参数作为一个字符串显示：1 2 3
-</code></pre><blockquote>
+<p>修改上述脚本canshu.sh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Shell 传递参数实例！"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"第一个参数为：<span class="variable">$1</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"参数个数为：<span class="variable">$#</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"传递的参数作为一个字符串显示：$*"</span></div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ./canshu.sh <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div><div class="line">Shell 传递参数实例！</div><div class="line">第一个参数为：<span class="number">1</span></div><div class="line">参数个数为：<span class="number">3</span></div><div class="line">传递的参数作为一个字符串显示：<span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<blockquote>
 <p>需要注意的是$*与\$@的区别</p>
 </blockquote>
 <ul>
 <li>相同点：都是引用所有参数</li>
 <li>不同点：只有在双引号中体现出来。假设在脚本运行时写了三个参数1、2、3，则”*”等价于”1 2 3”（传递了一个参数），而”@”等价于”1”,”2”,”3”(传递了三个参数)</li>
 </ul>
-<p>下面通过一个脚本来说明,新建脚本compare.sh</p>
-<pre><code>#!/bin/bash
-echo &quot;-- \$* 演示 ---&quot;
-for i in &quot;$*&quot;;do
-echo $i
-done
-
-echo &quot;-- \$@ 演示 ---&quot;
-for i in &quot;$@&quot;;do
-echo $i
-done
-</code></pre><p>运行脚本</p>
-<pre><code>$ ./compare.sh 1 2 3
--- $* 演示 ---
-1 2 3
--- $@ 演示 ---
-1
-2
-3
-</code></pre><p>区别一目了然。</p>
+<p>下面通过一个脚本来说明,新建脚本compare.sh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"-- \$* 演示 ---"</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"$*"</span>;<span class="keyword">do</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$i</span></div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"-- \$@ 演示 ---"</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$@</span>"</span>;<span class="keyword">do</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$i</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure></p>
+<p>运行脚本<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">$</span> <span class="string">./compare.sh</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div><div class="line"><span class="bullet">-</span><span class="bullet">-</span> <span class="string">$*</span> <span class="string">演示</span> <span class="meta">---</span></div><div class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div><div class="line"><span class="bullet">-</span><span class="bullet">-</span> <span class="string">$@</span> <span class="string">演示</span> <span class="meta">---</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>区别一目了然。</p>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 
       
