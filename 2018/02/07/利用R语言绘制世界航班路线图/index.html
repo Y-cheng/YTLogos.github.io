@@ -510,7 +510,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,939
+                  1,931
                 </span>
               
 
@@ -547,32 +547,243 @@
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/6HckGG7Jfc.png?imageslim" alt="mark"></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文基于<strong>NASA</strong>的<a href="https://www.nasa.gov/specials/blackmarble/2016/globalmaps/BlackMarble_2016_01deg.jpg" target="_blank" rel="external">夜间地图</a>的基础上进行世界航班路线可视化，参考多篇博客以及可视化案例。</p>
 <a id="more"></a>
-<h2 id="包加载"><a href="#包加载" class="headerlink" title="包加载"></a>包加载</h2><p>本博客使用的包较多，利用<strong>pacman</strong>包里的<code>p_load()</code>函数进行加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">library(pacman)</div><div class="line">p_load(tidyverse, data.table, geosphere, grid, jpeg, plyr)</div></pre></td></tr></table></figure></p>
+<h2 id="包加载"><a href="#包加载" class="headerlink" title="包加载"></a>包加载</h2><p>本博客使用的包较多，利用<strong>pacman</strong>包里的<code>p_load()</code>函数进行加载</p>
+<pre><code class="{r}">library(pacman)
+p_load(tidyverse, data.table, geosphere, grid, jpeg, plyr)
+</code></pre>
 <h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用的数据来自于<a href="https://openflights.org/data.html" target="_blank" rel="external">OpenFlights.org</a>。</p>
-<h3 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">download.file(&quot;https://raw.githubusercontent.com/jpatokal/openflights/master/data/airlines.dat&quot;,</div><div class="line">              destfile = &quot;airlines.dat&quot;, mode = &quot;wb&quot;)</div><div class="line">download.file(&quot;https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat&quot;, </div><div class="line">              destfile = &quot;airports.dat&quot;, mode = &quot;wb&quot;)</div><div class="line">download.file(&quot;https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat&quot;, </div><div class="line">              destfile = &quot;routes.dat&quot;, mode = &quot;wb&quot;)</div></pre></td></tr></table></figure>
-<h3 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">airlines &lt;- fread(&quot;airlines.dat&quot;, sep = &quot;,&quot;, skip = 1)</div><div class="line">airports &lt;- fread(&quot;airports.dat&quot;, sep = &quot;,&quot;)</div><div class="line">routes &lt;- fread(&quot;routes.dat&quot;, sep = &quot;,&quot;)</div></pre></td></tr></table></figure>
-<h3 id="数据整理"><a href="#数据整理" class="headerlink" title="数据整理"></a>数据整理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#添加列名</div><div class="line">colnames(airlines) &lt;- c(&quot;airline_id&quot;, &quot;name&quot;, &quot;alias&quot;, &quot;iata&quot;, &quot;icao&quot;, &quot;callisign&quot;, &quot;country&quot;, &quot;active&quot;)</div><div class="line">colnames(airports) &lt;- c(&quot;airport_id&quot;, &quot;name&quot;, &quot;city&quot;, &quot;country&quot;,&quot;iata&quot;, &quot;icao&quot;, &quot;latitude&quot;, &quot;longitude&quot;,&quot;altitude&quot;, &quot;timezone&quot;,&quot;dst&quot;,&quot;tz_database_time_zone&quot;,&quot;type&quot;, &quot;source&quot;)</div><div class="line">colnames(routes) &lt;- c(&quot;airline&quot;, &quot;airline_id&quot;, &quot;source_airport&quot;, &quot;source_airport_id&quot;,&quot;destination_airport&quot;,&quot;destination_airport_id&quot;,&quot;codeshare&quot;, &quot;stops&quot;,&quot;equipment&quot;)</div><div class="line"></div><div class="line">#类型转换</div><div class="line">routes$airline_id &lt;- as.numeric(routes$airline_id)</div><div class="line"># airlines与routes数据融合</div><div class="line">flights &lt;- left_join(routes, airlines, by=&quot;airline_id&quot;)</div><div class="line"># flights与airports数据融合</div><div class="line">airports_orig &lt;- airports[,c(5,7,8)]</div><div class="line">colnames(airports_orig) &lt;- c(&quot;source_airport&quot;,&quot;source_airport_lat&quot;, &quot;source_airport_long&quot;)</div><div class="line">airports_dest &lt;- airports[, c(5, 7, 8)]</div><div class="line">colnames(airports_dest) &lt;- c(&quot;destination_airport&quot;, &quot;destination_airport_lat&quot;, &quot;destination_airport_long&quot;)</div><div class="line">flights &lt;- left_join(flights, airports_orig, by = &quot;source_airport&quot;)</div><div class="line">flights &lt;- left_join(flights, airports_dest, by = &quot;destination_airport&quot;)</div><div class="line">#剔除缺失值</div><div class="line">flights &lt;- na.omit(flights, cols = c(&quot;source_airport_long&quot;, &quot;source_airport_lat&quot;, &quot;destination_airport_long&quot;, &quot;destination_airport_lat&quot;))</div><div class="line">#最后数据如下</div><div class="line">head(flights[,c(1:5)])</div></pre></td></tr></table></figure>
+<h3 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h3><pre><code>download.file(&quot;https://raw.githubusercontent.com/jpatokal/openflights/master/data/airlines.dat&quot;,
+              destfile = &quot;airlines.dat&quot;, mode = &quot;wb&quot;)
+download.file(&quot;https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat&quot;, 
+              destfile = &quot;airports.dat&quot;, mode = &quot;wb&quot;)
+download.file(&quot;https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat&quot;, 
+              destfile = &quot;routes.dat&quot;, mode = &quot;wb&quot;)
+</code></pre><h3 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h3><pre><code class="{r}">airlines &lt;- fread(&quot;airlines.dat&quot;, sep = &quot;,&quot;, skip = 1)
+airports &lt;- fread(&quot;airports.dat&quot;, sep = &quot;,&quot;)
+routes &lt;- fread(&quot;routes.dat&quot;, sep = &quot;,&quot;)
+</code></pre>
+<h3 id="数据整理"><a href="#数据整理" class="headerlink" title="数据整理"></a>数据整理</h3><pre><code class="{r}">#添加列名
+colnames(airlines) &lt;- c(&quot;airline_id&quot;, &quot;name&quot;, &quot;alias&quot;, &quot;iata&quot;, &quot;icao&quot;, &quot;callisign&quot;, &quot;country&quot;, &quot;active&quot;)
+colnames(airports) &lt;- c(&quot;airport_id&quot;, &quot;name&quot;, &quot;city&quot;, &quot;country&quot;,&quot;iata&quot;, &quot;icao&quot;, &quot;latitude&quot;, &quot;longitude&quot;,&quot;altitude&quot;, &quot;timezone&quot;,&quot;dst&quot;,&quot;tz_database_time_zone&quot;,&quot;type&quot;, &quot;source&quot;)
+colnames(routes) &lt;- c(&quot;airline&quot;, &quot;airline_id&quot;, &quot;source_airport&quot;, &quot;source_airport_id&quot;,&quot;destination_airport&quot;,&quot;destination_airport_id&quot;,&quot;codeshare&quot;, &quot;stops&quot;,&quot;equipment&quot;)
+
+#类型转换
+routes$airline_id &lt;- as.numeric(routes$airline_id)
+# airlines与routes数据融合
+flights &lt;- left_join(routes, airlines, by=&quot;airline_id&quot;)
+# flights与airports数据融合
+airports_orig &lt;- airports[,c(5,7,8)]
+colnames(airports_orig) &lt;- c(&quot;source_airport&quot;,&quot;source_airport_lat&quot;, &quot;source_airport_long&quot;)
+airports_dest &lt;- airports[, c(5, 7, 8)]
+colnames(airports_dest) &lt;- c(&quot;destination_airport&quot;, &quot;destination_airport_lat&quot;, &quot;destination_airport_long&quot;)
+flights &lt;- left_join(flights, airports_orig, by = &quot;source_airport&quot;)
+flights &lt;- left_join(flights, airports_dest, by = &quot;destination_airport&quot;)
+#剔除缺失值
+flights &lt;- na.omit(flights, cols = c(&quot;source_airport_long&quot;, &quot;source_airport_lat&quot;, &quot;destination_airport_long&quot;, &quot;destination_airport_lat&quot;))
+#最后数据如下
+head(flights[,c(1:5)])
+</code></pre>
 <p>下面就是准备地理信息数据</p>
 <p>本文主要是可视化地理信息上的点与点之间的连接，这可以通过<strong>geosphere</strong>包里的函数<code>gcIntermediate()</code>很轻松实现。具体使用方法可以参考<a href="http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/" target="_blank" rel="external">这里</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># 按航空公司拆分数据集</div><div class="line">flights_split &lt;- split(flights, flights$name)</div><div class="line"># Calculate intermediate points between each two locations</div><div class="line">flights_all &lt;- lapply(flights_split, function(x) gcIntermediate(x[, c(&quot;source_airport_long&quot;, &quot;source_airport_lat&quot;)], x[, c(&quot;destination_airport_long&quot;, &quot;destination_airport_lat&quot;)], n=100, breakAtDateLine = FALSE, addStartEnd = TRUE, sp = TRUE))</div><div class="line"></div><div class="line"># 转换为数据框</div><div class="line">flights_fortified &lt;- lapply(flights_all, function(x) ldply(x@lines, fortify))</div><div class="line"></div><div class="line"># Unsplit lists</div><div class="line">flights_fortified &lt;- do.call(&quot;rbind&quot;, flights_fortified)</div><div class="line"></div><div class="line"># Add and clean column with airline names</div><div class="line">flights_fortified$name &lt;- rownames(flights_fortified)</div><div class="line">flights_fortified$name &lt;- gsub(&quot;\\..*&quot;, &quot;&quot;, flights_fortified$name)</div><div class="line"></div><div class="line"># Extract first and last observations for plotting source and destination points (i.e., airports)</div><div class="line">flights_points &lt;- flights_fortified %&gt;%</div><div class="line">  group_by(group) %&gt;%</div><div class="line">  filter(row_number() == 1 | row_number() == n())</div></pre></td></tr></table></figure>
+<pre><code class="{r}"># 按航空公司拆分数据集
+flights_split &lt;- split(flights, flights$name)
+# Calculate intermediate points between each two locations
+flights_all &lt;- lapply(flights_split, function(x) gcIntermediate(x[, c(&quot;source_airport_long&quot;, &quot;source_airport_lat&quot;)], x[, c(&quot;destination_airport_long&quot;, &quot;destination_airport_lat&quot;)], n=100, breakAtDateLine = FALSE, addStartEnd = TRUE, sp = TRUE))
+
+# 转换为数据框
+flights_fortified &lt;- lapply(flights_all, function(x) ldply(x@lines, fortify))
+
+# Unsplit lists
+flights_fortified &lt;- do.call(&quot;rbind&quot;, flights_fortified)
+
+# Add and clean column with airline names
+flights_fortified$name &lt;- rownames(flights_fortified)
+flights_fortified$name &lt;- gsub(&quot;\\..*&quot;, &quot;&quot;, flights_fortified$name)
+
+# Extract first and last observations for plotting source and destination points (i.e., airports)
+flights_points &lt;- flights_fortified %&gt;%
+  group_by(group) %&gt;%
+  filter(row_number() == 1 | row_number() == n())
+</code></pre>
 <h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>接下来就是进行可视化了，前面讲了我们只是在<strong>NASA</strong>提供的夜间地球图上面进行数据映射，所以第一我们需要获取该背景地图。</p>
-<h3 id="图片获取并渲染"><a href="#图片获取并渲染" class="headerlink" title="图片获取并渲染"></a>图片获取并渲染</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#下载图片</div><div class="line">download.file(&quot;https://www.nasa.gov/specials/blackmarble/2016/globalmaps/BlackMarble_2016_01deg.jpg&quot;,</div><div class="line">              destfile = &quot;BlackMarble_2016_01deg.jpg&quot;, mode = &quot;wb&quot;)</div><div class="line">#加载并渲染图片</div><div class="line">earth &lt;- readJPEG(&quot;BlackMarble_2016_01deg.jpg&quot;, native = TRUE)</div><div class="line">earth &lt;- rasterGrob(earth, interpolate = TRUE)</div></pre></td></tr></table></figure>
+<h3 id="图片获取并渲染"><a href="#图片获取并渲染" class="headerlink" title="图片获取并渲染"></a>图片获取并渲染</h3><pre><code class="{r}">#下载图片
+download.file(&quot;https://www.nasa.gov/specials/blackmarble/2016/globalmaps/BlackMarble_2016_01deg.jpg&quot;,
+              destfile = &quot;BlackMarble_2016_01deg.jpg&quot;, mode = &quot;wb&quot;)
+#加载并渲染图片
+earth &lt;- readJPEG(&quot;BlackMarble_2016_01deg.jpg&quot;, native = TRUE)
+earth &lt;- rasterGrob(earth, interpolate = TRUE)
+</code></pre>
 <h3 id="数据映射"><a href="#数据映射" class="headerlink" title="数据映射"></a>数据映射</h3><p>由于航空公司十分多，就挑选几个有名的航空公司进行可视化。</p>
-<h4 id="Lufthansa-德国汉莎航空公司"><a href="#Lufthansa-德国汉莎航空公司" class="headerlink" title="Lufthansa(德国汉莎航空公司)"></a>Lufthansa(德国汉莎航空公司)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ggplot() +</div><div class="line">  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +</div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + </div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#f9ba00&quot;, data = flights_fortified[flights_fortified$name == &quot;Lufthansa&quot;, ]) + </div><div class="line">  geom_point(data = flights_points[flights_points$name == &quot;Lufthansa&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +</div><div class="line">  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), </div><div class="line">        panel.grid.major = element_blank(),</div><div class="line">        panel.grid.minor = element_blank(), </div><div class="line">        axis.title = element_blank(), </div><div class="line">        axis.text = element_blank(), </div><div class="line">        axis.ticks.length = unit(0, &quot;cm&quot;),</div><div class="line">        legend.position = &quot;none&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,</div><div class="line">           label = paste(&quot;Lufthansa&quot;), color = &quot;#f9ba00&quot;, family = &quot;Helvetica Black&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, </div><div class="line">           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, </div><div class="line">           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +</div><div class="line">  coord_equal()</div></pre></td></tr></table></figure>
+<h4 id="Lufthansa-德国汉莎航空公司"><a href="#Lufthansa-德国汉莎航空公司" class="headerlink" title="Lufthansa(德国汉莎航空公司)"></a>Lufthansa(德国汉莎航空公司)</h4><pre><code class="{r}">ggplot() +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + 
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#f9ba00&quot;, data = flights_fortified[flights_fortified$name == &quot;Lufthansa&quot;, ]) + 
+  geom_point(data = flights_points[flights_points$name == &quot;Lufthansa&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +
+  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.title = element_blank(), 
+        axis.text = element_blank(), 
+        axis.ticks.length = unit(0, &quot;cm&quot;),
+        legend.position = &quot;none&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,
+           label = paste(&quot;Lufthansa&quot;), color = &quot;#f9ba00&quot;, family = &quot;Helvetica Black&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, 
+           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, 
+           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +
+  coord_equal()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/5g2k5l3afB.png?imageslim" alt="mark"></p>
-<h4 id="Emirates-阿联酋航空公司"><a href="#Emirates-阿联酋航空公司" class="headerlink" title="Emirates(阿联酋航空公司)"></a>Emirates(阿联酋航空公司)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ggplot() +</div><div class="line">  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +</div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + </div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#ff0000&quot;, data = flights_fortified[flights_fortified$name == &quot;Emirates&quot;, ]) + </div><div class="line">  geom_point(data = flights_points[flights_points$name == &quot;Emirates&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +</div><div class="line">  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), </div><div class="line">        panel.grid.major = element_blank(),</div><div class="line">        panel.grid.minor = element_blank(), </div><div class="line">        axis.title = element_blank(), </div><div class="line">        axis.text = element_blank(), </div><div class="line">        axis.ticks.length = unit(0, &quot;cm&quot;),</div><div class="line">        legend.position = &quot;none&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,</div><div class="line">           label = paste(&quot;Emirates&quot;), color = &quot;#ff0000&quot;, family = &quot;Fontin&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, </div><div class="line">           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, </div><div class="line">           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +</div><div class="line">  coord_equal()</div></pre></td></tr></table></figure>
+<h4 id="Emirates-阿联酋航空公司"><a href="#Emirates-阿联酋航空公司" class="headerlink" title="Emirates(阿联酋航空公司)"></a>Emirates(阿联酋航空公司)</h4><pre><code class="{r}">ggplot() +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + 
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#ff0000&quot;, data = flights_fortified[flights_fortified$name == &quot;Emirates&quot;, ]) + 
+  geom_point(data = flights_points[flights_points$name == &quot;Emirates&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +
+  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.title = element_blank(), 
+        axis.text = element_blank(), 
+        axis.ticks.length = unit(0, &quot;cm&quot;),
+        legend.position = &quot;none&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,
+           label = paste(&quot;Emirates&quot;), color = &quot;#ff0000&quot;, family = &quot;Fontin&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, 
+           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, 
+           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +
+  coord_equal()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/mgl6B5ecaJ.png?imageslim" alt="mark"></p>
-<h4 id="British-Airways-英国航空公司"><a href="#British-Airways-英国航空公司" class="headerlink" title="British Airways(英国航空公司)"></a>British Airways(英国航空公司)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ggplot() +</div><div class="line">  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +</div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + </div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#075aaa&quot;, data = flights_fortified[flights_fortified$name == &quot;British Airways&quot;, ]) + </div><div class="line">  geom_point(data = flights_points[flights_points$name == &quot;British Airways&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +</div><div class="line">  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), </div><div class="line">        panel.grid.major = element_blank(),</div><div class="line">        panel.grid.minor = element_blank(), </div><div class="line">        axis.title = element_blank(), </div><div class="line">        axis.text = element_blank(), </div><div class="line">        axis.ticks.length = unit(0, &quot;cm&quot;),</div><div class="line">        legend.position = &quot;none&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,</div><div class="line">           label = paste(&quot;BRITISH AIRWAYS&quot;), color = &quot;#075aaa&quot;, family = &quot;Baker Signet Std&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, </div><div class="line">           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, </div><div class="line">           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +</div><div class="line">  coord_equal()</div></pre></td></tr></table></figure>
+<h4 id="British-Airways-英国航空公司"><a href="#British-Airways-英国航空公司" class="headerlink" title="British Airways(英国航空公司)"></a>British Airways(英国航空公司)</h4><pre><code class="{r}">ggplot() +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + 
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#075aaa&quot;, data = flights_fortified[flights_fortified$name == &quot;British Airways&quot;, ]) + 
+  geom_point(data = flights_points[flights_points$name == &quot;British Airways&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +
+  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.title = element_blank(), 
+        axis.text = element_blank(), 
+        axis.ticks.length = unit(0, &quot;cm&quot;),
+        legend.position = &quot;none&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,
+           label = paste(&quot;BRITISH AIRWAYS&quot;), color = &quot;#075aaa&quot;, family = &quot;Baker Signet Std&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, 
+           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, 
+           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +
+  coord_equal()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/7H0j1CdIka.png?imageslim" alt="mark"></p>
-<h4 id="Air-China-中国国航"><a href="#Air-China-中国国航" class="headerlink" title="Air China(中国国航)"></a>Air China(中国国航)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ggplot() +</div><div class="line">  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +</div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + </div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#F70C15&quot;, data = flights_fortified[flights_fortified$name == &quot;Air China&quot;, ]) + </div><div class="line">  geom_point(data = flights_points[flights_points$name == &quot;Air China&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +</div><div class="line">  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), </div><div class="line">        panel.grid.major = element_blank(),</div><div class="line">        panel.grid.minor = element_blank(), </div><div class="line">        axis.title = element_blank(), </div><div class="line">        axis.text = element_blank(), </div><div class="line">        axis.ticks.length = unit(0, &quot;cm&quot;),</div><div class="line">        legend.position = &quot;none&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,</div><div class="line">           label = paste(&quot;Air China&quot;), color = &quot;#F70C15&quot;, family = &quot;Times New Roman&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, </div><div class="line">           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, </div><div class="line">           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +</div><div class="line">  coord_equal()</div></pre></td></tr></table></figure>
+<h4 id="Air-China-中国国航"><a href="#Air-China-中国国航" class="headerlink" title="Air China(中国国航)"></a>Air China(中国国航)</h4><pre><code class="{r}">ggplot() +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + 
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#F70C15&quot;, data = flights_fortified[flights_fortified$name == &quot;Air China&quot;, ]) + 
+  geom_point(data = flights_points[flights_points$name == &quot;Air China&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +
+  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.title = element_blank(), 
+        axis.text = element_blank(), 
+        axis.ticks.length = unit(0, &quot;cm&quot;),
+        legend.position = &quot;none&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,
+           label = paste(&quot;Air China&quot;), color = &quot;#F70C15&quot;, family = &quot;Times New Roman&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, 
+           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, 
+           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +
+  coord_equal()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/e9hHgKI1AE.png?imageslim" alt="mark"></p>
-<h4 id="China-Southern-Airlines-中国南航"><a href="#China-Southern-Airlines-中国南航" class="headerlink" title="China Southern Airlines(中国南航)"></a>China Southern Airlines(中国南航)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ggplot() +</div><div class="line">  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +</div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + </div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#004D9D&quot;, data = flights_fortified[flights_fortified$name == &quot;China Southern Airlines&quot;, ]) + </div><div class="line">  geom_point(data = flights_points[flights_points$name == &quot;China Southern Airlines&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +</div><div class="line">  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), </div><div class="line">        panel.grid.major = element_blank(),</div><div class="line">        panel.grid.minor = element_blank(), </div><div class="line">        axis.title = element_blank(), </div><div class="line">        axis.text = element_blank(), </div><div class="line">        axis.ticks.length = unit(0, &quot;cm&quot;),</div><div class="line">        legend.position = &quot;none&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,</div><div class="line">           label = paste(&quot;China Southern Airlines&quot;), color = &quot;#004D9D&quot;, family = &quot;Times New Roman&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, </div><div class="line">           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, </div><div class="line">           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +</div><div class="line">  coord_equal()</div></pre></td></tr></table></figure>
+<h4 id="China-Southern-Airlines-中国南航"><a href="#China-Southern-Airlines-中国南航" class="headerlink" title="China Southern Airlines(中国南航)"></a>China Southern Airlines(中国南航)</h4><pre><code class="{r}">ggplot() +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.0, size = 0.0, data = flights_fortified) + 
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, color = &quot;#004D9D&quot;, data = flights_fortified[flights_fortified$name == &quot;China Southern Airlines&quot;, ]) + 
+  geom_point(data = flights_points[flights_points$name == &quot;China Southern Airlines&quot;, ], aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +
+  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.title = element_blank(), 
+        axis.text = element_blank(), 
+        axis.ticks.length = unit(0, &quot;cm&quot;),
+        legend.position = &quot;none&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14,
+           label = paste(&quot;China Southern Airlines&quot;), color = &quot;#004D9D&quot;, family = &quot;Times New Roman&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -26, hjust = 0, size = 8, 
+           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 7, 
+           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +
+  coord_equal()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/D0GeF9BC62.png?imageslim" alt="mark"></p>
-<h3 id="一次性映射多家航空公司航行路线"><a href="#一次性映射多家航空公司航行路线" class="headerlink" title="一次性映射多家航空公司航行路线"></a>一次性映射多家航空公司航行路线</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">#抽取数据集</div><div class="line">flights_subset &lt;- c(&quot;Lufthansa&quot;, &quot;Emirates&quot;, &quot;British Airways&quot;)</div><div class="line">flights_subset &lt;- flights_fortified[flights_fortified$name %in% flights_subset, ]</div><div class="line">flights_subset_points &lt;- flights_subset%&gt;%</div><div class="line">  group_by(group)%&gt;%</div><div class="line">  filter(row_number()==1|row_number()==n())</div><div class="line">#可视化</div><div class="line">ggplot() +</div><div class="line">  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +</div><div class="line">  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, data = flights_subset) + </div><div class="line">  geom_point(data = flights_subset_points, aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +</div><div class="line">  scale_color_manual(values = c(&quot;#f9ba00&quot;, &quot;#ff0000&quot;, &quot;#075aaa&quot;)) +</div><div class="line">  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), </div><div class="line">        panel.grid.major = element_blank(),</div><div class="line">        panel.grid.minor = element_blank(), </div><div class="line">        axis.title = element_blank(), </div><div class="line">        axis.text = element_blank(), </div><div class="line">        axis.ticks.length = unit(0, &quot;cm&quot;),</div><div class="line">        legend.position = &quot;none&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -4, hjust = 0, size = 14, </div><div class="line">           label = paste(&quot;Lufthansa&quot;), color = &quot;#f9ba00&quot;, family = &quot;Helvetica Black&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -11, hjust = 0, size = 14, </div><div class="line">           label = paste(&quot;Emirates&quot;), color = &quot;#ff0000&quot;, family = &quot;Fontin&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14, </div><div class="line">           label = paste(&quot;BRITISH AIRWAYS&quot;), color = &quot;#075aaa&quot;, family = &quot;Baker Signet Std&quot;) + </div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 8, </div><div class="line">           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +</div><div class="line">  annotate(&quot;text&quot;, x = -150, y = -34, hjust = 0, size = 7, </div><div class="line">           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +</div><div class="line">  coord_equal()</div></pre></td></tr></table></figure>
+<h3 id="一次性映射多家航空公司航行路线"><a href="#一次性映射多家航空公司航行路线" class="headerlink" title="一次性映射多家航空公司航行路线"></a>一次性映射多家航空公司航行路线</h3><pre><code class="{r}">#抽取数据集
+flights_subset &lt;- c(&quot;Lufthansa&quot;, &quot;Emirates&quot;, &quot;British Airways&quot;)
+flights_subset &lt;- flights_fortified[flights_fortified$name %in% flights_subset, ]
+flights_subset_points &lt;- flights_subset%&gt;%
+  group_by(group)%&gt;%
+  filter(row_number()==1|row_number()==n())
+#可视化
+ggplot() +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_path(aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.3, data = flights_subset) + 
+  geom_point(data = flights_subset_points, aes(long, lat), alpha = 0.8, size = 0.1, colour = &quot;white&quot;) +
+  scale_color_manual(values = c(&quot;#f9ba00&quot;, &quot;#ff0000&quot;, &quot;#075aaa&quot;)) +
+  theme(panel.background = element_rect(fill = &quot;#05050f&quot;, colour = &quot;#05050f&quot;), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.title = element_blank(), 
+        axis.text = element_blank(), 
+        axis.ticks.length = unit(0, &quot;cm&quot;),
+        legend.position = &quot;none&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -4, hjust = 0, size = 14, 
+           label = paste(&quot;Lufthansa&quot;), color = &quot;#f9ba00&quot;, family = &quot;Helvetica Black&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -11, hjust = 0, size = 14, 
+           label = paste(&quot;Emirates&quot;), color = &quot;#ff0000&quot;, family = &quot;Fontin&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -18, hjust = 0, size = 14, 
+           label = paste(&quot;BRITISH AIRWAYS&quot;), color = &quot;#075aaa&quot;, family = &quot;Baker Signet Std&quot;) + 
+  annotate(&quot;text&quot;, x = -150, y = -30, hjust = 0, size = 8, 
+           label = paste(&quot;Flight routes&quot;), color = &quot;white&quot;) +
+  annotate(&quot;text&quot;, x = -150, y = -34, hjust = 0, size = 7, 
+           label = paste(&quot;ytlogos.github.io || NASA.gov || OpenFlights.org&quot;), color = &quot;white&quot;, alpha = 0.5) +
+  coord_equal()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180207/6HckGG7Jfc.png?imageslim" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">R version 3.4.3 (2017-11-30)</div><div class="line">Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">Running under: Windows &gt;= 8 x64 (build 9200)</div><div class="line"></div><div class="line">Matrix products: default</div><div class="line"></div><div class="line">locale:</div><div class="line">[1] LC_COLLATE=Chinese (Simplified)_China.936  LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">[3] LC_MONETARY=Chinese (Simplified)_China.936 LC_NUMERIC=C                              </div><div class="line">[5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line"></div><div class="line">attached base packages:</div><div class="line">[1] grid      stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line"></div><div class="line">other attached packages:</div><div class="line"> [1] plyr_1.8.4          jpeg_0.1-8          geosphere_1.5-7     data.table_1.10.4-3</div><div class="line"> [5] forcats_0.2.0       stringr_1.2.0       dplyr_0.7.4         purrr_0.2.4        </div><div class="line"> [9] readr_1.1.1         tidyr_0.8.0         tibble_1.4.2        ggplot2_2.2.1.9000 </div><div class="line">[13] tidyverse_1.2.1     pacman_0.4.6       </div><div class="line"></div><div class="line">loaded via a namespace (and not attached):</div><div class="line"> [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0      compiler_3.4.3    bindr_0.1        </div><div class="line"> [6] tools_3.4.3       lubridate_1.7.1   jsonlite_1.5      nlme_3.1-131      gtable_0.2.0     </div><div class="line">[11] lattice_0.20-35   pkgconfig_2.0.1   rlang_0.1.6       psych_1.7.8       cli_1.0.0        </div><div class="line">[16] rstudioapi_0.7    yaml_2.1.16       parallel_3.4.3    haven_1.1.1       bindrcpp_0.2     </div><div class="line">[21] xml2_1.2.0        httr_1.3.1        knitr_1.19        hms_0.4.1         glue_1.2.0       </div><div class="line">[26] R6_2.2.2          readxl_1.0.0      foreign_0.8-69    sp_1.2-7          modelr_0.1.1     </div><div class="line">[31] reshape2_1.4.3    magrittr_1.5      scales_0.5.0.9000 rvest_0.3.2       assertthat_0.2.0 </div><div class="line">[36] mnormt_1.5-5      colorspace_1.3-2  stringi_1.1.6     lazyeval_0.2.1    munsell_0.4.3    </div><div class="line">[41] broom_0.4.3       crayon_1.3.4</div></pre></td></tr></table></figure>
-<hr>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code class="{r}">sessionInfo()
+</code></pre>
+<pre><code>R version 3.4.3 (2017-11-30)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows &gt;= 8 x64 (build 9200)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=Chinese (Simplified)_China.936  LC_CTYPE=Chinese (Simplified)_China.936   
+[3] LC_MONETARY=Chinese (Simplified)_China.936 LC_NUMERIC=C                              
+[5] LC_TIME=Chinese (Simplified)_China.936    
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] plyr_1.8.4          jpeg_0.1-8          geosphere_1.5-7     data.table_1.10.4-3
+ [5] forcats_0.2.0       stringr_1.2.0       dplyr_0.7.4         purrr_0.2.4        
+ [9] readr_1.1.1         tidyr_0.8.0         tibble_1.4.2        ggplot2_2.2.1.9000 
+[13] tidyverse_1.2.1     pacman_0.4.6       
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0      compiler_3.4.3    bindr_0.1        
+ [6] tools_3.4.3       lubridate_1.7.1   jsonlite_1.5      nlme_3.1-131      gtable_0.2.0     
+[11] lattice_0.20-35   pkgconfig_2.0.1   rlang_0.1.6       psych_1.7.8       cli_1.0.0        
+[16] rstudioapi_0.7    yaml_2.1.16       parallel_3.4.3    haven_1.1.1       bindrcpp_0.2     
+[21] xml2_1.2.0        httr_1.3.1        knitr_1.19        hms_0.4.1         glue_1.2.0       
+[26] R6_2.2.2          readxl_1.0.0      foreign_0.8-69    sp_1.2-7          modelr_0.1.1     
+[31] reshape2_1.4.3    magrittr_1.5      scales_0.5.0.9000 rvest_0.3.2       assertthat_0.2.0 
+[36] mnormt_1.5-5      colorspace_1.3-2  stringi_1.1.6     lazyeval_0.2.1    munsell_0.4.3    
+[41] broom_0.4.3       crayon_1.3.4
+</code></pre><hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
 <p>Email: tyan@zju.edu.cn</p>
 <p>QQ: 1051927088</p>

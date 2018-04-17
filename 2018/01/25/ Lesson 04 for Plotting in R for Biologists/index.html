@@ -508,7 +508,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  674
+                  663
                 </span>
               
 
@@ -551,26 +551,92 @@
 <li>对部分type重命名</li>
 </ul>
 <a id="more"></a>
-<h2 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(tidyverse)</div><div class="line">my_data &lt;- read.csv(&quot;Encode_HMM_data.txt&quot;, sep = &quot;\t&quot;, header = FALSE)</div><div class="line">head(my_data[, c(1:6)])</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##     V1    V2    V3                V4 V5 V6</div><div class="line">## 1 chr1 10000 10600 15_Repetitive/CNV  0  .</div><div class="line">## 2 chr1 10600 11137 13_Heterochrom/lo  0  .</div><div class="line">## 3 chr1 11137 11737       8_Insulator  0  .</div><div class="line">## 4 chr1 11737 11937       11_Weak_Txn  0  .</div><div class="line">## 5 chr1 11937 12137   7_Weak_Enhancer  0  .</div><div class="line">## 6 chr1 12137 14537       11_Weak_Txn  0  .</div></pre></td></tr></table></figure>
-<h3 id="对数据部分列进行重命名"><a href="#对数据部分列进行重命名" class="headerlink" title="对数据部分列进行重命名"></a>对数据部分列进行重命名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;, &quot;start&quot;, &quot;stop&quot;,&quot;type&quot;)</div><div class="line">head(my_data[, c(1:4)])</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom start  stop              type</div><div class="line">## 1  chr1 10000 10600 15_Repetitive/CNV</div><div class="line">## 2  chr1 10600 11137 13_Heterochrom/lo</div><div class="line">## 3  chr1 11137 11737       8_Insulator</div><div class="line">## 4  chr1 11737 11937       11_Weak_Txn</div><div class="line">## 5  chr1 11937 12137   7_Weak_Enhancer</div><div class="line">## 6  chr1 12137 14537       11_Weak_Txn</div></pre></td></tr></table></figure>
-<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<h2 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h2><pre><code class="{r}">library(tidyverse)
+my_data &lt;- read.csv(&quot;Encode_HMM_data.txt&quot;, sep = &quot;\t&quot;, header = FALSE)
+head(my_data[, c(1:6)])
+</code></pre>
+<pre><code>##     V1    V2    V3                V4 V5 V6
+## 1 chr1 10000 10600 15_Repetitive/CNV  0  .
+## 2 chr1 10600 11137 13_Heterochrom/lo  0  .
+## 3 chr1 11137 11737       8_Insulator  0  .
+## 4 chr1 11737 11937       11_Weak_Txn  0  .
+## 5 chr1 11937 12137   7_Weak_Enhancer  0  .
+## 6 chr1 12137 14537       11_Weak_Txn  0  .
+</code></pre><h3 id="对数据部分列进行重命名"><a href="#对数据部分列进行重命名" class="headerlink" title="对数据部分列进行重命名"></a>对数据部分列进行重命名</h3><pre><code class="{r}">names(my_data)[1:4] &lt;- c(&quot;chrom&quot;, &quot;start&quot;, &quot;stop&quot;,&quot;type&quot;)
+head(my_data[, c(1:4)])
+</code></pre>
+<pre><code>##   chrom start  stop              type
+## 1  chr1 10000 10600 15_Repetitive/CNV
+## 2  chr1 10600 11137 13_Heterochrom/lo
+## 3  chr1 11137 11737       8_Insulator
+## 4  chr1 11737 11937       11_Weak_Txn
+## 5  chr1 11937 12137   7_Weak_Enhancer
+## 6  chr1 12137 14537       11_Weak_Txn
+</code></pre><h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><pre><code class="{r}">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/j2IB94I12k.png?imageslim" alt="mark"></p>
 <h2 id="数据调整"><a href="#数据调整" class="headerlink" title="数据调整"></a>数据调整</h2><p>主要是针对上面提出的几个问题对数据进行调整</p>
-<h3 id="剔除染色体前缀chr"><a href="#剔除染色体前缀chr" class="headerlink" title="剔除染色体前缀chr"></a>剔除染色体前缀chr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_data$chrom &lt;- factor(gsub(&quot;chr&quot;, &quot;&quot;, my_data$chrom))</div><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<h3 id="剔除染色体前缀chr"><a href="#剔除染色体前缀chr" class="headerlink" title="剔除染色体前缀chr"></a>剔除染色体前缀chr</h3><pre><code class="{r}">my_data$chrom &lt;- factor(gsub(&quot;chr&quot;, &quot;&quot;, my_data$chrom))
+ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/2ibGfgm9Gg.png?imageslim" alt="mark"></p>
 <h3 id="对染色体进行排序"><a href="#对染色体进行排序" class="headerlink" title="对染色体进行排序"></a>对染色体进行排序</h3><p>这个关于人类的基因组数据，所以染色体顺序应该是1：22,X,Y。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_data$chrom &lt;- factor(my_data$chrom, levels = c(seq(1:22), &quot;X&quot;, &quot;Y&quot;))</div><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<pre><code class="{r}">my_data$chrom &lt;- factor(my_data$chrom, levels = c(seq(1:22), &quot;X&quot;, &quot;Y&quot;))
+ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/G0i0aBH43a.png?imageslim" alt="mark"></p>
 <p>这下看起来相对好一点</p>
 <h3 id="选取type"><a href="#选取type" class="headerlink" title="选取type"></a>选取type</h3><p>只选取我们感兴趣的type进行可视化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my_data &lt;- my_data[my_data$type %in% c(&quot;1_Active_Promoter&quot;, &quot;4_Strong_Enhancer&quot;, &quot;8_Insulator&quot;), ]</div></pre></td></tr></table></figure>
-<h4 id="对选取的type进行重命名"><a href="#对选取的type进行重命名" class="headerlink" title="对选取的type进行重命名"></a>对选取的type进行重命名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(plyr)</div><div class="line">my_data$type &lt;- revalue(my_data$type,c(&quot;1_Active_Promoter&quot;=&quot;Promoter&quot;,&quot;4_Strong_Enhancer&quot;=&quot;Enhancer&quot;,&quot;8_Insulator&quot;=&quot;Insulator&quot;))</div><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<pre><code class="{r}">my_data &lt;- my_data[my_data$type %in% c(&quot;1_Active_Promoter&quot;, &quot;4_Strong_Enhancer&quot;, &quot;8_Insulator&quot;), ]
+</code></pre>
+<h4 id="对选取的type进行重命名"><a href="#对选取的type进行重命名" class="headerlink" title="对选取的type进行重命名"></a>对选取的type进行重命名</h4><pre><code class="{r}">library(plyr)
+my_data$type &lt;- revalue(my_data$type,c(&quot;1_Active_Promoter&quot;=&quot;Promoter&quot;,&quot;4_Strong_Enhancer&quot;=&quot;Enhancer&quot;,&quot;8_Insulator&quot;=&quot;Insulator&quot;))
+ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180201/gHcHm3FdLC.png?imageslim" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">##  [1] plyr_1.8.4         forcats_0.2.0      stringr_1.2.0     </div><div class="line">##  [4] dplyr_0.7.4        purrr_0.2.4        readr_1.1.1       </div><div class="line">##  [7] tidyr_0.7.2        tibble_1.4.2       ggplot2_2.2.1.9000</div><div class="line">## [10] tidyverse_1.2.1   </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0     </div><div class="line">##  [4] compiler_3.4.3    bindr_0.1         tools_3.4.3      </div><div class="line">##  [7] digest_0.6.14     lubridate_1.7.1   jsonlite_1.5     </div><div class="line">## [10] evaluate_0.10.1   nlme_3.1-131      gtable_0.2.0     </div><div class="line">## [13] lattice_0.20-35   pkgconfig_2.0.1   rlang_0.1.6      </div><div class="line">## [16] psych_1.7.8       cli_1.0.0         rstudioapi_0.7   </div><div class="line">## [19] yaml_2.1.16       parallel_3.4.3    haven_1.1.1      </div><div class="line">## [22] bindrcpp_0.2      xml2_1.2.0        httr_1.3.1       </div><div class="line">## [25] knitr_1.18        hms_0.4.1         rprojroot_1.3-2  </div><div class="line">## [28] grid_3.4.3        glue_1.2.0        R6_2.2.2         </div><div class="line">## [31] readxl_1.0.0      foreign_0.8-69    rmarkdown_1.8    </div><div class="line">## [34] modelr_0.1.1      reshape2_1.4.3    magrittr_1.5     </div><div class="line">## [37] backports_1.1.2   scales_0.5.0.9000 htmltools_0.3.6  </div><div class="line">## [40] rvest_0.3.2       assertthat_0.2.0  mnormt_1.5-5     </div><div class="line">## [43] colorspace_1.3-2  labeling_0.3      stringi_1.1.6    </div><div class="line">## [46] lazyeval_0.2.1    munsell_0.4.3     broom_0.4.3      </div><div class="line">## [49] crayon_1.3.4</div></pre></td></tr></table></figure>
-<hr>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code class="{r}">sessionInfo()
+</code></pre>
+<pre><code>## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=Chinese (Simplified)_China.936 
+## [2] LC_CTYPE=Chinese (Simplified)_China.936   
+## [3] LC_MONETARY=Chinese (Simplified)_China.936
+## [4] LC_NUMERIC=C                              
+## [5] LC_TIME=Chinese (Simplified)_China.936    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] plyr_1.8.4         forcats_0.2.0      stringr_1.2.0     
+##  [4] dplyr_0.7.4        purrr_0.2.4        readr_1.1.1       
+##  [7] tidyr_0.7.2        tibble_1.4.2       ggplot2_2.2.1.9000
+## [10] tidyverse_1.2.1   
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.15      cellranger_1.1.0  pillar_1.1.0     
+##  [4] compiler_3.4.3    bindr_0.1         tools_3.4.3      
+##  [7] digest_0.6.14     lubridate_1.7.1   jsonlite_1.5     
+## [10] evaluate_0.10.1   nlme_3.1-131      gtable_0.2.0     
+## [13] lattice_0.20-35   pkgconfig_2.0.1   rlang_0.1.6      
+## [16] psych_1.7.8       cli_1.0.0         rstudioapi_0.7   
+## [19] yaml_2.1.16       parallel_3.4.3    haven_1.1.1      
+## [22] bindrcpp_0.2      xml2_1.2.0        httr_1.3.1       
+## [25] knitr_1.18        hms_0.4.1         rprojroot_1.3-2  
+## [28] grid_3.4.3        glue_1.2.0        R6_2.2.2         
+## [31] readxl_1.0.0      foreign_0.8-69    rmarkdown_1.8    
+## [34] modelr_0.1.1      reshape2_1.4.3    magrittr_1.5     
+## [37] backports_1.1.2   scales_0.5.0.9000 htmltools_0.3.6  
+## [40] rvest_0.3.2       assertthat_0.2.0  mnormt_1.5-5     
+## [43] colorspace_1.3-2  labeling_0.3      stringi_1.1.6    
+## [46] lazyeval_0.2.1    munsell_0.4.3     broom_0.4.3      
+## [49] crayon_1.3.4
+</code></pre><hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 
       

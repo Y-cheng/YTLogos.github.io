@@ -121,8 +121,6 @@
 <meta property="og:site_name" content="Logos">
 <meta property="og:description" content="简介这篇博客主要基于d4tagirl,稍微有所修改。">
 <meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/g0hLljaEb9.gif">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/emDGG7e91G.png?imageslim">
-<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/g0hLljaEb9.gif">
 <meta property="og:updated_time" content="2018-02-08T06:02:39.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用gganimate可视化R-Ladies发展情况">
@@ -506,7 +504,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  921
+                  940
                 </span>
               
 
@@ -522,7 +520,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5
+                  6
                 </span>
               
             </div>
@@ -543,16 +541,77 @@
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/g0hLljaEb9.gif" alt="mark"></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>这篇博客主要基于<a href="https://d4tagirl.com/2017/05/how-to-plot-animated-maps-with-gganimate" target="_blank" rel="external"><strong>d4tagirl</strong></a>,稍微有所修改。</p>
 <a id="more"></a>
-<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(pacman)</div><div class="line">p_load(tidyverse, gganomate, maps, ggthemes)</div><div class="line">rladies &lt;- read_csv(url(&quot;https://raw.githubusercontent.com/d4tagirl/R-Ladies-growth-maps/master/rladies.csv&quot;))%&gt;%</div><div class="line">  select(-1)</div><div class="line">head(rladies)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">## # A tibble: 6 x 7</div><div class="line">##   screen_name     location     created_at followers age_days     lon   lat</div><div class="line">##   &lt;chr&gt;           &lt;chr&gt;        &lt;date&gt;         &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</div><div class="line">## 1 RLadiesSF       San Francis~ 2012-10-15       916     1673 -122     37.8</div><div class="line">## 2 RLadiesNYC      New York     2016-09-01       309      256 - 74.0   40.7</div><div class="line">## 3 RLadiesIstanbul &lt;U+0130&gt;stanbul, T~ 2016-09-06       436      251   29.0   41.0</div><div class="line">## 4 RLadiesBCN      Barcelona, ~ 2016-10-11       377      216    2.17  41.4</div><div class="line">## 5 RLadiesColumbus Columbus, OH 2016-10-04       179      223 - 83.0   40.0</div><div class="line">## 6 RLadiesBoston   Boston, MA   2016-09-06       259      251 - 71.1   42.4</div></pre></td></tr></table></figure>
-<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>主要是根据地理位置信息映射到地图上<br><figure class="highlight plain"><figcaption><span>fig.height=18&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">ggplot()+</div><div class="line">  borders(&quot;world&quot;, color=&quot;gray85&quot;, fill=&quot;grey80&quot;)+</div><div class="line">  geom_point(data = rladies, aes(lon, lat, size=followers), color=&quot;purple&quot;, alpha=0.5)+</div><div class="line">  scale_size_continuous(range = c(8, 24), breaks = c(250, 500, 750, 1000))+</div><div class="line">  labs(size=&quot;Followers&quot;, title=&quot;                                             The development of R-Ladies’ Twitter accounts&quot;,x=NULL,y=NULL)+</div><div class="line">  theme(text = element_text(family = &quot;Times New Roman&quot;, color = &quot;#EEEEEE&quot;),</div><div class="line">        plot.title = element_text(size=40,color = &quot;#f9ba00&quot;),</div><div class="line">        plot.subtitle = element_text(size=14),</div><div class="line">        axis.ticks = element_blank(),</div><div class="line">        axis.text = element_blank(),</div><div class="line">        panel.grid = element_blank(),</div><div class="line">        panel.background = element_rect(fill=&quot;#333333&quot;),</div><div class="line">        plot.background = element_rect(fill = &quot;#333333&quot;),</div><div class="line">        legend.position = c(0.18,0.36),</div><div class="line">        legend.background = element_blank(),</div><div class="line">        legend.key = element_blank(),</div><div class="line">        legend.text = element_text(size = 28),</div><div class="line">        legend.title = element_text(size=28, color = &quot;#f9ba00&quot;))+</div><div class="line">  annotate(geom = &quot;text&quot;,</div><div class="line">           label=&quot;Made by Logos ytlogos.github.io\nOriginally from d4tagirl https://d4tagirl.com&quot;,</div><div class="line">           x=70, y=-55, size=10, family=&quot;Helvetica Black&quot;, color=&quot;#f9ba00&quot;, hjust=&quot;left&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/emDGG7e91G.png?imageslim" alt="mark"></p>
-<h2 id="动画展示"><a href="#动画展示" class="headerlink" title="动画展示"></a>动画展示</h2><p>为了利用<strong>gganimate</strong>进行动态展示，需要构建一个映射变量：时间。同时为了使得可视化开始和结尾呈现的是空白，又构建了两个空白图层<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ghost_points_ini &lt;- tibble(created_at=as.Date(&quot;2011-09-01&quot;), followers=0, lon=0, lat=0)</div><div class="line">ghost_points_fin &lt;- tibble(created_at=seq(as.Date(&quot;2017-05-16&quot;), as.Date(&quot;2017-05-30&quot;),by=&quot;days&quot;), followers=0, lon=0,lat=0)</div></pre></td></tr></table></figure></p>
-<p>添加frame映射<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">map &lt;- ggplot()+</div><div class="line">  borders(&quot;world&quot;, color=&quot;gray85&quot;, fill=&quot;grey80&quot;)+</div><div class="line">  geom_point(data = rladies, aes(lon, lat, size=followers, frame=created_at, cumulative=TRUE), color=&quot;purple&quot;, alpha=0.5)+</div><div class="line">  scale_size_continuous(range = c(4, 16), breaks = c(250, 500, 750, 1000))+</div><div class="line">  geom_point(data = ghost_points_ini, aes(lon, lat, size=followers, frame=created_at, cumulative=TRUE), alpha=0)+</div><div class="line">  geom_point(data = ghost_points_fin, aes(lon, lat, size=followers, frame=created_at, cumulative=TRUE), alpha=0)+</div><div class="line">  labs(size=&quot;Followers&quot;, title=&quot;The development of R-Ladies’ Twitter accounts&quot;,x=NULL,y=NULL)+</div><div class="line">  theme(text = element_text(family = &quot;Times New Roman&quot;, color = &quot;#EEEEEE&quot;),</div><div class="line">        plot.title = element_text(size=28, color = &quot;#f9ba00&quot;),</div><div class="line">        plot.subtitle = element_text(size=14),</div><div class="line">        axis.ticks = element_blank(),</div><div class="line">        axis.text = element_blank(),</div><div class="line">        panel.grid = element_blank(),</div><div class="line">        panel.background = element_rect(fill=&quot;#333333&quot;),</div><div class="line">        plot.background = element_rect(fill = &quot;#333333&quot;),</div><div class="line">        legend.position = c(0.18,0.36),</div><div class="line">        legend.background = element_blank(),</div><div class="line">        legend.key = element_blank(),</div><div class="line">        legend.text = element_text(size = 18),</div><div class="line">        legend.title = element_text(size=24, color = &quot;#f9ba00&quot;))+</div><div class="line">  annotate(geom = &quot;text&quot;,</div><div class="line">           label=&quot;Made by Logos ytlogos.github.io\nOriginally from d4tagirl https://d4tagirl.com&quot;,</div><div class="line">           x=70, y=-55, size=6, family=&quot;Helvetica Black&quot;, color=&quot;#f9ba00&quot;, hjust=&quot;left&quot;)</div><div class="line">animation::ani.options(interval=0.15, ani.width=1500, ani.height=800, units=&quot;in&quot;)</div><div class="line">gganimate::gganimate(map, filename = &quot;d4tagirlmap.gif&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/g0hLljaEb9.gif" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">##  [1] ggthemes_3.4.0       maps_3.2.0           BiocInstaller_1.28.0</div><div class="line">##  [4] forcats_0.2.0        stringr_1.2.0        dplyr_0.7.4         </div><div class="line">##  [7] purrr_0.2.4          readr_1.1.1          tidyr_0.8.0         </div><div class="line">## [10] tibble_1.4.2         ggplot2_2.2.1.9000   tidyverse_1.2.1     </div><div class="line">## [13] pacman_0.4.6        </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] reshape2_1.4.3    haven_1.1.1       lattice_0.20-35  </div><div class="line">##  [4] colorspace_1.3-2  htmltools_0.3.6   yaml_2.1.16      </div><div class="line">##  [7] utf8_1.1.3        rlang_0.1.6       pillar_1.1.0     </div><div class="line">## [10] foreign_0.8-69    glue_1.2.0        modelr_0.1.1     </div><div class="line">## [13] readxl_1.0.0      bindrcpp_0.2      bindr_0.1        </div><div class="line">## [16] plyr_1.8.4        munsell_0.4.3     gtable_0.2.0     </div><div class="line">## [19] cellranger_1.1.0  rvest_0.3.2       psych_1.7.8      </div><div class="line">## [22] evaluate_0.10.1   labeling_0.3      knitr_1.19       </div><div class="line">## [25] parallel_3.4.3    broom_0.4.3       Rcpp_0.12.15     </div><div class="line">## [28] scales_0.5.0.9000 backports_1.1.2   jsonlite_1.5     </div><div class="line">## [31] mnormt_1.5-5      hms_0.4.1         digest_0.6.15    </div><div class="line">## [34] stringi_1.1.6     grid_3.4.3        rprojroot_1.3-2  </div><div class="line">## [37] cli_1.0.0         tools_3.4.3       magrittr_1.5     </div><div class="line">## [40] lazyeval_0.2.1    crayon_1.3.4      pkgconfig_2.0.1  </div><div class="line">## [43] xml2_1.2.0        lubridate_1.7.1   assertthat_0.2.0 </div><div class="line">## [46] rmarkdown_1.8     httr_1.3.1        rstudioapi_0.7   </div><div class="line">## [49] R6_2.2.2          nlme_3.1-131      compiler_3.4.3</div></pre></td></tr></table></figure>
-<hr>
+<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h2><pre><code class="{r}">library(pacman)
+p_load(tidyverse, gganomate, maps, ggthemes)
+rladies &lt;- read_csv(url(&quot;https://raw.githubusercontent.com/d4tagirl/R-Ladies-growth-maps/master/rladies.csv&quot;))%&gt;%
+  select(-1)
+head(rladies)
+</code></pre>
+<pre><code>## # A tibble: 6 x 7
+##   screen_name     location     created_at followers age_days     lon   lat
+##   &lt;chr&gt;           &lt;chr&gt;        &lt;date&gt;         &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 RLadiesSF       San Francis~ 2012-10-15       916     1673 -122     37.8
+## 2 RLadiesNYC      New York     2016-09-01       309      256 - 74.0   40.7
+## 3 RLadiesIstanbul &lt;U+0130&gt;stanbul, T~ 2016-09-06       436      251   29.0   41.0
+## 4 RLadiesBCN      Barcelona, ~ 2016-10-11       377      216    2.17  41.4
+## 5 RLadiesColumbus Columbus, OH 2016-10-04       179      223 - 83.0   40.0
+## 6 RLadiesBoston   Boston, MA   2016-09-06       259      251 - 71.1   42.4
+</code></pre><h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>主要是根据地理位置信息映射到地图上<br>```{r,fig.width=24, fig.height=18}<br>ggplot()+<br>  borders(“world”, color=”gray85”, fill=”grey80”)+<br>  geom_point(data = rladies, aes(lon, lat, size=followers), color=”purple”, alpha=0.5)+<br>  scale_size_continuous(range = c(8, 24), breaks = c(250, 500, 750, 1000))+<br>  labs(size=”Followers”, title=”                                             The development of R-Ladies’ Twitter accounts”,x=NULL,y=NULL)+<br>  theme(text = element_text(family = “Times New Roman”, color = “#EEEEEE”),<br>        plot.title = element_text(size=40,color = “#f9ba00”),<br>        plot.subtitle = element_text(size=14),<br>        axis.ticks = element_blank(),<br>        axis.text = element_blank(),<br>        panel.grid = element_blank(),<br>        panel.background = element_rect(fill=”#333333”),<br>        plot.background = element_rect(fill = “#333333”),<br>        legend.position = c(0.18,0.36),<br>        legend.background = element_blank(),<br>        legend.key = element_blank(),<br>        legend.text = element_text(size = 28),<br>        legend.title = element_text(size=28, color = “#f9ba00”))+<br>  annotate(geom = “text”,<br>           label=”Made by Logos ytlogos.github.io\nOriginally from d4tagirl <a href="https://d4tagirl.com" target="_blank" rel="external">https://d4tagirl.com</a>“,<br>           x=70, y=-55, size=10, family=”Helvetica Black”, color=”#f9ba00”, hjust=”left”)</p>
+<pre><code>![mark](http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/emDGG7e91G.png?imageslim)
+
+## 动画展示
+为了利用**gganimate**进行动态展示，需要构建一个映射变量：时间。同时为了使得可视化开始和结尾呈现的是空白，又构建了两个空白图层
+</code></pre><p>ghost_points_ini &lt;- tibble(created_at=as.Date(“2011-09-01”), followers=0, lon=0, lat=0)<br>ghost_points_fin &lt;- tibble(created_at=seq(as.Date(“2017-05-16”), as.Date(“2017-05-30”),by=”days”), followers=0, lon=0,lat=0)</p>
+<pre><code>
+添加frame映射
+</code></pre><p>map &lt;- ggplot()+<br>  borders(“world”, color=”gray85”, fill=”grey80”)+<br>  geom_point(data = rladies, aes(lon, lat, size=followers, frame=created_at, cumulative=TRUE), color=”purple”, alpha=0.5)+<br>  scale_size_continuous(range = c(4, 16), breaks = c(250, 500, 750, 1000))+<br>  geom_point(data = ghost_points_ini, aes(lon, lat, size=followers, frame=created_at, cumulative=TRUE), alpha=0)+<br>  geom_point(data = ghost_points_fin, aes(lon, lat, size=followers, frame=created_at, cumulative=TRUE), alpha=0)+<br>  labs(size=”Followers”, title=”The development of R-Ladies’ Twitter accounts”,x=NULL,y=NULL)+<br>  theme(text = element_text(family = “Times New Roman”, color = “#EEEEEE”),<br>        plot.title = element_text(size=28, color = “#f9ba00”),<br>        plot.subtitle = element_text(size=14),<br>        axis.ticks = element_blank(),<br>        axis.text = element_blank(),<br>        panel.grid = element_blank(),<br>        panel.background = element_rect(fill=”#333333”),<br>        plot.background = element_rect(fill = “#333333”),<br>        legend.position = c(0.18,0.36),<br>        legend.background = element_blank(),<br>        legend.key = element_blank(),<br>        legend.text = element_text(size = 18),<br>        legend.title = element_text(size=24, color = “#f9ba00”))+<br>  annotate(geom = “text”,<br>           label=”Made by Logos ytlogos.github.io\nOriginally from d4tagirl <a href="https://d4tagirl.com" target="_blank" rel="external">https://d4tagirl.com</a>“,<br>           x=70, y=-55, size=6, family=”Helvetica Black”, color=”#f9ba00”, hjust=”left”)<br>animation::ani.options(interval=0.15, ani.width=1500, ani.height=800, units=”in”)<br>gganimate::gganimate(map, filename = “d4tagirlmap.gif”)</p>
+<pre><code>![mark](http://ov520p4qw.bkt.clouddn.com/ytlogos/180208/g0hLljaEb9.gif)
+
+## SessionInfo
+```{r}
+sessionInfo()
+</code></pre><pre><code>## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=Chinese (Simplified)_China.936 
+## [2] LC_CTYPE=Chinese (Simplified)_China.936   
+## [3] LC_MONETARY=Chinese (Simplified)_China.936
+## [4] LC_NUMERIC=C                              
+## [5] LC_TIME=Chinese (Simplified)_China.936    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] ggthemes_3.4.0       maps_3.2.0           BiocInstaller_1.28.0
+##  [4] forcats_0.2.0        stringr_1.2.0        dplyr_0.7.4         
+##  [7] purrr_0.2.4          readr_1.1.1          tidyr_0.8.0         
+## [10] tibble_1.4.2         ggplot2_2.2.1.9000   tidyverse_1.2.1     
+## [13] pacman_0.4.6        
+## 
+## loaded via a namespace (and not attached):
+##  [1] reshape2_1.4.3    haven_1.1.1       lattice_0.20-35  
+##  [4] colorspace_1.3-2  htmltools_0.3.6   yaml_2.1.16      
+##  [7] utf8_1.1.3        rlang_0.1.6       pillar_1.1.0     
+## [10] foreign_0.8-69    glue_1.2.0        modelr_0.1.1     
+## [13] readxl_1.0.0      bindrcpp_0.2      bindr_0.1        
+## [16] plyr_1.8.4        munsell_0.4.3     gtable_0.2.0     
+## [19] cellranger_1.1.0  rvest_0.3.2       psych_1.7.8      
+## [22] evaluate_0.10.1   labeling_0.3      knitr_1.19       
+## [25] parallel_3.4.3    broom_0.4.3       Rcpp_0.12.15     
+## [28] scales_0.5.0.9000 backports_1.1.2   jsonlite_1.5     
+## [31] mnormt_1.5-5      hms_0.4.1         digest_0.6.15    
+## [34] stringi_1.1.6     grid_3.4.3        rprojroot_1.3-2  
+## [37] cli_1.0.0         tools_3.4.3       magrittr_1.5     
+## [40] lazyeval_0.2.1    crayon_1.3.4      pkgconfig_2.0.1  
+## [43] xml2_1.2.0        lubridate_1.7.1   assertthat_0.2.0 
+## [46] rmarkdown_1.8     httr_1.3.1        rstudioapi_0.7   
+## [49] R6_2.2.2          nlme_3.1-131      compiler_3.4.3
+</code></pre><hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
 <p>Email: tyan@zju.edu.cn</p>
 <p>QQ: 1051927088</p>
@@ -884,7 +943,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据加载"><span class="nav-number">2.</span> <span class="nav-text">数据加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化"><span class="nav-number">3.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画展示"><span class="nav-number">4.</span> <span class="nav-text">动画展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SessionInfo"><span class="nav-number">5.</span> <span class="nav-text">SessionInfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">6.</span> <span class="nav-text">联系方式：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据加载"><span class="nav-number">2.</span> <span class="nav-text">数据加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化"><span class="nav-number">3.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">4.</span> <span class="nav-text">联系方式：</span></a></li></ol></div>
             
 
           </div>

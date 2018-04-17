@@ -504,7 +504,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,452
+                  1,481
                 </span>
               
 
@@ -552,10 +552,15 @@
 <blockquote>
 <p>需要注意的是使用的是反引号`，而不是单引号’。另外表达式与运算符之间要有空格。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#创建测试脚本test.sh</div><div class="line"></div><div class="line">add=`expr 3 + 5`</div><div class="line">echo &quot;两数之和为：$add&quot;</div></pre></td></tr></table></figure>
-<p>运行脚本之后结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh        </div><div class="line">两数之和为：4</div></pre></td></tr></table></figure>
-<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>算术运算符主要如下：假设a=10,b=20</p>
+<pre><code>#!/bin/bash
+#创建测试脚本test.sh
+
+add=`expr 3 + 5`
+echo &quot;两数之和为：$add&quot;
+</code></pre><p>运行脚本之后结果如下：</p>
+<pre><code>$ ./test.sh        
+两数之和为：4
+</code></pre><h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>算术运算符主要如下：假设a=10,b=20</p>
 <table>
 <thead>
 <tr>
@@ -610,9 +615,44 @@
 <blockquote>
 <p>注意的是表达式要放在括号之间，并且要有空格。</p>
 </blockquote>
-<h3 id="举个例子说明"><a href="#举个例子说明" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#创建测试脚本test.sh</div><div class="line">m=12</div><div class="line">n=5</div><div class="line">#加法</div><div class="line">val=`expr $m + $n`</div><div class="line">echo &quot;m+n= $val&quot;</div><div class="line">#减法</div><div class="line">val=`expr $m - $n`</div><div class="line">echo &quot;m-n= $val&quot;</div><div class="line">#乘法</div><div class="line">val=`expr $m \* $n`</div><div class="line">echo &quot;m*n= $val&quot;</div><div class="line">#乘法</div><div class="line">val=`expr $m / $n`</div><div class="line">echo &quot;m/n= $val&quot;</div><div class="line">#乘法</div><div class="line">val=`expr $m % $n`</div><div class="line">echo &quot;m%n= $val&quot;</div><div class="line"></div><div class="line">#相等</div><div class="line">if [ $m == $n ]</div><div class="line">then</div><div class="line">        echo &quot;m=n&quot;</div><div class="line">fi</div><div class="line">#不相等</div><div class="line">if [ $m != $n ]</div><div class="line">then</div><div class="line">        echo &quot;m!=n&quot;</div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">m+n= 17</div><div class="line">m-n= 7</div><div class="line">m*n= 60</div><div class="line">m/n= 2</div><div class="line">m%n= 2</div><div class="line">m!=n</div></pre></td></tr></table></figure></p>
-<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符只支持数字，假设a=10,b=20:</p>
+<h3 id="举个例子说明"><a href="#举个例子说明" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><pre><code>#!/bin/bash
+#创建测试脚本test.sh
+m=12
+n=5
+#加法
+val=`expr $m + $n`
+echo &quot;m+n= $val&quot;
+#减法
+val=`expr $m - $n`
+echo &quot;m-n= $val&quot;
+#乘法
+val=`expr $m \* $n`
+echo &quot;m*n= $val&quot;
+#乘法
+val=`expr $m / $n`
+echo &quot;m/n= $val&quot;
+#乘法
+val=`expr $m % $n`
+echo &quot;m%n= $val&quot;
+
+#相等
+if [ $m == $n ]
+then
+        echo &quot;m=n&quot;
+fi
+#不相等
+if [ $m != $n ]
+then
+        echo &quot;m!=n&quot;
+</code></pre><p>运行脚本结果如下：</p>
+<pre><code>$ ./test.sh 
+m+n= 17
+m-n= 7
+m*n= 60
+m/n= 2
+m%n= 2
+m!=n
+</code></pre><h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符只支持数字，假设a=10,b=20:</p>
 <table>
 <thead>
 <tr>
@@ -654,9 +694,57 @@
 </tr>
 </tbody>
 </table>
-<h3 id="举个例子说明-1"><a href="#举个例子说明-1" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line">if [ $a -eq $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -eq $b : a 等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -eq $b: a 不等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -ne $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -ne $b: a 不等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -ne $b : a 等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -gt $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -gt $b: a 大于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -gt $b: a 不大于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -lt $b: a 小于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -lt $b: a 不小于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -ge $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -ge $b: a 大于或等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -ge $b: a 小于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -le $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a -le $b: a 小于或等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a -le $b: a 大于 b&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">10 -eq 20: a 不等于 b</div><div class="line">10 -ne 20: a 不等于 b</div><div class="line">10 -gt 20: a 不大于 b</div><div class="line">10 -lt 20: a 小于 b</div><div class="line">10 -ge 20: a 小于 b</div><div class="line">10 -le 20: a 小于或等于 b</div></pre></td></tr></table></figure></p>
-<h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><p>假设a=10,b=20</p>
+<h3 id="举个例子说明-1"><a href="#举个例子说明-1" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><pre><code>#!/bin/bash
+# 创建测试脚本test.sh
+
+a=10
+b=20
+
+if [ $a -eq $b ]
+then
+   echo &quot;$a -eq $b : a 等于 b&quot;
+else
+   echo &quot;$a -eq $b: a 不等于 b&quot;
+fi
+if [ $a -ne $b ]
+then
+   echo &quot;$a -ne $b: a 不等于 b&quot;
+else
+   echo &quot;$a -ne $b : a 等于 b&quot;
+fi
+if [ $a -gt $b ]
+then
+   echo &quot;$a -gt $b: a 大于 b&quot;
+else
+   echo &quot;$a -gt $b: a 不大于 b&quot;
+fi
+if [ $a -lt $b ]
+then
+   echo &quot;$a -lt $b: a 小于 b&quot;
+else
+   echo &quot;$a -lt $b: a 不小于 b&quot;
+fi
+if [ $a -ge $b ]
+then
+   echo &quot;$a -ge $b: a 大于或等于 b&quot;
+else
+   echo &quot;$a -ge $b: a 小于 b&quot;
+fi
+if [ $a -le $b ]
+then
+   echo &quot;$a -le $b: a 小于或等于 b&quot;
+else
+   echo &quot;$a -le $b: a 大于 b&quot;
+fi
+</code></pre><p>运行脚本结果如下：</p>
+<pre><code>$ ./test.sh 
+10 -eq 20: a 不等于 b
+10 -ne 20: a 不等于 b
+10 -gt 20: a 不大于 b
+10 -lt 20: a 小于 b
+10 -ge 20: a 小于 b
+10 -le 20: a 小于或等于 b
+</code></pre><h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><p>假设a=10,b=20</p>
 <table>
 <thead>
 <tr>
@@ -683,9 +771,43 @@
 </tr>
 </tbody>
 </table>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line">if [ $a != $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a != $b : a 不等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a != $b: a 等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt 100 -a $b -gt 15 ]</div><div class="line">then</div><div class="line">   echo &quot;$a 小于 100 且 $b 大于 15 : 返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a 小于 100 且 $b 大于 15 : 返回 false&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt 100 -o $b -gt 100 ]</div><div class="line">then</div><div class="line">   echo &quot;$a 小于 100 或 $b 大于 100 : 返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a 小于 100 或 $b 大于 100 : 返回 false&quot;</div><div class="line">fi</div><div class="line">if [ $a -lt 5 -o $b -gt 100 ]</div><div class="line">then</div><div class="line">   echo &quot;$a 小于 5 或 $b 大于 100 : 返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a 小于 5 或 $b 大于 100 : 返回 false&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">10 != 20 : a 不等于 b</div><div class="line">10 小于 100 且 20 大于 15 : 返回 true</div><div class="line">10 小于 100 或 20 大于 100 : 返回 true</div><div class="line">10 小于 5 或 20 大于 100 : 返回 false</div></pre></td></tr></table></figure></p>
-<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>假设a=10,b=20</p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><pre><code>#!/bin/bash
+# 创建测试脚本test.sh
+
+a=10
+b=20
+
+if [ $a != $b ]
+then
+   echo &quot;$a != $b : a 不等于 b&quot;
+else
+   echo &quot;$a != $b: a 等于 b&quot;
+fi
+if [ $a -lt 100 -a $b -gt 15 ]
+then
+   echo &quot;$a 小于 100 且 $b 大于 15 : 返回 true&quot;
+else
+   echo &quot;$a 小于 100 且 $b 大于 15 : 返回 false&quot;
+fi
+if [ $a -lt 100 -o $b -gt 100 ]
+then
+   echo &quot;$a 小于 100 或 $b 大于 100 : 返回 true&quot;
+else
+   echo &quot;$a 小于 100 或 $b 大于 100 : 返回 false&quot;
+fi
+if [ $a -lt 5 -o $b -gt 100 ]
+then
+   echo &quot;$a 小于 5 或 $b 大于 100 : 返回 true&quot;
+else
+   echo &quot;$a 小于 5 或 $b 大于 100 : 返回 false&quot;
+fi
+</code></pre><p>运行脚本结果如下：</p>
+<pre><code>$ ./test.sh 
+10 != 20 : a 不等于 b
+10 小于 100 且 20 大于 15 : 返回 true
+10 小于 100 或 20 大于 100 : 返回 true
+10 小于 5 或 20 大于 100 : 返回 false
+</code></pre><h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>假设a=10,b=20</p>
 <table>
 <thead>
 <tr>
@@ -711,12 +833,74 @@
 </tr>
 </tbody>
 </table>
-<h3 id="举例说明-1"><a href="#举例说明-1" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line">if [[ $a -lt 100 &amp;&amp; $b -gt 100 ]]</div><div class="line">then</div><div class="line">   echo &quot;返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;返回 false&quot;</div><div class="line">fi</div><div class="line"></div><div class="line">if [[ $a -lt 100 || $b -gt 100 ]]</div><div class="line">then</div><div class="line">   echo &quot;返回 true&quot;</div><div class="line">else</div><div class="line">   echo &quot;返回 false&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">返回 false</div><div class="line">返回 true</div></pre></td></tr></table></figure></p>
-<h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><p>下表列出了常用的字符串运算符，假定变量 a 为 “abc”，变量 b 为 “efg”：<br>运算符|说明|例子<br>—|—-|—–<br>=|相等|[ \$a = \$b ] 返回 false<br>!=|不相等|[ \$a != \$b ] 返回 true<br>-z|字符串长度是否为0|[ -z \$a ] 返回 false<br>-n|字符串长度是否不为0|[ -n \$a ] 返回 true<br>str|字符串是否不为空|[ \$a ] 返回 true</p>
-<h3 id="举例说明-2"><a href="#举例说明-2" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># 创建测试脚本test.sh</div><div class="line"></div><div class="line">a=&quot;abc&quot;</div><div class="line">b=&quot;efg&quot;</div><div class="line"></div><div class="line">if [ $a = $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a = $b : a 等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a = $b: a 不等于 b&quot;</div><div class="line">fi</div><div class="line">if [ $a != $b ]</div><div class="line">then</div><div class="line">   echo &quot;$a != $b : a 不等于 b&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a != $b: a 等于 b&quot;</div><div class="line">fi</div><div class="line">if [ -z $a ]</div><div class="line">then</div><div class="line">   echo &quot;-z $a : 字符串长度为 0&quot;</div><div class="line">else</div><div class="line">   echo &quot;-z $a : 字符串长度不为 0&quot;</div><div class="line">fi</div><div class="line">if [ -n $a ]</div><div class="line">then</div><div class="line">   echo &quot;-n $a : 字符串长度不为 0&quot;</div><div class="line">else</div><div class="line">   echo &quot;-n $a : 字符串长度为 0&quot;</div><div class="line">fi</div><div class="line">if [ $a ]</div><div class="line">then</div><div class="line">   echo &quot;$a : 字符串不为空&quot;</div><div class="line">else</div><div class="line">   echo &quot;$a : 字符串为空&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">abc = efg: a 不等于 b</div><div class="line">abc != efg : a 不等于 b</div><div class="line">-z abc : 字符串长度不为 0</div><div class="line">-n abc : 字符串长度不为 0</div><div class="line">abc : 字符串不为空</div></pre></td></tr></table></figure></p>
-<h2 id="文件运算符"><a href="#文件运算符" class="headerlink" title="文件运算符"></a>文件运算符</h2><p>文件运算符主要用于检测文件属性。这里就不讲解了。</p>
+<h3 id="举例说明-1"><a href="#举例说明-1" class="headerlink" title="举例说明"></a>举例说明</h3><pre><code>#!/bin/bash
+# 创建测试脚本test.sh
+
+a=10
+b=20
+
+if [[ $a -lt 100 &amp;&amp; $b -gt 100 ]]
+then
+   echo &quot;返回 true&quot;
+else
+   echo &quot;返回 false&quot;
+fi
+
+if [[ $a -lt 100 || $b -gt 100 ]]
+then
+   echo &quot;返回 true&quot;
+else
+   echo &quot;返回 false&quot;
+fi
+</code></pre><p>运行脚本结果如下：</p>
+<pre><code>$ ./test.sh 
+返回 false
+返回 true
+</code></pre><h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><p>下表列出了常用的字符串运算符，假定变量 a 为 “abc”，变量 b 为 “efg”：<br>运算符|说明|例子<br>—|—-|—–<br>=|相等|[ \$a = \$b ] 返回 false<br>!=|不相等|[ \$a != \$b ] 返回 true<br>-z|字符串长度是否为0|[ -z \$a ] 返回 false<br>-n|字符串长度是否不为0|[ -n \$a ] 返回 true<br>str|字符串是否不为空|[ \$a ] 返回 true</p>
+<h3 id="举例说明-2"><a href="#举例说明-2" class="headerlink" title="举例说明"></a>举例说明</h3><pre><code>#!/bin/bash
+# 创建测试脚本test.sh
+
+a=&quot;abc&quot;
+b=&quot;efg&quot;
+
+if [ $a = $b ]
+then
+   echo &quot;$a = $b : a 等于 b&quot;
+else
+   echo &quot;$a = $b: a 不等于 b&quot;
+fi
+if [ $a != $b ]
+then
+   echo &quot;$a != $b : a 不等于 b&quot;
+else
+   echo &quot;$a != $b: a 等于 b&quot;
+fi
+if [ -z $a ]
+then
+   echo &quot;-z $a : 字符串长度为 0&quot;
+else
+   echo &quot;-z $a : 字符串长度不为 0&quot;
+fi
+if [ -n $a ]
+then
+   echo &quot;-n $a : 字符串长度不为 0&quot;
+else
+   echo &quot;-n $a : 字符串长度为 0&quot;
+fi
+if [ $a ]
+then
+   echo &quot;$a : 字符串不为空&quot;
+else
+   echo &quot;$a : 字符串为空&quot;
+fi
+</code></pre><p>运行脚本结果如下：</p>
+<pre><code>$ ./test.sh 
+abc = efg: a 不等于 b
+abc != efg : a 不等于 b
+-z abc : 字符串长度不为 0
+-n abc : 字符串长度不为 0
+abc : 字符串不为空
+</code></pre><h2 id="文件运算符"><a href="#文件运算符" class="headerlink" title="文件运算符"></a>文件运算符</h2><p>文件运算符主要用于检测文件属性。这里就不讲解了。</p>
 <p>本文主要参考<a href="http://www.runoob.com/linux/linux-shell-basic-operators.html" target="_blank" rel="external">菜鸟教程</a></p>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 

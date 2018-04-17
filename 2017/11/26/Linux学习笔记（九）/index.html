@@ -113,18 +113,18 @@
 
 
 
-<meta name="description" content="sed实例讲解上篇博客已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用：12sed [-n] [-e] &amp;apos;command(s)&amp;apos; filessed [-n] -f scriptfile files">
+<meta name="description" content="sed实例讲解上篇博客已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用： sed [-n] [-e] &amp;#39;command(s)&amp;#39; files sed [-n] -f scriptfile files">
 <meta name="keywords" content="sed">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux学习笔记（九）">
 <meta property="og:url" content="https://ytlogos.github.io/2017/11/26/Linux学习笔记（九）/index.html">
 <meta property="og:site_name" content="Logos">
-<meta property="og:description" content="sed实例讲解上篇博客已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用：12sed [-n] [-e] &amp;apos;command(s)&amp;apos; filessed [-n] -f scriptfile files">
+<meta property="og:description" content="sed实例讲解上篇博客已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用： sed [-n] [-e] &amp;#39;command(s)&amp;#39; files sed [-n] -f scriptfile files">
 <meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/B6jBAEJ3k8.png?imageslim">
 <meta property="og:updated_time" content="2017-11-26T13:32:19.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux学习笔记（九）">
-<meta name="twitter:description" content="sed实例讲解上篇博客已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用：12sed [-n] [-e] &amp;apos;command(s)&amp;apos; filessed [-n] -f scriptfile files">
+<meta name="twitter:description" content="sed实例讲解上篇博客已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用： sed [-n] [-e] &amp;#39;command(s)&amp;#39; files sed [-n] -f scriptfile files">
 <meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/B6jBAEJ3k8.png?imageslim">
 
 
@@ -504,7 +504,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,543
+                  1,573
                 </span>
               
 
@@ -539,44 +539,149 @@
 
       
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171120/B6jBAEJ3k8.png?imageslim" alt="mark"></p>
-<h2 id="sed实例讲解"><a href="#sed实例讲解" class="headerlink" title="sed实例讲解"></a>sed实例讲解</h2><p>上篇<a href="https://ytlogos.github.io/2017/11/20/Linux学习笔记（八）/">博客</a>已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sed [-n] [-e] &apos;command(s)&apos; files</div><div class="line">sed [-n] -f scriptfile files</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h2 id="sed各个选项"><a href="#sed各个选项" class="headerlink" title="sed各个选项"></a>sed各个选项</h2><h3 id="替换命令：s命令"><a href="#替换命令：s命令" class="headerlink" title="替换命令：s命令"></a>替换命令：s命令</h3><p>sed的替换命令语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s/pattern/replacement/</div></pre></td></tr></table></figure></p>
-<p>现在有一个包含3列10行的数据集chroms.txt：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ head -n 3 chroms.txt</div><div class="line">chrom1  3214482 3216968</div><div class="line">chrom1  3216025 3216968</div><div class="line">chrom1  3216022 3216024</div></pre></td></tr></table></figure></p>
-<p>我们要将chrom替换成chr：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;s/chrom/chr/&apos; chroms.txt |head -n 3</div><div class="line">chr1    3214482 3216968</div><div class="line">chr1    3216025 3216968</div><div class="line">chr1    3216022 3216024</div></pre></td></tr></table></figure></p>
-<blockquote>
+<h2 id="sed实例讲解"><a href="#sed实例讲解" class="headerlink" title="sed实例讲解"></a>sed实例讲解</h2><p>上篇<a href="https://ytlogos.github.io/2017/11/20/Linux学习笔记（八）/">博客</a>已经讲解了sed的基本命令及其使用方法，sed有两种方式进行调用：</p>
+<pre><code>sed [-n] [-e] &#39;command(s)&#39; files
+sed [-n] -f scriptfile files
+</code></pre><a id="more"></a>
+<h2 id="sed各个选项"><a href="#sed各个选项" class="headerlink" title="sed各个选项"></a>sed各个选项</h2><h3 id="替换命令：s命令"><a href="#替换命令：s命令" class="headerlink" title="替换命令：s命令"></a>替换命令：s命令</h3><p>sed的替换命令语法如下：</p>
+<pre><code>s/pattern/replacement/
+</code></pre><p>现在有一个包含3列10行的数据集chroms.txt：</p>
+<pre><code>$ head -n 3 chroms.txt
+chrom1  3214482 3216968
+chrom1  3216025 3216968
+chrom1  3216022 3216024
+</code></pre><p>我们要将chrom替换成chr：</p>
+<pre><code>$ sed &#39;s/chrom/chr/&#39; chroms.txt |head -n 3
+chr1    3214482 3216968
+chr1    3216025 3216968
+chr1    3216022 3216024
+</code></pre><blockquote>
 <p>不管是pattern还是replacement都是被两个斜杠/包围，叫做定界符，定界符不仅仅只有/，还有：|等<br>sed有部分命令会直接修改原文件，所以使用过程中最后将结果redirect到一个新的文件</p>
 </blockquote>
-<h4 id="n选项和p命令一起使用表示只打印那些发生替换的行"><a href="#n选项和p命令一起使用表示只打印那些发生替换的行" class="headerlink" title="-n选项和p命令一起使用表示只打印那些发生替换的行"></a>-n选项和p命令一起使用表示只打印那些发生替换的行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cat company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">google 110 5000</div><div class="line">guge 50 3000</div><div class="line">$ sed -n &apos;s/u/U/p&apos; company.txt</div><div class="line">baidU 100 5000</div><div class="line">sohU 100 4500</div><div class="line">gUge 50 3000</div></pre></td></tr></table></figure>
-<h4 id="选项-i会匹配文件中每一行的第一个匹配"><a href="#选项-i会匹配文件中每一行的第一个匹配" class="headerlink" title="选项-i会匹配文件中每一行的第一个匹配"></a>选项-i会匹配文件中每一行的第一个匹配</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ cat company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">google 110 5000</div><div class="line">guge 50 3000</div><div class="line">$ sed -i &apos;s/g/G/&apos; company.txt</div><div class="line">$ cat company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">Google 110 5000</div><div class="line">Guge 50 3000</div></pre></td></tr></table></figure>
-<h4 id="全面替换标记g"><a href="#全面替换标记g" class="headerlink" title="全面替换标记g"></a>全面替换标记g</h4><p>使用后缀/g标记会替换每一行中的所有匹配<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;s/g/G/g&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">GooGle 110 5000</div><div class="line">GuGe 50 3000</div></pre></td></tr></table></figure></p>
-<h4 id="从第n个匹配处开始匹配标记ng"><a href="#从第n个匹配处开始匹配标记ng" class="headerlink" title="从第n个匹配处开始匹配标记ng"></a>从第n个匹配处开始匹配标记ng</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;s/g/G/2g&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">gooGle 110 5000</div><div class="line">guGe 50 3000</div></pre></td></tr></table></figure>
-<p>上面是从第二个匹配处开始替换，所以第一个g没有发生替换</p>
-<h4 id="E选项调用扩展正则表达式"><a href="#E选项调用扩展正则表达式" class="headerlink" title="-E选项调用扩展正则表达式"></a>-E选项调用扩展正则表达式</h4><p>sed默认使用的时POSIX的基本正则表达式（BRE），通过选项-E我们可以使用扩展版的正则表达式（ERE），举个例子，假设我们有一个字符串：chr1:28427874-28425431,分别代表染色体（chr）、start position以及end position，我们要将这三者分离开来形成3列：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;chr1:28427874-28425431&apos;|sed -E &apos;s/^(chr[^:]+):([0-9]+)-([0-9]+)/\1\t\2\t\3/&apos;</div><div class="line">chr1    28427874        28425431</div></pre></td></tr></table></figure></p>
-<p>看起来有点复杂，主要是涉及到正则表达式，拆开来看的话也不复杂，第一部分^(chr[^:]+):,首先匹配一行的开始，接着匹配（）里面的一切。总结起来就是该部分匹配以chr开头以及至少一个非:的字符，一次匹配到:就结束了。第二部分和第三部分都是匹配至少一个数字。最后将匹配到的三部分形成三列。<br>要实现这一功能还有sed很多方法，比如我们只需要将:和-替换成一个制表符就行了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;chr1:28427874-28425431&apos;|sed &apos;s/[:-]/\t/g&apos;</div><div class="line">chr1    28427874        28425431</div></pre></td></tr></table></figure></p>
-<p>还可以拆成多个命令完成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;chr1:28427874-28425431&apos;|sed &apos;s/:/\t/g&apos; | sed &apos;s/-/\t/g&apos;</div><div class="line">chr1    28427874        28425431</div></pre></td></tr></table></figure></p>
-<p>还可以通过-e选项来添加多个命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;chr1:28427874-28425431&apos;|sed -e &apos;s/:/\t/g&apos; -e &apos;s/-/\t/g&apos;</div><div class="line">chr1    28427874        28425431</div></pre></td></tr></table></figure></p>
-<h4 id="打印特定的几行"><a href="#打印特定的几行" class="headerlink" title="打印特定的几行"></a>打印特定的几行</h4><p>这个类似于head，如果我们需要打印第m到n行，使用’m,np’进行匹配<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sed -n &apos;2,5p&apos; chroms.txt</div><div class="line">chrom1  3216025 3216968</div><div class="line">chrom1  3216022 3216024</div><div class="line">chrom1  3671349 3671498</div><div class="line">chrom1  3214482 3216021</div></pre></td></tr></table></figure></p>
-<h3 id="删除命令：d命令"><a href="#删除命令：d命令" class="headerlink" title="删除命令：d命令"></a>删除命令：d命令</h3><h4 id="删除空白行"><a href="#删除空白行" class="headerlink" title="删除空白行"></a>删除空白行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;/^$/d&apos; file</div></pre></td></tr></table></figure>
-<h4 id="指定删除第几行"><a href="#指定删除第几行" class="headerlink" title="指定删除第几行"></a>指定删除第几行</h4><p>比如删除第二行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cat company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">google 110 5000</div><div class="line">guge 50 3000</div><div class="line">$ sed &apos;2d&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure></p>
-<h4 id="删除指定的第几行以及后面所有行"><a href="#删除指定的第几行以及后面所有行" class="headerlink" title="删除指定的第几行以及后面所有行"></a>删除指定的第几行以及后面所有行</h4><p>比如删除第二行及其后面所有行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;2,$d&apos; company.txt</div><div class="line">baidu 100 5000</div></pre></td></tr></table></figure></p>
-<p>从上面很容易知道$d表示最后一行，同时删除第m行到第n行也很容易实现了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#删除最后一行</div><div class="line">$ sed &apos;$d&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">google 110 5000</div><div class="line">#删除第2到3行</div><div class="line">$ sed &apos;2,3d&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure></p>
-<h4 id="匹配删除"><a href="#匹配删除" class="headerlink" title="匹配删除"></a>匹配删除</h4><p>比如我们需要删除所有开头是g的行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;/^g/&apos;d company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div></pre></td></tr></table></figure></p>
-<blockquote>
+<h4 id="n选项和p命令一起使用表示只打印那些发生替换的行"><a href="#n选项和p命令一起使用表示只打印那些发生替换的行" class="headerlink" title="-n选项和p命令一起使用表示只打印那些发生替换的行"></a>-n选项和p命令一起使用表示只打印那些发生替换的行</h4><pre><code>$ cat company.txt
+baidu 100 5000
+sohu 100 4500
+google 110 5000
+guge 50 3000
+$ sed -n &#39;s/u/U/p&#39; company.txt
+baidU 100 5000
+sohU 100 4500
+gUge 50 3000
+</code></pre><h4 id="选项-i会匹配文件中每一行的第一个匹配"><a href="#选项-i会匹配文件中每一行的第一个匹配" class="headerlink" title="选项-i会匹配文件中每一行的第一个匹配"></a>选项-i会匹配文件中每一行的第一个匹配</h4><pre><code>$ cat company.txt
+baidu 100 5000
+sohu 100 4500
+google 110 5000
+guge 50 3000
+$ sed -i &#39;s/g/G/&#39; company.txt
+$ cat company.txt
+baidu 100 5000
+sohu 100 4500
+Google 110 5000
+Guge 50 3000
+</code></pre><h4 id="全面替换标记g"><a href="#全面替换标记g" class="headerlink" title="全面替换标记g"></a>全面替换标记g</h4><p>使用后缀/g标记会替换每一行中的所有匹配</p>
+<pre><code>$ sed &#39;s/g/G/g&#39; company.txt
+baidu 100 5000
+sohu 100 4500
+GooGle 110 5000
+GuGe 50 3000
+</code></pre><h4 id="从第n个匹配处开始匹配标记ng"><a href="#从第n个匹配处开始匹配标记ng" class="headerlink" title="从第n个匹配处开始匹配标记ng"></a>从第n个匹配处开始匹配标记ng</h4><pre><code>$ sed &#39;s/g/G/2g&#39; company.txt
+baidu 100 5000
+sohu 100 4500
+gooGle 110 5000
+guGe 50 3000
+</code></pre><p>上面是从第二个匹配处开始替换，所以第一个g没有发生替换</p>
+<h4 id="E选项调用扩展正则表达式"><a href="#E选项调用扩展正则表达式" class="headerlink" title="-E选项调用扩展正则表达式"></a>-E选项调用扩展正则表达式</h4><p>sed默认使用的时POSIX的基本正则表达式（BRE），通过选项-E我们可以使用扩展版的正则表达式（ERE），举个例子，假设我们有一个字符串：chr1:28427874-28425431,分别代表染色体（chr）、start position以及end position，我们要将这三者分离开来形成3列：</p>
+<pre><code>$ echo &#39;chr1:28427874-28425431&#39;|sed -E &#39;s/^(chr[^:]+):([0-9]+)-([0-9]+)/\1\t\2\t\3/&#39;
+chr1    28427874        28425431
+</code></pre><p>看起来有点复杂，主要是涉及到正则表达式，拆开来看的话也不复杂，第一部分^(chr[^:]+):,首先匹配一行的开始，接着匹配（）里面的一切。总结起来就是该部分匹配以chr开头以及至少一个非:的字符，一次匹配到:就结束了。第二部分和第三部分都是匹配至少一个数字。最后将匹配到的三部分形成三列。<br>要实现这一功能还有sed很多方法，比如我们只需要将:和-替换成一个制表符就行了：</p>
+<pre><code>$ echo &#39;chr1:28427874-28425431&#39;|sed &#39;s/[:-]/\t/g&#39;
+chr1    28427874        28425431
+</code></pre><p>还可以拆成多个命令完成：</p>
+<pre><code>$ echo &#39;chr1:28427874-28425431&#39;|sed &#39;s/:/\t/g&#39; | sed &#39;s/-/\t/g&#39;
+chr1    28427874        28425431
+</code></pre><p>还可以通过-e选项来添加多个命令</p>
+<pre><code>$ echo &#39;chr1:28427874-28425431&#39;|sed -e &#39;s/:/\t/g&#39; -e &#39;s/-/\t/g&#39;
+chr1    28427874        28425431
+</code></pre><h4 id="打印特定的几行"><a href="#打印特定的几行" class="headerlink" title="打印特定的几行"></a>打印特定的几行</h4><p>这个类似于head，如果我们需要打印第m到n行，使用’m,np’进行匹配</p>
+<pre><code>$ sed -n &#39;2,5p&#39; chroms.txt
+chrom1  3216025 3216968
+chrom1  3216022 3216024
+chrom1  3671349 3671498
+chrom1  3214482 3216021
+</code></pre><h3 id="删除命令：d命令"><a href="#删除命令：d命令" class="headerlink" title="删除命令：d命令"></a>删除命令：d命令</h3><h4 id="删除空白行"><a href="#删除空白行" class="headerlink" title="删除空白行"></a>删除空白行</h4><pre><code>$ sed &#39;/^$/d&#39; file
+</code></pre><h4 id="指定删除第几行"><a href="#指定删除第几行" class="headerlink" title="指定删除第几行"></a>指定删除第几行</h4><p>比如删除第二行</p>
+<pre><code>$ cat company.txt
+baidu 100 5000
+sohu 100 4500
+google 110 5000
+guge 50 3000
+$ sed &#39;2d&#39; company.txt
+baidu 100 5000
+google 110 5000
+guge 50 3000
+</code></pre><h4 id="删除指定的第几行以及后面所有行"><a href="#删除指定的第几行以及后面所有行" class="headerlink" title="删除指定的第几行以及后面所有行"></a>删除指定的第几行以及后面所有行</h4><p>比如删除第二行及其后面所有行</p>
+<pre><code>$ sed &#39;2,$d&#39; company.txt
+baidu 100 5000
+</code></pre><p>从上面很容易知道$d表示最后一行，同时删除第m行到第n行也很容易实现了</p>
+<pre><code>#删除最后一行
+$ sed &#39;$d&#39; company.txt
+baidu 100 5000
+sohu 100 4500
+google 110 5000
+#删除第2到3行
+$ sed &#39;2,3d&#39; company.txt
+baidu 100 5000
+guge 50 3000
+</code></pre><h4 id="匹配删除"><a href="#匹配删除" class="headerlink" title="匹配删除"></a>匹配删除</h4><p>比如我们需要删除所有开头是g的行</p>
+<pre><code>$ sed &#39;/^g/&#39;d company.txt
+baidu 100 5000
+sohu 100 4500
+</code></pre><blockquote>
 <p>注意这里之间匹配用’’围住，d则不用</p>
 </blockquote>
-<h3 id="已匹配字符串标记-amp"><a href="#已匹配字符串标记-amp" class="headerlink" title="已匹配字符串标记&amp;"></a>已匹配字符串标记&amp;</h3><p>啥意思呢，就是&amp;代表已匹配的项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;s/\w\+/[&amp;]/g&apos; company.txt</div><div class="line">[baidu] [100] [5000]</div><div class="line">[sohu] [100] [4500]</div><div class="line">[google] [110] [5000]</div><div class="line">[guge] [50] [3000]</div></pre></td></tr></table></figure></p>
-<p>正则表达式\w\+匹配每一个单词，使用[&amp;]替换它，&amp;对应于之前匹配到的每个单词</p>
-<h3 id="子串匹配标记-1"><a href="#子串匹配标记-1" class="headerlink" title="子串匹配标记\1"></a>子串匹配标记\1</h3><p>即匹配给定样式的其中一部分,对于匹配到的第一个子串就标记为\1，以此类推匹配到的第二个子串就是\2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo this is digit 7 in a number|sed &apos;s/digit \([0-9]\)/\1/&apos;</div><div class="line">this is 7 in a number</div></pre></td></tr></table></figure></p>
-<p>\(..\)用于匹配子串数字，上述命令中digit 7被匹配到的是子串是7<br>再举个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo aaa BBB |sed &apos;s/\([a-z]\+\) \([A-Z]\+\)/\2 \1/&apos;</div><div class="line">BBB aaa</div></pre></td></tr></table></figure></p>
-<p>上述命令中匹配到的子串分别是aaa、BBB，\2表示BBB，\1表示aaa。</p>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>sed表达式可以使用单引号来引用，但是如果表达式内部包含变量字符串，就需要使用双引号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test=hello </div><div class="line">echo hello WORLD | sed &quot;s/$test/HELLO&quot; </div><div class="line">HELLO WORLD</div></pre></td></tr></table></figure></p>
-<h3 id="下一个：n命令"><a href="#下一个：n命令" class="headerlink" title="下一个：n命令"></a>下一个：n命令</h3><p>如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行然后继续<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;/test/&#123; n; s/aa/bb/; &#125;&apos; file</div></pre></td></tr></table></figure></p>
-<h3 id="变形：y命令"><a href="#变形：y命令" class="headerlink" title="变形：y命令"></a>变形：y命令</h3><p>把1~10行内所有的abcde转为大写，注意正则表达式元字符不能使用该命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;1,10y/abcde/ABCDE/&apos; file</div></pre></td></tr></table></figure></p>
-<h3 id="退出：q命令"><a href="#退出：q命令" class="headerlink" title="退出：q命令"></a>退出：q命令</h3><p>打印完第10行后退出sed<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed &apos;10q&apos; file</div></pre></td></tr></table></figure></p>
-<h3 id="打印奇数行或者偶数行"><a href="#打印奇数行或者偶数行" class="headerlink" title="打印奇数行或者偶数行"></a>打印奇数行或者偶数行</h3><p>有两种方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#奇数行</div><div class="line">$ $ sed -n &apos;p;n&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div><div class="line">#偶数行</div><div class="line">$ sed -n &apos;n;p&apos; company.txt</div><div class="line">sohu 100 4500</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure></p>
-<p>另一种方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#奇数行</div><div class="line">$ sed -n &apos;1~2p&apos; company.txt</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div><div class="line">#偶数行</div><div class="line">$ sed -n &apos;2~2p&apos; company.txt</div><div class="line">sohu 100 4500</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure></p>
-<p>sed内容十分丰富，这里只是稍微介绍一些主要功能，想要深入学习的话可参考<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">官方文档</a></p>
+<h3 id="已匹配字符串标记-amp"><a href="#已匹配字符串标记-amp" class="headerlink" title="已匹配字符串标记&amp;"></a>已匹配字符串标记&amp;</h3><p>啥意思呢，就是&amp;代表已匹配的项</p>
+<pre><code>$ sed &#39;s/\w\+/[&amp;]/g&#39; company.txt
+[baidu] [100] [5000]
+[sohu] [100] [4500]
+[google] [110] [5000]
+[guge] [50] [3000]
+</code></pre><p>正则表达式\w\+匹配每一个单词，使用[&amp;]替换它，&amp;对应于之前匹配到的每个单词</p>
+<h3 id="子串匹配标记-1"><a href="#子串匹配标记-1" class="headerlink" title="子串匹配标记\1"></a>子串匹配标记\1</h3><p>即匹配给定样式的其中一部分,对于匹配到的第一个子串就标记为\1，以此类推匹配到的第二个子串就是\2</p>
+<pre><code>$ echo this is digit 7 in a number|sed &#39;s/digit \([0-9]\)/\1/&#39;
+this is 7 in a number
+</code></pre><p>\(..\)用于匹配子串数字，上述命令中digit 7被匹配到的是子串是7<br>再举个例子</p>
+<pre><code>$ echo aaa BBB |sed &#39;s/\([a-z]\+\) \([A-Z]\+\)/\2 \1/&#39;
+BBB aaa
+</code></pre><p>上述命令中匹配到的子串分别是aaa、BBB，\2表示BBB，\1表示aaa。</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>sed表达式可以使用单引号来引用，但是如果表达式内部包含变量字符串，就需要使用双引号。</p>
+<pre><code>test=hello 
+echo hello WORLD | sed &quot;s/$test/HELLO&quot; 
+HELLO WORLD
+</code></pre><h3 id="下一个：n命令"><a href="#下一个：n命令" class="headerlink" title="下一个：n命令"></a>下一个：n命令</h3><p>如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行然后继续</p>
+<pre><code>$ sed &#39;/test/{ n; s/aa/bb/; }&#39; file
+</code></pre><h3 id="变形：y命令"><a href="#变形：y命令" class="headerlink" title="变形：y命令"></a>变形：y命令</h3><p>把1~10行内所有的abcde转为大写，注意正则表达式元字符不能使用该命令：</p>
+<pre><code>$ sed &#39;1,10y/abcde/ABCDE/&#39; file
+</code></pre><h3 id="退出：q命令"><a href="#退出：q命令" class="headerlink" title="退出：q命令"></a>退出：q命令</h3><p>打印完第10行后退出sed</p>
+<pre><code>$ sed &#39;10q&#39; file
+</code></pre><h3 id="打印奇数行或者偶数行"><a href="#打印奇数行或者偶数行" class="headerlink" title="打印奇数行或者偶数行"></a>打印奇数行或者偶数行</h3><p>有两种方法：</p>
+<pre><code>#奇数行
+$ $ sed -n &#39;p;n&#39; company.txt
+baidu 100 5000
+google 110 5000
+#偶数行
+$ sed -n &#39;n;p&#39; company.txt
+sohu 100 4500
+guge 50 3000
+</code></pre><p>另一种方法</p>
+<pre><code>#奇数行
+$ sed -n &#39;1~2p&#39; company.txt
+baidu 100 5000
+google 110 5000
+#偶数行
+$ sed -n &#39;2~2p&#39; company.txt
+sohu 100 4500
+guge 50 3000
+</code></pre><p>sed内容十分丰富，这里只是稍微介绍一些主要功能，想要深入学习的话可参考<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">官方文档</a></p>
 <p>注：<br>本文参考了sed的<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">官方文档</a>以及Linux命令大全中的<a href="http://man.linuxde.net/sed" target="_blank" rel="external">sed</a>命令用法</p>
 <hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>

@@ -537,7 +537,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,161
+                  2,134
                 </span>
               
 
@@ -553,7 +553,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  11
+                  10
                 </span>
               
             </div>
@@ -573,9 +573,20 @@
       
         <p><img src="http://upload-images.jianshu.io/upload_images/2084719-15bd512052d55bf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>上篇文章中提了一下如何通过<strong>ggpubr</strong>包为<code>ggplot</code>图添加<code>p-value</code>以及显著性标记,本文将详细介绍。利用数据集<strong>ToothGrowth</strong>进行演示</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#先加载包</div><div class="line">library(ggpubr)</div><div class="line">#加载数据集ToothGrowth</div><div class="line">data(&quot;ToothGrowth&quot;)</div><div class="line">head(ToothGrowth)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##    len  supp  dose</div><div class="line">## 1  4.2   VC   0.5</div><div class="line">## 2  11.5  VC   0.5</div><div class="line">## 3  7.3   VC   0.5</div><div class="line">## 4  5.8   VC   0.5</div><div class="line">## 5  6.4   VC   0.5</div><div class="line">## 6  10.0  VC   0.5</div></pre></td></tr></table></figure>
-<h2 id="比较方法"><a href="#比较方法" class="headerlink" title="比较方法"></a>比较方法</h2><hr>
+<pre><code class="{r}">#先加载包
+library(ggpubr)
+#加载数据集ToothGrowth
+data(&quot;ToothGrowth&quot;)
+head(ToothGrowth)
+</code></pre>
+<pre><code>##    len  supp  dose
+## 1  4.2   VC   0.5
+## 2  11.5  VC   0.5
+## 3  7.3   VC   0.5
+## 4  5.8   VC   0.5
+## 5  6.4   VC   0.5
+## 6  10.0  VC   0.5
+</code></pre><h2 id="比较方法"><a href="#比较方法" class="headerlink" title="比较方法"></a>比较方法</h2><hr>
 <p><strong>R</strong>中常用的比较方法主要有下面几种：</p>
 <table>
 <thead>
@@ -616,8 +627,9 @@
 <li><code>stat_compare_mean()</code>:自动添加<code>p-value</code>、显著性标记到<strong>ggplot</strong>图中</li>
 </ul>
 <h2 id="compare-means-函数"><a href="#compare-means-函数" class="headerlink" title="compare_means()函数"></a><strong>compare_means()</strong>函数</h2><p>该函数主要用用法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compare_means(formula, data, method = &quot;wilcox.test&quot;, paired = FALSE,</div><div class="line">  group.by = NULL, ref.group = NULL, ...)</div></pre></td></tr></table></figure>
-<p>注释：</p>
+<pre><code>compare_means(formula, data, method = &quot;wilcox.test&quot;, paired = FALSE,
+  group.by = NULL, ref.group = NULL, ...)
+</code></pre><p>注释：</p>
 <ul>
 <li><code>formula</code>:形如<code>x~group</code>，其中x是数值型变量，<code>group</code>是因子，可以是一个或者多个</li>
 <li><code>data</code>：数据集</li>
@@ -626,8 +638,10 @@
 <li><code>group_by</code>: 比较时是否要进行分组</li>
 <li><code>ref.group</code>: 是否需要指定参考组</li>
 </ul>
-<h2 id="stat-compare-means-函数"><a href="#stat-compare-means-函数" class="headerlink" title="stat_compare_means()函数"></a><strong>stat_compare_means()</strong>函数</h2><p>主要用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">stat_compare_means(mapping = NULL, comparisons = NULL hide.ns = FALSE,</div><div class="line">                   label = NULL,  label.x = NULL, label.y = NULL,  ...)</div></pre></td></tr></table></figure></p>
-<p>注释：</p>
+<h2 id="stat-compare-means-函数"><a href="#stat-compare-means-函数" class="headerlink" title="stat_compare_means()函数"></a><strong>stat_compare_means()</strong>函数</h2><p>主要用法：</p>
+<pre><code>stat_compare_means(mapping = NULL, comparisons = NULL hide.ns = FALSE,
+                   label = NULL,  label.x = NULL, label.y = NULL,  ...)
+</code></pre><p>注释：</p>
 <ul>
 <li><code>mapping</code>:由<code>aes()</code>创建的一套美学映射</li>
 <li><code>comparisons</code>:指定需要进行比较以及添加<code>p-value</code>、显著性标记的组</li>
@@ -637,7 +651,8 @@
 <li>…:其他参数</li>
 </ul>
 <h2 id="比较独立的两组"><a href="#比较独立的两组" class="headerlink" title="比较独立的两组"></a>比较独立的两组</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(len~supp, data=ToothGrowth)</div></pre></td></tr></table></figure>
+<pre><code class="{r}">compare_means(len~supp, data=ToothGrowth)
+</code></pre>
 <p><img src="http://upload-images.jianshu.io/upload_images/2084719-b045b6dd37c6efb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>结果解释：</p>
 <ul>
@@ -646,79 +661,193 @@
 <li><code>p.adj</code>:调整后的<code>p-value</code>。默认为<code>p.adjust.method=&quot;holm&quot;</code></li>
 <li><code>p.format</code>:四舍五入后的<code>p-value</code></li>
 <li><code>p.signif</code>:显著性水平</li>
-<li><code>method</code>:用于统计检验的方法<br>##绘制箱线图<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, </div><div class="line">palette = &quot;jco&quot;, add = &quot;jitter&quot;)#添加p-valuep+stat_compare_means()</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-e218a1edab30a234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#使用其他统计检验方法</div><div class="line">p+stat_compare_means(method = &quot;t.test&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-fc20d4bbb39c1377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>上述显著性标记可以通过<code>label.x</code>、<code>label.y</code>、<code>hjust</code>及<code>vjust</code>来调整<br>显著性标记可以通过<code>aes()</code>映射来更改：</p>
-<ul>
-<li><code>aes(label=..p.format..)</code>或<code>aes(lebel=paste0(&quot;p=&quot;,..p.format..))</code>:只显示<code>p-value</code>，不显示统计检验方法<ul>
+<li><code>method</code>:用于统计检验的方法<br>##绘制箱线图<pre><code>p &lt;- ggboxplot(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, 
+palette = &quot;jco&quot;, add = &quot;jitter&quot;)#添加p-valuep+stat_compare_means()
+</code></pre><img src="http://upload-images.jianshu.io/upload_images/2084719-e218a1edab30a234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><pre><code>#使用其他统计检验方法
+p+stat_compare_means(method = &quot;t.test&quot;)
+</code></pre><img src="http://upload-images.jianshu.io/upload_images/2084719-fc20d4bbb39c1377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>上述显著性标记可以通过<code>label.x</code>、<code>label.y</code>、<code>hjust</code>及<code>vjust</code>来调整<br>显著性标记可以通过<code>aes()</code>映射来更改：<ul>
+<li><code>aes(label=..p.format..)</code>或<code>aes(lebel=paste0(&quot;p=&quot;,..p.format..))</code>:只显示<code>p-value</code>，不显示统计检验方法</li>
 <li><code>aes(label=..p.signif..)</code>:仅显示显著性水平</li>
 <li><code>aes(label=paste0(..method..,&quot;\n&quot;, &quot;p=&quot;,..p.format..))</code>:<code>p-value</code>与显著性水平分行显示</li>
 </ul>
 </li>
 </ul>
-<p>举个栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p+stat_compare_means(aes(label=..p.signif..), label.x = 1.5, label.y = 40)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-c0f71b843b6472b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>也可以将标签指定为字符向量，不要映射，只需将p.signif两端的..去掉即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p+stat_compare_means(label = &quot;p.signif&quot;, label.x = 1.5, label.y = 40)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-15c7ae8bbaaf7b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>举个栗子：</p>
+<pre><code>p+stat_compare_means(aes(label=..p.signif..), label.x = 1.5, label.y = 40)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-c0f71b843b6472b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>也可以将标签指定为字符向量，不要映射，只需将p.signif两端的..去掉即可</p>
+<pre><code>p+stat_compare_means(label = &quot;p.signif&quot;, label.x = 1.5, label.y = 40)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-15c7ae8bbaaf7b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="比较两个paired-sample"><a href="#比较两个paired-sample" class="headerlink" title="比较两个paired sample"></a>比较两个paired sample</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(len~supp, data=ToothGrowth, paired = TRUE)</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-770f433a6a5e4ef3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>compare_means(len~supp, data=ToothGrowth, paired = TRUE)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-770f433a6a5e4ef3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="利用ggpaired-进行可视化"><a href="#利用ggpaired-进行可视化" class="headerlink" title="利用ggpaired()进行可视化"></a>利用ggpaired()进行可视化</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ggpaired(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, line.color = &quot;gray&quot;, </div><div class="line">line.size = 0.4, palette = &quot;jco&quot;)+ stat_compare_means(paired = TRUE)</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-2b3b18fa8e3ec2c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>ggpaired(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, line.color = &quot;gray&quot;, 
+line.size = 0.4, palette = &quot;jco&quot;)+ stat_compare_means(paired = TRUE)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-2b3b18fa8e3ec2c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="多组比较"><a href="#多组比较" class="headerlink" title="多组比较"></a>多组比较</h2><hr>
-<p>Global test<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(len~dose, data=ToothGrowth, method = &quot;anova&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-dd4f81af301e529b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Global test</p>
+<pre><code>compare_means(len~dose, data=ToothGrowth, method = &quot;anova&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-dd4f81af301e529b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+</div><div class="line">stat_compare_means()</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-a0fcb4c4683d0f07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#使用其他的方法</div><div class="line">ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+ </div><div class="line">stat_compare_means(method = &quot;anova&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-6572797c98bbb9a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+
+stat_compare_means()
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-a0fcb4c4683d0f07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#使用其他的方法
+ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+ 
+stat_compare_means(method = &quot;anova&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-6572797c98bbb9a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <blockquote>
 <p>Pairwise comparisons:如果分组变量中包含两个以上的水平，那么会自动进行pairwise test,默认方法为”wilcox.test”</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(len~dose, data=ToothGrowth)</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-c25c03cedcf149bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#可以指定比较哪些组</div><div class="line">my_comparisons &lt;- list(c(&quot;0.5&quot;, &quot;1&quot;), c(&quot;1&quot;, &quot;2&quot;), c(&quot;0.5&quot;, &quot;2&quot;))</div><div class="line">ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;,palette = &quot;jco&quot;)+</div><div class="line">stat_compare_means(comparisons=my_comparisons)+ # Add pairwise </div><div class="line">comparisons p-value stat_compare_means(label.y = 50) # Add global p-value</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-87c29855f34018b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可以通过修改参数label.y来更改标签的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;,palette = &quot;jco&quot;)+</div><div class="line">stat_compare_means(comparisons=my_comparisons, label.y = c(29, 35, 40))+ # Add pairwise comparisons p-value </div><div class="line">stat_compare_means(label.y = 45) # Add global p-value</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-554a2136abe2eee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>至于通过添加线条来连接比较的两组，这一功能已由包<a href="https://github.com/Artjom-Metro/ggsignif" target="_blank" rel="external"><strong>ggsignif</strong></a>实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">##设定参考组</div><div class="line">compare_means(len~dose, data=ToothGrowth, ref.group = &quot;0.5&quot;,  #以dose=0.5组为参考组 </div><div class="line">method = &quot;t.test&quot; )</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-9ba2e25b978710a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#可视化</div><div class="line">ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+ </div><div class="line">stat_compare_means(method = &quot;anova&quot;, label.y = 40)+ # Add global p-value</div><div class="line">stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, ref.group = &quot;0.5&quot;) # Pairwise comparison against reference</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-8510992c45710447.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">参考组也可以设置为.all.即所有的平均值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(len~dose, data=ToothGrowth, ref.group = &quot;.all.&quot;, method = &quot;t.test&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-2976426c33943786.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#可视化</div><div class="line">ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+</div><div class="line">stat_compare_means(method = &quot;anova&quot;, label.y = 40)+# Add global p-value</div><div class="line">stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, </div><div class="line">ref.group = &quot;.all.&quot;)#Pairwise comparison against all</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-e0b10b222601691f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>接下来利用<strong>survminer</strong>包中的数据集<strong>myeloma</strong>来讲解一下为什么有时候我们需要将ref.group设置为.all.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">library(survminer)#没安装的先安装再加载</div><div class="line">data(&quot;myeloma&quot;)</div><div class="line">head(myeloma)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-96dcc29ad0882230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>compare_means(len~dose, data=ToothGrowth)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-c25c03cedcf149bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#可以指定比较哪些组
+my_comparisons &lt;- list(c(&quot;0.5&quot;, &quot;1&quot;), c(&quot;1&quot;, &quot;2&quot;), c(&quot;0.5&quot;, &quot;2&quot;))
+ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;,palette = &quot;jco&quot;)+
+stat_compare_means(comparisons=my_comparisons)+ # Add pairwise 
+comparisons p-value stat_compare_means(label.y = 50) # Add global p-value
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-87c29855f34018b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可以通过修改参数label.y来更改标签的位置</p>
+<pre><code>ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;,palette = &quot;jco&quot;)+
+stat_compare_means(comparisons=my_comparisons, label.y = c(29, 35, 40))+ # Add pairwise comparisons p-value 
+stat_compare_means(label.y = 45) # Add global p-value
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-554a2136abe2eee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>至于通过添加线条来连接比较的两组，这一功能已由包<a href="https://github.com/Artjom-Metro/ggsignif" target="_blank" rel="external"><strong>ggsignif</strong></a>实现 </p>
+<pre><code>##设定参考组
+compare_means(len~dose, data=ToothGrowth, ref.group = &quot;0.5&quot;,  #以dose=0.5组为参考组 
+method = &quot;t.test&quot; )
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-9ba2e25b978710a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#可视化
+ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+ 
+stat_compare_means(method = &quot;anova&quot;, label.y = 40)+ # Add global p-value
+stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, ref.group = &quot;0.5&quot;) # Pairwise comparison against reference
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-8510992c45710447.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">参考组也可以设置为.all.即所有的平均值</p>
+<pre><code>compare_means(len~dose, data=ToothGrowth, ref.group = &quot;.all.&quot;, method = &quot;t.test&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-2976426c33943786.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#可视化
+ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;dose&quot;, palette = &quot;jco&quot;)+
+stat_compare_means(method = &quot;anova&quot;, label.y = 40)+# Add global p-value
+stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, 
+ref.group = &quot;.all.&quot;)#Pairwise comparison against all
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-e0b10b222601691f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>接下来利用<strong>survminer</strong>包中的数据集<strong>myeloma</strong>来讲解一下为什么有时候我们需要将ref.group设置为.all.</p>
+<pre><code>library(survminer)#没安装的先安装再加载
+data(&quot;myeloma&quot;)
+head(myeloma)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-96dcc29ad0882230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <blockquote>
 <p>我们将根据患者的分组来绘制<strong>DEPDC1</strong>基因的表达谱，看不同组之间是否存在显著性的差异，我们可以在7组之间进行比较，但是这样的话组间比较的组合就太多了，因此我们可以将7组中每一组与全部平均值进行比较，看看<strong>DEPDC1</strong>基因在不同的组中是否过表达还是低表达。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(DEPDC1~molecular_group, data = myeloma, ref.group = &quot;.all.&quot;, method = &quot;t.test&quot;)</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-53c1d6a7df55e7d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#可视化DEPDC1基因表达谱</div><div class="line">ggboxplot(myeloma, x=&quot;molecular_group&quot;, y=&quot;DEPDC1&quot;, </div><div class="line">color = &quot;molecular_group&quot;, add = &quot;jitter&quot;, legend=&quot;none&quot;)+ </div><div class="line">rotate_x_text(angle = 45)+ </div><div class="line">geom_hline(yintercept = mean(myeloma$DEPDC1), linetype=2)+# Add horizontal line at base mean </div><div class="line">stat_compare_means(method = &quot;anova&quot;, label.y = 1600)+ # Add global annova p-value </div><div class="line">stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, ref.group = &quot;.all.&quot;)# Pairwise comparison against all</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-c6188f0a83617dcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>compare_means(DEPDC1~molecular_group, data = myeloma, ref.group = &quot;.all.&quot;, method = &quot;t.test&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-53c1d6a7df55e7d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#可视化DEPDC1基因表达谱
+ggboxplot(myeloma, x=&quot;molecular_group&quot;, y=&quot;DEPDC1&quot;, 
+color = &quot;molecular_group&quot;, add = &quot;jitter&quot;, legend=&quot;none&quot;)+ 
+rotate_x_text(angle = 45)+ 
+geom_hline(yintercept = mean(myeloma$DEPDC1), linetype=2)+# Add horizontal line at base mean 
+stat_compare_means(method = &quot;anova&quot;, label.y = 1600)+ # Add global annova p-value 
+stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, ref.group = &quot;.all.&quot;)# Pairwise comparison against all
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-c6188f0a83617dcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <blockquote>
 <p>从图中可以看出，DEPDC1基因在Proliferation组中显著性地过表达，而在Hyperdiploid和Low bone disease显著性地低表达</p>
 </blockquote>
-<p>我们也可以将非显著性标记ns去掉，只需要将参数hide.ns=TRUE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ggboxplot(myeloma, x=&quot;molecular_group&quot;, y=&quot;DEPDC1&quot;, </div><div class="line">color = &quot;molecular_group&quot;, add = &quot;jitter&quot;, legend=&quot;none&quot;)+</div><div class="line">rotate_x_text(angle = 45)+ </div><div class="line">geom_hline(yintercept = mean(myeloma$DEPDC1), linetype=2)+# Add horizontal line at base mean </div><div class="line">stat_compare_means(method = &quot;anova&quot;, label.y = 1600)+ # Add global annova p-value </div><div class="line">stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, ref.group = &quot;.all.&quot;, hide.ns = TRUE)# Pairwise comparison against all</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-15bd512052d55bf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>我们也可以将非显著性标记ns去掉，只需要将参数hide.ns=TRUE</p>
+<pre><code>ggboxplot(myeloma, x=&quot;molecular_group&quot;, y=&quot;DEPDC1&quot;, 
+color = &quot;molecular_group&quot;, add = &quot;jitter&quot;, legend=&quot;none&quot;)+
+rotate_x_text(angle = 45)+ 
+geom_hline(yintercept = mean(myeloma$DEPDC1), linetype=2)+# Add horizontal line at base mean 
+stat_compare_means(method = &quot;anova&quot;, label.y = 1600)+ # Add global annova p-value 
+stat_compare_means(label = &quot;p.signif&quot;, method = &quot;t.test&quot;, ref.group = &quot;.all.&quot;, hide.ns = TRUE)# Pairwise comparison against all
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-15bd512052d55bf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="多个分组变量"><a href="#多个分组变量" class="headerlink" title="多个分组变量"></a>多个分组变量</h2><hr>
-<p>按另一个变量进行分组之后进行统计检验，比如按变量dose进行分组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compare_means(len~supp, data=ToothGrowth, group.by = &quot;dose&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-56f713ae2fa2c591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#可视化</div><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, </div><div class="line">palette = &quot;jco&quot;, add = &quot;jitter&quot;, facet.by = &quot;dose&quot;, short.panel.labs = FALSE)#按dose进行分面</div><div class="line">#label只绘制</div><div class="line">p-valuep+stat_compare_means(label = &quot;p.format&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-a235626a981e4709.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#label绘制显著性水平</div><div class="line">p+stat_compare_means(label = &quot;p.signif&quot;, label.x = 1.5)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-3ebf7d89f1a517cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#将所有箱线图绘制在一个panel中</div><div class="line">p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, </div><div class="line">palette = &quot;jco&quot;, add = &quot;jitter&quot;)</div><div class="line">p+stat_compare_means(aes(group=supp))</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-6529191fdef8f3dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#只显示p-value</div><div class="line">p+stat_compare_means(aes(group=supp), label = &quot;p.format&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-ce9c6136407ca58a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#显示显著性水平</div><div class="line">p+stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-f2cf5728cc9cf67a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">进行paired sample检验</div><div class="line">compare_means(len~supp, data=ToothGrowth, group.by = &quot;dose&quot;, paired = TRUE)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-f5d2ebfd37391113.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#可视化</div><div class="line">p &lt;- ggpaired(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, </div><div class="line">palette = &quot;jco&quot;, line.color=&quot;gray&quot;, line.size=0.4, facet.by = &quot;dose&quot;, </div><div class="line">short.panel.labs = FALSE)#按dose分面</div><div class="line">#只显示p-value</div><div class="line">p+stat_compare_means(label = &quot;p.format&quot;, paired = TRUE)</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-cc7db564846fae97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="其他图形"><a href="#其他图形" class="headerlink" title="其他图形"></a>其他图形</h2><h3 id="条形图与线图（一个分组变量）"><a href="#条形图与线图（一个分组变量）" class="headerlink" title="条形图与线图（一个分组变量）"></a>条形图与线图（一个分组变量）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#有误差棒的条形图，实际上我以前的文章里有纯粹用ggplot2实现</div><div class="line">ggbarplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;)+ </div><div class="line">stat_compare_means()+ </div><div class="line">stat_compare_means(ref.group = &quot;0.5&quot;, label = &quot;p.signif&quot;, label.y = c(22, 29))</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-0a38300e74bbce61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#有误差棒的线图</div><div class="line">ggline(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;)+</div><div class="line">stat_compare_means()+ </div><div class="line">stat_compare_means(ref.group = &quot;0.5&quot;, label = &quot;p.signif&quot;, label.y = c(22, 29))</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-9bbc6411123c593a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h3 id="条形图与线图（两个分组变量）"><a href="#条形图与线图（两个分组变量）" class="headerlink" title="条形图与线图（两个分组变量）"></a>条形图与线图（两个分组变量）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ggbarplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;, color = &quot;supp&quot;, </div><div class="line">palette = &quot;jco&quot;, position = position_dodge(0.8))+ </div><div class="line">stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = 29)</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-b2dd950f78f7a642.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ggline(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;, color = &quot;supp&quot;, </div><div class="line">palette = &quot;jco&quot;)+ </div><div class="line">stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = c(16, 25, 29))</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2084719-bd2413a61ece0ed2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>按另一个变量进行分组之后进行统计检验，比如按变量dose进行分组：</p>
+<pre><code>compare_means(len~supp, data=ToothGrowth, group.by = &quot;dose&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-56f713ae2fa2c591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#可视化
+p &lt;- ggboxplot(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, 
+palette = &quot;jco&quot;, add = &quot;jitter&quot;, facet.by = &quot;dose&quot;, short.panel.labs = FALSE)#按dose进行分面
+#label只绘制
+p-valuep+stat_compare_means(label = &quot;p.format&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-a235626a981e4709.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#label绘制显著性水平
+p+stat_compare_means(label = &quot;p.signif&quot;, label.x = 1.5)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-3ebf7d89f1a517cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#将所有箱线图绘制在一个panel中
+p &lt;- ggboxplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, 
+palette = &quot;jco&quot;, add = &quot;jitter&quot;)
+p+stat_compare_means(aes(group=supp))
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-6529191fdef8f3dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#只显示p-value
+p+stat_compare_means(aes(group=supp), label = &quot;p.format&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-ce9c6136407ca58a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#显示显著性水平
+p+stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-f2cf5728cc9cf67a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>进行paired sample检验
+compare_means(len~supp, data=ToothGrowth, group.by = &quot;dose&quot;, paired = TRUE)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-f5d2ebfd37391113.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#可视化
+p &lt;- ggpaired(ToothGrowth, x=&quot;supp&quot;, y=&quot;len&quot;, color = &quot;supp&quot;, 
+palette = &quot;jco&quot;, line.color=&quot;gray&quot;, line.size=0.4, facet.by = &quot;dose&quot;, 
+short.panel.labs = FALSE)#按dose分面
+#只显示p-value
+p+stat_compare_means(label = &quot;p.format&quot;, paired = TRUE)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-cc7db564846fae97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="其他图形"><a href="#其他图形" class="headerlink" title="其他图形"></a>其他图形</h2><h3 id="条形图与线图（一个分组变量）"><a href="#条形图与线图（一个分组变量）" class="headerlink" title="条形图与线图（一个分组变量）"></a>条形图与线图（一个分组变量）</h3><pre><code>#有误差棒的条形图，实际上我以前的文章里有纯粹用ggplot2实现
+ggbarplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;)+ 
+stat_compare_means()+ 
+stat_compare_means(ref.group = &quot;0.5&quot;, label = &quot;p.signif&quot;, label.y = c(22, 29))
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-0a38300e74bbce61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>#有误差棒的线图
+ggline(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;)+
+stat_compare_means()+ 
+stat_compare_means(ref.group = &quot;0.5&quot;, label = &quot;p.signif&quot;, label.y = c(22, 29))
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-9bbc6411123c593a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="条形图与线图（两个分组变量）"><a href="#条形图与线图（两个分组变量）" class="headerlink" title="条形图与线图（两个分组变量）"></a>条形图与线图（两个分组变量）</h3><pre><code>ggbarplot(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;, color = &quot;supp&quot;, 
+palette = &quot;jco&quot;, position = position_dodge(0.8))+ 
+stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = 29)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-b2dd950f78f7a642.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>ggline(ToothGrowth, x=&quot;dose&quot;, y=&quot;len&quot;, add = &quot;mean_se&quot;, color = &quot;supp&quot;, 
+palette = &quot;jco&quot;)+ 
+stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = c(16, 25, 29))
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2084719-bd2413a61ece0ed2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="Sessioninfo"><a href="#Sessioninfo" class="headerlink" title="Sessioninfo"></a>Sessioninfo</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div><div class="line">## R version 3.4.0 (2017-04-21)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 8.1 x64 (build 9600)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936 </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936 </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats graphics grDevices utils datasets methods base </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">## [1] survminer_0.4.0 ggpubr_0.1.3 magrittr_1.5 ggplot2_2.2.1 </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">## [1] Rcpp_0.12.11 compiler_3.4.0 plyr_1.8.4</div><div class="line">## [4] tools_3.4.0 digest_0.6.12 evaluate_0.10 </div><div class="line">## [7] tibble_1.3.3 gtable_0.2.0 nlme_3.1-131 </div><div class="line">## [10] lattice_0.20-35 rlang_0.1.1 Matrix_1.2-10 </div><div class="line">## [13] psych_1.7.5 ggsci_2.4 DBI_0.6-1 </div><div class="line">## [16] cmprsk_2.2-7 yaml_2.1.14 parallel_3.4.0 </div><div class="line">## [19] gridExtra_2.2.1 dplyr_0.5.0 stringr_1.2.0 </div><div class="line">## [22] knitr_1.16 survMisc_0.5.4 rprojroot_1.2 </div><div class="line">## [25] grid_3.4.0 data.table_1.10.4 KMsurv_0.1-5 </div><div class="line">## [28] R6_2.2.1 km.ci_0.5-2 survival_2.41-3 </div><div class="line">## [31] foreign_0.8-68 rmarkdown_1.5 reshape2_1.4.2 </div><div class="line">## [34] tidyr_0.6.3 purrr_0.2.2.2 splines_3.4.0 </div><div class="line">## [37] backports_1.1.0 scales_0.4.1 htmltools_0.3.6 </div><div class="line">## [40] assertthat_0.2.0 mnormt_1.5-5 xtable_1.8-2 </div><div class="line">## [43] colorspace_1.3-2 ggsignif_0.2.0 labeling_0.3 </div><div class="line">## [46] stringi_1.1.5 lazyeval_0.2.0 munsell_0.4.3 </div><div class="line">## [49] broom_0.4.2 zoo_1.8-0</div></pre></td></tr></table></figure>
-<hr>
+<pre><code>sessionInfo()
+## R version 3.4.0 (2017-04-21)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 8.1 x64 (build 9600)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=Chinese (Simplified)_China.936 
+## [2] LC_CTYPE=Chinese (Simplified)_China.936 
+## [3] LC_MONETARY=Chinese (Simplified)_China.936
+## [4] LC_NUMERIC=C 
+## [5] LC_TIME=Chinese (Simplified)_China.936 
+## 
+## attached base packages:
+## [1] stats graphics grDevices utils datasets methods base 
+## 
+## other attached packages:
+## [1] survminer_0.4.0 ggpubr_0.1.3 magrittr_1.5 ggplot2_2.2.1 
+## 
+## loaded via a namespace (and not attached):
+## [1] Rcpp_0.12.11 compiler_3.4.0 plyr_1.8.4
+## [4] tools_3.4.0 digest_0.6.12 evaluate_0.10 
+## [7] tibble_1.3.3 gtable_0.2.0 nlme_3.1-131 
+## [10] lattice_0.20-35 rlang_0.1.1 Matrix_1.2-10 
+## [13] psych_1.7.5 ggsci_2.4 DBI_0.6-1 
+## [16] cmprsk_2.2-7 yaml_2.1.14 parallel_3.4.0 
+## [19] gridExtra_2.2.1 dplyr_0.5.0 stringr_1.2.0 
+## [22] knitr_1.16 survMisc_0.5.4 rprojroot_1.2 
+## [25] grid_3.4.0 data.table_1.10.4 KMsurv_0.1-5 
+## [28] R6_2.2.1 km.ci_0.5-2 survival_2.41-3 
+## [31] foreign_0.8-68 rmarkdown_1.5 reshape2_1.4.2 
+## [34] tidyr_0.6.3 purrr_0.2.2.2 splines_3.4.0 
+## [37] backports_1.1.0 scales_0.4.1 htmltools_0.3.6 
+## [40] assertthat_0.2.0 mnormt_1.5-5 xtable_1.8-2 
+## [43] colorspace_1.3-2 ggsignif_0.2.0 labeling_0.3 
+## [46] stringi_1.1.5 lazyeval_0.2.0 munsell_0.4.3 
+## [49] broom_0.4.2 zoo_1.8-0
+</code></pre><hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
 <p>Email: tyan@zju.edu.cn</p>
 <p>QQ: 1051927088</p>
@@ -818,8 +947,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/25/R语言可视化学习笔记之相关矩阵可视化包ggcorrplot/" rel="next" title="R语言可视化学习笔记之相关矩阵可视化包ggcorrplot">
-                <i class="fa fa-chevron-left"></i> R语言可视化学习笔记之相关矩阵可视化包ggcorrplot
+              <a href="/2017/06/25/R语言可视化学习笔记之ggrepel包/" rel="next" title="R语言可视化学习笔记之ggrepel包">
+                <i class="fa fa-chevron-left"></i> R语言可视化学习笔记之ggrepel包
               </a>
             
           </div>
@@ -828,8 +957,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/25/R语言学习笔记之相关性矩阵分析及其可视化/" rel="prev" title="R语言学习笔记之相关性矩阵分析及其可视化">
-                R语言学习笔记之相关性矩阵分析及其可视化 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/25/R语言学习笔记之聚类分析/" rel="prev" title="R语言学习笔记之聚类分析">
+                R语言学习笔记之聚类分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

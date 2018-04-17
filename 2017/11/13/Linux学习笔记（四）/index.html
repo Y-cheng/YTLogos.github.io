@@ -503,7 +503,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,301
+                  1,322
                 </span>
               
 
@@ -540,8 +540,9 @@
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171112/894bbdhjmL.png?imageslim" alt="mark"></p>
 <h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a><code>grep</code></h2><p><code>grep</code>全称是<strong>global search regular expression(RE) and print out the line</strong>，中文名即全面搜索正则表达式并把行打印出来。是一种强大的文本搜索工具，可以使用正则表达式搜索文本，并将匹配的行列打印出来。<strong>Unix</strong>的<code>grep</code>家族包括<code>grep</code>,<code>egrep</code>,<code>fgrep</code>以及<code>zgrep</code>等，<code>egrep</code>,<code>fgrep</code>与<code>grep</code>的差别很小，<code>egrep</code>支持更多的re元字符， <code>fgrep</code>就是<em>fixed grep</em>或<em>fast grep</em>，它们把所有的字母都看作单词，也就是说，正则表达式中的元字符表示其自身的字面意义，不再特殊<code>grep</code>可以通过-<em>G、</em>-<em>E、</em>-<em>F</em>命令行选项来使用<code>egrep</code>,<code>fgrep</code>的功能，<code>zgrep</code>可以用来处理<strong>ZIP</strong>格式文件。</p>
 <a id="more"></a>
-<h3 id="grep常用用法"><a href="#grep常用用法" class="headerlink" title="grep常用用法"></a><code>grep</code>常用用法</h3><p><code>grep</code>常用用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep [-acinv] [--color=auto] &apos;字符串或者正则表达式&apos; filename</div></pre></td></tr></table></figure></p>
-<p>选项参数：</p>
+<h3 id="grep常用用法"><a href="#grep常用用法" class="headerlink" title="grep常用用法"></a><code>grep</code>常用用法</h3><p><code>grep</code>常用用法如下：</p>
+<pre><code>grep [-acinv] [--color=auto] &#39;字符串或者正则表达式&#39; filename
+</code></pre><p>选项参数：</p>
 <ul>
 <li>-a：将binary文件以text文件的方式搜索，即不要忽略二进制数据</li>
 <li>-A&lt;显示列数&gt;：除了显示匹配到的那一行之外，还显示该行之后的内容</li>
@@ -570,17 +571,61 @@
 <li>-v：方向选择即显示出未匹配到<strong>字符串</strong>的那一行</li>
 <li>–color=auto：匹配到的字符串颜色高亮</li>
 </ul>
-<p>下面我们实战演练一下，我们要从<strong>GTF</strong>文件中搜索到匹配<code>Olfr418-ps1</code>的行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ grep &apos;Olfr418-ps1&apos; Mus_musculus.GRCm38.75_chr1_genes.txt</div><div class="line">ENSMUSG00000049605      Olfr418-ps1</div><div class="line">#打印出行号</div><div class="line">$ grep -n &apos;Olfr&apos; Mus_musculus.GRCm38.75_chr1_genes.txt|head -n 5</div><div class="line">548:ENSMUSG00000067064  Olfr1416</div><div class="line">549:ENSMUSG00000057464  Olfr1415</div><div class="line">550:ENSMUSG00000042849  Olfr1414</div><div class="line">551:ENSMUSG00000058904  Olfr1413</div><div class="line">552:ENSMUSG00000046300  Olfr1412</div></pre></td></tr></table></figure></p>
-<p>通过参数<code>-v</code>设置可以不匹配不需要的字符串或者正则表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ grep Olfr Mus_musculus.GRCm38.75_chr1_genes.txt|grep -v Olfr1413|head -n 5</div><div class="line">ENSMUSG00000067064      Olfr1416</div><div class="line">ENSMUSG00000057464      Olfr1415</div><div class="line">ENSMUSG00000042849      Olfr1414</div><div class="line">ENSMUSG00000046300      Olfr1412</div><div class="line">ENSMUSG00000062497      Olfr1411</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>需要注意的是，这里我们排除掉<code>Olfr1413</code>，但是如果数据集里存在类似于<code>Olfr1413a</code>这样的字符，<code>grep</code>也会将之剔除，因此我们需要设置参数<code>-w</code>进行精准匹配。下面举个例子说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ cat example.txt</div><div class="line">bio</div><div class="line">bioinfo</div><div class="line">bioinformatics</div><div class="line">computational biology</div><div class="line"># grep without -w</div><div class="line">$ grep -v bioinfo example.txt</div><div class="line">bio</div><div class="line">computational biology</div><div class="line">#可以看出这里将含有bioinfo字符串的bioinformatics也剔除掉了,使用参数-w可以避免</div><div class="line">$ grep -v -w bioinfo example.txt</div><div class="line">bio</div><div class="line">bioinformatics</div><div class="line">computational biology</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>我们平常接触的组学数据格式都是很复杂的，当我们匹配的时候我们希望能过浏览匹配到的字符串的前后文，<code>Linux</code>提供了参数设置：-B（前）、-A（后）以及-C（前后），每个参数后面都跟着一个数字，表示要显示几行,如果匹配到多行，则个匹配之间会用–分割开：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ grep -B2 &apos;AGATCGG&apos; contam.fastq|head -n 6</div><div class="line">@DJB775P1:248:D0MDGACXX:7:1202:12362:49613</div><div class="line">TGCTTACTCTGCGTTGATACCACTGCTTAGATCGGAAGAGCACACGTCTGAA</div><div class="line">--</div><div class="line">JJJJJIIJJJJJJHIHHHGHFFFFFFCEEEEEDBD?DDDDDDBDDDABDDCA</div><div class="line">@DJB775P1:248:D0MDGACXX:7:1202:12782:49716</div><div class="line">CTCTGCGTTGATACCACTGCTTACTCTGCGTTGATACCACTGCTTAGATCGG</div></pre></td></tr></table></figure></p>
-<p><code>grep</code>如果结合正则表达式则会显得十分强大，比如如果我们要匹配<code>Olfr1413</code>以及<code>Olfr1411</code>,可以使用简单的正则表达式完成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ grep &apos;Olfr141[13]&apos; Mus_musculus.GRCm38.75_chr1_genes.txt</div><div class="line">ENSMUSG00000058904      Olfr1413</div><div class="line">ENSMUSG00000062497      Olfr1411</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>当然如果我们要匹配的不具有相同的前缀，那就很尴尬了，这时我们可以利用<strong>POSIX Extended Regular Expressions(ERE)</strong>进行匹配，可以添加参数-E或者直接使用<code>egrep</code>都行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ grep -E &quot;(Olfr1413|Olfr12)&quot; Mus_musculus.GRCm38.75_chr1_genes.txt</div><div class="line">ENSMUSG00000058904      Olfr1413</div><div class="line">ENSMUSG00000061616      Olfr12</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>很多时候我们只需要将匹配到的行打印出来，此时我们可以使用参数-o：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ grep -o &quot;Olfr.*&quot; Mus_musculus.GRCm38.75_chr1_genes.txt|head -n 3</div><div class="line">Olfr1416</div><div class="line">Olfr1415</div><div class="line">Olfr1414</div></pre></td></tr></table></figure></p>
+<p>下面我们实战演练一下，我们要从<strong>GTF</strong>文件中搜索到匹配<code>Olfr418-ps1</code>的行：</p>
+<pre><code>$ grep &#39;Olfr418-ps1&#39; Mus_musculus.GRCm38.75_chr1_genes.txt
+ENSMUSG00000049605      Olfr418-ps1
+#打印出行号
+$ grep -n &#39;Olfr&#39; Mus_musculus.GRCm38.75_chr1_genes.txt|head -n 5
+548:ENSMUSG00000067064  Olfr1416
+549:ENSMUSG00000057464  Olfr1415
+550:ENSMUSG00000042849  Olfr1414
+551:ENSMUSG00000058904  Olfr1413
+552:ENSMUSG00000046300  Olfr1412
+</code></pre><p>通过参数<code>-v</code>设置可以不匹配不需要的字符串或者正则表达式：</p>
+<pre><code>$ grep Olfr Mus_musculus.GRCm38.75_chr1_genes.txt|grep -v Olfr1413|head -n 5
+ENSMUSG00000067064      Olfr1416
+ENSMUSG00000057464      Olfr1415
+ENSMUSG00000042849      Olfr1414
+ENSMUSG00000046300      Olfr1412
+ENSMUSG00000062497      Olfr1411
+</code></pre><blockquote>
+<p>需要注意的是，这里我们排除掉<code>Olfr1413</code>，但是如果数据集里存在类似于<code>Olfr1413a</code>这样的字符，<code>grep</code>也会将之剔除，因此我们需要设置参数<code>-w</code>进行精准匹配。下面举个例子说明：</p>
+<pre><code>$ cat example.txt
+bio
+bioinfo
+bioinformatics
+computational biology
+# grep without -w
+$ grep -v bioinfo example.txt
+bio
+computational biology
+#可以看出这里将含有bioinfo字符串的bioinformatics也剔除掉了,使用参数-w可以避免
+$ grep -v -w bioinfo example.txt
+bio
+bioinformatics
+computational biology
+</code></pre><p>我们平常接触的组学数据格式都是很复杂的，当我们匹配的时候我们希望能过浏览匹配到的字符串的前后文，<code>Linux</code>提供了参数设置：-B（前）、-A（后）以及-C（前后），每个参数后面都跟着一个数字，表示要显示几行,如果匹配到多行，则个匹配之间会用–分割开：</p>
+<pre><code>$ grep -B2 &#39;AGATCGG&#39; contam.fastq|head -n 6
+@DJB775P1:248:D0MDGACXX:7:1202:12362:49613
+TGCTTACTCTGCGTTGATACCACTGCTTAGATCGGAAGAGCACACGTCTGAA
+--
+JJJJJIIJJJJJJHIHHHGHFFFFFFCEEEEEDBD?DDDDDDBDDDABDDCA
+@DJB775P1:248:D0MDGACXX:7:1202:12782:49716
+CTCTGCGTTGATACCACTGCTTACTCTGCGTTGATACCACTGCTTAGATCGG
+</code></pre><p><code>grep</code>如果结合正则表达式则会显得十分强大，比如如果我们要匹配<code>Olfr1413</code>以及<code>Olfr1411</code>,可以使用简单的正则表达式完成：</p>
+<pre><code>$ grep &#39;Olfr141[13]&#39; Mus_musculus.GRCm38.75_chr1_genes.txt
+ENSMUSG00000058904      Olfr1413
+ENSMUSG00000062497      Olfr1411
+</code></pre><p>当然如果我们要匹配的不具有相同的前缀，那就很尴尬了，这时我们可以利用<strong>POSIX Extended Regular Expressions(ERE)</strong>进行匹配，可以添加参数-E或者直接使用<code>egrep</code>都行</p>
+<pre><code>$ grep -E &quot;(Olfr1413|Olfr12)&quot; Mus_musculus.GRCm38.75_chr1_genes.txt
+ENSMUSG00000058904      Olfr1413
+ENSMUSG00000061616      Olfr12
+</code></pre><p>很多时候我们只需要将匹配到的行打印出来，此时我们可以使用参数-o：</p>
+<pre><code>$ grep -o &quot;Olfr.*&quot; Mus_musculus.GRCm38.75_chr1_genes.txt|head -n 3
+Olfr1416
+Olfr1415
+Olfr1414
+</code></pre></blockquote>
 <hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>

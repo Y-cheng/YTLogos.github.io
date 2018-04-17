@@ -527,7 +527,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,216
+                  1,187
                 </span>
               
 
@@ -576,65 +576,165 @@
 <li>韦恩图</li>
 </ul>
 <a id="more"></a>
-<h2 id="数据加载清洗"><a href="#数据加载清洗" class="headerlink" title="数据加载清洗"></a>数据加载清洗</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">library(tidyverse)</div><div class="line">theme_set(theme_gray(base_size = 18))</div><div class="line">my_data &lt;- read.csv(&quot;variants_from_assembly.bed&quot;, sep = &quot;\t&quot;, quote = &apos;&apos;, stringsAsFactors = FALSE)</div><div class="line">names(my_data) &lt;- c(&quot;chrom&quot;,&quot;start&quot;,&quot;stop&quot;,&quot;name&quot;,&quot;size&quot;,&quot;strand&quot;,&quot;type&quot;,&quot;ref.dist&quot;,&quot;query.dist&quot;)</div><div class="line">head(my_data)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom     start      stop name size strand      type ref.dist query.dist</div><div class="line">## 1     6 102958468 102958469  SV2  317      + Insertion      -14        303</div><div class="line">## 2     6 102741692 102741693  SV3  130      +  Deletion      130          0</div><div class="line">## 3     6 102283759 102283760  SV4 1271      + Insertion      -12       1259</div><div class="line">## 4     6 101194032 101194033  SV5 2864      + Insertion      -13       2851</div><div class="line">## 5     6 101056644 101056645  SV6  265      + Insertion        0        265</div><div class="line">## 6     6 100407499 100407500  SV7  334      + Insertion        0        334</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">summary(my_data$chrom)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">##    Length     Class      Mode </div><div class="line">##      9555 character character</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#数据过滤</div><div class="line">my_data &lt;- my_data[my_data$chrom %in% c(seq(1:22), &quot;X&quot;, &quot;Y&quot;,&quot;MT&quot;), ]</div><div class="line">#染色体排序</div><div class="line">my_data$chrom &lt;- factor(my_data$chrom, levels = c(seq(1:22), &quot;X&quot;, &quot;Y&quot;,&quot;MT&quot;))</div><div class="line">#类型(type)排序</div><div class="line">my_data$type &lt;- factor(my_data$type, levels = c(&quot;Insertion&quot;,&quot;Deletion&quot;,&quot;Expansion&quot;,&quot;Contraction&quot;))</div><div class="line">head(my_data)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   chrom     start      stop name size strand      type ref.dist query.dist</div><div class="line">## 1     6 102958468 102958469  SV2  317      + Insertion      -14        303</div><div class="line">## 2     6 102741692 102741693  SV3  130      +  Deletion      130          0</div><div class="line">## 3     6 102283759 102283760  SV4 1271      + Insertion      -12       1259</div><div class="line">## 4     6 101194032 101194033  SV5 2864      + Insertion      -13       2851</div><div class="line">## 5     6 101056644 101056645  SV6  265      + Insertion        0        265</div><div class="line">## 6     6 100407499 100407500  SV7  334      + Insertion        0        334</div></pre></td></tr></table></figure>
-<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><h3 id="条形图"><a href="#条形图" class="headerlink" title="条形图"></a>条形图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()</div></pre></td></tr></table></figure>
+<h2 id="数据加载清洗"><a href="#数据加载清洗" class="headerlink" title="数据加载清洗"></a>数据加载清洗</h2><pre><code class="{r}">library(tidyverse)
+theme_set(theme_gray(base_size = 18))
+my_data &lt;- read.csv(&quot;variants_from_assembly.bed&quot;, sep = &quot;\t&quot;, quote = &#39;&#39;, stringsAsFactors = FALSE)
+names(my_data) &lt;- c(&quot;chrom&quot;,&quot;start&quot;,&quot;stop&quot;,&quot;name&quot;,&quot;size&quot;,&quot;strand&quot;,&quot;type&quot;,&quot;ref.dist&quot;,&quot;query.dist&quot;)
+head(my_data)
+</code></pre>
+<pre><code>##   chrom     start      stop name size strand      type ref.dist query.dist
+## 1     6 102958468 102958469  SV2  317      + Insertion      -14        303
+## 2     6 102741692 102741693  SV3  130      +  Deletion      130          0
+## 3     6 102283759 102283760  SV4 1271      + Insertion      -12       1259
+## 4     6 101194032 101194033  SV5 2864      + Insertion      -13       2851
+## 5     6 101056644 101056645  SV6  265      + Insertion        0        265
+## 6     6 100407499 100407500  SV7  334      + Insertion        0        334
+</code></pre><pre><code>summary(my_data$chrom)
+</code></pre><pre><code>##    Length     Class      Mode 
+##      9555 character character
+</code></pre><pre><code>#数据过滤
+my_data &lt;- my_data[my_data$chrom %in% c(seq(1:22), &quot;X&quot;, &quot;Y&quot;,&quot;MT&quot;), ]
+#染色体排序
+my_data$chrom &lt;- factor(my_data$chrom, levels = c(seq(1:22), &quot;X&quot;, &quot;Y&quot;,&quot;MT&quot;))
+#类型(type)排序
+my_data$type &lt;- factor(my_data$type, levels = c(&quot;Insertion&quot;,&quot;Deletion&quot;,&quot;Expansion&quot;,&quot;Contraction&quot;))
+head(my_data)
+</code></pre><pre><code>##   chrom     start      stop name size strand      type ref.dist query.dist
+## 1     6 102958468 102958469  SV2  317      + Insertion      -14        303
+## 2     6 102741692 102741693  SV3  130      +  Deletion      130          0
+## 3     6 102283759 102283760  SV4 1271      + Insertion      -12       1259
+## 4     6 101194032 101194033  SV5 2864      + Insertion      -13       2851
+## 5     6 101056644 101056645  SV6  265      + Insertion        0        265
+## 6     6 100407499 100407500  SV7  334      + Insertion        0        334
+</code></pre><h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><h3 id="条形图"><a href="#条形图" class="headerlink" title="条形图"></a>条形图</h3><pre><code class="{r}">ggplot(my_data, aes(x=chrom, fill=type))+geom_bar()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/Ij6mC3GFm8.png?imageslim" alt="mark"></p>
-<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_histogram()</div></pre></td></tr></table></figure>
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><pre><code class="{r}">ggplot(my_data, aes(x=size, fill=type))+geom_histogram()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/4ILKighKlg.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_histogram()+xlim(0,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/fI2i1chIJ9.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_histogram(binwidth = 5)+xlim(0,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/IKebffc1EI.png?imageslim" alt="mark"></p>
-<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#将type映射给颜色</div><div class="line">ggplot(my_data, aes(x=ref.dist, y=query.dist, color=type))+geom_point()</div></pre></td></tr></table></figure>
+<pre><code>ggplot(my_data, aes(x=size, fill=type))+geom_histogram()+xlim(0,500)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/fI2i1chIJ9.png?imageslim" alt="mark"></p>
+<pre><code>ggplot(my_data, aes(x=size, fill=type))+geom_histogram(binwidth = 5)+xlim(0,500)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/IKebffc1EI.png?imageslim" alt="mark"></p>
+<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><pre><code class="{r}">#将type映射给颜色
+ggplot(my_data, aes(x=ref.dist, y=query.dist, color=type))+geom_point()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/f4fEKhAd35.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=ref.dist, y=query.dist, color=type))+geom_point()+xlim(-500,500)+ylim(-500,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/EGkhk29KlI.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#将数值型变量size映射给颜色</div><div class="line">ggplot(my_data, aes(x=ref.dist, y=query.dist, color=size))+geom_point()+xlim(-500,500)+ylim(-500,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/je4lgmC970.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=ref.dist, y=query.dist,color=size))+geom_point()+xlim(-500,500)+ylim(-500,500)+scale_color_gradient(limits=c(0, 500))</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/fDg6K877F7.png?imageslim" alt="mark"></p>
-<h3 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(type, y=size))+geom_boxplot()</div></pre></td></tr></table></figure>
+<pre><code>ggplot(my_data, aes(x=ref.dist, y=query.dist, color=type))+geom_point()+xlim(-500,500)+ylim(-500,500)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/EGkhk29KlI.png?imageslim" alt="mark"></p>
+<pre><code>#将数值型变量size映射给颜色
+ggplot(my_data, aes(x=ref.dist, y=query.dist, color=size))+geom_point()+xlim(-500,500)+ylim(-500,500)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/je4lgmC970.png?imageslim" alt="mark"></p>
+<pre><code>ggplot(my_data, aes(x=ref.dist, y=query.dist,color=size))+geom_point()+xlim(-500,500)+ylim(-500,500)+scale_color_gradient(limits=c(0, 500))
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/fDg6K877F7.png?imageslim" alt="mark"></p>
+<h3 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h3><pre><code class="{r}">ggplot(my_data, aes(type, y=size))+geom_boxplot()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/dI07A0I0Ah.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=type, y=size, fill=type))+geom_boxplot()</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/76bb7i9f2F.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=type, y=size, fill=type))+geom_boxplot()+coord_flip()</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/E8klE3m6EA.png?imageslim" alt="mark"></p>
-<h3 id="小提琴图"><a href="#小提琴图" class="headerlink" title="小提琴图"></a>小提琴图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=type, y=size, fill=type))+geom_violin()+ylim(0,1000)+guides(fill=FALSE)</div></pre></td></tr></table></figure>
+<pre><code>ggplot(my_data, aes(x=type, y=size, fill=type))+geom_boxplot()
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/76bb7i9f2F.png?imageslim" alt="mark"></p>
+<pre><code>ggplot(my_data, aes(x=type, y=size, fill=type))+geom_boxplot()+coord_flip()
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/E8klE3m6EA.png?imageslim" alt="mark"></p>
+<h3 id="小提琴图"><a href="#小提琴图" class="headerlink" title="小提琴图"></a>小提琴图</h3><pre><code class="{r}">ggplot(my_data, aes(x=type, y=size, fill=type))+geom_violin()+ylim(0,1000)+guides(fill=FALSE)
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/AFkf5JgLAL.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=type, y=size, fill=type))+geom_violin(adjust=0.2)+ylim(0,1000)+guides(fill=FALSE)#adjust调整分辨率，默认为1，值越低，分辨率越高</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/51IFgFDCDc.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#坐标变换</div><div class="line">ggplot(my_data, aes(x=type, y=size, fill=type))+geom_violin()+scale_y_log10()</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/JGjBHIKc80.png?imageslim" alt="mark"></p>
-<h3 id="密度图"><a href="#密度图" class="headerlink" title="密度图"></a>密度图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density()+xlim(0,500)</div></pre></td></tr></table></figure>
+<pre><code>ggplot(my_data, aes(x=type, y=size, fill=type))+geom_violin(adjust=0.2)+ylim(0,1000)+guides(fill=FALSE)#adjust调整分辨率，默认为1，值越低，分辨率越高
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/51IFgFDCDc.png?imageslim" alt="mark"></p>
+<pre><code>#坐标变换
+ggplot(my_data, aes(x=type, y=size, fill=type))+geom_violin()+scale_y_log10()
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/JGjBHIKc80.png?imageslim" alt="mark"></p>
+<h3 id="密度图"><a href="#密度图" class="headerlink" title="密度图"></a>密度图</h3><pre><code class="{r}">ggplot(my_data, aes(x=size, fill=type))+geom_density()+xlim(0,500)
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/HjB54KeclD.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density(position = &quot;stack&quot;)+xlim(0,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/GDI76ijEJ8.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density(alpha=0.5)+xlim(0,500)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/BlLGm4G75l.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#图形分面</div><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_density()+xlim(0,500)+facet_grid(type~.)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/353a4gh1bK.png?imageslim" alt="mark"></p>
-<h3 id="点状图"><a href="#点状图" class="headerlink" title="点状图"></a>点状图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(my_data, aes(x=size, fill=type))+geom_dotplot()</div></pre></td></tr></table></figure>
+<pre><code>ggplot(my_data, aes(x=size, fill=type))+geom_density(position = &quot;stack&quot;)+xlim(0,500)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/GDI76ijEJ8.png?imageslim" alt="mark"></p>
+<pre><code>ggplot(my_data, aes(x=size, fill=type))+geom_density(alpha=0.5)+xlim(0,500)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/BlLGm4G75l.png?imageslim" alt="mark"></p>
+<pre><code>#图形分面
+ggplot(my_data, aes(x=size, fill=type))+geom_density()+xlim(0,500)+facet_grid(type~.)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/353a4gh1bK.png?imageslim" alt="mark"></p>
+<h3 id="点状图"><a href="#点状图" class="headerlink" title="点状图"></a>点状图</h3><pre><code class="{r}">ggplot(my_data, aes(x=size, fill=type))+geom_dotplot()
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/9AElbGEB3G.png?imageslim" alt="mark"></p>
-<h3 id="线图"><a href="#线图" class="headerlink" title="线图"></a>线图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">time_cource &lt;- read.csv(&quot;time_course_data.txt&quot;, sep = &quot;,&quot;, quote = &apos;&apos;, stringsAsFactors = TRUE, header = TRUE)</div><div class="line">head(time_cource)</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">##   seconds value sample</div><div class="line">## 1       0  0.00      A</div><div class="line">## 2       1  5.97      A</div><div class="line">## 3       2 13.42      A</div><div class="line">## 4       3 56.08      A</div><div class="line">## 5       4 98.04      A</div><div class="line">## 6       5 27.11      A</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(time_cource, aes(x=seconds, y=value, color=sample))+geom_line()</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/kiA5jFAdCK.png?imageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(time_cource, aes(x=seconds, y=value, color=sample))+geom_line(size=3)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/bcGfGALGHl.png?imageslim" alt="mark"></p>
-<h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">type_counts &lt;- summary(my_data$type)</div><div class="line">type_counts</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">##   Insertion    Deletion   Expansion Contraction </div><div class="line">##        3141        2256        2476        1674</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">library(RColorBrewer)</div><div class="line">pie(type_counts, col = brewer.pal(length(type_counts), &quot;Set1&quot;))</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/90jhF097Fl.png?imageslim" alt="mark"></p>
-<h3 id="韦恩图"><a href="#韦恩图" class="headerlink" title="韦恩图"></a>韦恩图</h3><p>这里利用四个基因集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">listA &lt;- read.csv(&quot;genes_list_A.txt&quot;, header = FALSE)</div><div class="line">A &lt;- listA$V1</div><div class="line">listB &lt;- read.csv(&quot;genes_list_B.txt&quot;, header = FALSE)</div><div class="line">B &lt;- listB$V1</div><div class="line">listC &lt;- read.csv(&quot;genes_list_C.txt&quot;, header = FALSE)</div><div class="line">C &lt;- listC$V1</div><div class="line">listD &lt;- read.csv(&quot;genes_list_D.txt&quot;, header = FALSE)</div><div class="line">D &lt;- listD$V1</div><div class="line">library(VennDiagram)</div><div class="line">#注意这个包绘制的图只能直接保存在文件中，无法实时显示</div><div class="line">venn.diagram(list(A=A, B=B, C=C, D=D), fill=c(&quot;yellow&quot;,&quot;red&quot;,&quot;cyan&quot;,&quot;forestgreen&quot;), cex=1.5, filename = &quot;Venn_diagram_genes_4.png&quot;)</div></pre></td></tr></table></figure></p>
+<h3 id="线图"><a href="#线图" class="headerlink" title="线图"></a>线图</h3><pre><code class="{r}">time_cource &lt;- read.csv(&quot;time_course_data.txt&quot;, sep = &quot;,&quot;, quote = &#39;&#39;, stringsAsFactors = TRUE, header = TRUE)
+head(time_cource)
+</code></pre>
+<pre><code>##   seconds value sample
+## 1       0  0.00      A
+## 2       1  5.97      A
+## 3       2 13.42      A
+## 4       3 56.08      A
+## 5       4 98.04      A
+## 6       5 27.11      A
+</code></pre><pre><code>ggplot(time_cource, aes(x=seconds, y=value, color=sample))+geom_line()
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/kiA5jFAdCK.png?imageslim" alt="mark"></p>
+<pre><code>ggplot(time_cource, aes(x=seconds, y=value, color=sample))+geom_line(size=3)
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/bcGfGALGHl.png?imageslim" alt="mark"></p>
+<h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><pre><code class="{r}">type_counts &lt;- summary(my_data$type)
+type_counts
+</code></pre>
+<pre><code>##   Insertion    Deletion   Expansion Contraction 
+##        3141        2256        2476        1674
+</code></pre><pre><code>library(RColorBrewer)
+pie(type_counts, col = brewer.pal(length(type_counts), &quot;Set1&quot;))
+</code></pre><p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/90jhF097Fl.png?imageslim" alt="mark"></p>
+<h3 id="韦恩图"><a href="#韦恩图" class="headerlink" title="韦恩图"></a>韦恩图</h3><p>这里利用四个基因集</p>
+<pre><code class="{r}">listA &lt;- read.csv(&quot;genes_list_A.txt&quot;, header = FALSE)
+A &lt;- listA$V1
+listB &lt;- read.csv(&quot;genes_list_B.txt&quot;, header = FALSE)
+B &lt;- listB$V1
+listC &lt;- read.csv(&quot;genes_list_C.txt&quot;, header = FALSE)
+C &lt;- listC$V1
+listD &lt;- read.csv(&quot;genes_list_D.txt&quot;, header = FALSE)
+D &lt;- listD$V1
+library(VennDiagram)
+#注意这个包绘制的图只能直接保存在文件中，无法实时显示
+venn.diagram(list(A=A, B=B, C=C, D=D), fill=c(&quot;yellow&quot;,&quot;red&quot;,&quot;cyan&quot;,&quot;forestgreen&quot;), cex=1.5, filename = &quot;Venn_diagram_genes_4.png&quot;)
+</code></pre>
 <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180202/AFLB2JBHc7.png?imageslim" alt="mark"></p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">## R version 3.4.3 (2017-11-30)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] grid      stats     graphics  grDevices utils     datasets  methods  </div><div class="line">## [8] base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">##  [1] VennDiagram_1.6.18  futile.logger_1.4.3 RColorBrewer_1.1-2 </div><div class="line">##  [4] forcats_0.2.0       stringr_1.2.0       dplyr_0.7.4        </div><div class="line">##  [7] purrr_0.2.4         readr_1.1.1         tidyr_0.7.2        </div><div class="line">## [10] tibble_1.4.2        ggplot2_2.2.1.9000  tidyverse_1.2.1    </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] reshape2_1.4.3       haven_1.1.1          lattice_0.20-35     </div><div class="line">##  [4] colorspace_1.3-2     htmltools_0.3.6      yaml_2.1.16         </div><div class="line">##  [7] rlang_0.1.6          pillar_1.1.0         foreign_0.8-69      </div><div class="line">## [10] glue_1.2.0           lambda.r_1.2         modelr_0.1.1        </div><div class="line">## [13] readxl_1.0.0         bindrcpp_0.2         bindr_0.1           </div><div class="line">## [16] plyr_1.8.4           munsell_0.4.3        gtable_0.2.0        </div><div class="line">## [19] cellranger_1.1.0     rvest_0.3.2          psych_1.7.8         </div><div class="line">## [22] evaluate_0.10.1      labeling_0.3         knitr_1.18          </div><div class="line">## [25] parallel_3.4.3       broom_0.4.3          Rcpp_0.12.15        </div><div class="line">## [28] scales_0.5.0.9000    backports_1.1.2      jsonlite_1.5        </div><div class="line">## [31] mnormt_1.5-5         hms_0.4.1            digest_0.6.14       </div><div class="line">## [34] stringi_1.1.6        rprojroot_1.3-2      cli_1.0.0           </div><div class="line">## [37] tools_3.4.3          magrittr_1.5         lazyeval_0.2.1      </div><div class="line">## [40] futile.options_1.0.0 crayon_1.3.4         pkgconfig_2.0.1     </div><div class="line">## [43] xml2_1.2.0           lubridate_1.7.1      assertthat_0.2.0    </div><div class="line">## [46] rmarkdown_1.8        httr_1.3.1           rstudioapi_0.7      </div><div class="line">## [49] R6_2.2.2             nlme_3.1-131         compiler_3.4.3</div></pre></td></tr></table></figure>
-<hr>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><pre><code class="{r}">sessionInfo()
+</code></pre>
+<pre><code>## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=Chinese (Simplified)_China.936 
+## [2] LC_CTYPE=Chinese (Simplified)_China.936   
+## [3] LC_MONETARY=Chinese (Simplified)_China.936
+## [4] LC_NUMERIC=C                              
+## [5] LC_TIME=Chinese (Simplified)_China.936    
+## 
+## attached base packages:
+## [1] grid      stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+##  [1] VennDiagram_1.6.18  futile.logger_1.4.3 RColorBrewer_1.1-2 
+##  [4] forcats_0.2.0       stringr_1.2.0       dplyr_0.7.4        
+##  [7] purrr_0.2.4         readr_1.1.1         tidyr_0.7.2        
+## [10] tibble_1.4.2        ggplot2_2.2.1.9000  tidyverse_1.2.1    
+## 
+## loaded via a namespace (and not attached):
+##  [1] reshape2_1.4.3       haven_1.1.1          lattice_0.20-35     
+##  [4] colorspace_1.3-2     htmltools_0.3.6      yaml_2.1.16         
+##  [7] rlang_0.1.6          pillar_1.1.0         foreign_0.8-69      
+## [10] glue_1.2.0           lambda.r_1.2         modelr_0.1.1        
+## [13] readxl_1.0.0         bindrcpp_0.2         bindr_0.1           
+## [16] plyr_1.8.4           munsell_0.4.3        gtable_0.2.0        
+## [19] cellranger_1.1.0     rvest_0.3.2          psych_1.7.8         
+## [22] evaluate_0.10.1      labeling_0.3         knitr_1.18          
+## [25] parallel_3.4.3       broom_0.4.3          Rcpp_0.12.15        
+## [28] scales_0.5.0.9000    backports_1.1.2      jsonlite_1.5        
+## [31] mnormt_1.5-5         hms_0.4.1            digest_0.6.14       
+## [34] stringi_1.1.6        rprojroot_1.3-2      cli_1.0.0           
+## [37] tools_3.4.3          magrittr_1.5         lazyeval_0.2.1      
+## [40] futile.options_1.0.0 crayon_1.3.4         pkgconfig_2.0.1     
+## [43] xml2_1.2.0           lubridate_1.7.1      assertthat_0.2.0    
+## [46] rmarkdown_1.8        httr_1.3.1           rstudioapi_0.7      
+## [49] R6_2.2.2             nlme_3.1-131         compiler_3.4.3
+</code></pre><hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 
       

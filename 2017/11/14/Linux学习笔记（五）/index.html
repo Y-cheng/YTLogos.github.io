@@ -113,18 +113,18 @@
 
 
 
-<meta name="description" content="sortsort命令在linux中非常有用，它可以对文件进行排序并将排序结果标准输出。sort即可以从特定的文件中也可以从STDIN中获取输入。sort语法规则如下：1sort (选项) (参数) 文件">
+<meta name="description" content="sortsort命令在linux中非常有用，它可以对文件进行排序并将排序结果标准输出。sort即可以从特定的文件中也可以从STDIN中获取输入。sort语法规则如下： sort (选项) (参数) 文件">
 <meta name="keywords" content="sort">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux学习笔记（五）">
 <meta property="og:url" content="https://ytlogos.github.io/2017/11/14/Linux学习笔记（五）/index.html">
 <meta property="og:site_name" content="Logos">
-<meta property="og:description" content="sortsort命令在linux中非常有用，它可以对文件进行排序并将排序结果标准输出。sort即可以从特定的文件中也可以从STDIN中获取输入。sort语法规则如下：1sort (选项) (参数) 文件">
+<meta property="og:description" content="sortsort命令在linux中非常有用，它可以对文件进行排序并将排序结果标准输出。sort即可以从特定的文件中也可以从STDIN中获取输入。sort语法规则如下： sort (选项) (参数) 文件">
 <meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/171112/9Egg9ALKHB.png?imageslim">
 <meta property="og:updated_time" content="2017-11-13T07:27:58.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux学习笔记（五）">
-<meta name="twitter:description" content="sortsort命令在linux中非常有用，它可以对文件进行排序并将排序结果标准输出。sort即可以从特定的文件中也可以从STDIN中获取输入。sort语法规则如下：1sort (选项) (参数) 文件">
+<meta name="twitter:description" content="sortsort命令在linux中非常有用，它可以对文件进行排序并将排序结果标准输出。sort即可以从特定的文件中也可以从STDIN中获取输入。sort语法规则如下： sort (选项) (参数) 文件">
 <meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/171112/9Egg9ALKHB.png?imageslim">
 
 
@@ -504,7 +504,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,920
+                  1,989
                 </span>
               
 
@@ -539,8 +539,9 @@
 
       
         <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171112/9Egg9ALKHB.png?imageslim" alt="mark"></p>
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a><strong><code>sort</code></strong></h2><p><code>sort</code>命令在<strong>linux</strong>中非常有用，它可以对文件进行排序并将排序结果标准输出。<code>sort</code>即可以从特定的文件中也可以从STDIN中获取输入。<br><code>sort</code>语法规则如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sort (选项) (参数) 文件</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a><strong><code>sort</code></strong></h2><p><code>sort</code>命令在<strong>linux</strong>中非常有用，它可以对文件进行排序并将排序结果标准输出。<code>sort</code>即可以从特定的文件中也可以从STDIN中获取输入。<br><code>sort</code>语法规则如下：</p>
+<pre><code>sort (选项) (参数) 文件
+</code></pre><a id="more"></a>
 <p>参数详解：</p>
 <ul>
 <li>-b：忽略每行前面开始出的空格字符； </li>
@@ -556,39 +557,143 @@
 <li>-t&lt;分隔字符&gt;：指定排序时所用的栏位分隔字符； </li>
 <li>+&lt;起始栏位&gt;-&lt;结束栏位&gt;：以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。</li>
 </ul>
-<p><code>sort</code>将文件/文本的每一行作为一个单位相互比较，比较原则是从首字符向后，一次按<strong>ASCII</strong>码值进行比较，最后将他们按升序格式输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ cat example.bed</div><div class="line">chr1    26      39</div><div class="line">chr1    32      47</div><div class="line">chr3    11      28</div><div class="line">chr1    40      49</div><div class="line">chr3    16      27</div><div class="line">chr1    9       28</div><div class="line">chr2    35      54</div><div class="line">chr1    10      19</div><div class="line">#没有任何参数排序</div><div class="line">$ sort example.bed</div><div class="line">chr1    10      19</div><div class="line">chr1    26      39</div><div class="line">chr1    32      47</div><div class="line">chr1    40      49</div><div class="line">chr1    9       28</div><div class="line">chr2    35      54</div><div class="line">chr3    11      28</div><div class="line">chr3    16      27</div></pre></td></tr></table></figure></p>
-<blockquote>
+<p><code>sort</code>将文件/文本的每一行作为一个单位相互比较，比较原则是从首字符向后，一次按<strong>ASCII</strong>码值进行比较，最后将他们按升序格式输出。</p>
+<pre><code>$ cat example.bed
+chr1    26      39
+chr1    32      47
+chr3    11      28
+chr1    40      49
+chr3    16      27
+chr1    9       28
+chr2    35      54
+chr1    10      19
+#没有任何参数排序
+$ sort example.bed
+chr1    10      19
+chr1    26      39
+chr1    32      47
+chr1    40      49
+chr1    9       28
+chr2    35      54
+chr3    11      28
+chr3    16      27
+</code></pre><blockquote>
 <p><code>sort</code>默认空格（tab or spaces）作为分隔符，因此如果你的文件使用其他的分隔符，比如CSV文件（分隔符为“,”），这时就需要通过参数<code>-t</code>指定分隔符。</p>
 </blockquote>
-<p>实际排序过程中我们希望能够指定依次按哪一列进行排序，这里面就涉及到了参数选项-k了。-k参数的语法格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FStart.CStart Modifie,FEnd.CEnd Modifier </div><div class="line">-------Start--------,-------End-------- </div><div class="line">FStart.CStart 选项 , FEnd.CEnd 选项</div></pre></td></tr></table></figure></p>
-<p>格式被”,”分为两部分<code>Start</code>以及<code>End</code>两部分。其中<code>Start</code>部分又分为三部分,重点解释一下其中的<code>FStart</code>以及<code>CStart</code>部分，<code>CStart</code>不是必须的可以省略，省略的话表示从本域的开头部分开始，<code>FStart.CStart</code>中的<code>FStart</code>表示作用的域，<code>CStart</code>则表示在<code>FStart</code>域中从第几个字符开始排序，同理，在<code>End</code>部分类似。下面我们举个例子说明一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ head -n 3 example.bed</div><div class="line">chr1    26      39</div><div class="line">chr1    32      47</div><div class="line">chr3    11      28</div><div class="line"># sort 进行排序</div><div class="line">$ sort -k1,1 -k2,2n example.bed</div><div class="line">chr1    9       28</div><div class="line">chr1    10      19</div><div class="line">chr1    26      39</div><div class="line">chr1    32      47</div><div class="line">chr1    40      49</div><div class="line">chr2    35      54</div><div class="line">chr3    11      28</div><div class="line">chr3    16      27</div></pre></td></tr></table></figure></p>
-<p>在上面的命令中，我们通过参数-k来指定按哪一列来进行排序，首先第一个-k参数表示我们想要第一按第一列排序，接下来的第二个-k参数表示按第二列排序，n表示这一列是数值型数据。-k的语法十分复杂，再举个简单例子，假设我们有这样一个文件<em>company.txt</em>:有三个域，第一个域是公司名称，第二个域是公司人数，第三个域是员工平均工资。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ cat company.txt|column -t</div><div class="line">baidu   100  5000</div><div class="line">sohu    100  4500</div><div class="line">google  110  5000</div><div class="line">guge    50   3000</div></pre></td></tr></table></figure></p>
-<h3 id="按第一个域业也就是按公司名称的字母进行排序"><a href="#按第一个域业也就是按公司名称的字母进行排序" class="headerlink" title="按第一个域业也就是按公司名称的字母进行排序"></a>按第一个域业也就是按公司名称的字母进行排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k1 company.txt</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div><div class="line">guge 50 3000</div><div class="line">sohu 100 4500</div></pre></td></tr></table></figure>
-<p>这很好理解</p>
-<h3 id="按每个公司的人数也就是第二个域进行排序-n表示这一个域是数值型数据"><a href="#按每个公司的人数也就是第二个域进行排序-n表示这一个域是数值型数据" class="headerlink" title="按每个公司的人数也就是第二个域进行排序(n表示这一个域是数值型数据)"></a>按每个公司的人数也就是第二个域进行排序(n表示这一个域是数值型数据)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k2n company.txt</div><div class="line">guge 50 3000</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">google 110 5000</div></pre></td></tr></table></figure>
-<p>从上面可以看出，baidu和sohu的员工人数相同，这时会按照默认的规则从第一个域进行升序排列，所以可以看到baidu排在sohu前面。</p>
-<h3 id="按公司员工人数排序，员工人数相同的按第三个域升序排列"><a href="#按公司员工人数排序，员工人数相同的按第三个域升序排列" class="headerlink" title="按公司员工人数排序，员工人数相同的按第三个域升序排列"></a>按公司员工人数排序，员工人数相同的按第三个域升序排列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k2n -k3n company.txt</div><div class="line">guge 50 3000</div><div class="line">sohu 100 4500</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div></pre></td></tr></table></figure>
-<p>可以看出与前面的差别，这里按员工平均工资进行第二次排序，所以sohu排在baidu前面。</p>
-<h3 id="先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序"><a href="#先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序" class="headerlink" title="先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序"></a>先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k3nr -k2n company.txt</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div><div class="line">sohu 100 4500</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure>
-<p>命令中的r表示降序排序，可以看到我们将n、r这样的选项加入到了每一个-k选项中，其实就是-k语法中的Modifier选项。</p>
-<h3 id="从公司名称字母的第二个字母开始排序"><a href="#从公司名称字母的第二个字母开始排序" class="headerlink" title="从公司名称字母的第二个字母开始排序"></a>从公司名称字母的第二个字母开始排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k1.2 company.txt</div><div class="line">baidu 100 5000</div><div class="line">sohu 100 4500</div><div class="line">google 110 5000</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure>
-<p>-k1.2表示对第一个域的第二个字符开始到本域的最后一个字符为止的字符串进行排序，可以看到sohu与google的第二个字母都是o，但是接下来的字母sohu的h排在google的o之前，因此sohu排在google前面。</p>
+<p>实际排序过程中我们希望能够指定依次按哪一列进行排序，这里面就涉及到了参数选项-k了。-k参数的语法格式如下：</p>
+<pre><code>FStart.CStart Modifie,FEnd.CEnd Modifier 
+-------Start--------,-------End-------- 
+FStart.CStart 选项 , FEnd.CEnd 选项
+</code></pre><p>格式被”,”分为两部分<code>Start</code>以及<code>End</code>两部分。其中<code>Start</code>部分又分为三部分,重点解释一下其中的<code>FStart</code>以及<code>CStart</code>部分，<code>CStart</code>不是必须的可以省略，省略的话表示从本域的开头部分开始，<code>FStart.CStart</code>中的<code>FStart</code>表示作用的域，<code>CStart</code>则表示在<code>FStart</code>域中从第几个字符开始排序，同理，在<code>End</code>部分类似。下面我们举个例子说明一下：</p>
+<pre><code>$ head -n 3 example.bed
+chr1    26      39
+chr1    32      47
+chr3    11      28
+# sort 进行排序
+$ sort -k1,1 -k2,2n example.bed
+chr1    9       28
+chr1    10      19
+chr1    26      39
+chr1    32      47
+chr1    40      49
+chr2    35      54
+chr3    11      28
+chr3    16      27
+</code></pre><p>在上面的命令中，我们通过参数-k来指定按哪一列来进行排序，首先第一个-k参数表示我们想要第一按第一列排序，接下来的第二个-k参数表示按第二列排序，n表示这一列是数值型数据。-k的语法十分复杂，再举个简单例子，假设我们有这样一个文件<em>company.txt</em>:有三个域，第一个域是公司名称，第二个域是公司人数，第三个域是员工平均工资。</p>
+<pre><code>$ cat company.txt|column -t
+baidu   100  5000
+sohu    100  4500
+google  110  5000
+guge    50   3000
+</code></pre><h3 id="按第一个域业也就是按公司名称的字母进行排序"><a href="#按第一个域业也就是按公司名称的字母进行排序" class="headerlink" title="按第一个域业也就是按公司名称的字母进行排序"></a>按第一个域业也就是按公司名称的字母进行排序</h3><pre><code>$ sort -k1 company.txt
+baidu 100 5000
+google 110 5000
+guge 50 3000
+sohu 100 4500
+</code></pre><p>这很好理解</p>
+<h3 id="按每个公司的人数也就是第二个域进行排序-n表示这一个域是数值型数据"><a href="#按每个公司的人数也就是第二个域进行排序-n表示这一个域是数值型数据" class="headerlink" title="按每个公司的人数也就是第二个域进行排序(n表示这一个域是数值型数据)"></a>按每个公司的人数也就是第二个域进行排序(n表示这一个域是数值型数据)</h3><pre><code>$ sort -k2n company.txt
+guge 50 3000
+baidu 100 5000
+sohu 100 4500
+google 110 5000
+</code></pre><p>从上面可以看出，baidu和sohu的员工人数相同，这时会按照默认的规则从第一个域进行升序排列，所以可以看到baidu排在sohu前面。</p>
+<h3 id="按公司员工人数排序，员工人数相同的按第三个域升序排列"><a href="#按公司员工人数排序，员工人数相同的按第三个域升序排列" class="headerlink" title="按公司员工人数排序，员工人数相同的按第三个域升序排列"></a>按公司员工人数排序，员工人数相同的按第三个域升序排列</h3><pre><code>$ sort -k2n -k3n company.txt
+guge 50 3000
+sohu 100 4500
+baidu 100 5000
+google 110 5000
+</code></pre><p>可以看出与前面的差别，这里按员工平均工资进行第二次排序，所以sohu排在baidu前面。</p>
+<h3 id="先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序"><a href="#先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序" class="headerlink" title="先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序"></a>先按员工工资降序排序，如果员工人数相同，则再按公司人数升序排序</h3><pre><code>$ sort -k3nr -k2n company.txt
+baidu 100 5000
+google 110 5000
+sohu 100 4500
+guge 50 3000
+</code></pre><p>命令中的r表示降序排序，可以看到我们将n、r这样的选项加入到了每一个-k选项中，其实就是-k语法中的Modifier选项。</p>
+<h3 id="从公司名称字母的第二个字母开始排序"><a href="#从公司名称字母的第二个字母开始排序" class="headerlink" title="从公司名称字母的第二个字母开始排序"></a>从公司名称字母的第二个字母开始排序</h3><pre><code>$ sort -k1.2 company.txt
+baidu 100 5000
+sohu 100 4500
+google 110 5000
+guge 50 3000
+</code></pre><p>-k1.2表示对第一个域的第二个字符开始到本域的最后一个字符为止的字符串进行排序，可以看到sohu与google的第二个字母都是o，但是接下来的字母sohu的h排在google的o之前，因此sohu排在google前面。</p>
 <h3 id="只针对公司名称的第二字母进行排序，相同的话则按员工平均工资降序排序"><a href="#只针对公司名称的第二字母进行排序，相同的话则按员工平均工资降序排序" class="headerlink" title="只针对公司名称的第二字母进行排序，相同的话则按员工平均工资降序排序"></a>只针对公司名称的第二字母进行排序，相同的话则按员工平均工资降序排序</h3><blockquote>
 <p>注意了，敲黑板！！！上面我们是从第一个域的第二个字符开始进行排序，而这里只针对第二个字符进行排序，如果第二字符相同的话则按员工平均工资降序排序，上面的例子是按第三个字符进行排序。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k1.2,1.2 -k3rn company.txt</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div><div class="line">sohu 100 4500</div><div class="line">guge 50 3000</div></pre></td></tr></table></figure>
-<p>可以看到这次google排在sohu前面了。<br>-k选项部分讲到这里基本脉络清楚了,此时再结合其他选项<code>sort</code>就会变得十分强大。</p>
-<h3 id="sort的-u选项"><a href="#sort的-u选项" class="headerlink" title="sort的-u选项"></a>sort的-u选项</h3><p>u代表unique，因此此选项会将重复的选项删除，举个例子，这里我们根据第二域进行排序，添加-u选项，这样具有相同员工数且处于后续位置的行将被删除。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sort -k2n -u company.txt</div><div class="line">guge 50 3000</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div></pre></td></tr></table></figure></p>
-<blockquote>
+<pre><code>$ sort -k1.2,1.2 -k3rn company.txt
+baidu 100 5000
+google 110 5000
+sohu 100 4500
+guge 50 3000
+</code></pre><p>可以看到这次google排在sohu前面了。<br>-k选项部分讲到这里基本脉络清楚了,此时再结合其他选项<code>sort</code>就会变得十分强大。</p>
+<h3 id="sort的-u选项"><a href="#sort的-u选项" class="headerlink" title="sort的-u选项"></a>sort的-u选项</h3><p>u代表unique，因此此选项会将重复的选项删除，举个例子，这里我们根据第二域进行排序，添加-u选项，这样具有相同员工数且处于后续位置的行将被删除。</p>
+<pre><code>$ sort -k2n -u company.txt
+guge 50 3000
+baidu 100 5000
+google 110 5000
+</code></pre><blockquote>
 <p>这里就将sohu这一行删除了。注意了，当-k与u结合使用时，-u只识别-k设定的域，发现相同就将后续相同的行删除。</p>
 </blockquote>
-<p>再举个例子看看特殊情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sort -k2n -k3n -u company.txt</div><div class="line">guge 50 3000</div><div class="line">sohu 100 4500</div><div class="line">baidu 100 5000</div><div class="line">google 110 5000</div></pre></td></tr></table></figure></p>
-<p>可以看到这次没有删除任何行，这主要是由于-u会权衡所有-k选项，只会将都相同的删除，只要其中有一级不同就不会轻易删除。</p>
-<h3 id="其他注意点"><a href="#其他注意点" class="headerlink" title="其他注意点"></a>其他注意点</h3><p>最后我还想再讲讲<code>sort</code>一些其他比较有用的选项。第一个是-V选项。我们通过一个例子看看。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ cat example2.bed</div><div class="line">chr2    15      19</div><div class="line">chr22   32      46</div><div class="line">chr10   31      47</div><div class="line">chr1    34      49</div><div class="line">chr11   6       16</div><div class="line">chr2    17      22</div><div class="line">chr2    27      46</div><div class="line">chr10   30      42</div><div class="line"># 进行排序</div><div class="line">$ sort -k1,1 -k2,2n example2.bed</div><div class="line">chr1    34      49</div><div class="line">chr10   30      42</div><div class="line">chr10   31      47</div><div class="line">chr11   6       16</div><div class="line">chr2    15      19</div><div class="line">chr2    17      22</div><div class="line">chr2    27      46</div><div class="line">chr22   32      46</div></pre></td></tr></table></figure></p>
-<p>我们可以看到chr2排在chr11之后，主要是因为1排在2之前，<code>sort</code>对文本进行排序时无法按数字进行排序，通过选项-V可以解决这个问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ sort -k1,1V -k2,2n example2.bed</div><div class="line">chr1    34      49</div><div class="line">chr2    15      19</div><div class="line">chr2    17      22</div><div class="line">chr2    27      46</div><div class="line">chr10   30      42</div><div class="line">chr10   31      47</div><div class="line">chr11   6       16</div><div class="line">chr22   32      46</div></pre></td></tr></table></figure></p>
-<p>另外一个需要考虑的是当我们处理大数据集文本时，提高运行速度是很重要的，<code>sort</code>提供了几种方法，第一是提供了-S选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sort -k1,1 -k4,4n -S2G Mus_musculus.GRCm38.75_chr1_random.gtf</div></pre></td></tr></table></figure></p>
-<p>其中G表示gigabyte，另外一种方法是提供了并行多线程计算–parallel选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sort -k1,1 -k4,4n --parallel=4 Mus_musculus.GRCm38.75_chr1_random.gtf</div></pre></td></tr></table></figure></p>
-<hr>
+<p>再举个例子看看特殊情况</p>
+<pre><code>$ sort -k2n -k3n -u company.txt
+guge 50 3000
+sohu 100 4500
+baidu 100 5000
+google 110 5000
+</code></pre><p>可以看到这次没有删除任何行，这主要是由于-u会权衡所有-k选项，只会将都相同的删除，只要其中有一级不同就不会轻易删除。</p>
+<h3 id="其他注意点"><a href="#其他注意点" class="headerlink" title="其他注意点"></a>其他注意点</h3><p>最后我还想再讲讲<code>sort</code>一些其他比较有用的选项。第一个是-V选项。我们通过一个例子看看。</p>
+<pre><code>$ cat example2.bed
+chr2    15      19
+chr22   32      46
+chr10   31      47
+chr1    34      49
+chr11   6       16
+chr2    17      22
+chr2    27      46
+chr10   30      42
+# 进行排序
+$ sort -k1,1 -k2,2n example2.bed
+chr1    34      49
+chr10   30      42
+chr10   31      47
+chr11   6       16
+chr2    15      19
+chr2    17      22
+chr2    27      46
+chr22   32      46
+</code></pre><p>我们可以看到chr2排在chr11之后，主要是因为1排在2之前，<code>sort</code>对文本进行排序时无法按数字进行排序，通过选项-V可以解决这个问题：</p>
+<pre><code>$ sort -k1,1V -k2,2n example2.bed
+chr1    34      49
+chr2    15      19
+chr2    17      22
+chr2    27      46
+chr10   30      42
+chr10   31      47
+chr11   6       16
+chr22   32      46
+</code></pre><p>另外一个需要考虑的是当我们处理大数据集文本时，提高运行速度是很重要的，<code>sort</code>提供了几种方法，第一是提供了-S选项：</p>
+<pre><code>$ sort -k1,1 -k4,4n -S2G Mus_musculus.GRCm38.75_chr1_random.gtf
+</code></pre><p>其中G表示gigabyte，另外一种方法是提供了并行多线程计算–parallel选项</p>
+<pre><code>$ sort -k1,1 -k4,4n --parallel=4 Mus_musculus.GRCm38.75_chr1_random.gtf
+</code></pre><hr>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生（生物信息学方向）<br>伪码农，R语言爱好者，爱开源</p>
 

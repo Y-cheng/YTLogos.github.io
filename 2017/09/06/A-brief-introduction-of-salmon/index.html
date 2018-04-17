@@ -502,7 +502,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  910
+                  911
                 </span>
               
 
@@ -540,28 +540,71 @@
 <p>Salmon是一款定量分析RNA-seq的软件，号称Fast、accurate、bias-aware and Don’t count…quantify定量分析转录本。本文主要简要的介绍一下Salmon。具体的情况可移步<a href="https://combine-lab.github.io/salmon/" target="_blank" rel="external">Salmon官网</a></p>
 <a id="more"></a>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><hr>
-<p>可以去<a href="https://github.com/COMBINE-lab/salmon" target="_blank" rel="external">Github</a>里下载Salmon进行安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir Salmon &amp;&amp; cd Salmon</div><div class="line">$ wget  https://github.com/COMBINE-lab/salmon/releases/download/v0.8.2/Salmon-0.8.2_linux_x86_64.tar.gz</div><div class="line">$ tar zxvf Salmon-0.8.2_linux_x86_64.tar.gz</div></pre></td></tr></table></figure></p>
-<p>至于路径则根据自己电脑进行配置，这里不讲，安装成功的话则可以用<code>salmon -h</code>查看帮助文件。应该可以看到如下输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ salmon -h</div><div class="line">Salmon v0.8.1</div><div class="line"></div><div class="line">Usage:  salmon -h|--help or</div><div class="line">        salmon -v|--version or</div><div class="line">        salmon -c|--cite or</div><div class="line">        salmon [--no-version-check] &lt;COMMAND&gt; [-h | options]</div><div class="line"></div><div class="line">Commands:</div><div class="line">     cite  Show salmon citation information</div><div class="line">     index Create a salmon index</div><div class="line">     quant Quantify a sample</div><div class="line">     swim  Perform super-secret operation</div></pre></td></tr></table></figure>
-<p>也可以利用conda安装，这样就可以省去很多麻烦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ conda install salmon</div></pre></td></tr></table></figure></p>
-<h2 id="获取转录组"><a href="#获取转录组" class="headerlink" title="获取转录组"></a>获取转录组</h2><hr>
+<p>可以去<a href="https://github.com/COMBINE-lab/salmon" target="_blank" rel="external">Github</a>里下载Salmon进行安装</p>
+<pre><code>$ mkdir Salmon &amp;&amp; cd Salmon
+$ wget  https://github.com/COMBINE-lab/salmon/releases/download/v0.8.2/Salmon-0.8.2_linux_x86_64.tar.gz
+$ tar zxvf Salmon-0.8.2_linux_x86_64.tar.gz
+</code></pre><p>至于路径则根据自己电脑进行配置，这里不讲，安装成功的话则可以用<code>salmon -h</code>查看帮助文件。应该可以看到如下输出：</p>
+<pre><code>$ salmon -h
+Salmon v0.8.1
+
+Usage:  salmon -h|--help or
+        salmon -v|--version or
+        salmon -c|--cite or
+        salmon [--no-version-check] &lt;COMMAND&gt; [-h | options]
+
+Commands:
+     cite  Show salmon citation information
+     index Create a salmon index
+     quant Quantify a sample
+     swim  Perform super-secret operation
+</code></pre><p>也可以利用conda安装，这样就可以省去很多麻烦。</p>
+<pre><code>$ conda install salmon
+</code></pre><h2 id="获取转录组"><a href="#获取转录组" class="headerlink" title="获取转录组"></a>获取转录组</h2><hr>
 <p>Salmon是直接将原始序列map到转录组上而不是全基因组上(这是很重要的一点，千万不要搞混了，这也是作者一直在强调的)，这里我们就以拟南芥为例下载其转录组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#Creat a directory </div><div class="line">$ mkdir RNA-seq_test cd RNA-seq_test</div><div class="line">$ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz</div></pre></td></tr></table></figure>
-<p>好了，现在转录组已下载好，接下来就是建立索引了</p>
+<pre><code>#Creat a directory 
+$ mkdir RNA-seq_test cd RNA-seq_test
+$ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz
+</code></pre><p>好了，现在转录组已下载好，接下来就是建立索引了</p>
 <h2 id="建立索引"><a href="#建立索引" class="headerlink" title="建立索引"></a>建立索引</h2><hr>
-<p>利用Salmon建立索引十分简单，一行命令就搞定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ salmon index -t athal.fa.gz -i athal_index</div><div class="line">```</div></pre></td></tr></table></figure></p>
-<p>这里解释一下几个参数：</p>
+<p>利用Salmon建立索引十分简单，一行命令就搞定</p>
+<pre><code>$ salmon index -t athal.fa.gz -i athal_index
+```
+</code></pre><p>这里解释一下几个参数：</p>
 <ul>
 <li>-t: 表示需要用到的转录组，这里是拟南芥的，我们刚下载好的athal.fa.gz</li>
 <li>-i: 表示我们建立的索引的名称，它是一个文件夹</li>
 </ul>
 <p>更多的参数设置可以<a href="http://salmon.readthedocs.io/en/latest/" target="_blank" rel="external">参考说明</a></p>
 <h2 id="获取序列数据"><a href="#获取序列数据" class="headerlink" title="获取序列数据"></a>获取序列数据</h2><hr>
-<p>一次试验数据往往很多，我们可以写一个脚本进行下载，这里简单示例一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">mkdir data</div><div class="line">cd data</div><div class="line">for i in &apos;seq 25 40&apos;;</div><div class="line">do</div><div class="line">  madir DRR0161$&#123;i&#125;;</div><div class="line">  cd DRR0161$&#123;i&#125;;</div><div class="line">  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161$&#123;i&#125;/DRR0161$&#123;i&#125;_1.fastq.gz; </div><div class="line">  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161$&#123;i&#125;/DRR0161$&#123;i&#125;_2.fastq.gz; </div><div class="line">  cd ..; </div><div class="line">done</div><div class="line">cd ..</div></pre></td></tr></table></figure></p>
-<p>将其保存为obtain_reads.sh,将其运行只需以下命令就行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bash obtain_reads.sh</div></pre></td></tr></table></figure></p>
-<h2 id="定量样本"><a href="#定量样本" class="headerlink" title="定量样本"></a>定量样本</h2><hr>
-<p>这次也写一个简单脚本进行定量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for fn in data/DRR0161&#123;25..40&#125;;</div><div class="line">do</div><div class="line">samp=`basename $&#123;fn&#125;`</div><div class="line">echo &quot;Processing sample $&#123;samp&#125;&quot;</div><div class="line">salmon quant -i athal_index -l A \</div><div class="line">         -1 $&#123;fn&#125;/$&#123;samp&#125;_1.fastq.gz \</div><div class="line">         -2 $&#123;fn&#125;/$&#123;samp&#125;_2.fastq.gz \</div><div class="line">         -p 8 -o quants/$&#123;samp&#125;_quant</div><div class="line">done</div></pre></td></tr></table></figure></p>
-<p>这里简单说明一下几个参数：</p>
+<p>一次试验数据往往很多，我们可以写一个脚本进行下载，这里简单示例一下：</p>
+<pre><code>#!/bin/bash
+mkdir data
+cd data
+for i in &#39;seq 25 40&#39;;
+do
+  madir DRR0161${i};
+  cd DRR0161${i};
+  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161${i}/DRR0161${i}_1.fastq.gz; 
+  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161${i}/DRR0161${i}_2.fastq.gz; 
+  cd ..; 
+done
+cd ..
+</code></pre><p>将其保存为obtain_reads.sh,将其运行只需以下命令就行：</p>
+<pre><code>$ bash obtain_reads.sh
+</code></pre><h2 id="定量样本"><a href="#定量样本" class="headerlink" title="定量样本"></a>定量样本</h2><hr>
+<p>这次也写一个简单脚本进行定量</p>
+<pre><code>#!/bin/bash
+for fn in data/DRR0161{25..40};
+do
+samp=`basename ${fn}`
+echo &quot;Processing sample ${samp}&quot;
+salmon quant -i athal_index -l A \
+         -1 ${fn}/${samp}_1.fastq.gz \
+         -2 ${fn}/${samp}_2.fastq.gz \
+         -p 8 -o quants/${samp}_quant
+done
+</code></pre><p>这里简单说明一下几个参数：</p>
 <ul>
 <li>-i: 用来告诉salmon哪里寻找索引index</li>
 <li>-l A: 告诉salmon自行决定是何种类型的序列数据</li>
