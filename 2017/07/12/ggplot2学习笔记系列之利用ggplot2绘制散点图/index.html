@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,visualization,scatter plot," />
+  <meta name="keywords" content="R,scatter plot,visualization," />
 
 
 
@@ -114,7 +114,7 @@
 
 
 <meta name="description" content="1 简介散点图通常用来刻画两个连续型变量之间的关系。绘制散点图时数据集中的每一个观测值都由散点图中的一个点来表示。利用包ggplot2可以绘制十分漂亮的散点图。 利用ggplot2绘图前先确保我们所使用的数据集是data.frame形式。ggplot2绘图利用映射将数据赋予给坐标轴上进而添加几何对象形成图形。绘图前先加载包ggplot2 即library(ggplot2)。">
-<meta name="keywords" content="R,visualization,scatter plot">
+<meta name="keywords" content="R,scatter plot,visualization">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ggplot2学习笔记系列之利用ggplot2绘制散点图">
 <meta property="og:url" content="https://ytlogos.github.io/2017/07/12/ggplot2学习笔记系列之利用ggplot2绘制散点图/index.html">
@@ -688,9 +688,9 @@ geom_point()+stat_smooth(method=&quot;lm&quot;)
           
             <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
           
-            <a href="/tags/visualization/" rel="tag"><i class="fa fa-tag"></i> visualization</a>
-          
             <a href="/tags/scatter-plot/" rel="tag"><i class="fa fa-tag"></i> scatter plot</a>
+          
+            <a href="/tags/visualization/" rel="tag"><i class="fa fa-tag"></i> visualization</a>
           
         </div>
       
@@ -1692,3 +1692,99 @@ $(function() {
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/love.js"></script>
+
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/Monokai Sublime.min.css">
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    hljs.initHighlighting();
+    $('pre code').each(function() {
+      var lines = $(this).text().split('\n').length - 1;
+      var $numbering = $('<ul/>').addClass('pre-numbering');
+      $(this)
+        .addClass('has-numbering')
+        .parent()
+        .append($numbering);
+      for (i = 1; i <= lines; i++) {
+        $numbering.append($('<li/>'));
+      }
+    });
+  });
+
+</script>
+
+<style>
+  pre {
+    position: relative;
+    padding: 0;
+  }
+
+  code.has-numbering {
+    margin-left: 2.5rem;
+  }
+
+  code.has-numbering::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pre-numbering {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .pre-numbering li {
+    list-style-type: decimal-leading-zero !important;
+  }
+
+  @media (max-width: 760px) {
+    .post-body pre {
+      padding: 0px;
+    }
+
+    .post-body .pre-numbering {
+      display: none;
+    }
+
+    code.has-numbering {
+      margin: 0;
+    }
+  }
+
+</style>
+
+<style>
+blockquote {
+  color: #888;
+  background-color: #eae6f3;
+  border-left: 1rem solid #5236a0;
+  padding: 0 1.5rem;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+blockquote:before,
+blockquote:after {
+  color: #392570;
+  font-size: 2.5rem;
+  position: absolute;
+  line-height: 2.5rem;
+}
+
+blockquote:before {
+  content: "\201C";
+  left: -1rem;
+  top: 0;
+}
+
+blockquote:after {
+  content: "\201D";
+  right: 0;
+  bottom: -1rem;
+}
+</style>

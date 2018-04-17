@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,ggrepel,visualization," />
+  <meta name="keywords" content="R,visualization,ggrepel," />
 
 
 
@@ -114,7 +114,7 @@
 
 
 <meta name="description" content="上篇文章中提了一下如何通过ggpubr包为ggplot图添加p-value以及显著性标记,本文将详细介绍。利用数据集ToothGrowth进行演示">
-<meta name="keywords" content="R,ggrepel,visualization">
+<meta name="keywords" content="R,visualization,ggrepel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R语言可视化学习笔记之添加p-value和显著性标记">
 <meta property="og:url" content="https://ytlogos.github.io/2017/06/25/R语言可视化学习笔记之添加p-value和显著性标记/index.html">
@@ -932,9 +932,9 @@ stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = c(16
           
             <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
           
-            <a href="/tags/ggrepel/" rel="tag"><i class="fa fa-tag"></i> ggrepel</a>
-          
             <a href="/tags/visualization/" rel="tag"><i class="fa fa-tag"></i> visualization</a>
+          
+            <a href="/tags/ggrepel/" rel="tag"><i class="fa fa-tag"></i> ggrepel</a>
           
         </div>
       
@@ -947,8 +947,8 @@ stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = c(16
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/25/R语言可视化学习笔记之ggrepel包/" rel="next" title="R语言可视化学习笔记之ggrepel包">
-                <i class="fa fa-chevron-left"></i> R语言可视化学习笔记之ggrepel包
+              <a href="/2017/06/25/ggplot2学习笔记系列之利用ggplot2绘制条形图/" rel="next" title="ggplot2学习笔记系列之利用ggplot2绘制条形图">
+                <i class="fa fa-chevron-left"></i> ggplot2学习笔记系列之利用ggplot2绘制条形图
               </a>
             
           </div>
@@ -957,8 +957,8 @@ stat_compare_means(aes(group=supp), label = &quot;p.signif&quot;, label.y = c(16
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/25/R语言学习笔记之聚类分析/" rel="prev" title="R语言学习笔记之聚类分析">
-                R语言学习笔记之聚类分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/25/R语言可视化学习笔记之相关矩阵可视化包ggcorrplot/" rel="prev" title="R语言可视化学习笔记之相关矩阵可视化包ggcorrplot">
+                R语言可视化学习笔记之相关矩阵可视化包ggcorrplot <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1936,3 +1936,99 @@ $(function() {
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/love.js"></script>
+
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/Monokai Sublime.min.css">
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    hljs.initHighlighting();
+    $('pre code').each(function() {
+      var lines = $(this).text().split('\n').length - 1;
+      var $numbering = $('<ul/>').addClass('pre-numbering');
+      $(this)
+        .addClass('has-numbering')
+        .parent()
+        .append($numbering);
+      for (i = 1; i <= lines; i++) {
+        $numbering.append($('<li/>'));
+      }
+    });
+  });
+
+</script>
+
+<style>
+  pre {
+    position: relative;
+    padding: 0;
+  }
+
+  code.has-numbering {
+    margin-left: 2.5rem;
+  }
+
+  code.has-numbering::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pre-numbering {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .pre-numbering li {
+    list-style-type: decimal-leading-zero !important;
+  }
+
+  @media (max-width: 760px) {
+    .post-body pre {
+      padding: 0px;
+    }
+
+    .post-body .pre-numbering {
+      display: none;
+    }
+
+    code.has-numbering {
+      margin: 0;
+    }
+  }
+
+</style>
+
+<style>
+blockquote {
+  color: #888;
+  background-color: #eae6f3;
+  border-left: 1rem solid #5236a0;
+  padding: 0 1.5rem;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+blockquote:before,
+blockquote:after {
+  color: #392570;
+  font-size: 2.5rem;
+  position: absolute;
+  line-height: 2.5rem;
+}
+
+blockquote:before {
+  content: "\201C";
+  left: -1rem;
+  top: 0;
+}
+
+blockquote:after {
+  content: "\201D";
+  right: 0;
+  bottom: -1rem;
+}
+</style>
