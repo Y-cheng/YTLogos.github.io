@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-05-19T06:30:54.079Z</updated>
+  <updated>2018-05-19T08:56:00.898Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux之结构化命令</title>
+    <link href="https://ytlogos.github.io/2018/05/16/Linux%E4%B9%8B%E7%BB%93%E6%9E%84%E5%8C%96%E5%91%BD%E4%BB%A4/"/>
+    <id>https://ytlogos.github.io/2018/05/16/Linux之结构化命令/</id>
+    <published>2018-05-16T13:19:05.000Z</published>
+    <updated>2018-05-19T08:56:00.898Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="test语句"><a href="#test语句" class="headerlink" title="test语句"></a><code>test</code>语句</h2><p><code>test</code>命令提供了在<code>if-then</code>语句中测试不同条件的途径。如果<code>test</code>命令中列出的条件成立，<code>test</code>命令就会推出并返回退出状态码0。如果条件不成立，<code>test</code>命令就会推出并返回非零的退出状态码，这使得<code>if-then</code>语句不会被执行。<code>test</code>命令格式非常简单:</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">test </span>condition</div></pre></td></tr></table></figure>
+<p>在<code>if-then</code>语句中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="built_in">test</span> condition</div><div class="line"><span class="keyword">then</span></div><div class="line">    commands</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<p><strong>bash shell</strong>提供了另一种条件测试方法，无需在<code>if-then</code>语句中声明<code>test</code>命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> [ condition ]</div><div class="line"><span class="keyword">then</span></div><div class="line">    commands</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>方括号定义了测试条件，需要注意的是，第一个方括号之后和第二个方括号之前必须加上一个空格，否则会报错。</p>
+</blockquote>
+<p><code>test</code>命令可以判断三类条件</p>
+<ul>
+<li>数值比较(bash shell只能处理整数)</li>
+<li>字符串比较</li>
+<li>文件比较</li>
+</ul>
+<blockquote>
+<p>在比较测试中，大写字母被认为是小于小写字母的，但是<code>sort</code>命令恰好相反。比较测试中使用的是标准的<strong>ASCⅡ</strong>，根据每个字符的<strong>ASCⅡ</strong>数值来决定排序结果。<code>sort</code>命令使用的是系统的本地化语言设置中定义的排序顺序，对于英语，本地化设置指定了在排序顺序中小写字母出现在大写字母之前。<code>test</code>命令和测试表达式使用标准的数字比较符号来表示字符串比较，而用文本代码来表示数值比较。</p>
+</blockquote>
+<h2 id="if-then高级特性"><a href="#if-then高级特性" class="headerlink" title="if-then高级特性"></a><code>if-then</code>高级特性</h2><p><strong>bash shell</strong>提供了两项可在<code>if-then</code>语句中使用的高级特性：</p>
+<ul>
+<li>用于数学表达式的双括号(无需转义)</li>
+<li>用于高级字符串处理功能的双方括号(支持模式匹配)</li>
+</ul>
+<h3 id="使用双括号"><a href="#使用双括号" class="headerlink" title="使用双括号"></a>使用双括号</h3><p>双括号提供了使用高级数学表达式的功能，双括号命令格式如下：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(( <span class="name">expression</span> ))</div></pre></td></tr></table></figure>
+<h3 id="使用双方括号"><a href="#使用双方括号" class="headerlink" title="使用双方括号"></a>使用双方括号</h3><p>双方括号命令提供了针对字符串比较的高级特性，其命令格式如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">[[ expression ]]</span></div></pre></td></tr></table></figure>
+<h2 id="case命令"><a href="#case命令" class="headerlink" title="case命令"></a><code>case</code>命令</h2><p><code>case</code>命令会将指定的变量与不同模式进行比较，如果变量和模式模式匹配，那么<code>shell</code>会执行为该模式指定的命令。可以通过竖线操作符来分隔出多个模式，星号会捕获所有与已知模式不匹配的值。格式具体如下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">case variable <span class="keyword">in</span> </div><div class="line">pattern1 | pattern2) command1;;</div><div class="line">pattern3) command2;;</div><div class="line">*)<span class="built_in"> default </span>commands;;</div><div class="line">esac</div></pre></td></tr></table></figure>
+<p>举个例子<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ cat test26.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># using the case command</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="keyword">case</span> <span class="variable">$USER</span> <span class="keyword">in</span></div><div class="line">rich | barbara)</div><div class="line"><span class="built_in">echo</span> <span class="string">"Welcome, <span class="variable">$USER</span>"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Please enjoy your visit"</span>;;</div><div class="line">testing)</div><div class="line"><span class="built_in">echo</span> <span class="string">"Special testing account"</span>;;</div><div class="line">jessica)</div><div class="line"><span class="built_in">echo</span> <span class="string">"Do not forget to log off when you're done"</span>;;</div><div class="line">*)</div><div class="line"><span class="built_in">echo</span> <span class="string">"Sorry, you are not allowed here"</span>;;</div><div class="line"><span class="keyword">esac</span></div><div class="line">$</div><div class="line">$ ./test26.sh</div><div class="line">Welcome, rich</div><div class="line">Please enjoy your visit</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
+    
+    
+      <category term="Shell" scheme="https://ytlogos.github.io/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux命令</title>
@@ -1286,117 +1343,6 @@
     
       &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/gfihd4EIE0.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;shell传递参数&quot;&gt;&lt;a href=&quot;#shell传递参数&quot; class=&quot;headerlink&quot; title=&quot;shell传递参数&quot;&gt;&lt;/a&gt;shell传递参数&lt;/h2&gt;&lt;p&gt;执行shell脚本时，向脚本传递参数，脚本内获取参数的格式为：$n。n代表数字，1为执行脚本的第一个参数，2为第二个，以此类推。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Shell" scheme="https://ytlogos.github.io/categories/Shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Shell编程：变量</title>
-    <link href="https://ytlogos.github.io/2018/02/02/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%8F%98%E9%87%8F/"/>
-    <id>https://ytlogos.github.io/2018/02/02/Shell编程：变量/</id>
-    <published>2018-02-02T13:19:05.000Z</published>
-    <updated>2018-02-05T05:21:56.946Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim" alt="mark"></p>
-<a id="more"></a>
-<h2 id="Shell变量"><a href="#Shell变量" class="headerlink" title="Shell变量"></a>Shell变量</h2><p>定义变量时，变量名不加美元符号<code>$</code>，如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> my_name=<span class="string">"logos"</span></span></div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>需要注意的是，变量名与等号之间不能有空格。同时变量命名遵循以下规则：</p>
-</blockquote>
-<ul>
-<li>只能使用英文字母，数字与下划线，首个字符不能以数字开头</li>
-<li>中间不能有空格，可以使用下划线</li>
-<li>不能使用标点符号</li>
-<li>不能使用bash里的关键字</li>
-</ul>
-<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><p>使用已经定义过的变量只需在变量名前加美元符号<code>$</code>即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my</span>-name</span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_name</span></span></div><div class="line">logos</div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;my_name&#125;</span></span></div><div class="line">logos</div></pre></td></tr></table></figure></p>
-<p>变量名外面的花括号是可选的，加花括号是为了帮助解释器识别变量边界，因此推荐使用花括号。另已经定义过的变量可以重新被定义。</p>
-<h2 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h2><p>使用<code>readonly</code>命令可以将变量定义为只读变量，只读变量的值不能被改变<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> my_name=<span class="string">"logos"</span></span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">readonly</span> my_name</span></div><div class="line"><span class="meta">$</span><span class="bash"> my_name=<span class="string">"other"</span></span></div><div class="line">zsh: read-only variable: my_name</div></pre></td></tr></table></figure></p>
-<h2 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h2><p>使用<code>unset</code>命令可以删除变量，但是无法删除只读变量<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> my_name</span></div></pre></td></tr></table></figure></p>
-<h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><p>运行shell时，会同时存在三种变量</p>
-<ul>
-<li>局部变量：局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量</li>
-<li>环境变量：所有程序包括shell启动的程序都能访问环境变量</li>
-<li>shell变量：由shell设置的特殊变量。shell变量中一部分是局部变量，一部分是环境变量。这些变量保证shell的正常运行</li>
-</ul>
-<h2 id="shell字符串"><a href="#shell字符串" class="headerlink" title="shell字符串"></a>shell字符串</h2><p>字符串是最常用的数据类型，可以用单引号、双引号，也可以不用引号。</p>
-<h3 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> str=<span class="string">'This is a string'</span></span></div></pre></td></tr></table></figure>
-<p>单引号字符串的限制：</p>
-<ul>
-<li>单引号里的任意字符都会原样输出，单引号字符串中的变量是无效的</li>
-<li>单引号字符串中不能出现单引号,使用转义符也没用</li>
-</ul>
-<h2 id="双引号"><a href="#双引号" class="headerlink" title="双引号"></a>双引号</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> my_name=<span class="string">'logos'</span></span></div><div class="line"><span class="meta">$</span><span class="bash"> str=<span class="string">"Hello, I know you are \"<span class="variable">$&#123;my_name&#125;</span>\"! \n"</span></span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;str&#125;</span></span></div><div class="line">Hello, I know you are "logos"!</div></pre></td></tr></table></figure>
-<p>双引号的优点：</p>
-<ul>
-<li>双引号里面可以有变量</li>
-<li>双引号里可以出现转义符</li>
-</ul>
-<h2 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h2><p>新建一个脚本string.sh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">my_name=<span class="string">"logos"</span></div><div class="line">greeting=<span class="string">"hello, "</span><span class="variable">$my_name</span><span class="string">" !"</span></div><div class="line">greeting_1=<span class="string">"hello, <span class="variable">$&#123;my_name&#125;</span> !"</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$greeting</span> <span class="variable">$greeting_1</span></div></pre></td></tr></table></figure></p>
-<p>运行脚本<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">bash </span><span class="keyword">string.sh</span></div><div class="line"><span class="symbol">hello</span>, logos ! hello, logos !</div></pre></td></tr></table></figure></p>
-<h2 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash">string=<span class="string">"abcde"</span></span></div><div class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$&#123;#string&#125;</span></span></div><div class="line">5</div></pre></td></tr></table></figure>
-<blockquote>
-<p>计算字符串长度也可以用<strong>length</strong></p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> expr length <span class="string">"<span class="variable">$url</span>"</span></span></div><div class="line">26</div></pre></td></tr></table></figure>
-<h2 id="字符串截取"><a href="#字符串截取" class="headerlink" title="字符串截取"></a>字符串截取</h2><p>字符串截取主要有4个截取符：<code>#</code>、<code>##</code>、<code>%</code>、<code>%%</code>：删除包含了指定的字符</p>
-<ul>
-<li>#、##表示从左边开始截取，#表示从左边删除到指定的第一个字符；##表示从左边删除到最后一个指定的字符</li>
-<li>%、%%表示从右边开始删除，%表示从右边删除到指定的第一个字符；%%表示从右边删除到最后一个指定的字符</li>
-</ul>
-<blockquote>
-<p>linux的字符串截取有八种方法</p>
-</blockquote>
-<p>假设我们有变量url=<a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h3 id="截取，删除左边字符，保留右边字符"><a href="#截取，删除左边字符，保留右边字符" class="headerlink" title="#截取，删除左边字符，保留右边字符"></a><code>#</code>截取，删除左边字符，保留右边字符</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url#*//&#125;</span></span></div><div class="line">ytlogos.github.io/</div></pre></td></tr></table></figure>
-<p>其中url是变量名，#是字符截取运算符，*//表示从左边开始删除第一个<code>//</code>及其左边所有字符，即删除<code>https://</code>。</p>
-<h3 id="截取，删除左边字符，保留右边字符-1"><a href="#截取，删除左边字符，保留右边字符-1" class="headerlink" title="##截取，删除左边字符，保留右边字符"></a><code>##</code>截取，删除左边字符，保留右边字符</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url##*/&#125;</span></span></div></pre></td></tr></table></figure>
-<p>##*/表示从左边开始删除指定的最后一个字符<code>/</code>及其左边所有字符，所以上述结果就是空的。</p>
-<h3 id="截取，删除右边字符，保留左边字符"><a href="#截取，删除右边字符，保留左边字符" class="headerlink" title="%截取，删除右边字符，保留左边字符"></a><code>%</code>截取，删除右边字符，保留左边字符</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url%/*&#125;</span></span></div><div class="line">https://ytlogos.github.io</div></pre></td></tr></table></figure>
-<p>%/*表示从右边开始删除第一个<code>/</code>及其右边字符</p>
-<h3 id="截取，删除右边字符，保留左边字符-1"><a href="#截取，删除右边字符，保留左边字符-1" class="headerlink" title="%%截取，删除右边字符，保留左边字符"></a><code>%%</code>截取，删除右边字符，保留左边字符</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url%%/*&#125;</span></span></div><div class="line">https:</div></pre></td></tr></table></figure>
-<p><code>%%</code>表示从右边开始删除最后一个<code>/</code>及其右边的字符</p>
-<h3 id="从左边第几个字符开始及字符个数"><a href="#从左边第几个字符开始及字符个数" class="headerlink" title="从左边第几个字符开始及字符个数"></a>从左边第几个字符开始及字符个数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url:0:5&#125;</span></span></div><div class="line">https</div></pre></td></tr></table></figure>
-<p>上述命令表示从左边第一个字符开始截取5个字符</p>
-<h3 id="从左边开始第几个字符开始一直到结束"><a href="#从左边开始第几个字符开始一直到结束" class="headerlink" title="从左边开始第几个字符开始一直到结束"></a>从左边开始第几个字符开始一直到结束</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>echo <span class="variable">$&#123;</span><span class="symbol">url:</span><span class="number">5</span>&#125;</div><div class="line"><span class="symbol">://ytlogos</span>.github.io/</div></pre></td></tr></table></figure>
-<h3 id="从右边第几个字符开始及字符个数"><a href="#从右边第几个字符开始及字符个数" class="headerlink" title="从右边第几个字符开始及字符个数"></a>从右边第几个字符开始及字符个数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url:0-4:3&#125;</span></span></div><div class="line">.io</div></pre></td></tr></table></figure>
-<p>上述命令表示从右边第四个字符开始向右截取3个字符</p>
-<h3 id="从右边第几个字符开始一直到结束"><a href="#从右边第几个字符开始一直到结束" class="headerlink" title="从右边第几个字符开始一直到结束"></a>从右边第几个字符开始一直到结束</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;url:0-7&#125;</span></span></div><div class="line">hub.io/</div></pre></td></tr></table></figure>
-<blockquote>
-<p>左边第一个字符用0表示，右边第一个字符用0-1表示</p>
-</blockquote>
-<h2 id="查找子字符串"><a href="#查找子字符串" class="headerlink" title="查找子字符串"></a>查找子字符串</h2><p>查找字符<code>g</code>的位置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> `expr index <span class="string">"<span class="variable">$url</span>"</span> g`</span></div><div class="line">13</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>如果字符串中不含那个字符的话，结果显示为0，另外如果查找多个字符的话只显示排在前面的字符</p>
-<p>还有一点需要注意的是上面的是反引号`而不是单引号’</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> `expr index <span class="string">"<span class="variable">$url</span>"</span> gt`</span></div><div class="line">2</div></pre></td></tr></table></figure>
-<h2 id="shell数组"><a href="#shell数组" class="headerlink" title="shell数组"></a>shell数组</h2><p>bash支持一维数组（不支持多维数组），并且没有限定数组大小，数组元素下标从0开始，可以是整数或算术表达式。</p>
-<h3 id="定义数组"><a href="#定义数组" class="headerlink" title="定义数组"></a>定义数组</h3><p>shell中数组的定义用括号表示，数组元素用<code>空格</code>分隔开。定义数组形式如下：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">数组名=(值<span class="number">1</span> 值<span class="number">2</span> ... 值n)</div></pre></td></tr></table></figure>
-<p>具体如下：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array_name=(v0 v1 v2 v3 v4 v5)</div></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">array_name=(</div><div class="line">    v0</div><div class="line">    v1</div><div class="line">    v2</div><div class="line">    v3</div><div class="line">    v4</div><div class="line">    v5</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>还可以通过赋值单独定义数组各个分量</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">array_name[<span class="number">0</span>]=v0</div><div class="line">array_name[<span class="number">1</span>]=v1</div><div class="line">.</div><div class="line">.</div><div class="line">.</div></pre></td></tr></table></figure>
-<blockquote>
-<p>可以不使用连续的下标，而且下标范围没有限制</p>
-</blockquote>
-<h2 id="数组读取"><a href="#数组读取" class="headerlink" title="数组读取"></a>数组读取</h2><p>数组读取的一帮格式如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash">&#123;数组名[下标]&#125;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;array_name[2]&#125;</span></span></div><div class="line">v1</div></pre></td></tr></table></figure>
-<p>使用@符号可以获取数组中所有元素<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo $&#123;array_name[@]&#125;</div><div class="line">v0 v1 v2 v3 v4 v5</div></pre></td></tr></table></figure></p>
-<h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>获取数组长度的方法与获取字符串长度的方法相同：首先获取数组元素个数，再获取长度</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;#array_name[@]&#125;</span></span></div><div class="line">6</div><div class="line"><span class="meta">#</span><span class="bash"> 或</span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;#array_name[*]&#125;</span></span></div><div class="line">6</div></pre></td></tr></table></figure>
-<h2 id="shell注释"><a href="#shell注释" class="headerlink" title="shell注释"></a>shell注释</h2><p>注释行都是以<code>#</code>开头，会被解释器忽略。不支持多行注释。</p>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
     
     </summary>
     
