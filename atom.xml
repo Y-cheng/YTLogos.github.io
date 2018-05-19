@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-05-05T07:40:12.795Z</updated>
+  <updated>2018-05-19T06:30:54.079Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux命令</title>
+    <link href="https://ytlogos.github.io/2018/05/15/Linux%E5%91%BD%E4%BB%A4/"/>
+    <id>https://ytlogos.github.io/2018/05/15/Linux命令/</id>
+    <published>2018-05-15T13:19:05.000Z</published>
+    <updated>2018-05-19T06:30:54.079Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><ul>
+<li><strong>tail</strong>命令添加-f参数允许在其他进程使用该文件时查看文件的内容。<strong>tail</strong>命令会保持活动状态。</li>
+<li>变量名、等号和值之间没有空格，如果要赋值一个含有空格的字符串组，必须用单引号来界定字符串的首尾。</li>
+<li>删除已经存在的环境变量，可以用<code>unset</code>命令完成。在涉及环境变量名时，需要记住的一点是：如果要用到环境变量，使用\$，如果要操作变量，不使用\$。一个例外就是使用<code>printenv</code>显示某个变量的值。</li>
+<li>/etc/profile文件是<code>bash shell</code>默认的主启动文件，只要登录了<strong>Linux</strong>系统，<code>bash</code>就会执行/etc/profile启动文件中的内容。</li>
+<li>用来向<strong>Linux</strong>系统添加新用户的主要工具是<code>useradd</code>,删除用户使用<code>userdel</code>。</li>
+<li><strong>Vim</strong>编辑器中<code>G</code>表示移到最后一行，<code>num G</code>表示移到第<code>num</code>行，<code>gg</code>表示移到第一行。</li>
+<li><code>echo</code>命令如果想将文本字符串和命令输出显示在同一行中，可以用<code>echo</code>语句的<code>-n</code>参数。需要在字符串的两侧使用引号，保证要显示的字符串尾部有一个空格。</li>
+<li>使用等号将值赋给用户变量，在变量、等号和值之间不能出现空格。</li>
+<li><p>有两种方法可以将命令输出赋给变量</p>
+<ul>
+<li>反引号字符(`)</li>
+<li>$()格式</li>
+</ul>
+</li>
+<li><p>重定向输出时，<code>&gt;</code>会覆盖已有文件，<code>&gt;&gt;</code>追加数据</p>
+</li>
+<li>输入重定向和输出重定向正好相反，输入重定向将文件的内容重定到命令，而非将命令的输出重定向到文件。输入重定向的符号是<code>&lt;</code>：<code>command &lt; inputfile</code>。一个记忆方法是：在命令行上，命令总在左侧，而重定向符号指向数据流动的方向。</li>
+<li>使用方括号进行数学运算，在<strong>bash</strong>中将一个数学运算结果赋值给某个变量时，可以用美元符和方括号<code>($[ operation ])</code>将数学表达式围起来</li>
+</ul>
+<h2 id="结构化命令"><a href="#结构化命令" class="headerlink" title="结构化命令"></a>结构化命令</h2><h3 id="使用if-then语句"><a href="#使用if-then语句" class="headerlink" title="使用if-then语句"></a>使用<code>if-then</code>语句</h3><p><code>if-then</code>语句是最基本的结构化语句，其格式如下：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="keyword">command</span></div><div class="line"><span class="keyword">then</span> </div><div class="line">    <span class="keyword">command</span></div><div class="line">fi</div></pre></td></tr></table></figure>
+<p><strong>bash shell</strong>的语句会运行<code>if</code>后面的命令，如果该命令的退出码是0(表示该命令运行成功),位于<code>then</code>部分的命令就会被执行，否则<code>then</code>部分的命令不会被执行，<strong>bash shell</strong>会继续执行脚本中的下一个命令。<code>fi</code>语句用来表示<code>if-then</code>语句到此结束。</p>
+<h3 id="使用if-then-else语句"><a href="#使用if-then-else语句" class="headerlink" title="使用if-then-else语句"></a>使用<code>if-then-else</code>语句</h3><p>在<code>if-then</code>语句中，不管命令是否成功执行，都只有一种选择。如果命令返回一个非零退出状态码，<code>bash shell</code>会继续执行脚本中的下一条命令。在这种情况下，如果能够执行另一组命令就好了，这正是<code>if-then-else</code>语句的作用。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="keyword">command</span></div><div class="line"><span class="keyword">then</span>  </div><div class="line">     <span class="keyword">command</span></div><div class="line"><span class="keyword">else</span></div><div class="line">     <span class="keyword">command</span></div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>与<code>if-then</code>相似，区别就是当<code>if</code>语句中的命令返回非零退出状态码时,<code>bash shell</code>会执行<code>else</code>部分中的命令。</p>
+<h3 id="嵌套if"><a href="#嵌套if" class="headerlink" title="嵌套if"></a>嵌套<code>if</code></h3><p>有时需要检查脚本代码中的多种条件，可以使用嵌套的<code>if-then</code>语句。嵌套的<code>if-then</code>语句位于主<code>if-then-else</code>语句的<code>else</code>代码块中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">$ ls -d /home/NoSuchUser/</div><div class="line">/home/NoSuchUser/</div><div class="line">$</div><div class="line">$ cat test5.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># Testing nested ifs</span></div><div class="line"><span class="comment">#</span></div><div class="line">testuser=NoSuchUser</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="keyword">if</span> grep <span class="variable">$testuser</span> /etc/passwd</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"The user <span class="variable">$testuser</span> exists on this system."</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"The user <span class="variable">$testuser</span> does not exist on this system."</span></div><div class="line">   <span class="keyword">if</span> ls -d /home/<span class="variable">$testuser</span>/</div><div class="line">   <span class="keyword">then</span></div><div class="line">      <span class="built_in">echo</span> <span class="string">"However, <span class="variable">$testuser</span> has a directory."</span></div><div class="line">   <span class="keyword">fi</span></div><div class="line"><span class="keyword">fi</span></div><div class="line">$</div><div class="line">$ ./test5.sh</div><div class="line">The user NoSuchUser does not exist on this system.</div><div class="line">/home/NoSuchUser/</div><div class="line">However, NoSuchUser has a directory.</div></pre></td></tr></table></figure>
+<p>可以使用<code>else</code>部分的另一种形式:<code>elif</code>。这样就不用书写多个<code>if-then</code>语句了，<code>elif</code>使用另一个<code>if-then</code>语句延续<code>else</code>部分。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="keyword">command</span></div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="keyword">command</span></div><div class="line">elif <span class="keyword">command</span></div><div class="line"><span class="keyword">then</span></div><div class="line">    more <span class="keyword">command</span></div><div class="line">fi</div></pre></td></tr></table></figure>
+<p><code>elif</code>语句提供了另一个要测试的命令，这类似于原始的<code>if</code>语句行。如果<code>elif</code>后命令的退出状态码是0，则<code>bash</code>会执行第二个<code>then</code>语句部分的命令。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">$ cat test5.sh</div><div class="line"><span class="comment">#!/bin/bash</span></div><div class="line"><span class="comment"># Testing nested ifs - use elif &amp; else</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="attribute">testuser</span>=NoSuchUser</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="keyword">if</span> grep <span class="variable">$testuser</span> /etc/passwd</div><div class="line">then</div><div class="line">echo <span class="string">"The user <span class="variable">$testuser</span> exists on this system."</span></div><div class="line"><span class="comment">#</span></div><div class="line">elif ls -d /home/<span class="variable">$testuser</span></div><div class="line">then</div><div class="line">echo <span class="string">"The user <span class="variable">$testuser</span> does not exist on this system."</span></div><div class="line">echo <span class="string">"However, <span class="variable">$testuser</span> has a directory."</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="keyword">else</span></div><div class="line">echo <span class="string">"The user <span class="variable">$testuser</span> does not exist on this system."</span></div><div class="line">echo <span class="string">"And, <span class="variable">$testuser</span> does not have a directory."</span></div><div class="line">fi</div><div class="line">$</div><div class="line">$ ./test5.sh</div><div class="line">/home/NoSuchUser</div><div class="line">The<span class="built_in"> user </span>NoSuchUser does <span class="keyword">not</span> exist on this system.</div><div class="line">However, NoSuchUser has a directory.</div><div class="line">$</div><div class="line">$ sudo rmdir /home/NoSuchUser</div><div class="line">[sudo] password <span class="keyword">for</span> Christine:</div><div class="line">$</div><div class="line">$ ./test5.sh</div><div class="line">ls: cannot access /home/NoSuchUser: <span class="literal">No</span> such file <span class="keyword">or</span> directory</div><div class="line">The<span class="built_in"> user </span>NoSuchUser does <span class="keyword">not</span> exist on this system.</div><div class="line"><span class="keyword">And</span>, NoSuchUser does <span class="keyword">not</span> have a directory.</div></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是，在<code>elif</code>语句中，紧跟其后的<code>else</code>语句属于<code>elif</code>代码块。它们并不属于之前的<code>if-then</code>代码块</p>
+</blockquote>
+<p>可以继续将多个<code>elif</code>语句串起来，形成一个大的<code>if-then-elif</code>嵌套组合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> command1</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">command</span> <span class="built_in">set</span> 1</div><div class="line"><span class="keyword">elif</span> command2</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">command</span> <span class="built_in">set</span> 2</div><div class="line"><span class="keyword">elif</span> command3</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">command</span> <span class="built_in">set</span> 3</div><div class="line"><span class="keyword">elif</span> command4</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">command</span> <span class="built_in">set</span> 4</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>每块命令都会根据命令是否会返回退出状态码0来执行。记住，<code>bash shell</code>会依次执行<code>if</code>语句，只有第一个返回退出状态码0的语句中的<code>then</code>部分会被执行。</p>
+</blockquote>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
+    
+    
+      <category term="Shell" scheme="https://ytlogos.github.io/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>群体遗传进化</title>
@@ -1330,49 +1397,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Shell" scheme="https://ytlogos.github.io/categories/Shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Shell编程：简介</title>
-    <link href="https://ytlogos.github.io/2018/02/01/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E4%BB%8B/"/>
-    <id>https://ytlogos.github.io/2018/02/01/Shell编程：简介/</id>
-    <published>2018-02-01T13:19:05.000Z</published>
-    <updated>2018-02-04T10:59:24.055Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/GhihcB409F.png?imageslim" alt="mark"></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Shell是一个用C语言编写的程序，提供用户使用linux的桥梁。它既是一种命令语言，又是一种程序设计语言。Shell脚本(Shell script)shiyizhongweiShel编写的脚本程序。通常我们说的Shell就是指的Shell脚本，但是应该记住的是Shell与Shell脚本是两个不同的概念。linux的Shell种类众多，但是我们常用的是bash。</p>
-<a id="more"></a>
-<h2 id="Shell脚本"><a href="#Shell脚本" class="headerlink" title="Shell脚本"></a>Shell脚本</h2><p>由于Shell种类众多，所以我们编写Shell脚本的时候解释该脚本的Shell程序。所以第一行我们通常写成这样：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div></pre></td></tr></table></figure>
-<p><strong>#!</strong>是一个约定的标记，用来告诉系统这个脚本用什么解释器来执行，也就是使用哪一种Shell来执行，这里我们指定由bash来执行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">!<span class="comment">#/bin/bash</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Hello World !"</span></div></pre></td></tr></table></figure>
-<p><code>echo</code>命令用于向窗口输出文本。</p>
-<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>运行脚本有两种方法</p>
-<ul>
-<li>作为可执行程序</li>
-</ul>
-<p>将上面的代码保存为hello.sh，然后进入其所在的目录<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#使脚本具有执行权限</span></div><div class="line">chmod +x <span class="string">./hello.sh</span></div><div class="line"><span class="comment">#执行脚本</span></div><div class="line"><span class="string">./hello.sh</span></div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>需要注意的是，一定要写成./hello.sh，而不是./hello.sh，运行其他二进制的程序也一样。如果直接写成hello.sh的话，linux系统会去PATH里寻找有没有hello.sh这个文本，但是只有/bin,/sbin,/usr/bin等在PATH里，当前目录通常不在PATH里，所以写成hello.sh是找不到命令的，要用./hello.sh告诉系统就在当前目录找。</p>
-</blockquote>
-<ul>
-<li>作为解释器参数<br>这种运行方式是直接运行解释器，参数就是shell脚本文件名。</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/bin/<span class="keyword">sh</span> hello.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
-<p>此时就无需声明解释器了，因为已经在命令中指定了</p>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/GhihcB409F.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;Shell是一个用C语言编写的程序，提供用户使用linux的桥梁。它既是一种命令语言，又是一种程序设计语言。Shell脚本(Shell script)shiyizhongweiShel编写的脚本程序。通常我们说的Shell就是指的Shell脚本，但是应该记住的是Shell与Shell脚本是两个不同的概念。linux的Shell种类众多，但是我们常用的是bash。&lt;/p&gt;
     
     </summary>
     
