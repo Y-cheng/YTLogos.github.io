@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-05-19T09:40:42.827Z</updated>
+  <updated>2018-05-20T05:37:34.042Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux之处理用户输入</title>
+    <link href="https://ytlogos.github.io/2018/05/18/Linux%E4%B9%8B%E5%A4%84%E7%90%86%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/"/>
+    <id>https://ytlogos.github.io/2018/05/18/Linux之处理用户输入/</id>
+    <published>2018-05-18T13:19:05.000Z</published>
+    <updated>2018-05-20T05:37:34.042Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>向<code>shell</code>脚本传递参数的最基本方法是使用命令行参数。命令行参数允许在运行脚本时向命令行添加数据。</p>
+<h3 id="读取参数"><a href="#读取参数" class="headerlink" title="读取参数"></a>读取参数</h3><p><code>bash shell</code>将一些称为位置参数的特殊变量分配给输入到命令行中的所有参数，包括<code>shell</code>所执行的脚本名称。位置参数变量是标准的数字:\$0是程序名，\$1是第一个变量,依此类推到第九个参数\$9。</p>
+<p>下面是在<code>shell</code>脚本中使用单个命令行参数的简单例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ cat test1.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># using one command line parameter</span></div><div class="line"><span class="comment">#</span></div><div class="line">factorial=1</div><div class="line"><span class="keyword">for</span> (( number = 1; number &lt;= <span class="variable">$1</span> ; number++ ))</div><div class="line"><span class="keyword">do</span></div><div class="line">factorial=$[ <span class="variable">$factorial</span> * <span class="variable">$number</span> ]</div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="built_in">echo</span> The factorial of <span class="variable">$1</span> is <span class="variable">$factorial</span></div><div class="line">$</div><div class="line">$ ./test1.sh 5</div><div class="line">The factorial of 5 is 120</div></pre></td></tr></table></figure>
+<blockquote>
+<p>可以在<code>shell</code>脚本中像使用其他变量一样使用\$1变量，<code>shell</code>脚本会自动蒋命令行参数的值分配给变量，不需要用户做任何处理</p>
+</blockquote>
+<p>如果需要输入更多的命令行参数，则每个参数必须用空格分开</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ cat test2.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># testing two command line parameters</span></div><div class="line"><span class="comment">#</span></div><div class="line">total=$[ <span class="variable">$1</span> * <span class="variable">$2</span> ]</div><div class="line"><span class="built_in">echo</span> The first parameter is <span class="variable">$1</span>.</div><div class="line"><span class="built_in">echo</span> The second parameter is <span class="variable">$2</span>.</div><div class="line"><span class="built_in">echo</span> The total value is <span class="variable">$total</span>.</div><div class="line">$</div><div class="line">$ ./test2.sh 2 5</div><div class="line">The first parameter is 2.</div><div class="line">The second parameter is 5.</div><div class="line">The total value is 10.</div></pre></td></tr></table></figure>
+<p><code>shell</code>会将每个参数分配给对应的变量</p>
+<p>也可以在命令行中使用文本字符串<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ cat test3.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># testing string parameters</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">echo</span> Hello <span class="variable">$1</span>, glad to meet you.</div><div class="line">$</div><div class="line">$ ./test3.sh Rich</div><div class="line">Hello Rich, glad to meet you.</div></pre></td></tr></table></figure></p>
+<p><code>shell</code>将输入到命令行的字符串值传给脚本，但碰到含有空格的文本字符串时就会出现问题：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> ./test3.sh Rich Blum</span></div><div class="line">Hello Rich, glad to meet you.</div></pre></td></tr></table></figure>
+<blockquote>
+<p>记住每个参数都是用空格分隔的，所以<code>shell</code>会将空格当成两个值的分隔符。要在参数值中包含空格，必须使用引号(单双引号均可)</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> ./test3.sh <span class="string">'Rich Blum'</span></span></div><div class="line">Hello Rich Blum, glad to meet you.</div></pre></td></tr></table></figure>
+<blockquote>
+<p>将文本字符串作为参数传递时，引号并非数据的一部分，它们只是表明数据的起止位置</p>
+</blockquote>
+<p>如果脚本需要的命令行参数不止9个，需要在第九个变量之后的变量数字周围加上花括号,比如\${10}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ cat test4.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># handling lots of parameters</span></div><div class="line"><span class="comment">#</span></div><div class="line">total=$[ <span class="variable">$&#123;10&#125;</span> * <span class="variable">$&#123;11&#125;</span> ]</div><div class="line"><span class="built_in">echo</span> The tenth parameter is <span class="variable">$&#123;10&#125;</span></div><div class="line"><span class="built_in">echo</span> The eleventh parameter is <span class="variable">$&#123;11&#125;</span></div><div class="line"><span class="built_in">echo</span> The total is <span class="variable">$total</span></div><div class="line">$</div><div class="line">$ ./test4.sh 1 2 3 4 5 6 7 8 9 10 11 12</div><div class="line">The tenth parameter is 10</div><div class="line">The eleventh parameter is 11</div><div class="line">The total is 110</div></pre></td></tr></table></figure>
+<h3 id="读取脚本名"><a href="#读取脚本名" class="headerlink" title="读取脚本名"></a>读取脚本名</h3><p>可以用\$0参数获取<code>shell</code>在命令行启动的脚本名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cat test5.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># Testing the $0 parameter</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">echo</span> The zero parameter is <span class="built_in">set</span> to: <span class="variable">$0</span></div><div class="line"><span class="comment">#</span></div><div class="line">$</div><div class="line">$ bash test5.sh</div><div class="line">The zero parameter is <span class="built_in">set</span> to: test5.sh</div></pre></td></tr></table></figure>
+<p>这里存在一个潜在的问题，如果使用另一个命令来运行脚本，命令会和脚本名混在一起，出现在\$0参数中</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test5.<span class="keyword">sh</span></div><div class="line">The zero parameter <span class="keyword">is</span> <span class="keyword">set</span> <span class="keyword">to</span>: ./test5.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
+<p>另外如果传给\$0变量的实际字符串不仅仅是脚本名，而是完整的脚本路径时，变量\$0就会使用整个路径</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ bash /home/Christine/test5.<span class="keyword">sh</span></div><div class="line">The zero parameter <span class="keyword">is</span> <span class="keyword">set</span> <span class="keyword">to</span>: /home/Christine/test5.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
+<p>有个小命令可以解决这些问题，<code>basename</code>命令会返回不包含路径的脚本名</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ cat test5b.sh</div><div class="line"><span class="comment">#!/bin/bash</span></div><div class="line"><span class="comment"># Using basename with the $0 parameter</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="attribute">name</span>=$(basename <span class="variable">$0</span>)</div><div class="line">echo</div><div class="line">echo The<span class="built_in"> script </span>name is: <span class="variable">$name</span></div><div class="line"><span class="comment">#</span></div><div class="line">$ bash /home/Christine/test5b.sh</div><div class="line">The<span class="built_in"> script </span>name is: test5b.sh</div><div class="line">$</div><div class="line">$ ./test5b.sh</div><div class="line">The<span class="built_in"> script </span>name is: test5b.sh</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> cat test6.sh</span></div><div class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></div><div class="line"><span class="meta">#</span><span class="bash"> Testing a Multi-function script</span></div><div class="line"><span class="meta">#</span><span class="bash"></span></div><div class="line">name=$(basename $0)</div><div class="line"><span class="meta">#</span><span class="bash"></span></div><div class="line">if [ $name = "addem" ]</div><div class="line">then</div><div class="line">total=$[ $1 + $2 ]</div><div class="line"><span class="meta">#</span><span class="bash"></span></div><div class="line">elif [ $name = "multem" ]</div><div class="line">then</div><div class="line">total=$[ $1 * $2 ]</div><div class="line">fi</div><div class="line"><span class="meta">#</span><span class="bash"></span></div><div class="line">echo</div><div class="line">echo The calculated value is $total</div><div class="line"><span class="meta">#</span><span class="bash"></span></div><div class="line"><span class="meta">$</span><span class="bash"></span></div><div class="line"><span class="meta">$</span><span class="bash"> cp test6.sh addem</span></div><div class="line"><span class="meta">$</span><span class="bash"> chmod u+x addem</span></div><div class="line"><span class="meta">$</span><span class="bash"></span></div><div class="line"><span class="meta">$</span><span class="bash"> ln -s test6.sh multem</span></div><div class="line"><span class="meta">$</span><span class="bash"></span></div><div class="line"><span class="meta">$</span><span class="bash"> ls -l *em</span></div><div class="line">-rwxrw-r--. 1 Christine Christine 224 Jun 30 23:50 addem</div><div class="line">lrwxrwxrwx. 1 Christine Christine 8 Jun 30 23:50 multem -&gt; test6.sh</div><div class="line"><span class="meta">$</span><span class="bash"></span></div><div class="line"><span class="meta">$</span><span class="bash"> ./addem 2 5</span></div><div class="line">The calculated value is 7</div><div class="line"><span class="meta">$</span><span class="bash"></span></div><div class="line"><span class="meta">$</span><span class="bash"> ./multem 2 5</span></div><div class="line">The calculated value is 10</div></pre></td></tr></table></figure>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180204/7bEcJiH4l2.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
+    
+    
+      <category term="Shell" scheme="https://ytlogos.github.io/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux结构化命令which</title>
@@ -198,45 +255,6 @@
   </entry>
   
   <entry>
-    <title>R编程题目练习1</title>
-    <link href="https://ytlogos.github.io/2018/04/24/R%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"/>
-    <id>https://ytlogos.github.io/2018/04/24/R编程题目练习1/</id>
-    <published>2018-04-24T13:19:05.000Z</published>
-    <updated>2018-05-20T03:55:43.823Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim" alt="mark"></p>
-<a id="more"></a>
-<h2 id="Multiples-of-3-and-5"><a href="#Multiples-of-3-and-5" class="headerlink" title="Multiples of 3 and 5"></a>Multiples of 3 and 5</h2><p>Problem 1 </p>
-<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
-<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
-<p><strong>answer</strong>：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">n</span> &lt;- c()</div><div class="line"><span class="title">n</span>[<span class="number">1</span>] &lt;- <span class="number">0</span></div><div class="line"><span class="title">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">999</span>)&#123;</div><div class="line">  <span class="keyword">if</span> (i%%<span class="number">3</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">3</span>!=<span class="number">0</span>&amp;i%%<span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="title">cat</span>(<span class="string">"The answer is:"</span>, n)</div></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">233168</span></div></pre></td></tr></table></figure>
-<h2 id="Even-Fibonacci-numbers"><a href="#Even-Fibonacci-numbers" class="headerlink" title="Even Fibonacci numbers"></a>Even Fibonacci numbers</h2><p>Problem 2<br>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
-<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
-<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.、</p>
-<p><strong>answer</strong>:</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">f &lt;- c()</div><div class="line">f[<span class="number">1</span>] &lt;- <span class="number">1</span></div><div class="line">f[<span class="number">2</span>] &lt;- <span class="number">2</span></div><div class="line">i &lt;- <span class="number">3</span></div><div class="line">repeat&#123;</div><div class="line">  f[i] &lt;- f[i<span class="number">-2</span>]+f[i<span class="number">-1</span>]</div><div class="line">  if(f[i]&gt;<span class="number">4000000</span>)break</div><div class="line">  i &lt;- i+<span class="number">1</span></div><div class="line">&#125;</div><div class="line">f &lt;- f[-length(f)]</div><div class="line">f_even_index &lt;- f%%<span class="number">2</span>==<span class="number">0</span></div><div class="line">f_even_sum &lt;- sum(f[f_even_index])</div><div class="line">cat(<span class="string">"The answer is:"</span>, f_even_sum,<span class="string">"<span class="subst">\n</span>"</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">4613732</span></div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="R编程" scheme="https://ytlogos.github.io/categories/R%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="编程能力" scheme="https://ytlogos.github.io/tags/%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/"/>
-    
-  </entry>
-  
-  <entry>
     <title>群体遗传进化</title>
     <link href="https://ytlogos.github.io/2018/04/24/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E8%BF%9B%E5%8C%96/"/>
     <id>https://ytlogos.github.io/2018/04/24/群体遗传进化/</id>
@@ -283,6 +301,45 @@
     
     
       <category term="进化，选择性清除分析" scheme="https://ytlogos.github.io/tags/%E8%BF%9B%E5%8C%96%EF%BC%8C%E9%80%89%E6%8B%A9%E6%80%A7%E6%B8%85%E9%99%A4%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R编程题目练习1</title>
+    <link href="https://ytlogos.github.io/2018/04/24/R%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"/>
+    <id>https://ytlogos.github.io/2018/04/24/R编程题目练习1/</id>
+    <published>2018-04-24T13:19:05.000Z</published>
+    <updated>2018-05-20T03:55:43.823Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="Multiples-of-3-and-5"><a href="#Multiples-of-3-and-5" class="headerlink" title="Multiples of 3 and 5"></a>Multiples of 3 and 5</h2><p>Problem 1 </p>
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+<p><strong>answer</strong>：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">n</span> &lt;- c()</div><div class="line"><span class="title">n</span>[<span class="number">1</span>] &lt;- <span class="number">0</span></div><div class="line"><span class="title">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">999</span>)&#123;</div><div class="line">  <span class="keyword">if</span> (i%%<span class="number">3</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">3</span>!=<span class="number">0</span>&amp;i%%<span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="title">cat</span>(<span class="string">"The answer is:"</span>, n)</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">233168</span></div></pre></td></tr></table></figure>
+<h2 id="Even-Fibonacci-numbers"><a href="#Even-Fibonacci-numbers" class="headerlink" title="Even Fibonacci numbers"></a>Even Fibonacci numbers</h2><p>Problem 2<br>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
+<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
+<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.、</p>
+<p><strong>answer</strong>:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">f &lt;- c()</div><div class="line">f[<span class="number">1</span>] &lt;- <span class="number">1</span></div><div class="line">f[<span class="number">2</span>] &lt;- <span class="number">2</span></div><div class="line">i &lt;- <span class="number">3</span></div><div class="line">repeat&#123;</div><div class="line">  f[i] &lt;- f[i<span class="number">-2</span>]+f[i<span class="number">-1</span>]</div><div class="line">  if(f[i]&gt;<span class="number">4000000</span>)break</div><div class="line">  i &lt;- i+<span class="number">1</span></div><div class="line">&#125;</div><div class="line">f &lt;- f[-length(f)]</div><div class="line">f_even_index &lt;- f%%<span class="number">2</span>==<span class="number">0</span></div><div class="line">f_even_sum &lt;- sum(f[f_even_index])</div><div class="line">cat(<span class="string">"The answer is:"</span>, f_even_sum,<span class="string">"<span class="subst">\n</span>"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">4613732</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="R编程" scheme="https://ytlogos.github.io/categories/R%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="编程能力" scheme="https://ytlogos.github.io/tags/%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/"/>
     
   </entry>
   
@@ -1254,65 +1311,6 @@
     
     
       <category term="gganimate" scheme="https://ytlogos.github.io/tags/gganimate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R语言可视化学习笔记之ggridges包</title>
-    <link href="https://ytlogos.github.io/2018/02/05/R%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8Bggridges%E5%8C%85/"/>
-    <id>https://ytlogos.github.io/2018/02/05/R语言可视化学习笔记之ggridges包/</id>
-    <published>2018-02-05T06:19:05.000Z</published>
-    <updated>2018-02-05T06:47:15.776Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/bhlKJ09j0e.png?imageslim" alt="mark"></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>ggridges</strong>包主要用来绘制山峦图。尤其是针对时间或者空间分布份可视化具有十分好的效果。<strong>ggridges</strong>主要提供两个几何图像函数：</p>
-<ul>
-<li>geom_ridgeline():主要绘制山脊线图</li>
-<li>geom_density_ridges()：主要根据密度绘制山脊线图</li>
-</ul>
-<p>具体用法可以参考<a href="https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html" target="_blank" rel="external">官方文档</a></p>
-<a id="more"></a>
-<h2 id="geom-ridgeline"><a href="#geom-ridgeline" class="headerlink" title="geom_ridgeline()"></a>geom_ridgeline()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">library(ggridges)</div><div class="line">library(tidyverse)</div><div class="line">library(gridExtra)</div><div class="line">my_data &lt;- data.frame(x=1:5, y=rep(1,5), height=c(0,1,-1,3,2))</div><div class="line">plot_base &lt;- ggplot(my_data, aes(x, y, height=height))</div><div class="line">grid.arrange(plot_base+geom_ridgeline(), </div><div class="line">             plot_base+geom_ridgeline(min_height=-2), ncol=2)</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/JjFA48a46m.png?imageslim" alt="mark"></p>
-<h2 id="geom-density-ridges"><a href="#geom-density-ridges" class="headerlink" title="geom_density_ridges()"></a>geom_density_ridges()</h2><p>geom_density_ridges()函数首先会根据数据计算密度然后绘图，此时美学映射<code>height</code>没有必要写入函数中。下面使用<strong>lincoln_weather</strong>数据集。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">library(viridis)</div><div class="line">head(lincoln_weather[ ,1:4])</div></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># # A tibble: 6 x 4</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#   CST      `Max Temperature [F]` `Mean Temperature [F]` `Min Temperature ~</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#   &lt;chr&gt;                    &lt;int&gt;                  &lt;int&gt;              &lt;int&gt;</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 1 2016-1-1                    37                     24                 11</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2 2016-1-2                    41                     23                  5</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 3 2016-1-3                    37                     23                  8</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 4 2016-1-4                    30                     17                  4</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 5 2016-1-5                    38                     29                 19</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 6 2016-1-6                    34                     33                 32</span></span></div></pre></td></tr></table></figure>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ggplot(<span class="name">lincoln_weather</span>, aes(<span class="name">x=</span>`Mean Temperature [F]`, y=`Month`, fill=..x..))+</div><div class="line">  geom_density_ridges_gradient(<span class="name">scale=3</span>, rel_min_height=0.<span class="number">01</span>, gradient_lwd = <span class="number">1</span>.)+</div><div class="line">  scale_x_continuous(<span class="name">expand</span> = c(<span class="number">0.01</span>, <span class="number">0</span>))+</div><div class="line">  scale_y_discrete(<span class="name">expand</span> = c(<span class="number">0.01</span>,<span class="number">0</span>))+</div><div class="line">  scale_fill_viridis(<span class="name">name=</span><span class="string">"Temp. [F]"</span>, option = <span class="string">"C"</span>)+</div><div class="line">  labs(<span class="name">title=</span><span class="string">"Temperature in Lincoln NE"</span>,</div><div class="line">       subtitle=<span class="string">"Mean temperature (Fahrenheit) by month for 2016\nData:Orogin CSV from the Weather Underground "</span>)+</div><div class="line">  theme_ridges(<span class="name">font_size</span> = <span class="number">13</span>, grid = FALSE)+</div><div class="line">  theme(<span class="name">axis</span>.title.y = element_blank())</div></pre></td></tr></table></figure>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/bhlKJ09j0e.png?imageslim" alt="mark"></p>
-<h2 id="cyclinal-scales"><a href="#cyclinal-scales" class="headerlink" title="cyclinal scales"></a>cyclinal scales</h2><p>为了使得<strong>ggridges</strong>绘制的图形可视化效果最好，同时为了减少用户对颜色设置的困难，作者提供了<strong>cyclinal scales</strong>用于颜色轮转映射。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggplot(diamonds, aes(x=price, y=cut, fill=cut))+</div><div class="line">  geom_density_ridges(scale=4)+</div><div class="line">  scale_fill_cyclical(values = c(&quot;blue&quot;, &quot;green&quot;))+</div><div class="line">  theme_ridges(grid = FALSE)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/ljf8Gcjh08.png?imageslim" alt="mark"></p>
-<p>默认的，<strong>cyclinal scales</strong>为了防止误解是不绘制图例的，但是可以通过选项<code>guide=&quot;legend&quot;</code>添加图例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ggplot(diamonds, aes(x=price, y=cut, fill=cut))+</div><div class="line">  geom_density_ridges(scale=4)+</div><div class="line">  scale_fill_cyclical(values = c(&quot;blue&quot;, &quot;green&quot;), guide=&quot;legend&quot;)+</div><div class="line">  theme_ridges(grid = FALSE)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/iGh734gaCG.png?imageslim" alt="mark"></p>
-<p>跟<strong>ggplot2</strong>一样，图例是可以修改的,其他参数比如大小、透明度、形状等都是可以通过<strong>cyclinal scales</strong>修改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ggplot(diamonds, aes(x=price, y=cut, fill=cut))+</div><div class="line">  geom_density_ridges(scale=4)+</div><div class="line">  scale_fill_cyclical(values = c(&quot;blue&quot;, &quot;green&quot;), guide=&quot;legend&quot;,</div><div class="line">                      labels=c(&quot;Fair&quot;=&quot;blue&quot;, &quot;Good&quot;=&quot;green&quot;),</div><div class="line">                      name=&quot;Fill colors&quot;)+</div><div class="line">  theme_ridges(grid = FALSE)</div></pre></td></tr></table></figure></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/5kmJIcg7EB.png?imageslim" alt="mark"></p>
-<p>还有很多用法有兴趣的可以查看<a href="https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html" target="_blank" rel="external">官方文档</a>继续学习。</p>
-<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># R version 3.4.3 (2017-11-30)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Running under: Windows 10 x64 (build 16299)</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Matrix products: default</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># locale:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] LC_COLLATE=Chinese (Simplified)_China.936 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [2] LC_CTYPE=Chinese (Simplified)_China.936   </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [3] LC_MONETARY=Chinese (Simplified)_China.936</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [4] LC_NUMERIC=C                              </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [5] LC_TIME=Chinese (Simplified)_China.936    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># attached base packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># other attached packages:</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [1] viridis_0.5.0       viridisLite_0.3.0   gridExtra_2.3      </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [4] forcats_0.2.0       stringr_1.2.0       dplyr_0.7.4        </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [7] purrr_0.2.4         readr_1.1.1         tidyr_0.8.0        </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [10] tibble_1.4.2        tidyverse_1.2.1     ggridges_0.4.1.9990</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [13] ggplot2_2.2.1.9000 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># loaded via a namespace (and not attached):</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [1] reshape2_1.4.3    haven_1.1.1       lattice_0.20-35  </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [4] colorspace_1.3-2  htmltools_0.3.6   yaml_2.1.16      </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#  [7] utf8_1.1.3        rlang_0.1.6       pillar_1.1.0     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [10] foreign_0.8-69    glue_1.2.0        modelr_0.1.1     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [13] readxl_1.0.0      bindrcpp_0.2      bindr_0.1        </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [16] plyr_1.8.4        munsell_0.4.3     gtable_0.2.0     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [19] cellranger_1.1.0  rvest_0.3.2       psych_1.7.8      </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [22] evaluate_0.10.1   labeling_0.3      knitr_1.19       </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [25] parallel_3.4.3    broom_0.4.3       Rcpp_0.12.15     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [28] scales_0.5.0.9000 backports_1.1.2   jsonlite_1.5     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [31] mnormt_1.5-5      hms_0.4.1         digest_0.6.15    </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [34] stringi_1.1.6     grid_3.4.3        rprojroot_1.3-2  </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [37] cli_1.0.0         tools_3.4.3       magrittr_1.5     </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [40] lazyeval_0.2.1    crayon_1.3.4      pkgconfig_2.0.1  </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [43] xml2_1.2.0        lubridate_1.7.1   assertthat_0.2.0 </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [46] rmarkdown_1.8     httr_1.3.1        rstudioapi_0.7   </span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># [49] R6_2.2.2          nlme_3.1-131      compiler_3.4.3</span></span></div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410</p>
-<p>Email: tyan@zju.edu.cn</p>
-<p>QQ: 1051927088</p>
-<p>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a></p>
-<p>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a></p>
-<p>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180205/bhlKJ09j0e.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ggridges&lt;/strong&gt;包主要用来绘制山峦图。尤其是针对时间或者空间分布份可视化具有十分好的效果。&lt;strong&gt;ggridges&lt;/strong&gt;主要提供两个几何图像函数：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;geom_ridgeline():主要绘制山脊线图&lt;/li&gt;
-&lt;li&gt;geom_density_ridges()：主要根据密度绘制山脊线图&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;具体用法可以参考&lt;a href=&quot;https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官方文档&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="可视化" scheme="https://ytlogos.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-    
-      <category term="ggridges" scheme="https://ytlogos.github.io/tags/ggridges/"/>
     
   </entry>
   
