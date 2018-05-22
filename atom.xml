@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-05-22T08:57:01.808Z</updated>
+  <updated>2018-05-22T09:12:25.425Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://ytlogos.github.io/2018/05/21/Linux%E4%B9%8B%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/"/>
     <id>https://ytlogos.github.io/2018/05/21/Linux之获取用户输入/</id>
     <published>2018-05-21T13:19:05.000Z</published>
-    <updated>2018-05-22T08:57:01.808Z</updated>
+    <updated>2018-05-22T09:12:25.425Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180522/CGbkeLBFc9.png?imageslim" alt="mark"><br><a id="more"></a></p>
 <h2 id="基本读取"><a href="#基本读取" class="headerlink" title="基本读取"></a>基本读取</h2><p>read命令从标准输入（键盘）或另一个文件描述符中接受输入，在收到输入后，read命令会将数据放进一个变量</p>
@@ -40,6 +40,8 @@
 <p>将-n选项与值1一起使用，告诉read命令在接受单个字符后退出。</p>
 <h3 id="隐藏方式读取"><a href="#隐藏方式读取" class="headerlink" title="隐藏方式读取"></a>隐藏方式读取</h3><p>-s选项可以避免在read命令中输入的数据出现在显示器上</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ cat test27.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># hiding input data from the monitor</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">read</span> -s -p <span class="string">"Enter your password: "</span> pass</div><div class="line"><span class="built_in">echo</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Is your password really <span class="variable">$pass</span>? "</span></div><div class="line">$</div><div class="line">$ ./test27.sh</div><div class="line">Enter your password:</div><div class="line">Is your password really T3st1ng?</div></pre></td></tr></table></figure>
+<h3 id="文件中读取"><a href="#文件中读取" class="headerlink" title="文件中读取"></a>文件中读取</h3><p>read可以用来直接读取文件里保存的数据，每次调用read命令，它都会从文件中读取一行，当文件中没有内容后，read退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ cat test28.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># reading data from a file</span></div><div class="line"><span class="comment">#</span></div><div class="line">count=1</div><div class="line">cat <span class="built_in">test</span> | <span class="keyword">while</span> <span class="built_in">read</span> line</div><div class="line"><span class="keyword">do</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Line <span class="variable">$count</span>: <span class="variable">$line</span>"</span></div><div class="line">count=$[ <span class="variable">$count</span> + 1]</div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Finished processing the file"</span></div><div class="line">$</div><div class="line">$ cat <span class="built_in">test</span></div><div class="line">The quick brown dog jumps over the lazy fox.</div><div class="line">This is a <span class="built_in">test</span>, this is only a <span class="built_in">test</span>.</div><div class="line">O Romeo, Romeo! Wherefore art thou Romeo?</div><div class="line">$</div><div class="line">$ ./test28.sh</div><div class="line">Line 1: The quick brown dog jumps over the lazy fox.</div><div class="line">Line 2: This is a <span class="built_in">test</span>, this is only a <span class="built_in">test</span>.</div><div class="line">Line 3: O Romeo, Romeo! Wherefore art thou Romeo?</div><div class="line">Finished processing the file</div></pre></td></tr></table></figure>
 <h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
 <h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
 ]]></content>
@@ -415,45 +417,6 @@
   </entry>
   
   <entry>
-    <title>R编程题目练习1</title>
-    <link href="https://ytlogos.github.io/2018/04/24/R%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"/>
-    <id>https://ytlogos.github.io/2018/04/24/R编程题目练习1/</id>
-    <published>2018-04-24T13:19:05.000Z</published>
-    <updated>2018-05-20T03:55:43.823Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim" alt="mark"></p>
-<a id="more"></a>
-<h2 id="Multiples-of-3-and-5"><a href="#Multiples-of-3-and-5" class="headerlink" title="Multiples of 3 and 5"></a>Multiples of 3 and 5</h2><p>Problem 1 </p>
-<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
-<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
-<p><strong>answer</strong>：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">n</span> &lt;- c()</div><div class="line"><span class="title">n</span>[<span class="number">1</span>] &lt;- <span class="number">0</span></div><div class="line"><span class="title">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">999</span>)&#123;</div><div class="line">  <span class="keyword">if</span> (i%%<span class="number">3</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">3</span>!=<span class="number">0</span>&amp;i%%<span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="title">cat</span>(<span class="string">"The answer is:"</span>, n)</div></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">233168</span></div></pre></td></tr></table></figure>
-<h2 id="Even-Fibonacci-numbers"><a href="#Even-Fibonacci-numbers" class="headerlink" title="Even Fibonacci numbers"></a>Even Fibonacci numbers</h2><p>Problem 2<br>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
-<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
-<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.、</p>
-<p><strong>answer</strong>:</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">f &lt;- c()</div><div class="line">f[<span class="number">1</span>] &lt;- <span class="number">1</span></div><div class="line">f[<span class="number">2</span>] &lt;- <span class="number">2</span></div><div class="line">i &lt;- <span class="number">3</span></div><div class="line">repeat&#123;</div><div class="line">  f[i] &lt;- f[i<span class="number">-2</span>]+f[i<span class="number">-1</span>]</div><div class="line">  if(f[i]&gt;<span class="number">4000000</span>)break</div><div class="line">  i &lt;- i+<span class="number">1</span></div><div class="line">&#125;</div><div class="line">f &lt;- f[-length(f)]</div><div class="line">f_even_index &lt;- f%%<span class="number">2</span>==<span class="number">0</span></div><div class="line">f_even_sum &lt;- sum(f[f_even_index])</div><div class="line">cat(<span class="string">"The answer is:"</span>, f_even_sum,<span class="string">"<span class="subst">\n</span>"</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">4613732</span></div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="R编程" scheme="https://ytlogos.github.io/categories/R%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="编程能力" scheme="https://ytlogos.github.io/tags/%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/"/>
-    
-  </entry>
-  
-  <entry>
     <title>群体遗传进化</title>
     <link href="https://ytlogos.github.io/2018/04/24/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E8%BF%9B%E5%8C%96/"/>
     <id>https://ytlogos.github.io/2018/04/24/群体遗传进化/</id>
@@ -500,6 +463,45 @@
     
     
       <category term="进化，选择性清除分析" scheme="https://ytlogos.github.io/tags/%E8%BF%9B%E5%8C%96%EF%BC%8C%E9%80%89%E6%8B%A9%E6%80%A7%E6%B8%85%E9%99%A4%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R编程题目练习1</title>
+    <link href="https://ytlogos.github.io/2018/04/24/R%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"/>
+    <id>https://ytlogos.github.io/2018/04/24/R编程题目练习1/</id>
+    <published>2018-04-24T13:19:05.000Z</published>
+    <updated>2018-05-20T03:55:43.823Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="Multiples-of-3-and-5"><a href="#Multiples-of-3-and-5" class="headerlink" title="Multiples of 3 and 5"></a>Multiples of 3 and 5</h2><p>Problem 1 </p>
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+<p><strong>answer</strong>：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">n</span> &lt;- c()</div><div class="line"><span class="title">n</span>[<span class="number">1</span>] &lt;- <span class="number">0</span></div><div class="line"><span class="title">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">999</span>)&#123;</div><div class="line">  <span class="keyword">if</span> (i%%<span class="number">3</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">3</span>!=<span class="number">0</span>&amp;i%%<span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="title">cat</span>(<span class="string">"The answer is:"</span>, n)</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">233168</span></div></pre></td></tr></table></figure>
+<h2 id="Even-Fibonacci-numbers"><a href="#Even-Fibonacci-numbers" class="headerlink" title="Even Fibonacci numbers"></a>Even Fibonacci numbers</h2><p>Problem 2<br>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
+<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
+<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.、</p>
+<p><strong>answer</strong>:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">f &lt;- c()</div><div class="line">f[<span class="number">1</span>] &lt;- <span class="number">1</span></div><div class="line">f[<span class="number">2</span>] &lt;- <span class="number">2</span></div><div class="line">i &lt;- <span class="number">3</span></div><div class="line">repeat&#123;</div><div class="line">  f[i] &lt;- f[i<span class="number">-2</span>]+f[i<span class="number">-1</span>]</div><div class="line">  if(f[i]&gt;<span class="number">4000000</span>)break</div><div class="line">  i &lt;- i+<span class="number">1</span></div><div class="line">&#125;</div><div class="line">f &lt;- f[-length(f)]</div><div class="line">f_even_index &lt;- f%%<span class="number">2</span>==<span class="number">0</span></div><div class="line">f_even_sum &lt;- sum(f[f_even_index])</div><div class="line">cat(<span class="string">"The answer is:"</span>, f_even_sum,<span class="string">"<span class="subst">\n</span>"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">4613732</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="R编程" scheme="https://ytlogos.github.io/categories/R%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="编程能力" scheme="https://ytlogos.github.io/tags/%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/"/>
     
   </entry>
   
