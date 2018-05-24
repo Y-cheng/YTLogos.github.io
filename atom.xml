@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-05-22T09:12:25.425Z</updated>
+  <updated>2018-05-24T05:51:41.420Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux之数据呈现</title>
+    <link href="https://ytlogos.github.io/2018/05/22/Linux%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%91%88%E7%8E%B0/"/>
+    <id>https://ytlogos.github.io/2018/05/22/Linux之数据呈现/</id>
+    <published>2018-05-22T13:19:05.000Z</published>
+    <updated>2018-05-24T05:51:41.420Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180524/8aj460AJAl.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><p><strong>bash shell</strong>保留了前三个文件描述符(0、1、2),分别表示标准输入、标准输出、标准错误。如果需要将标准输出和标准错误重定向到同一个输出文件中，<strong>bash shell</strong>提供了特殊的重定向符<code>&amp;&gt;</code>。</p>
+<h2 id="脚本中重定向输出"><a href="#脚本中重定向输出" class="headerlink" title="脚本中重定向输出"></a>脚本中重定向输出</h2><h3 id="临时重定向"><a href="#临时重定向" class="headerlink" title="临时重定向"></a>临时重定向</h3><p>在重定向到文件描述符时，必须在文件描述符数字前加一个<code>&amp;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cat test8</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># testing STDERR messages</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"This is an error"</span> &gt;&amp;2</div><div class="line"><span class="built_in">echo</span> <span class="string">"This is normal output"</span></div><div class="line">$ ./test8 2&gt; test9</div><div class="line">This is normal output</div><div class="line">$ cat test9</div><div class="line">This is an error</div></pre></td></tr></table></figure>
+<h3 id="永久重定向"><a href="#永久重定向" class="headerlink" title="永久重定向"></a>永久重定向</h3><p>可以在脚本中用<code>exec</code>命令告诉<code>shell</code>在脚本执行期间重定向某个特定文件描述符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ cat test11</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># redirecting output to different locations</span></div><div class="line"><span class="built_in">exec</span> 2&gt;testerror</div><div class="line"><span class="built_in">echo</span> <span class="string">"This is the start of the script"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"now redirecting all output to another location"</span></div><div class="line"><span class="built_in">exec</span> 1&gt;testout</div><div class="line"><span class="built_in">echo</span> <span class="string">"This output should go to the testout file"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"but this should go to the testerror file"</span> &gt;&amp;2</div><div class="line">$</div><div class="line">$ ./test11</div><div class="line">This is the start of the script</div><div class="line">now redirecting all output to another location</div><div class="line">$ cat testout</div><div class="line">This output should go to the testout file</div><div class="line">$ cat testerror</div><div class="line">but this should go to the testerror file</div></pre></td></tr></table></figure>
+<h2 id="脚本中重定向输入"><a href="#脚本中重定向输入" class="headerlink" title="脚本中重定向输入"></a>脚本中重定向输入</h2><p><code>exec</code>命令允许将标准输入重定向到<strong>Linux</strong>系统上的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">exec</span> 0&lt; testfile</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这个命令会告诉<code>shell</code>应该从文件testfile中获得输入而不是STDIN</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ cat test12</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># redirecting file input</span></div><div class="line"><span class="built_in">exec</span> 0&lt; testfile</div><div class="line">count=1</div><div class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</div><div class="line"><span class="keyword">do</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Line #<span class="variable">$count</span>: <span class="variable">$line</span>"</span></div><div class="line">count=$[ <span class="variable">$count</span> + 1 ]</div><div class="line"><span class="keyword">done</span></div><div class="line">$ ./test12</div><div class="line">Line <span class="comment">#1: This is the first line.</span></div><div class="line">Line <span class="comment">#2: This is the second line.</span></div><div class="line">Line <span class="comment">#3: This is the third line.</span></div></pre></td></tr></table></figure>
+<h2 id="消息记录"><a href="#消息记录" class="headerlink" title="消息记录"></a>消息记录</h2><p><code>tee</code>命令相当于管道的一个T型接头，它将从STDIN过来的数据同时发往两处，一处是STDOUT，另一处是<code>tee</code>命令行指定的文件名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> date | tee testfile</span></div><div class="line">Sun Oct 19 18:56:21 EDT 2014</div><div class="line"><span class="meta">$</span><span class="bash"> cat testfile</span></div><div class="line">Sun Oct 19 18:56:21 EDT 2014</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>tee</code>命令在默认条件下会每次覆盖输出文件内容，如果需要追加数据到文件中，可以用<code>-a</code>参数</p>
+</blockquote>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180524/8aj460AJAl.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://ytlogos.github.io/categories/Linux/"/>
+    
+    
+      <category term="Shell" scheme="https://ytlogos.github.io/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux之获取用户输入</title>
@@ -417,6 +459,45 @@
   </entry>
   
   <entry>
+    <title>R编程题目练习1</title>
+    <link href="https://ytlogos.github.io/2018/04/24/R%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"/>
+    <id>https://ytlogos.github.io/2018/04/24/R编程题目练习1/</id>
+    <published>2018-04-24T13:19:05.000Z</published>
+    <updated>2018-05-20T03:55:43.823Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<h2 id="Multiples-of-3-and-5"><a href="#Multiples-of-3-and-5" class="headerlink" title="Multiples of 3 and 5"></a>Multiples of 3 and 5</h2><p>Problem 1 </p>
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+<p><strong>answer</strong>：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">n</span> &lt;- c()</div><div class="line"><span class="title">n</span>[<span class="number">1</span>] &lt;- <span class="number">0</span></div><div class="line"><span class="title">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">999</span>)&#123;</div><div class="line">  <span class="keyword">if</span> (i%%<span class="number">3</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">3</span>!=<span class="number">0</span>&amp;i%%<span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="title">cat</span>(<span class="string">"The answer is:"</span>, n)</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">233168</span></div></pre></td></tr></table></figure>
+<h2 id="Even-Fibonacci-numbers"><a href="#Even-Fibonacci-numbers" class="headerlink" title="Even Fibonacci numbers"></a>Even Fibonacci numbers</h2><p>Problem 2<br>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
+<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
+<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.、</p>
+<p><strong>answer</strong>:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">f &lt;- c()</div><div class="line">f[<span class="number">1</span>] &lt;- <span class="number">1</span></div><div class="line">f[<span class="number">2</span>] &lt;- <span class="number">2</span></div><div class="line">i &lt;- <span class="number">3</span></div><div class="line">repeat&#123;</div><div class="line">  f[i] &lt;- f[i<span class="number">-2</span>]+f[i<span class="number">-1</span>]</div><div class="line">  if(f[i]&gt;<span class="number">4000000</span>)break</div><div class="line">  i &lt;- i+<span class="number">1</span></div><div class="line">&#125;</div><div class="line">f &lt;- f[-length(f)]</div><div class="line">f_even_index &lt;- f%%<span class="number">2</span>==<span class="number">0</span></div><div class="line">f_even_sum &lt;- sum(f[f_even_index])</div><div class="line">cat(<span class="string">"The answer is:"</span>, f_even_sum,<span class="string">"<span class="subst">\n</span>"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">4613732</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="R编程" scheme="https://ytlogos.github.io/categories/R%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="编程能力" scheme="https://ytlogos.github.io/tags/%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>群体遗传进化</title>
     <link href="https://ytlogos.github.io/2018/04/24/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E8%BF%9B%E5%8C%96/"/>
     <id>https://ytlogos.github.io/2018/04/24/群体遗传进化/</id>
@@ -463,45 +544,6 @@
     
     
       <category term="进化，选择性清除分析" scheme="https://ytlogos.github.io/tags/%E8%BF%9B%E5%8C%96%EF%BC%8C%E9%80%89%E6%8B%A9%E6%80%A7%E6%B8%85%E9%99%A4%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R编程题目练习1</title>
-    <link href="https://ytlogos.github.io/2018/04/24/R%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"/>
-    <id>https://ytlogos.github.io/2018/04/24/R编程题目练习1/</id>
-    <published>2018-04-24T13:19:05.000Z</published>
-    <updated>2018-05-20T03:55:43.823Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim" alt="mark"></p>
-<a id="more"></a>
-<h2 id="Multiples-of-3-and-5"><a href="#Multiples-of-3-and-5" class="headerlink" title="Multiples of 3 and 5"></a>Multiples of 3 and 5</h2><p>Problem 1 </p>
-<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
-<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
-<p><strong>answer</strong>：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">n</span> &lt;- c()</div><div class="line"><span class="title">n</span>[<span class="number">1</span>] &lt;- <span class="number">0</span></div><div class="line"><span class="title">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">999</span>)&#123;</div><div class="line">  <span class="keyword">if</span> (i%%<span class="number">3</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">3</span>!=<span class="number">0</span>&amp;i%%<span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">    n &lt;- n+i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="title">cat</span>(<span class="string">"The answer is:"</span>, n)</div></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">233168</span></div></pre></td></tr></table></figure>
-<h2 id="Even-Fibonacci-numbers"><a href="#Even-Fibonacci-numbers" class="headerlink" title="Even Fibonacci numbers"></a>Even Fibonacci numbers</h2><p>Problem 2<br>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
-<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
-<p>By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.、</p>
-<p><strong>answer</strong>:</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">f &lt;- c()</div><div class="line">f[<span class="number">1</span>] &lt;- <span class="number">1</span></div><div class="line">f[<span class="number">2</span>] &lt;- <span class="number">2</span></div><div class="line">i &lt;- <span class="number">3</span></div><div class="line">repeat&#123;</div><div class="line">  f[i] &lt;- f[i<span class="number">-2</span>]+f[i<span class="number">-1</span>]</div><div class="line">  if(f[i]&gt;<span class="number">4000000</span>)break</div><div class="line">  i &lt;- i+<span class="number">1</span></div><div class="line">&#125;</div><div class="line">f &lt;- f[-length(f)]</div><div class="line">f_even_index &lt;- f%%<span class="number">2</span>==<span class="number">0</span></div><div class="line">f_even_sum &lt;- sum(f[f_even_index])</div><div class="line">cat(<span class="string">"The answer is:"</span>, f_even_sum,<span class="string">"<span class="subst">\n</span>"</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The answer <span class="keyword">is</span>: <span class="number">4613732</span></div></pre></td></tr></table></figure>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180520/8DLlfLA4dc.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="R编程" scheme="https://ytlogos.github.io/categories/R%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="编程能力" scheme="https://ytlogos.github.io/tags/%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/"/>
     
   </entry>
   
@@ -1098,217 +1140,6 @@
     
     
       <category term="调色板" scheme="https://ytlogos.github.io/tags/%E8%B0%83%E8%89%B2%E6%9D%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Shell编程：运算符</title>
-    <link href="https://ytlogos.github.io/2018/02/09/Shell%E7%BC%96%E7%A8%8B%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    <id>https://ytlogos.github.io/2018/02/09/Shell编程：运算符/</id>
-    <published>2018-02-09T13:19:05.000Z</published>
-    <updated>2018-02-27T14:24:31.906Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://os3hnmzbp.bkt.clouddn.com/yunsuanfu.jpeg" alt=""></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Shell支持多种运算符：</p>
-<ul>
-<li>算术运算符</li>
-<li>布尔运算符</li>
-<li>关系运算符</li>
-<li>字符串运算符</li>
-<li>文件测试运算符</li>
-</ul>
-<a id="more"></a>
-<p>原生bash不支持简单的数学运算，但是可以通过expr等来实现。例如两个数相加：</p>
-<blockquote>
-<p>需要注意的是使用的是反引号`，而不是单引号’。另外表达式与运算符之间要有空格。</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment">#创建测试脚本test.sh</span></div><div class="line"></div><div class="line">add=`expr 3 + 5`</div><div class="line"><span class="built_in">echo</span> <span class="string">"两数之和为：<span class="variable">$add</span>"</span></div></pre></td></tr></table></figure>
-<p>运行脚本之后结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> ./test.sh        </span></div><div class="line">两数之和为：4</div></pre></td></tr></table></figure>
-<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>算术运算符主要如下：假设a=10,b=20</p>
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>说明</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>+</td>
-<td>加法</td>
-<td>`expr \$a + \$b`结果为30</td>
-</tr>
-<tr>
-<td>-</td>
-<td>减法</td>
-<td>`expr \$a + \$b`结果为-10</td>
-</tr>
-<tr>
-<td>*</td>
-<td>乘法</td>
-<td>`expr \$a*\$b`结果为200</td>
-</tr>
-<tr>
-<td>/</td>
-<td>除法</td>
-<td>`expr \$b/\$a`结果为2</td>
-</tr>
-<tr>
-<td>%</td>
-<td>取余</td>
-<td>`expr \$b\%\$a`结果为0</td>
-</tr>
-<tr>
-<td>=</td>
-<td>赋值</td>
-<td>a=$b将变量b的值赋值给a</td>
-</tr>
-<tr>
-<td>==</td>
-<td>相等，用于比较两个数字是否相等，是则返回TRUE，否则返回FALSE</td>
-<td>[ \$a==\$b ]结果返回FALSE</td>
-</tr>
-<tr>
-<td>!=</td>
-<td>不相等</td>
-<td>[ \$a!=\$b ]结果返回TRUE</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>注意的是表达式要放在括号之间，并且要有空格。</p>
-</blockquote>
-<h3 id="举个例子说明"><a href="#举个例子说明" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment">#创建测试脚本test.sh</span></div><div class="line">m=12</div><div class="line">n=5</div><div class="line"><span class="comment">#加法</span></div><div class="line">val=`expr <span class="variable">$m</span> + <span class="variable">$n</span>`</div><div class="line"><span class="built_in">echo</span> <span class="string">"m+n= <span class="variable">$val</span>"</span></div><div class="line"><span class="comment">#减法</span></div><div class="line">val=`expr <span class="variable">$m</span> - <span class="variable">$n</span>`</div><div class="line"><span class="built_in">echo</span> <span class="string">"m-n= <span class="variable">$val</span>"</span></div><div class="line"><span class="comment">#乘法</span></div><div class="line">val=`expr <span class="variable">$m</span> \* <span class="variable">$n</span>`</div><div class="line"><span class="built_in">echo</span> <span class="string">"m*n= <span class="variable">$val</span>"</span></div><div class="line"><span class="comment">#乘法</span></div><div class="line">val=`expr <span class="variable">$m</span> / <span class="variable">$n</span>`</div><div class="line"><span class="built_in">echo</span> <span class="string">"m/n= <span class="variable">$val</span>"</span></div><div class="line"><span class="comment">#乘法</span></div><div class="line">val=`expr <span class="variable">$m</span> % <span class="variable">$n</span>`</div><div class="line"><span class="built_in">echo</span> <span class="string">"m%n= <span class="variable">$val</span>"</span></div><div class="line"></div><div class="line"><span class="comment">#相等</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$m</span> == <span class="variable">$n</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"m=n"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment">#不相等</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$m</span> != <span class="variable">$n</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"m!=n"</span></div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">m+<span class="built_in">n</span>= <span class="number">17</span></div><div class="line">m-<span class="built_in">n</span>= <span class="number">7</span></div><div class="line">m*<span class="built_in">n</span>= <span class="number">60</span></div><div class="line">m/<span class="built_in">n</span>= <span class="number">2</span></div><div class="line">m%<span class="built_in">n</span>= <span class="number">2</span></div><div class="line">m!=<span class="built_in">n</span></div></pre></td></tr></table></figure></p>
-<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符只支持数字，假设a=10,b=20:</p>
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>说明</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-eq</td>
-<td>是否相等</td>
-<td>[ \$a -eq \$b ]结果返回FALSE</td>
-</tr>
-<tr>
-<td>-ne</td>
-<td>是否不相等</td>
-<td>[ \$a -ne \$b ]结果返回TRUE</td>
-</tr>
-<tr>
-<td>-gt</td>
-<td>左边是否大于右边</td>
-<td>[ \$a -gt \$b ]结果返回FALSE</td>
-</tr>
-<tr>
-<td>-lt</td>
-<td>左边是否小于是否右边</td>
-<td>[ \$a -lt \$b ]结果返回TRUE</td>
-</tr>
-<tr>
-<td>-ge</td>
-<td>左边是否大于等于右边</td>
-<td>[ \$a -ge \$b ]结果返回FALSE</td>
-</tr>
-<tr>
-<td>-eq</td>
-<td>左边是否小于等于右边</td>
-<td>[ \$a -le \$b ]结果返回TRUE</td>
-</tr>
-</tbody>
-</table>
-<h3 id="举个例子说明-1"><a href="#举个例子说明-1" class="headerlink" title="举个例子说明"></a>举个例子说明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建测试脚本test.sh</span></div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -eq <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -eq <span class="variable">$b</span> : a 等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -eq <span class="variable">$b</span>: a 不等于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -ne <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -ne <span class="variable">$b</span>: a 不等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -ne <span class="variable">$b</span> : a 等于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -gt <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -gt <span class="variable">$b</span>: a 大于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -gt <span class="variable">$b</span>: a 不大于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -lt <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -lt <span class="variable">$b</span>: a 小于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -lt <span class="variable">$b</span>: a 不小于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -ge <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -ge <span class="variable">$b</span>: a 大于或等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -ge <span class="variable">$b</span>: a 小于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -le <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -le <span class="variable">$b</span>: a 小于或等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> -le <span class="variable">$b</span>: a 大于 b"</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./test<span class="selector-class">.sh</span> </div><div class="line"><span class="number">10</span> -eq <span class="number">20</span>: <span class="selector-tag">a</span> 不等于 <span class="selector-tag">b</span></div><div class="line"><span class="number">10</span> -ne <span class="number">20</span>: <span class="selector-tag">a</span> 不等于 <span class="selector-tag">b</span></div><div class="line"><span class="number">10</span> -gt <span class="number">20</span>: <span class="selector-tag">a</span> 不大于 <span class="selector-tag">b</span></div><div class="line"><span class="number">10</span> -lt <span class="number">20</span>: <span class="selector-tag">a</span> 小于 <span class="selector-tag">b</span></div><div class="line"><span class="number">10</span> -ge <span class="number">20</span>: <span class="selector-tag">a</span> 小于 <span class="selector-tag">b</span></div><div class="line"><span class="number">10</span> -le <span class="number">20</span>: <span class="selector-tag">a</span> 小于或等于 b</div></pre></td></tr></table></figure></p>
-<h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><p>假设a=10,b=20</p>
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>说明</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>！</td>
-<td>非运算</td>
-<td>[ !false ]返回TRUE</td>
-</tr>
-<tr>
-<td>-o</td>
-<td>或运算</td>
-<td>[ \$a -lt 20 -o \$b -gt 100 ] 返回true。</td>
-</tr>
-<tr>
-<td>-a</td>
-<td>与运算</td>
-<td>[ \$a -lt 20 -a \$b -gt 100 ] 返回false</td>
-</tr>
-</tbody>
-</table>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建测试脚本test.sh</span></div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> != <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> != <span class="variable">$b</span> : a 不等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> != <span class="variable">$b</span>: a 等于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -lt 100 -a <span class="variable">$b</span> -gt 15 ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> 小于 100 且 <span class="variable">$b</span> 大于 15 : 返回 true"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> 小于 100 且 <span class="variable">$b</span> 大于 15 : 返回 false"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -lt 100 -o <span class="variable">$b</span> -gt 100 ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> 小于 100 或 <span class="variable">$b</span> 大于 100 : 返回 true"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> 小于 100 或 <span class="variable">$b</span> 大于 100 : 返回 false"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> -lt 5 -o <span class="variable">$b</span> -gt 100 ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> 小于 5 或 <span class="variable">$b</span> 大于 100 : 返回 true"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> 小于 5 或 <span class="variable">$b</span> 大于 100 : 返回 false"</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight tap"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh </div><div class="line">10 !=<span class="number"> 20 </span>: a 不等于 b</div><div class="line">10 小于<span class="number"> 100 </span>且<span class="number"> 20 </span>大于<span class="number"> 15 </span>: 返回 true</div><div class="line">10 小于<span class="number"> 100 </span>或<span class="number"> 20 </span>大于<span class="number"> 100 </span>: 返回 true</div><div class="line">10 小于<span class="number"> 5 </span>或<span class="number"> 20 </span>大于<span class="number"> 100 </span>: 返回 false</div></pre></td></tr></table></figure></p>
-<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>假设a=10,b=20</p>
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>说明</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&amp;&amp;</td>
-<td>逻辑的AND</td>
-<td>[[ \$a -lt 100 &amp;&amp; \$b -gt 100 ]] 返回 false</td>
-</tr>
-<tr>
-<td>\</td>
-<td>\</td>
-<td></td>
-<td>逻辑的OR</td>
-<td>[[ \$a -lt 100 \</td>
-<td>\</td>
-<td>\$b -gt 100 ]] 返回 true</td>
-</tr>
-</tbody>
-</table>
-<h3 id="举例说明-1"><a href="#举例说明-1" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建测试脚本test.sh</span></div><div class="line"></div><div class="line">a=10</div><div class="line">b=20</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="variable">$a</span> -lt 100 &amp;&amp; <span class="variable">$b</span> -gt 100 ]]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"返回 true"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"返回 false"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="variable">$a</span> -lt 100 || <span class="variable">$b</span> -gt 100 ]]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"返回 true"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"返回 false"</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">$</span> <span class="string">./test.sh</span> </div><div class="line"><span class="string">返回</span> <span class="literal">false</span></div><div class="line"><span class="string">返回</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
-<h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><p>下表列出了常用的字符串运算符，假定变量 a 为 “abc”，变量 b 为 “efg”：<br>运算符|说明|例子<br>—|—-|—–<br>=|相等|[ \$a = \$b ] 返回 false<br>!=|不相等|[ \$a != \$b ] 返回 true<br>-z|字符串长度是否为0|[ -z \$a ] 返回 false<br>-n|字符串长度是否不为0|[ -n \$a ] 返回 true<br>str|字符串是否不为空|[ \$a ] 返回 true</p>
-<h3 id="举例说明-2"><a href="#举例说明-2" class="headerlink" title="举例说明"></a>举例说明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># 创建测试脚本test.sh</span></div><div class="line"></div><div class="line">a=<span class="string">"abc"</span></div><div class="line">b=<span class="string">"efg"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> = <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> = <span class="variable">$b</span> : a 等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> = <span class="variable">$b</span>: a 不等于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> != <span class="variable">$b</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> != <span class="variable">$b</span> : a 不等于 b"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> != <span class="variable">$b</span>: a 等于 b"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ -z <span class="variable">$a</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"-z <span class="variable">$a</span> : 字符串长度为 0"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"-z <span class="variable">$a</span> : 字符串长度不为 0"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ -n <span class="variable">$a</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"-n <span class="variable">$a</span> : 字符串长度不为 0"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"-n <span class="variable">$a</span> : 字符串长度为 0"</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> : 字符串不为空"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> : 字符串为空"</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
-<p>运行脚本结果如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ./test<span class="selector-class">.sh</span> </div><div class="line">abc = efg: <span class="selector-tag">a</span> 不等于 <span class="selector-tag">b</span></div><div class="line">abc != efg : <span class="selector-tag">a</span> 不等于 <span class="selector-tag">b</span></div><div class="line">-z abc : 字符串长度不为 <span class="number">0</span></div><div class="line">-n abc : 字符串长度不为 <span class="number">0</span></div><div class="line">abc : 字符串不为空</div></pre></td></tr></table></figure></p>
-<h2 id="文件运算符"><a href="#文件运算符" class="headerlink" title="文件运算符"></a>文件运算符</h2><p>文件运算符主要用于检测文件属性。这里就不讲解了。</p>
-<p>本文主要参考<a href="http://www.runoob.com/linux/linux-shell-basic-operators.html" target="_blank" rel="external">菜鸟教程</a></p>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>简书: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>博客: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://os3hnmzbp.bkt.clouddn.com/yunsuanfu.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;Shell支持多种运算符：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;算术运算符&lt;/li&gt;
-&lt;li&gt;布尔运算符&lt;/li&gt;
-&lt;li&gt;关系运算符&lt;/li&gt;
-&lt;li&gt;字符串运算符&lt;/li&gt;
-&lt;li&gt;文件测试运算符&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Shell" scheme="https://ytlogos.github.io/categories/Shell/"/>
-    
-    
-      <category term="运算符" scheme="https://ytlogos.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
     
   </entry>
   

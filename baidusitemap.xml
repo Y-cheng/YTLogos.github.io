@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://ytlogos.github.io/2018/05/22/Linux%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%91%88%E7%8E%B0/</loc>
+    <lastmod>2018-05-24T05:51:41.420Z</lastmod>
+    <data>
+        <display>
+        <title>Linux之数据呈现</title>
+        <pubTime>2018-05-22T13:19:05.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="https://ytlogos.github.io/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ytlogos.github.io/2018/05/21/Linux%E4%B9%8B%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/</loc>
     <lastmod>2018-05-22T09:12:25.425Z</lastmod>
     <data>
@@ -838,9 +858,9 @@
         
         <tag>R</tag>
          
-        <tag>ggrepel</tag>
-         
         <tag>visualization</tag>
+         
+        <tag>ggrepel</tag>
          
          
            
@@ -1232,9 +1252,9 @@
         
         <tag>R</tag>
          
-        <tag>ggrepel</tag>
-         
         <tag>visualization</tag>
+         
+        <tag>ggrepel</tag>
          
          
            
@@ -1626,9 +1646,9 @@
         
         <tag>R</tag>
          
-        <tag>visualization</tag>
-         
         <tag>scatter plot</tag>
+         
+        <tag>visualization</tag>
          
          
            
