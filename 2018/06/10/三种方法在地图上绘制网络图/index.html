@@ -1,0 +1,1650 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="map,ggraph," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Logos" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近为了绘制几幅简单地图，查阅了一些资料，看到了Markus konrad的帖子，非常赞。其中他的部分思路对于我们学习可视化很有帮助。">
+<meta name="keywords" content="map,ggraph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三种方法在地图上绘制网络图">
+<meta property="og:url" content="https://ytlogos.github.io/2018/06/10/三种方法在地图上绘制网络图/index.html">
+<meta property="og:site_name" content="Logos">
+<meta property="og:description" content="最近为了绘制几幅简单地图，查阅了一些资料，看到了Markus konrad的帖子，非常赞。其中他的部分思路对于我们学习可视化很有帮助。">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/mA73K7a4gJ.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/mA73K7a4gJ.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/ifLkLd15Jh.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/Cfe1Bkf0Ga.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/BCI696DJ3I.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/hab81AIbfa.png?imageslim">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/8HG1jbLaAf.png?imageslim">
+<meta property="og:updated_time" content="2018-06-10T10:38:06.319Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三种方法在地图上绘制网络图">
+<meta name="twitter:description" content="最近为了绘制几幅简单地图，查阅了一些资料，看到了Markus konrad的帖子，非常赞。其中他的部分思路对于我们学习可视化很有帮助。">
+<meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/mA73K7a4gJ.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ytlogos.github.io/2018/06/10/三种方法在地图上绘制网络图/"/>
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+  <title>三种方法在地图上绘制网络图 | Logos</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'true', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+  <a href="https://github.com/YTLogos"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Logos</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay hungry,Stay foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ytlogos.github.io/2018/06/10/三种方法在地图上绘制网络图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TaoYan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/Kh4BagCbCG.png?imageslim">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Logos">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三种方法在地图上绘制网络图</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T18:19:05+08:00">
+                2018-06-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-10T18:38:06+08:00">
+                2018-06-10
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/可视化/" itemprop="url" rel="index">
+                    <span itemprop="name">可视化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/10/三种方法在地图上绘制网络图/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/10/三种方法在地图上绘制网络图/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/10/三种方法在地图上绘制网络图/" class="leancloud_visitors" data-flag-title="三种方法在地图上绘制网络图">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				  <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,096
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/mA73K7a4gJ.png?imageslim" alt="mark"></p>
+<p>最近为了绘制几幅简单地图，查阅了一些资料，看到了<strong>Markus konrad</strong>的<a href="https://datascience.blog.wzb.eu/2018/05/31/three-ways-of-visualizing-a-graph-on-a-map/" target="_blank" rel="external">帖子</a>，非常赞。其中他的部分思路对于我们学习可视化很有帮助。</p>
+<a id="more"></a>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>我们需要用到以下包</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">library</span><span class="params">(pacman)</span></span></div><div class="line"><span class="function"><span class="title">p_load</span><span class="params">(assertthat,tidyverse,ggraph,igraph,ggmap)</span></span></div></pre></td></tr></table></figure>
+<p>加载数据</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nodes &lt;- read.table(<span class="string">"country_coords.txt"</span>, <span class="selector-tag">header</span> = FALSE, <span class="selector-tag">quote</span> = <span class="string">"'"</span>,sep = <span class="string">""</span>,col<span class="selector-class">.names</span> = c(<span class="string">"id"</span>,<span class="string">"lon"</span>,<span class="string">"lat"</span>,<span class="string">"name"</span>))</div></pre></td></tr></table></figure>
+<p>创建连接关系<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">set.seed(<span class="number">42</span>)</div><div class="line"><span class="keyword">min</span> &lt;- <span class="number">1</span></div><div class="line"><span class="keyword">max</span> &lt;- <span class="number">4</span></div><div class="line">n_categories &lt;- <span class="number">4</span></div><div class="line">edges &lt;- map_dfr(nodes$<span class="keyword">id</span>, <span class="keyword">function</span>(<span class="keyword">id</span>)&#123;</div><div class="line">  n &lt;- <span class="keyword">floor</span>(runif(<span class="number">1</span>,<span class="keyword">min</span>,<span class="keyword">max</span>+<span class="number">1</span>))</div><div class="line">  <span class="keyword">to</span> &lt;- <span class="keyword">sample</span>(<span class="number">1</span>:<span class="keyword">max</span>(nodes$<span class="keyword">id</span>),n ,<span class="keyword">replace</span> = <span class="literal">FALSE</span>)</div><div class="line">  <span class="keyword">to</span> &lt;- <span class="keyword">to</span>[<span class="keyword">to</span>!=<span class="keyword">id</span>]</div><div class="line">  categories &lt;- <span class="keyword">sample</span>(<span class="number">1</span>:n_categories,<span class="keyword">length</span>(<span class="keyword">to</span>), <span class="keyword">replace</span> = <span class="literal">TRUE</span>)</div><div class="line">  weight &lt;- runif(<span class="keyword">length</span>(<span class="keyword">to</span>))</div><div class="line">  data_frame(<span class="keyword">from</span>=<span class="keyword">id</span>, <span class="keyword">to</span>=<span class="keyword">to</span>, weight=weight, <span class="keyword">category</span>=categories)</div><div class="line">&#125;)</div><div class="line">edges &lt;- edges%&gt;%mutate(<span class="keyword">category</span>=as.factor(<span class="keyword">category</span>))</div></pre></td></tr></table></figure></p>
+<p>上面我们已经创建好了节点(node)以及连接(edge)，下面进行可视化</p>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#生成图形结构</span></div><div class="line">g &lt;- graph_from_data_frame<span class="params">(edges, <span class="attr">directed</span> = FALSE, <span class="attr">vertices</span> = nodes)</span></div></pre></td></tr></table></figure>
+<p>再额外定义四列用来绘制节点的起始位置<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">edges_for_plot &lt;- edges%&gt;%</div><div class="line">  inner_join(nodes%&gt;%select(id, lon, lat),by=c(<span class="string">"from"</span>=<span class="string">"id"</span>))%&gt;%</div><div class="line">  <span class="keyword">rename</span>(x=lon, y=lat)%&gt;%</div><div class="line">  inner_join(nodes%&gt;%select(id,lon,lat),by=c(<span class="string">"to"</span>=<span class="string">"id"</span>))%&gt;%</div><div class="line">  <span class="keyword">rename</span>(xend=lon,yend=lat)</div><div class="line">assert_that(nrow(edges_for_plot)==nrow(edges))</div><div class="line">nodes$weight &lt;- degree(g)</div></pre></td></tr></table></figure></p>
+<p>下面再定义以下<strong>ggplot2</strong>主题用来绘制地图<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">maptheme &lt;- theme(</div><div class="line">  <span class="name">panel</span>.grid = element_blank(),</div><div class="line">  axis.text = element_blank(),</div><div class="line">  axis.ticks = element_blank(),</div><div class="line">  axis.title = element_blank(),</div><div class="line">  legend.position = <span class="string">"bottom"</span>,</div><div class="line">  panel.background = element_rect(<span class="name">fill=</span><span class="string">"#596673"</span>),</div><div class="line">  plot.margin = unit(<span class="name">c</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">0</span>),<span class="string">"cm"</span>)</div><div class="line">)</div><div class="line">country_shape &lt;- geom_polygon(<span class="name">aes</span>(<span class="name">x=long</span>, y=lat, group=group),</div><div class="line">                              data=map_data(<span class="string">"world"</span>),</div><div class="line">                              fill=<span class="string">"#CECECE"</span>, color=<span class="string">"#515151"</span>,size=0.<span class="number">1</span>)</div><div class="line">mapcoords &lt;- coord_fixed(<span class="name">xlim=c</span>(<span class="name">-150</span>,<span class="number">180</span>), ylim=c(<span class="name">-55</span>,<span class="number">80</span>))</div></pre></td></tr></table></figure></p>
+<h3 id="方法一：ggplot2"><a href="#方法一：ggplot2" class="headerlink" title="方法一：ggplot2"></a>方法一：ggplot2</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ggplot(<span class="name">nodes</span>)+country_shape+</div><div class="line">  geom_curve(<span class="name">aes</span>(<span class="name">x=x</span>,y=y,xend=xend,yend=yend,color=category,size=weight),</div><div class="line">             data=edges_for_plot,curvature = <span class="number">0.33</span>,alpha=0.<span class="number">5</span>)+</div><div class="line">  scale_size_continuous(<span class="name">guide</span> = FALSE,range = c(<span class="number">0.25</span>,<span class="number">2</span>))+</div><div class="line">  geom_point(<span class="name">aes</span>(<span class="name">x=lon</span>,y=lat,size=weight),shape=21,fill=<span class="string">"white"</span>,color=<span class="string">"black"</span>,stroke=0.<span class="number">5</span>)+</div><div class="line">  scale_size_continuous(<span class="name">guide</span> = FALSE, range = c(<span class="number">1</span>,<span class="number">6</span>))+</div><div class="line">  geom_text(<span class="name">aes</span>(<span class="name">x=lon</span>,y=lat,label=name),hjust=0,nudge_x = <span class="number">1</span>,nudge_y = <span class="number">4</span>,size=3,color=<span class="string">"black"</span>,fontface=<span class="string">"bold"</span>)+</div><div class="line">  mapcoords+maptheme</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/mA73K7a4gJ.png?imageslim" alt="mark"></p>
+<h3 id="方法二：ggplot2-ggraph"><a href="#方法二：ggplot2-ggraph" class="headerlink" title="方法二：ggplot2+ggraph"></a>方法二：ggplot2+ggraph</h3><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="xml">nodes_pos <span class="tag">&lt;<span class="name">-</span> <span class="attr">nodes</span>%&gt;</span>%</span></div><div class="line">  select(lon,lat)%&gt;%</div><div class="line">  rename(x=lon,y=lat)</div><div class="line">lay <span class="tag">&lt;<span class="name">-</span> <span class="attr">create_layout</span>(<span class="attr">g</span>,"<span class="attr">manual</span>",<span class="attr">node.position</span>=<span class="string">nodes_pos)</span></span></div><div class="line"><span class="attr">assert_that</span>(<span class="attr">nrow</span>(<span class="attr">lay</span>)==<span class="string">nrow(nodes))</span></div><div class="line"><span class="attr">lay</span>$<span class="attr">weight</span> &lt;<span class="attr">-</span> <span class="attr">degree</span>(<span class="attr">g</span>)</div><div class="line"><span class="attr">ggraph</span>(<span class="attr">lay</span>)+</div><div class="line">  <span class="attr">country_shape</span>+</div><div class="line">  <span class="attr">geom_edge_arc</span>(<span class="attr">aes</span>(<span class="attr">color</span>=<span class="string">category,edge_width</span>=<span class="string">weight,circular</span>=<span class="string">FALSE),</span></div><div class="line">                <span class="attr">data</span> = <span class="string">edges_for_plot,curvature</span> = <span class="string">0.33,alpha</span>=<span class="string">0.5)+</span></div><div class="line">  <span class="attr">scale_edge_width_continuous</span>(<span class="attr">range</span> = <span class="string">c(0.5,2),guide</span>=<span class="string">FALSE)+</span></div><div class="line">  <span class="attr">geom_node_point</span>(<span class="attr">aes</span>(<span class="attr">size</span>=<span class="string">weight),shape</span>=<span class="string">21,fill</span>=<span class="string">"white"</span>,<span class="attr">color</span>=<span class="string">"black"</span>,<span class="attr">stroke</span>=<span class="string">0.5)+</span></div><div class="line">  <span class="attr">scale_size_continuous</span>(<span class="attr">range</span> = <span class="string">c(1,6),guide</span> = <span class="string">FALSE)+</span></div><div class="line">  <span class="attr">geom_node_text</span>(<span class="attr">aes</span>(<span class="attr">label</span>=<span class="string">name),repel</span> = <span class="string">TRUE,</span> <span class="attr">size</span>=<span class="string">3,color</span>=<span class="string">"black"</span>,<span class="attr">fontface</span>=<span class="string">"bold"</span>)+</div><div class="line">  <span class="attr">mapcoords</span>+<span class="attr">maptheme</span></div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/ifLkLd15Jh.png?imageslim" alt="mark"></p>
+<h3 id="方法三：图形叠加"><a href="#方法三：图形叠加" class="headerlink" title="方法三：图形叠加"></a>方法三：图形叠加</h3><p>图形叠加，所以需要一个透明背景<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">theme_transp_overlay &lt;- theme(</div><div class="line">  <span class="name">panel</span>.background = element_rect(<span class="name">fill=</span><span class="string">"transparent"</span>,color=NA),</div><div class="line">  plot.background = element_rect(<span class="name">fill=</span><span class="string">"transparent"</span>,color=NA)</div><div class="line">)</div><div class="line">(<span class="name">p_base</span> &lt;- ggplot()+</div><div class="line">  country_shape+</div><div class="line">  mapcoords+</div><div class="line">  maptheme)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/Cfe1Bkf0Ga.png?imageslim" alt="mark"></p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(<span class="name">p_edges</span> &lt;- ggplot(<span class="name">edges_for_plot</span>)+</div><div class="line">  geom_curve(<span class="name">aes</span>(<span class="name">x=x</span>,y=y,xend=xend,yend=yend,color=category,size=weight),</div><div class="line">             curvature = <span class="number">0.33</span>,alpha=0.33)+</div><div class="line">  scale_size_continuous(<span class="name">guide</span> = FALSE, range = c(<span class="name">0.5</span>, <span class="number">2</span>)) + </div><div class="line">  mapcoords + maptheme + theme_transp_overlay +</div><div class="line">  theme(<span class="name">legend.position</span> = c(<span class="name">0.5</span>, <span class="number">-0.1</span>),</div><div class="line">        legend.direction = <span class="string">"horizontal"</span>))</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/BCI696DJ3I.png?imageslim" alt="mark"></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(p_nodes &lt;- ggplot(nodes) +</div><div class="line">  geom_point(aes(<span class="attr">x</span> = lon, <span class="attr">y</span> = lat, <span class="attr">size</span> = weight),</div><div class="line">             <span class="attr">shape</span> = <span class="number">21</span>, <span class="attr">fill</span> = <span class="string">"white"</span>, <span class="attr">color</span> = <span class="string">"black"</span>,   </div><div class="line">             <span class="attr">stroke</span> = <span class="number">0.5</span>) +</div><div class="line">  scale_size_continuous(<span class="attr">guide</span> = FALSE, <span class="attr">range</span> = c(<span class="number">1</span>, <span class="number">6</span>)) +    </div><div class="line">  geom_text(aes(<span class="attr">x</span> = lon, <span class="attr">y</span> = lat, <span class="attr">label</span> = name),             </div><div class="line">            <span class="attr">hjust</span> = <span class="number">0</span>, <span class="attr">nudge_x</span> = <span class="number">1</span>, <span class="attr">nudge_y</span> = <span class="number">4</span>,</div><div class="line">            <span class="attr">size</span> = <span class="number">3</span>, <span class="attr">color</span> = <span class="string">"white"</span>, <span class="attr">fontface</span> = <span class="string">"bold"</span>) +</div><div class="line">  mapcoords + maptheme + theme_transp_overlay)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/hab81AIbfa.png?imageslim" alt="mark"></p>
+<p>最后就是三图形叠加了（需要多次调整）<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p &lt;- p_base+</div><div class="line">  annotation_custom(<span class="name">ggplotGrob</span>(<span class="name">p_edges</span>),ymin = <span class="number">-74</span>)+</div><div class="line">  annotation_custom(<span class="name">ggplotGrob</span>(<span class="name">p_nodes</span>),ymin = <span class="number">-74</span>)</div><div class="line">print(<span class="name">p</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180610/8HG1jbLaAf.png?imageslim" alt="mark"></p>
+<h3 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">sessionInfo</span><span class="params">()</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">## R version <span class="number">3.5</span><span class="meta">.0</span> (<span class="number">2018</span>-<span class="number">04</span>-<span class="number">23</span>)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (<span class="number">64</span>-bit)</div><div class="line">## Running under: Windows <span class="number">10</span> x64 (build <span class="number">16299</span>)</div><div class="line">## </div><div class="line">## Matrix products: <span class="meta">default</span></div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [<span class="number">1</span>] LC_COLLATE=Chinese (Simplified)_China<span class="meta">.936</span> </div><div class="line">## [<span class="number">2</span>] LC_CTYPE=Chinese (Simplified)_China<span class="meta">.936</span>   </div><div class="line">## [<span class="number">3</span>] LC_MONETARY=Chinese (Simplified)_China<span class="meta">.936</span></div><div class="line">## [<span class="number">4</span>] LC_NUMERIC=C                              </div><div class="line">## [<span class="number">5</span>] LC_TIME=Chinese (Simplified)_China<span class="meta">.936</span>    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [<span class="number">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## other attached packages:</div><div class="line">##  [<span class="number">1</span>] maps_3<span class="meta">.3</span><span class="meta">.0</span>         bindrcpp_0<span class="meta">.2</span><span class="meta">.2</span>     ggmap_2<span class="meta">.6</span><span class="meta">.1</span>       </div><div class="line">##  [<span class="number">4</span>] igraph_1<span class="meta">.2</span><span class="meta">.1</span>       ggraph_1<span class="meta">.0</span><span class="meta">.1</span>       forcats_0<span class="meta">.3</span><span class="meta">.0</span>     </div><div class="line">##  [<span class="number">7</span>] stringr_1<span class="meta">.3</span><span class="meta">.1</span>      dplyr_0<span class="meta">.7</span><span class="meta">.5</span>        purrr_0<span class="meta">.2</span><span class="meta">.5</span>       </div><div class="line">## [<span class="number">10</span>] readr_1<span class="meta">.1</span><span class="meta">.1</span>        tidyr_0<span class="meta">.8</span><span class="meta">.1</span>        tibble_1<span class="meta">.4</span><span class="meta">.2</span>      </div><div class="line">## [<span class="number">13</span>] ggplot2_2<span class="meta">.2</span><span class="meta">.1</span><span class="meta">.9000</span> tidyverse_1<span class="meta">.2</span><span class="meta">.1</span>    assertthat_0<span class="meta">.2</span><span class="meta">.0</span>  </div><div class="line">## [<span class="number">16</span>] pacman_0<span class="meta">.4</span><span class="meta">.6</span>      </div><div class="line">## </div><div class="line">## loaded via a namespace (<span class="keyword">and</span> <span class="keyword">not</span> attached):</div><div class="line">##  [<span class="number">1</span>] ggrepel_0<span class="meta">.8</span><span class="meta">.0</span>     Rcpp_0<span class="meta">.12</span><span class="meta">.17</span>      lubridate_1<span class="meta">.7</span><span class="meta">.4</span>  </div><div class="line">##  [<span class="number">4</span>] lattice_0<span class="meta">.20</span>-<span class="number">35</span>   png_0<span class="meta">.1</span>-<span class="number">7</span>         rprojroot_1<span class="meta">.3</span>-<span class="number">2</span>  </div><div class="line">##  [<span class="number">7</span>] digest_0<span class="meta">.6</span><span class="meta">.15</span>     psych_1<span class="meta">.8</span><span class="meta">.4</span>       ggforce_0<span class="meta">.1</span><span class="meta">.2</span>    </div><div class="line">## [<span class="number">10</span>] R6_2<span class="meta">.2</span><span class="meta">.2</span>          cellranger_1<span class="meta">.1</span><span class="meta">.0</span>  plyr_1<span class="meta">.8</span><span class="meta">.4</span>       </div><div class="line">## [<span class="number">13</span>] backports_1<span class="meta">.1</span><span class="meta">.2</span>   evaluate_0<span class="meta">.10</span><span class="meta">.1</span>   httr_1<span class="meta">.3</span><span class="meta">.1</span>       </div><div class="line">## [<span class="number">16</span>] pillar_1<span class="meta">.2</span><span class="meta">.3</span>      RgoogleMaps_1<span class="meta">.4</span><span class="meta">.1</span> rlang_0<span class="meta">.2</span><span class="meta">.1</span>      </div><div class="line">## [<span class="number">19</span>] lazyeval_0<span class="meta">.2</span><span class="meta">.1</span>    readxl_1<span class="meta">.1</span><span class="meta">.0</span>      geosphere_1<span class="meta">.5</span>-<span class="number">7</span>  </div><div class="line">## [<span class="number">22</span>] rstudioapi_0<span class="meta">.7</span>    rmarkdown_1<span class="meta">.9</span>     labeling_0<span class="meta">.3</span>     </div><div class="line">## [<span class="number">25</span>] proto_1<span class="meta">.0</span><span class="meta">.0</span>       udunits2_0<span class="meta">.13</span>     foreign_0<span class="meta">.8</span>-<span class="number">70</span>   </div><div class="line">## [<span class="number">28</span>] munsell_0<span class="meta">.4</span><span class="meta">.3</span>     broom_0<span class="meta">.4</span><span class="meta">.4</span>       compiler_3<span class="meta">.5</span><span class="meta">.0</span>   </div><div class="line">## [<span class="number">31</span>] modelr_0<span class="meta">.1</span><span class="meta">.2</span>      pkgconfig_2<span class="meta">.0</span><span class="meta">.1</span>   mnormt_1<span class="meta">.5</span>-<span class="number">5</span>     </div><div class="line">## [<span class="number">34</span>] htmltools_0<span class="meta">.3</span><span class="meta">.6</span>   tidyselect_0<span class="meta">.2</span><span class="meta">.4</span>  gridExtra_2<span class="meta">.3</span>    </div><div class="line">## [<span class="number">37</span>] viridisLite_0<span class="meta">.3</span><span class="meta">.0</span> crayon_1<span class="meta">.3</span><span class="meta">.4</span>      withr_2<span class="meta">.1</span><span class="meta">.2</span>      </div><div class="line">## [<span class="number">40</span>] MASS_7<span class="meta">.3</span>-<span class="number">49</span>       grid_3<span class="meta">.5</span><span class="meta">.0</span>        nlme_3<span class="meta">.1</span>-<span class="number">137</span>     </div><div class="line">## [<span class="number">43</span>] jsonlite_1<span class="meta">.5</span>      gtable_0<span class="meta">.2</span><span class="meta">.0</span>      magrittr_1<span class="meta">.5</span>     </div><div class="line">## [<span class="number">46</span>] units_0<span class="meta">.5</span>-<span class="number">1</span>       scales_0<span class="meta">.5</span><span class="meta">.0</span>      cli_1<span class="meta">.0</span><span class="meta">.0</span>        </div><div class="line">## [<span class="number">49</span>] stringi_1<span class="meta">.1</span><span class="meta">.7</span>     mapproj_1<span class="meta">.2</span><span class="meta">.6</span>     reshape2_1<span class="meta">.4</span><span class="meta">.3</span>   </div><div class="line">## [<span class="number">52</span>] viridis_0<span class="meta">.5</span><span class="meta">.1</span>     sp_1<span class="meta">.2</span>-<span class="number">7</span>          xml2_1<span class="meta">.2</span><span class="meta">.0</span>       </div><div class="line">## [<span class="number">55</span>] rjson_0<span class="meta">.2</span><span class="meta">.19</span>      tools_3<span class="meta">.5</span><span class="meta">.0</span>       glue_1<span class="meta">.2</span><span class="meta">.0</span>       </div><div class="line">## [<span class="number">58</span>] tweenr_0<span class="meta">.1</span><span class="meta">.5</span>      jpeg_0<span class="meta">.1</span>-<span class="number">8</span>        hms_0<span class="meta">.4</span><span class="meta">.2</span>        </div><div class="line">## [<span class="number">61</span>] parallel_3<span class="meta">.5</span><span class="meta">.0</span>    yaml_2<span class="meta">.1</span><span class="meta">.19</span>       colorspace_1<span class="meta">.3</span>-<span class="number">2</span> </div><div class="line">## [<span class="number">64</span>] rvest_0<span class="meta">.3</span><span class="meta">.2</span>       knitr_1<span class="meta">.20</span>        bindr_0<span class="meta">.1</span><span class="meta">.1</span>      </div><div class="line">## [<span class="number">67</span>] haven_1<span class="meta">.1</span><span class="meta">.1</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
+<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>R语言爱好者，爱开源</p>
+
+      
+    </div>
+<div>
+      
+        
+      
+</div>
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/8cG2gjfiDL.png?imageslim" >
+<br/>
+<p style="font-size: 15px;line-height: 30px"><a href="https://ytlogos.github.io" style="color:#258FC6">Logos</a> by <a href="https://ytlogos.github.io" style="color:#258FC6">Tao Yan</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br/>
+由<a href="https://ytlogos.github.io" style="color:#258FC6">严涛</a>创作并维护的<a href="https://ytlogos.github.io" style="color:#258FC6">Logos</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br/>
+本文首发于<a href="https://ytlogos.github.io" style="color:#258FC6">Logos</a> 博客（ <a href="https://ytlogos.github.io" style="color:#258FC6">https://ytlogos.github.io</a> ），版权所有，侵权必究。</p>
+</div>
+</div>
+
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得文章不错，请作者喝杯咖啡！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/jGLlL0g4aH.png?imageslim" alt="TaoYan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/EBfhf7e6lG.png?imageslim" alt="TaoYan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/map/" rel="tag"><i class="fa fa-tag"></i> map</a>
+          
+            <a href="/tags/ggraph/" rel="tag"><i class="fa fa-tag"></i> ggraph</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/Linux之数据呈现/" rel="next" title="Linux之数据呈现">
+                <i class="fa fa-chevron-left"></i> Linux之数据呈现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/Kh4BagCbCG.png?imageslim"
+               alt="TaoYan" />
+          <p class="site-author-name" itemprop="name">TaoYan</p>
+           
+              <p class="site-description motion-element" itemprop="description">R&Data Science&Bioinformatics</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/YTLogos" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TaoYANLogos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://vip.biotrainee.com" title="生信技能树" target="_blank">生信技能树</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.sthda.com/english/" title="STHDA" target="_blank">STHDA</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sharpsightlabs.com" title="SHARP SIGHT LABS" target="_blank">SHARP SIGHT LABS</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://rosalind.info/problems/locations/" title="ROSALIND" target="_blank">ROSALIND</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.r-graph-gallery.com" title="R GRAPH GALLERY" target="_blank">R GRAPH GALLERY</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化"><span class="nav-number">2.</span> <span class="nav-text">可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：ggplot2"><span class="nav-number">2.1.</span> <span class="nav-text">方法一：ggplot2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：ggplot2-ggraph"><span class="nav-number">2.2.</span> <span class="nav-text">方法二：ggplot2+ggraph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三：图形叠加"><span class="nav-number">2.3.</span> <span class="nav-text">方法三：图形叠加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Info"><span class="nav-number">2.4.</span> <span class="nav-text">Info</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式："><span class="nav-number">3.</span> <span class="nav-text">联系方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人简介："><span class="nav-number">4.</span> <span class="nav-text">个人简介：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TaoYan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Logos.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ytlogos.github.io/2018/06/10/三种方法在地图上绘制网络图/';
+          this.page.identifier = '2018/06/10/三种方法在地图上绘制网络图/';
+          this.page.title = '三种方法在地图上绘制网络图';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Logos.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "true",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("eCk2SIn1qQv7950CURz6Ybz3-gzGzoHsz", "mh2NS9HEcotcPN5TBwwMAKSk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("eCk2SIn1qQv7950CURz6Ybz3-gzGzoHsz", "mh2NS9HEcotcPN5TBwwMAKSk");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css">
