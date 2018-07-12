@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlogos.github.io/"/>
-  <updated>2018-07-10T06:39:28.032Z</updated>
+  <updated>2018-07-12T09:21:03.922Z</updated>
   <id>https://ytlogos.github.io/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>改善R语言代码的5个小技巧</title>
+    <link href="https://ytlogos.github.io/2018/07/10/%E6%94%B9%E5%96%84R%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%845%E4%B8%AA%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>https://ytlogos.github.io/2018/07/10/改善R语言代码的5个小技巧/</id>
+    <published>2018-07-10T04:19:05.000Z</published>
+    <updated>2018-07-12T09:21:03.922Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180712/0m7AJLj3he.png?imageslim" alt="mark"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>这篇文章来源于<a href="https://twitter.com/drsimonj" target="_blank" rel="external">@drsimonj</a>的<a href="https://drsimonj.svbtle.com/five-simple-tricks-to-improve-your-r-cod" target="_blank" rel="external">博客</a></p>
+<h2 id="从1开始排序"><a href="#从1开始排序" class="headerlink" title="从1开始排序"></a>从1开始排序</h2><p>当使用冒号(:)创建序列时，尝试用<code>seq()</code>.<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># sequence a <span class="type">vector</span></div><div class="line">x &lt;- runif(<span class="number">10</span>)</div><div class="line">seq(x)</div><div class="line">##  [<span class="number">1</span>]  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span></div><div class="line"></div><div class="line">#sequence an <span class="type">integer</span></div><div class="line"></div><div class="line">seq(nrow(mtcars))</div><div class="line">##  [<span class="number">1</span>]  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span> <span class="number">16</span> <span class="number">17</span> <span class="number">18</span> <span class="number">19</span> <span class="number">20</span> <span class="number">21</span> <span class="number">22</span> <span class="number">23</span></div><div class="line">## [<span class="number">24</span>] <span class="number">24</span> <span class="number">25</span> <span class="number">26</span> <span class="number">27</span> <span class="number">28</span> <span class="number">29</span> <span class="number">30</span> <span class="number">31</span> <span class="number">32</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>冒号有时会产生意想不到的结果，它会在我们不注意的情况下产生各种问题，比如当我们对空向量的长度进行排序的时候：</p>
+</blockquote>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># empty vector</span></div><div class="line"><span class="keyword">x</span> = c()</div><div class="line"><span class="number">1</span>:<span class="keyword">length</span>(<span class="keyword">x</span>)</div><div class="line"><span class="comment">## [1] 1 0</span></div><div class="line"></div><div class="line">se<span class="string">q(x)</span></div><div class="line"><span class="comment">## integer(0)</span></div></pre></td></tr></table></figure>
+<p>利用<code>seq()</code>可以自动创建从1到对象长度的序列，这样就可以避免使用<code>length()</code></p>
+<h2 id="vcetor-而非c"><a href="#vcetor-而非c" class="headerlink" title="vcetor()而非c()"></a><code>vcetor()</code>而非<code>c()</code></h2><p>创建空向量的时候，尝试使用<code>vector(&quot;type&quot;, length)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># a numeric vector with 5 elements</div><div class="line">vector(&quot;numeric&quot;, 10)</div><div class="line">##  [1] 0 0 0 0 0 0 0 0 0 0</div><div class="line"></div><div class="line">#a character vector with 5 elements</div><div class="line">vector(&quot;character&quot;, 5)</div><div class="line">## [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</div></pre></td></tr></table></figure>
+<p>使用<code>vector()</code>可以提高内存使用率并提高运行速度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">n &lt;- 1e05</div><div class="line">x_empty &lt;- c()</div><div class="line">system.time(</div><div class="line">  for (i in seq(n))&#123;</div><div class="line">    x_empty &lt;- c(x_empty,i)</div><div class="line">  &#125;</div><div class="line">)</div><div class="line">##    user  system elapsed </div><div class="line">##    9.69    0.03    9.97</div><div class="line">n &lt;- 1e05</div><div class="line">x_zeros &lt;- vector(&quot;integer&quot;, n)</div><div class="line">system.time(</div><div class="line">  for (i in seq(n))&#123;</div><div class="line">    x_zeros[i] &lt;- i</div><div class="line">  &#125;</div><div class="line">)</div><div class="line">##    user  system elapsed </div><div class="line">##       0       0       0</div></pre></td></tr></table></figure>
+<h2 id="放弃which"><a href="#放弃which" class="headerlink" title="放弃which()"></a>放弃<code>which()</code></h2><p>使用R语言的时候，我们常常使用<code>which()</code>从某个布尔条件中获取索引，然后根据索引提取数据,其实没有必要使用<code>which()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#obtain elements greater than 5</div><div class="line">x &lt;- 3:7</div><div class="line">#use which (not necessary)</div><div class="line">x[which(x&gt;5)]</div><div class="line">## [1] 6 7</div><div class="line">#no which</div><div class="line">x[x&gt;5]</div><div class="line">## [1] 6 7</div></pre></td></tr></table></figure>
+<p>或者计算大于5的元素个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#use which</div><div class="line">length(which(x&gt;5))</div><div class="line">## [1] 2</div><div class="line"># no which</div><div class="line">sum(x&gt;5)</div><div class="line">## [1] 2</div></pre></td></tr></table></figure></p>
+<p>实际上我们需要的是布尔值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">condition &lt;- x&gt;5</div><div class="line">condition</div><div class="line">## [1] FALSE FALSE FALSE  TRUE  TRUE</div><div class="line">x[condition]</div><div class="line">## [1] 6 7</div></pre></td></tr></table></figure></p>
+<p>当与<code>sum()</code>或者<code>mean()</code>结合使用时，可以用布尔值来获取满足条件的值的计数或比例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sum(condition)</div><div class="line">## [1] 2</div><div class="line">mean(condition)</div><div class="line">## [1] 0.4</div></pre></td></tr></table></figure>
+<p>但是<code>which()</code>可以告诉我们TRUE值的索引号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">which(condition)</div><div class="line">## [1] 4 5</div></pre></td></tr></table></figure>
+<p>测试任何或者所有的值是否为真，可以利用<code>any()</code>和<code>all()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">set.seed(23)</div><div class="line">x &lt;- runif(10)</div><div class="line">if (length(which(x&gt;0.5))&gt;0)</div><div class="line">  print(&quot;At least one value is greater than 0.5&quot;)</div><div class="line">## [1] &quot;At least one value is greater than 0.5&quot;</div><div class="line"></div><div class="line">if (any(x&gt;0.5))</div><div class="line">  print(&quot;At least one value is greater than 0.5&quot;)</div><div class="line">## [1] &quot;At least one value is greater than 0.5&quot;</div><div class="line"></div><div class="line">#use which and length to test if all values are less than 1</div><div class="line">if (length(which(x&lt;1))==length(x))</div><div class="line">  print(&quot;All values are less than 1&quot;)</div><div class="line">## [1] &quot;All values are less than 1&quot;</div><div class="line"></div><div class="line">if (all(x&lt;1))</div><div class="line">  print(&quot;All values are less than 1&quot;)</div><div class="line">## [1] &quot;All values are less than 1&quot;</div></pre></td></tr></table></figure>
+<p>另外一点是可以节省时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">x &lt;- runif(1e8)</div><div class="line"></div><div class="line">system.time(x[which(x &gt; .5)])</div><div class="line">##    user  system elapsed </div><div class="line">##    1.24    0.09    1.33</div><div class="line">system.time(x[x &gt; .5])</div><div class="line">##    user  system elapsed </div><div class="line">##    0.97    0.14    1.13</div></pre></td></tr></table></figure>
+<h2 id="factor你的变量"><a href="#factor你的变量" class="headerlink" title="factor你的变量"></a><code>factor</code>你的变量</h2><p>当移除一个元素之后，被移除的元素仍然占据着一个位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">set.seed(23)</div><div class="line">x &lt;-factor(sample(letters,5,replace = FALSE))</div><div class="line">x</div><div class="line">## [1] o f h q s</div><div class="line">## Levels: f h o q s</div><div class="line">plot(x)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180712/dK2i1bjhG4.png?imageslim" alt="mark"></p>
+<p>移除<strong>s</strong>之后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- x[x!=&quot;s&quot;]</div><div class="line">x</div><div class="line">## [1] o f h q</div><div class="line">## Levels: f h o q s</div><div class="line">plot(x)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180712/eAb8d887iA.png?imageslim" alt="mark"></p>
+<p>一种解决办法是再次<code>factor()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- factor(x)</div><div class="line">x</div><div class="line">## [1] o f h q</div><div class="line">## Levels: f h o q</div><div class="line">plot(x)</div></pre></td></tr></table></figure></p>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180712/HId1H0ICc0.png?imageslim" alt="mark"></p>
+<p>另外一种方法是利用<code>droplevels()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">set.seed(23)</div><div class="line">x &lt;-factor(sample(letters,5,replace = FALSE))</div><div class="line">x &lt;- x[x!=&quot;s&quot;]</div><div class="line">x &lt;- droplevels(x)</div><div class="line">x</div><div class="line">## [1] o f h q</div><div class="line">## Levels: f h o q</div><div class="line">plot(x)</div></pre></td></tr></table></figure>
+<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180712/HId1H0ICc0.png?imageslim" alt="mark"></p>
+<h2 id="优先使用"><a href="#优先使用" class="headerlink" title="优先使用$"></a>优先使用$</h2><p>从data.frame中提取数据时，在行$之前指定列[</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#row first,column second - not ideal</div><div class="line">mtcars[mtcars$cyl==4, ]$hp</div><div class="line">##  [1]  93  62  95  66  52  65  97  66  91 113 109</div><div class="line">#column first, row second - much better</div><div class="line">mtcars$hp[mtcars$cyl==4]</div><div class="line">##  [1]  93  62  95  66  52  65  97  66  91 113 109</div></pre></td></tr></table></figure>
+<p>原因如下：</p>
+<ul>
+<li>尽量避免使用烦人的逗号</li>
+<li>提高运行速度</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># Simulate a data frame...</div><div class="line">n &lt;- 1e7</div><div class="line">d &lt;- data.frame(</div><div class="line">  a = seq(n),</div><div class="line">  b = runif(n)</div><div class="line">)</div><div class="line"></div><div class="line"># rows first, column second - not ideal</div><div class="line">system.time(d[d$b &gt; .5, ]$a)</div><div class="line">##    user  system elapsed </div><div class="line">##    0.47    0.00    0.47</div><div class="line"></div><div class="line"># column first, rows second - much better</div><div class="line">system.time(d$a[d$b &gt; .5])</div><div class="line">##    user  system elapsed </div><div class="line">##    0.11    0.00    0.11</div></pre></td></tr></table></figure>
+<h2 id="SessionInfo"><a href="#SessionInfo" class="headerlink" title="SessionInfo"></a>SessionInfo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">sessionInfo()</div><div class="line"></div><div class="line">## R version 3.5.1 (2018-07-02)</div><div class="line">## Platform: x86_64-w64-mingw32/x64 (64-bit)</div><div class="line">## Running under: Windows 10 x64 (build 16299)</div><div class="line">## </div><div class="line">## Matrix products: default</div><div class="line">## </div><div class="line">## locale:</div><div class="line">## [1] LC_COLLATE=Chinese (Simplified)_China.936 </div><div class="line">## [2] LC_CTYPE=Chinese (Simplified)_China.936   </div><div class="line">## [3] LC_MONETARY=Chinese (Simplified)_China.936</div><div class="line">## [4] LC_NUMERIC=C                              </div><div class="line">## [5] LC_TIME=Chinese (Simplified)_China.936    </div><div class="line">## </div><div class="line">## attached base packages:</div><div class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </div><div class="line">## </div><div class="line">## loaded via a namespace (and not attached):</div><div class="line">##  [1] compiler_3.5.1  backports_1.1.2 magrittr_1.5    rprojroot_1.3-2</div><div class="line">##  [5] tools_3.5.1     htmltools_0.3.6 yaml_2.1.19     Rcpp_0.12.17   </div><div class="line">##  [9] stringi_1.1.7   rmarkdown_1.10  knitr_1.20      stringr_1.3.1  </div><div class="line">## [13] digest_0.6.15   evaluate_0.10.1</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180712/0m7AJLj3he.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;head
+    
+    </summary>
+    
+      <category term="R语言" scheme="https://ytlogos.github.io/categories/R%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="tips" scheme="https://ytlogos.github.io/tags/tips/"/>
+    
+  </entry>
   
   <entry>
     <title>读取含有多个表头的数据</title>
@@ -1016,63 +1081,6 @@
     
     
       <category term="Brassica" scheme="https://ytlogos.github.io/tags/Brassica/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>生物信息学学习笔记（八）</title>
-    <link href="https://ytlogos.github.io/2018/03/07/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/"/>
-    <id>https://ytlogos.github.io/2018/03/07/生物信息学学习笔记（八）/</id>
-    <published>2018-03-07T13:19:05.000Z</published>
-    <updated>2018-03-21T03:27:44.135Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180309/E3bGF58F5a.png?imageslim" alt="mark"></p>
-<ul>
-<li>WRKY转录因子是高等植物中10个最大的转录因子家族之一，其N-末端含有高度保守的WRKYGQK氨基酸序列。WRKY蛋白的N-端均含有1个或两个由近60个氨基酸组成的WRKY结构域，C-端均含有1个锌指结构，二者是WRKY特异性与启动子中W-box序列（C/T）TGAC（T/C）结合必不可少的组件，其中WRKY结构域中含有一段高度保守的WRKYGQK七肽序列（或者为WRKYGEK、WRKYGKK）。</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>作为转录因子，WRKY蛋白参与对细胞内特定基因的转录调控，从而产生相应的细胞反应来应对不同的外界刺激，这些刺激包括非生物胁迫和生物胁迫。WRKY转录因子也广泛参与调控植物的生长发育过程，如种子发育过程、胚胎形成、叶片衰老和新陈代谢等过程。</p>
-</li>
-<li><p>调控开花的四条信号途径</p>
-<ul>
-<li>光周期途径</li>
-<li>春化途径</li>
-<li>自主途径</li>
-<li>赤霉素(GA)途径</li>
-</ul>
-</li>
-</ul>
-<p>光周期途径：光周期途径中相关基因的突变体，仅在光照条件下开花时间延迟<br>春化途径：通过抑制开花抑制子FLC的转录,从而促进开花<br>自主途径：独立于光周期途径，使得那些在长光照下迅速开花的植物如拟南芥在短光照条件下最终也能开花。自主途径中的相关复合物通过限制FLC mRNA的积累，从而促使开花<br>GA途径：GA合成及GA信号转导相关的突变体，在短光照条件下，开花会延迟很长时间，说明在没有长光照促使开花的条件下，GA是一种刺激植物开花的重要物质</p>
-<blockquote>
-<p>四条途径可以独立调控开花过程，但是它们有着共同的下游目标基因CO和FLC。位于CO和FLC下游的开花整合因子FT、LFY和SOC1，通过整合开花途径输出的信号，激活花分生组织特异性基因LFY和APl的表达，从而启动开花。其中FT是一个长距离信号，其蛋白通过韧皮部从叶片(伴胞细胞)转移到茎端，与FD蛋白相互作用，激活APl的表达。LFY既是开花时间基因，又是花分生组织特性基因，直接调控靶基因APl的表达。SOC1受四条开花途径的正调控，并认为可能是四条开花途径的一个整合子。SOC1可被CO的过量表达诱导和FT的过量表达快速激活。</p>
-<p>WRKY蛋白质通过特异性结合靶基因启动子区域的(T)TGAC(C/T)(W-box)序列来调控相应基因的表达，从而在植物生长发育、形态建成、物质代谢和耐逆抗病等方面发挥生物学功能。</p>
-</blockquote>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180309/E3bGF58F5a.png?imageslim" alt="mark"></p>
-<p>关于cDNA和CDS以及ORF的区别<br>mRNA是由编码区(CDS)、上游的5’和下游的3’非编码区组成，真核生物的mRNA的5’端带有7-甲基鸟苷-三磷酸帽子结构，3’端有多腺苷酸尾巴，但是NCBI中的mRNA序列实际上是cDNA序列，即经过反转录得到的与RNA序列互补的DNA序列，一般不包括3’多腺苷酸尾巴。一个cDNA序列被称为一个转录子，第一个碱基所在的位置为转录起始位点(TSS)，cDNA都是由外显子组成，但是编码蛋白质的外显子只有一个，即CDS(Coding Sequence)，这段序列也就是一个ORF区，也就是这个cDNA的ORF序列，参与特定基因转录及其调控的TSS上游序列称为启动子。</p>
-<blockquote>
-<p>5’UTR-CDS-3’UTR=cDNA,cDNA包含CDS</p>
-</blockquote>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180313/hlEH5EmfIJ.png?imageslim" alt="mark"></p>
-<p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180313/KCeLhe4gli.png?imageslim" alt="mark"></p>
-<hr>
-<h2 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h2><p>wechat: yt056410<br>Email: tyan@zju.edu.cn<br>QQ: 1051927088<br>GitHub: <a href="https://github.com/YTLogos" target="_blank" rel="external">https://github.com/YTLogos</a><br>JianShu: <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" rel="external">http://www.jianshu.com/u/bd001545cf0b</a><br>Blog: <a href="https://ytlogos.github.io/">https://ytlogos.github.io/</a></p>
-<h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>严涛<br>浙江大学作物遗传育种在读研究生<br>伪码农，R语言爱好者，爱开源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ov520p4qw.bkt.clouddn.com/ytlogos/180309/E3bGF58F5a.png?imageslim&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;WRKY转录因子是高等植物中10个最大的转录因子家族之一，其N-末端含有高度保守的WRKYGQK氨基酸序列。WRKY蛋白的N-端均含有1个或两个由近60个氨基酸组成的WRKY结构域，C-端均含有1个锌指结构，二者是WRKY特异性与启动子中W-box序列（C/T）TGAC（T/C）结合必不可少的组件，其中WRKY结构域中含有一段高度保守的WRKYGQK七肽序列（或者为WRKYGEK、WRKYGKK）。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="bioinformatics" scheme="https://ytlogos.github.io/categories/bioinformatics/"/>
-    
-    
-      <category term="转录因子" scheme="https://ytlogos.github.io/tags/%E8%BD%AC%E5%BD%95%E5%9B%A0%E5%AD%90/"/>
     
   </entry>
   
