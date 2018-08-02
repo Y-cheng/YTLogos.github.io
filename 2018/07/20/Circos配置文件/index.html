@@ -1,0 +1,1646 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="circos," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Logos" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Circos的配置文件准备Circos的使用主要通过输入一个配置文件，改配置文件的主要内容以各种区块表示，大区块中可以包含小区快。区块中以”变量=值”的方式来进行参数的设定： 123456789101112&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;  file = data/set1.txt  color = black  ...&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;  fi">
+<meta name="keywords" content="circos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Circos配置文件">
+<meta property="og:url" content="https://ytlogos.github.io/2018/07/20/Circos配置文件/index.html">
+<meta property="og:site_name" content="Logos">
+<meta property="og:description" content="Circos的配置文件准备Circos的使用主要通过输入一个配置文件，改配置文件的主要内容以各种区块表示，大区块中可以包含小区快。区块中以”变量=值”的方式来进行参数的设定： 123456789101112&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;  file = data/set1.txt  color = black  ...&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;  fi">
+<meta property="og:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180802/CAl9leklEG.png?imageslim">
+<meta property="og:updated_time" content="2018-08-02T05:58:50.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Circos配置文件">
+<meta name="twitter:description" content="Circos的配置文件准备Circos的使用主要通过输入一个配置文件，改配置文件的主要内容以各种区块表示，大区块中可以包含小区快。区块中以”变量=值”的方式来进行参数的设定： 123456789101112&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;  file = data/set1.txt  color = black  ...&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;  fi">
+<meta name="twitter:image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/180802/CAl9leklEG.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ytlogos.github.io/2018/07/20/Circos配置文件/"/>
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+  <title>Circos配置文件 | Logos</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'true', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+  <a href="https://github.com/YTLogos"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Logos</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay hungry,Stay foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ytlogos.github.io/2018/07/20/Circos配置文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TaoYan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/Kh4BagCbCG.png?imageslim">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Logos">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Circos配置文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T18:19:05+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-02T13:58:50+08:00">
+                2018-08-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/可视化/" itemprop="url" rel="index">
+                    <span itemprop="name">可视化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/20/Circos配置文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/20/Circos配置文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/20/Circos配置文件/" class="leancloud_visitors" data-flag-title="Circos配置文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				  <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,215
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/180802/CAl9leklEG.png?imageslim" alt="mark"></p>
+<h2 id="Circos的配置文件准备"><a href="#Circos的配置文件准备" class="headerlink" title="Circos的配置文件准备"></a>Circos的配置文件准备</h2><p>Circos的使用主要通过输入一个配置文件，改配置文件的主要内容以各种区块表示，大区块中可以包含小区快。区块中以”变量=值”的方式来进行参数的设定：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;links&gt;</div><div class="line">&lt;<span class="keyword">link</span>&gt;</div><div class="line">  file = <span class="built_in">data</span>/set1.txt</div><div class="line">  color = black</div><div class="line">  <span class="params">...</span></div><div class="line">&lt;/<span class="keyword">link</span>&gt;</div><div class="line">&lt;<span class="keyword">link</span>&gt;</div><div class="line">  file = <span class="built_in">data</span>/set2.txt</div><div class="line">  color = red</div><div class="line">  <span class="params">...</span></div><div class="line">&lt;/<span class="keyword">link</span>&gt;</div><div class="line">&lt;/links&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>有些配置文件不需要改动，比如颜色、字体等，一般将这类信息保存到一个独立的配置文件中。只需要在主配置文件中声明包含这些独立的配置文件名及其路径，即表示使用这些配置信息。最常用的放置到主配置文件尾部的数行</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="设置生成的图片参数"><a href="#设置生成的图片参数" class="headerlink" title="设置生成的图片参数"></a>设置生成的图片参数</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="built_in">image</span>&gt;</div><div class="line">&lt;&lt;include etc/<span class="built_in">image</span>.conf&gt;&gt;</div><div class="line">&lt;/<span class="built_in">image</span>&gt;</div></pre></td></tr></table></figure>
+<h3 id="设置颜色、字体、填充模式的配置信息、"><a href="#设置颜色、字体、填充模式的配置信息、" class="headerlink" title="设置颜色、字体、填充模式的配置信息、"></a>设置颜色、字体、填充模式的配置信息、</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;&lt;<span class="keyword">include</span> etc/colors_fonts_patterns.conf<span class="meta">&gt;&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="系统与debug参数"><a href="#系统与debug参数" class="headerlink" title="系统与debug参数"></a>系统与debug参数</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;&lt;<span class="keyword">include</span> etc/housekeeping.conf<span class="meta">&gt;&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="Circos的使用参数"><a href="#Circos的使用参数" class="headerlink" title="Circos的使用参数"></a>Circos的使用参数</h2><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">version</span></div><div class="line">查询Circos版本</div><div class="line">-<span class="ruby">modules</span></div><div class="line">检测perl模块</div><div class="line">-<span class="ruby">conf &lt;string&gt;</span></div><div class="line">输入主文件配置</div><div class="line">-<span class="ruby">outputdir &lt;string&gt;</span></div><div class="line">设置输出文件名，该参数的值以.png为后缀</div><div class="line">-<span class="ruby">svg</span></div><div class="line">生成svg结果文件</div><div class="line">-<span class="ruby">nosvg</span></div><div class="line">不生成svg结果文件</div></pre></td></tr></table></figure>
+<h2 id="Circos配置文件详解"><a href="#Circos配置文件详解" class="headerlink" title="Circos配置文件详解"></a>Circos配置文件详解</h2><h3 id="ideogram-block显示染色体"><a href="#ideogram-block显示染色体" class="headerlink" title="ideogram block显示染色体"></a>ideogram block显示染色体</h3><p>将染色体在圈图上展示出来，代表每个染色体的图形，称为ideogram。将以下配置信息放入一个单独的配置文件中，命名为ideogram.conf</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;ideogram&gt;</div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设定ideogram之间的间隙</span></span></div><div class="line">  &lt;spacing&gt;</div><div class="line"><span class="meta">  #</span><span class="bash">设置圈图染色体之间的间隙大小，以下设置为每个间隙大小为周长的0.5%</span></div><div class="line">  default = 0.005r</div><div class="line"><span class="meta">#</span><span class="bash">也可以设置指定的两条染色体之间的间隙</span></div><div class="line"><span class="meta">  #</span><span class="bash">&lt;pairwise chrA01;chrA02&gt;</span></div><div class="line"><span class="meta">  #</span><span class="bash">以下设定为两条染色体之间的间隙为圆的20度角</span></div><div class="line"><span class="meta">  #</span><span class="bash">spacing = 20r</span></div><div class="line"><span class="meta">  #</span><span class="bash">&lt;/pairwise&gt;</span></div><div class="line">&lt;/spacing&gt;</div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#设定ideogram</span></span></div><div class="line"><span class="meta">#</span><span class="bash">设定ideogram的位置，一下设定为ideograms在图离圆心的90%处</span></div><div class="line">radius = 0.90r</div><div class="line"><span class="meta">#</span><span class="bash">设定ideograms是否填充颜色。填充的颜色取决于karyotype指定的文件的最后一列</span></div><div class="line">fill = yes</div><div class="line"><span class="meta">#</span><span class="bash">设定ideograms轮廓的颜色及其厚度。如果没有该参数或设定其厚度为0，则表示没有轮廓</span></div><div class="line">stroke_color = dgrey</div><div class="line">stroke_thickness = 2p</div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 设定label的显示信息</span></span></div><div class="line"><span class="meta">#</span><span class="bash">设定是否显示label，label对应着karyotype文件的第四列，如果其值为yes，则必须要有label_radius参数来设定label的位置，否则会报错无法生成结果</span></div><div class="line">show_label = yes</div><div class="line"><span class="meta">#</span><span class="bash"> 设定label的字体</span></div><div class="line">label_font = default</div><div class="line"><span class="meta">#</span><span class="bash"> 设定label字体大小</span></div><div class="line">label_size = 40</div><div class="line"><span class="meta">#</span><span class="bash"> 设定label的字体方向，yes是易于浏览的方向</span></div><div class="line">label_parallel = yes</div><div class="line">&lt;/ideogram&gt;</div></pre></td></tr></table></figure>
+<h3 id="ticks-block以刻度形式显示染色体大小"><a href="#ticks-block以刻度形式显示染色体大小" class="headerlink" title="ticks block以刻度形式显示染色体大小"></a>ticks block以刻度形式显示染色体大小</h3><p>将染色体的大小以刻度的形式在圈图上展示出来，将以下配置信息放入到一个独立的配置文件中，命名为ticks.conf</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#是否显示ticks</span></div><div class="line">show_ticks = yes</div><div class="line"><span class="comment">#是否显示ticks的labels</span></div><div class="line">show_ticks_labels = yes</div><div class="line"><span class="comment">#设定ticks</span></div><div class="line">&lt;ticks&gt;</div><div class="line"><span class="comment">##ticks的设置</span></div><div class="line"><span class="comment">#设定ticks的位置</span></div><div class="line">radius = 1r</div><div class="line"><span class="comment">#设置ticks的颜色</span></div><div class="line">color = black</div><div class="line"><span class="comment">#设置ticks的厚度</span></div><div class="line">thickness = 2p</div><div class="line"><span class="comment">#设置ticks'label的值的计算，将改刻度对应的值*multiplier得到展示到圈图上的label值</span></div><div class="line">multiplier = 1e-6</div><div class="line"><span class="comment">#label值的格式化方法，%d表示结果为整数；%f表示结果为浮点数；%.nf表示结果保留小数点后n位</span></div><div class="line">format = %d</div><div class="line"><span class="comment">## 以下设置了2个ticks，前者是小刻度，后者是大刻度</span></div><div class="line">&lt;tick&gt;</div><div class="line"><span class="comment">#设置每个刻度代表的长度，若其单位为u，则必须要设置chromosome_units参数，比如设置chromosome_units=1000000,则如下5u表示每个刻度代表5M长度的基因组序列</span></div><div class="line">spacing = 5u</div><div class="line"><span class="comment">#设置tick的长度</span></div><div class="line">size = 10p</div><div class="line">&lt;/tick&gt;</div><div class="line">&lt;tick&gt;</div><div class="line">spacing = 25u</div><div class="line">size = 15p</div><div class="line"><span class="comment">#由于设置的是大刻度，以下用于设置展示ticks'label</span></div><div class="line">show_label = yes</div><div class="line"><span class="comment">#设置ticks'label字体大小</span></div><div class="line">label_size= 20p</div><div class="line"><span class="comment">#设置ticks'label离ticks的距离</span></div><div class="line">label_offset = 10p</div><div class="line">format = %d</div><div class="line">&lt;/tick&gt;</div><div class="line">&lt;/ticks&gt;</div></pre></td></tr></table></figure>
+<h3 id="links-block以曲线连接显示基因组内部之间的联系"><a href="#links-block以曲线连接显示基因组内部之间的联系" class="headerlink" title="links block以曲线连接显示基因组内部之间的联系"></a>links block以曲线连接显示基因组内部之间的联系</h3><p>基因组内部不同的序列区域之间有联系，将之使用线条进行连接，从而展示到圈图上，常见的是重复序列之间的连接，将以下配置信息放入到一个独立的配置文件中，命名为links.conf</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&lt;links&gt;</div><div class="line">&lt;link&gt;</div><div class="line"><span class="comment">#指定link文件的路径，其文件格式为：</span></div><div class="line"><span class="comment"># chr1 start end chr2 start end</span></div><div class="line"><span class="comment"># chrA01 1 10 chrC01 10 45</span></div><div class="line"><span class="comment">#表明这两条染色体区域有联系，例如这个区域的序列长度&gt;1kb且序列相似性&gt;=90%</span></div><div class="line">file = data/segdup.txt</div><div class="line"><span class="comment">#设置link曲线的半径</span></div><div class="line">radius = 0.8r</div><div class="line"><span class="comment">#设置贝塞尔曲线半径，该值越大曲线越扁平，不好看</span></div><div class="line">bezier_radius = 0r</div><div class="line"><span class="comment">#设置link曲线的颜色</span></div><div class="line">color = black_a4</div><div class="line"><span class="comment">#设置link曲线的厚度</span></div><div class="line">thickness = 2</div><div class="line">&lt;rules&gt;</div><div class="line"><span class="comment">#以下可以设置多个rule，用来对link文件的每一行进行过滤或展示进行设定。每个rule都有一个condition参数，如果该condition为真，执行该block的内容，除非flow=continue，则不执行，检测下一个rule</span></div><div class="line"><span class="comment">#下面如果link文件中该行数据是染色体内部的link，则不进行展示</span></div><div class="line">&lt;rule&gt;</div><div class="line">condition = var(intrachr)</div><div class="line">show = no</div><div class="line">&lt;/rule&gt;</div><div class="line"><span class="comment">#设置link曲线的颜色与ideogram的颜色一致，否则为统一的颜色</span></div><div class="line">&lt;rule&gt;</div><div class="line"><span class="comment">#若condition为真，则执行该block的内容</span></div><div class="line">condition = 1</div><div class="line"><span class="comment">#设置link曲线的颜色为第二条染色体的颜色，对应着link文件中第四列数据对应的染色体的名称</span></div><div class="line">color = eval(var(chrC02))</div><div class="line"><span class="comment">#虽然condition为真，但依然检测下一个rule</span></div><div class="line">flow = continue</div><div class="line">&lt;/rule&gt;</div><div class="line"><span class="comment">#如果link起始于chrA01，则其link曲线半径为0.99r</span></div><div class="line">&lt;rule&gt;</div><div class="line">contidition = from(chrA01)</div><div class="line">radius1 = 0.99r</div><div class="line">&lt;/rule&gt;</div><div class="line"><span class="comment">#如果link结束于chrC01，则其link曲线半径为0.99r</span></div><div class="line">&lt;rule&gt;</div><div class="line">condition = to(chrC01)</div><div class="line">radius2 = 0.99r</div><div class="line">&lt;/rule&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line">&lt;/link&gt;</div><div class="line">&lt;/links&gt;</div></pre></td></tr></table></figure>
+<h3 id="plots-block以直方图形式展示数据"><a href="#plots-block以直方图形式展示数据" class="headerlink" title="plots block以直方图形式展示数据"></a>plots block以直方图形式展示数据</h3><p>将基因组序列中的GC含量、表达量等以直方图的形式在圈图中展示出来，将以下配置信息放入到一个单独的配置文件中，命名为plots_histogram.conf，下面绘制了两个直方图，并分别添加背景或网格线。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">&lt;plot&gt;</div><div class="line"><span class="comment">#设定直方图</span></div><div class="line">type = histogram</div><div class="line"><span class="comment">#数据文件路径，4列</span></div><div class="line"><span class="comment">#chromosome start end data</span></div><div class="line"><span class="comment"># chrA01 0 2000000 155.0000</span></div><div class="line">file = data/Bna1234.hist.txt</div><div class="line"><span class="comment">#设置直方图的位置，r1要比r0大，直方图的方向默许为向外</span></div><div class="line">r1 = 0.88r</div><div class="line">r0 = 0.81r</div><div class="line"><span class="comment">#直方图的填充颜色</span></div><div class="line">fill_color = vdgrey</div><div class="line"><span class="comment">#默认下直方图轮廓厚度为1px，若不需要轮廓，将其设置为9，或者直接在etc/tracks/histogram.conf中修改</span></div><div class="line">thickness = 0p</div><div class="line"><span class="comment">#直方图是由bins所构成的，若bins在坐标轴上不相连，最好设置不要将其bins连接到一起，例如：</span></div><div class="line"><span class="comment"># chrA01 10 20 0.5</span></div><div class="line"><span class="comment"># chrA01 30 40 0.25</span></div><div class="line"><span class="comment">#上述数据设置值为yes和no时，图形是不一样的</span></div><div class="line">extend_bin = no</div><div class="line"><span class="comment">#以下添加rule，不在chrA01上添加直方图</span></div><div class="line">&lt;rules&gt;</div><div class="line">&lt;&lt;<span class="keyword">include</span> exclude.chrA01.rule&gt;&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line"><span class="comment">#设置直方图的背景颜色</span></div><div class="line">&lt;backgrounds&gt;</div><div class="line">show = data</div><div class="line">&lt;background&gt;</div><div class="line">color = vvlgrey</div><div class="line">&lt;/background&gt;</div><div class="line">&lt;background&gt;</div><div class="line">color = vlgrey</div><div class="line">y0 = 0.2r</div><div class="line">y1 = 0.5r</div><div class="line">&lt;/background&gt;</div><div class="line">&lt;background&gt;</div><div class="line">color = lgrey</div><div class="line">y0 = 0.5r</div><div class="line">y1 = 0.8r</div><div class="line">&lt;/background&gt;</div><div class="line">&lt;background&gt;</div><div class="line">color = grey</div><div class="line">y0 = 0.8r</div><div class="line">&lt;/background&gt;</div><div class="line">&lt;/backgrounds&gt;</div><div class="line">&lt;/plot&gt;</div><div class="line">&lt;plot&gt;</div><div class="line">type = histogram</div><div class="line"><span class="comment">#此处直方图的数据文件第4列是由多个由逗号分隔的数值，需要制作叠加的直方图</span></div><div class="line">file = data/Bna.stacked.txt</div><div class="line">r1 = 0.99r</div><div class="line">r0 = 0.92r</div><div class="line"><span class="comment">#给4个值按顺序填充不同的颜色</span></div><div class="line">fill_color = chrA01,chrA02,chrA03,chrA04</div><div class="line">thickness = 0p</div><div class="line">orientation = in</div><div class="line">extend_bin = no</div><div class="line">&lt;rules&gt;</div><div class="line">&lt;&lt;<span class="keyword">include</span> exclude.chrA01.rule&gt;&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line"><span class="comment">#在直方图中添加坐标网格线</span></div><div class="line">&lt;axes&gt;</div><div class="line">show = data</div><div class="line">thickness = 1</div><div class="line">color = lgrey</div><div class="line">&lt;axis&gt;</div><div class="line">spacing = 0.1r</div><div class="line">&lt;/axis&gt;</div><div class="line">&lt;axis&gt;</div><div class="line">spacing = 0.2r</div><div class="line">color = grey</div><div class="line">&lt;/axis&gt;</div><div class="line">&lt;axis&gt;</div><div class="line">position = 0.5r</div><div class="line">color = red</div><div class="line">&lt;/axis&gt;</div><div class="line">&lt;axis&gt;</div><div class="line">position = 0.85r</div><div class="line">color = green</div><div class="line">thickness = 2</div><div class="line">&lt;/axis&gt;</div><div class="line">&lt;/axes&gt;</div><div class="line">&lt;/plot&gt;</div></pre></td></tr></table></figure>
+<h3 id="plots-block以热图形式显示数据"><a href="#plots-block以热图形式显示数据" class="headerlink" title="plots block以热图形式显示数据"></a>plots block以热图形式显示数据</h3><p>基因组一个区域内有多组数据时，适合以热图的形式显示数据，比如基因表达量，将以下配置信息放入一个单独的配置文件中，命名为plots_heatmap.conf</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">&lt;plot&gt;</div><div class="line"><span class="comment">#绘制heatmap</span></div><div class="line"><span class="attr">type</span> = haetmap</div><div class="line"><span class="comment">#设置数据文件路径，文件有5列</span></div><div class="line"><span class="comment"># chrID start end data class</span></div><div class="line"><span class="comment"># chrA01 0 1999999 113.0000 id=chrA01</span></div><div class="line"><span class="comment"># chrA01 0 1999999 40.0000 id=chrA04</span></div><div class="line"><span class="comment"># chrA01 0 1999999 20.0000 id=chrA02</span></div><div class="line"><span class="comment"># chrA01 0 1999999 7.0000 id=chrA03</span></div><div class="line"><span class="attr">file</span> = data/Bna.heatmap.txt</div><div class="line"><span class="comment">#设置图形所处位置</span></div><div class="line"><span class="attr">r1</span> = <span class="number">0.89</span>r</div><div class="line"><span class="attr">r0</span> = <span class="number">0.88</span>r</div><div class="line"><span class="comment">#设置热图的颜色，颜色为chrA01，以及相应带不同透明程度的5中颜色</span></div><div class="line"><span class="attr">color</span> = chrA01_a5,chrA01_a4,chrA01_a3,chrA01_a2,chrA01_a1,chrA01</div><div class="line"><span class="comment">#设定scale_log_base参数，计算颜色的方法如下：</span></div><div class="line"><span class="comment"># f = (value - min)/(max - min)热图中每个方块代表着一个值，并给予相应的颜色标示，一系列的值[min,max]对应一系列的颜色c[n],i=0..N</span></div><div class="line"><span class="comment">#n=N*f**(1/scale_log_base)</span></div><div class="line"><span class="comment">#若scale_log_base = 1，则数值与颜色的变化是线性的</span></div><div class="line"><span class="comment">#若scale_log_base &gt; 1，则颜色向小方向靠近</span></div><div class="line"><span class="comment">#若scale_log_base &lt; 1，则颜色向大方向靠近</span></div><div class="line"><span class="attr">scale_log_base</span> = <span class="number">5</span></div><div class="line">&lt;rules&gt;</div><div class="line">&lt;&lt;include exclude.chrA01.rule&gt;&gt;</div><div class="line"><span class="comment">#仅显示id = chrA01的数据</span></div><div class="line">&lt;rule&gt;</div><div class="line"><span class="attr">condition</span> = var(id) ne <span class="string">"chrA01"</span></div><div class="line"><span class="attr">show</span> = no</div><div class="line">&lt;/rule&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line">&lt;plot&gt;</div><div class="line"> <span class="attr">type</span> = heatmap</div><div class="line"> <span class="attr">file</span> = data/Bna.heatmap.txt</div><div class="line"> <span class="attr">r1</span> = <span class="number">0.90</span>r</div><div class="line"> <span class="attr">r0</span> = <span class="number">0.89</span>r</div><div class="line"> <span class="attr">color</span> = chrA02_a5,chrA02_a4,chrA02_a3,chrA02_a2,chrA02_a1,chrA02</div><div class="line"> <span class="attr">scale_log_base</span> = <span class="number">5</span></div><div class="line">&lt;rules&gt;</div><div class="line"> &lt;&lt;include exclude.chrA01.rule&gt;&gt;</div><div class="line">&lt;rule&gt;</div><div class="line"> <span class="attr">condition</span> = var(id) ne <span class="string">"chrA02"</span></div><div class="line"> <span class="attr">show</span> = no</div><div class="line"> &lt;/rule&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line">&lt;/plot&gt;</div><div class="line">&lt;plot&gt;</div><div class="line"> <span class="attr">type</span> = heatmap</div><div class="line"> <span class="attr">file</span> = data/Bna.heatmap.txt</div><div class="line"> <span class="attr">r1</span> = <span class="number">0.91</span>r</div><div class="line"> <span class="attr">r0</span> = <span class="number">0.90</span>r</div><div class="line"> <span class="attr">color</span> = chrA03_a5,chrA03_a4,chrA03_a3,chrA03_a2,chrA03_a1,chrA03</div><div class="line"> <span class="attr">scale_log_base</span> = <span class="number">5</span></div><div class="line">&lt;rules&gt;</div><div class="line"> &lt;&lt;include exclude.chrA01.rule&gt;&gt;</div><div class="line">&lt;rule&gt;</div><div class="line"> <span class="attr">condition</span> = var(id) ne <span class="string">"chrA03"</span></div><div class="line"> <span class="attr">show</span> = no</div><div class="line"> &lt;/rule&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line">&lt;/plot&gt;</div><div class="line">&lt;plot&gt;</div><div class="line"> <span class="attr">type</span> = heatmap</div><div class="line"> <span class="attr">file</span> = data/Bna.heatmap.txt</div><div class="line"> <span class="attr">r1</span> = <span class="number">0.92</span>r</div><div class="line"> <span class="attr">r0</span> = <span class="number">0.91</span>r</div><div class="line"> <span class="attr">color</span> = chrA04_a5,chrA04_a4,chrA04_a3,chrA04_a2,chrA04_a1,chrA04</div><div class="line"> <span class="attr">scale_log_base</span> = <span class="number">5</span></div><div class="line">&lt;rules&gt;</div><div class="line"> &lt;&lt;include exclude.chrA01.rule&gt;&gt;</div><div class="line">&lt;rule&gt;</div><div class="line"> <span class="attr">condition</span> = var(id) ne <span class="string">"chrA04"</span></div><div class="line"> <span class="attr">show</span> = no</div><div class="line"> &lt;/rule&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line">&lt;/plot&gt;</div></pre></td></tr></table></figure>
+<h3 id="plots-block以文本形式显示数据"><a href="#plots-block以文本形式显示数据" class="headerlink" title="plots block以文本形式显示数据"></a>plots block以文本形式显示数据</h3><p>若需要在圈图上显示基因名称，需要以文本形式展示，将以下配置信息放入到一个单独的配置文件中，命名为plots_text.conf</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&lt;plot&gt;</div><div class="line"><span class="comment">#表示文字</span></div><div class="line">type = text</div><div class="line"><span class="comment">#数据文件路径</span></div><div class="line">file = data/Bnagene.labels.txt</div><div class="line"><span class="comment">#显示在图形中的位置</span></div><div class="line">r1 = 0.8r</div><div class="line">r0 = 0.6r</div><div class="line"><span class="comment">#标签的字体</span></div><div class="line">label_font = light</div><div class="line"><span class="comment">#标签大小</span></div><div class="line">label_size = 12p </div><div class="line"><span class="comment">#文字边缘的大小，设置较小则不同单词就可能会连在一块</span></div><div class="line"><span class="comment">#padding - text margin in angular direction</span></div><div class="line"><span class="comment">#rpadding - text margin in radial direction</span></div><div class="line">rpadding = 5p</div><div class="line"><span class="comment">#设置是否需要在label前加一条线用来指出label的位置</span></div><div class="line">show_links = no</div><div class="line">link_dims = 0p,2p,5p,2p,2p</div><div class="line">link_thickness = 2p</div><div class="line">link_color = black</div><div class="line">&lt;rules&gt;</div><div class="line">&lt;&lt;<span class="keyword">include</span> exclude.chrA01.rule&gt;&gt;</div><div class="line"><span class="comment">#设置rule，对label中含有字母a或b的特异性显示</span></div><div class="line">&lt;rule&gt;</div><div class="line">condition = var(value) =~ /a/i</div><div class="line">label_font = bold</div><div class="line">flow = continue</div><div class="line">&lt;/rule&gt;</div><div class="line">&lt;rule&gt;</div><div class="line">condition = var(value) =~ /b/i</div><div class="line">color = blue</div><div class="line">&lt;/rule&gt;</div><div class="line">&lt;/rules&gt;</div><div class="line">&lt;/plot&gt;</div></pre></td></tr></table></figure>
+<h3 id="rules-block放置常用的规则配置"><a href="#rules-block放置常用的规则配置" class="headerlink" title="rules block放置常用的规则配置"></a>rules block放置常用的规则配置</h3><p>上述配置文件中，很多track没有在1号染色体上展示，需要设置如下规则信息，将之写入到文件exclude.chrA01.rule中</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;rule&gt;</div><div class="line">condition = on(chrA01)</div><div class="line">show = no</div><div class="line">&lt;/rule&gt;</div></pre></td></tr></table></figure>
+<h3 id="主配置文件"><a href="#主配置文件" class="headerlink" title="主配置文件"></a>主配置文件</h3><p>在主配置文件circos.conf中，包含以上所有需要的配置文件信息，则可以会出所需要的track，此外，可以设置一些全局设置。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">#指定染色体组型的文件，该文件有<span class="number">7</span>列：</div><div class="line">#chr - ID LABEL START END COLOR</div><div class="line">#chr - chrA01 <span class="number">1</span> <span class="number">0</span> <span class="number">2154635789</span> chr1</div><div class="line">#chr - chrA02 <span class="number">2</span> <span class="number">0</span> <span class="number">2451545665</span> chr2</div><div class="line"></div><div class="line">karyotype = data/karyotype/karyotype.Bna.txt</div><div class="line">#设置长度单位，以下设置表示<span class="number">1</span>M长度的序列代表为<span class="number">1</span>u</div><div class="line">chromosomes_units = <span class="number">1000000</span></div><div class="line">#默认设置下是将karyotype文件中所有染色体都展示出来，当然也可以根据需要仅展示指定的染色体，使用如下的参数设置：</div><div class="line"></div><div class="line">chromosomes_display_default = no</div><div class="line">#以下参数设置指定的chromosome用于展示到圈图中，<span class="comment">//中是一个正则表达式，匹配的chromosomes用于展示到圈图中，其匹配的对象是karyotype文件中的第3列，也可以直接列出需要展示的chromosomes，例如：chrA01;chrA02;chrA03;chrA04;chrA05</span></div><div class="line"></div><div class="line">chromosomes = /chrA0[<span class="number">1</span><span class="number">-5</span>]$/</div><div class="line">#以下设置各个ideograms的大小，其总长度为<span class="number">1</span>，chrA01的长度为<span class="number">0.5</span>，chrA02,chrA03,chrA04这三条染色体的总长度为<span class="number">0.5</span>，并且这三条染色体的长度是均匀分布的，注意前者的单位是r，后者使用了正则表达式匹配多条染色体，其单位于是为rn</div><div class="line">chromosomes_scale = chrA01=<span class="number">0.5</span>r,/chrA0[<span class="number">234</span>]/=<span class="number">0.5</span>rn</div><div class="line">#使chrA02、chrA03和chrA04在圈图上展示的方向是相反的</div><div class="line">chromosomes_reverse = /chrA0[<span class="number">234</span>]/</div><div class="line">#设置各个ideograms的颜色</div><div class="line">chromosomes_color= chrA01=red,chrA02=orange,chrA03=green,chrA04=blue</div><div class="line">#默认下在ideogram block中统一shezhileideograms的位置，可以使用此参数调整指定ideograms的位置</div><div class="line">chromosomes_radius = chrA04:<span class="number">0.9</span>r</div><div class="line">#chromosomes_radius = chrA02:<span class="number">0.9</span>r;chrA03:<span class="number">0.8</span>r;chrA04:<span class="number">0.7</span>r</div><div class="line">#karyotype文件最后一行指定了各个chromosomes的颜色，而使用chromosomes_color参数也能修改颜色。使用如下方法进行颜色修改则更加直观，以下方式是对颜色重新定义。chr1,chr2,chr3,chr4对应着karyotype文件最后一行的值，代表着颜色的类型。此处使用color block来对其进行重新定义。注意重新定义的时候需要加符号*</div><div class="line">&lt;colors&gt;</div><div class="line">chr1* = red</div><div class="line">chr2* = orange</div><div class="line">chr3* = green</div><div class="line">chr4* = blue</div><div class="line">&lt;/colors&gt;</div><div class="line">###绘制plot图,将上述设置好的配置文件添加进来</div><div class="line">&lt;plots&gt;</div><div class="line">&lt;&lt;include plots_histogram.conf&gt;&gt;</div><div class="line">&lt;&lt;include plots_heatmap.conf&gt;&gt;</div><div class="line">&lt;&lt;include plots_text.conf&gt;&gt;</div><div class="line">&lt;/plots&gt;</div><div class="line">&lt;&lt;include ideogram.conf&gt;&gt;</div><div class="line">&lt;&lt;inlcude ticks.conf&gt;&gt;</div><div class="line">&lt;&lt;include links.conf&gt;&gt;</div><div class="line">#########################################################</div><div class="line">#插入必须的但不常修改的标准参数</div><div class="line">&lt;image&gt;</div><div class="line">&lt;&lt;include etc/image.conf&gt;&gt;</div><div class="line">&lt;/image&gt;</div><div class="line">&lt;&lt;include etc/color_fonts_pattern.conf&gt;&gt;</div><div class="line">&lt;&lt;include etc/housekeeping.conf&gt;&gt;</div></pre></td></tr></table></figure>
+<h3 id="使用Circos命令绘图"><a href="#使用Circos命令绘图" class="headerlink" title="使用Circos命令绘图"></a>使用Circos命令绘图</h3><p>先安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">#第一步先去官网下载最新版本</span></span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> circos</span></div><div class="line"><span class="meta">$</span><span class="bash"> tar zxf circos-tutorials-0.66.tgz</span></div><div class="line"><span class="meta">$</span><span class="bash"> mv data data.bak</span></div><div class="line"><span class="meta">$</span><span class="bash"> mv circos-tutorials-0.66/data/ ./</span></div></pre></td></tr></table></figure></p>
+<p>所有文件包括配置文件、数据文件等放置于当前目录文件夹中，运行circos绘图</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> ./bin/circos -conf circos.conf</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>这篇文章主要来自于<a href="https://www.plob.org/article/8424.html" target="_blank" rel="external">Circos的安装和简单使用</a>,可以说是十分详细了。当然最好的文档还是官方提供的文档<a href="http://circos.ca/" target="_blank" rel="external">Circos</a>。</p>
+</blockquote>
+
+      
+    </div>
+<div>
+      
+        
+      
+</div>
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/8cG2gjfiDL.png?imageslim" >
+<br/>
+<p style="font-size: 15px;line-height: 30px"><a href="https://ytlogos.github.io" style="color:#258FC6">Logos</a> by <a href="https://ytlogos.github.io" style="color:#258FC6">Tao Yan</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br/>
+由<a href="https://ytlogos.github.io" style="color:#258FC6">严涛</a>创作并维护的<a href="https://ytlogos.github.io" style="color:#258FC6">Logos</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br/>
+本文首发于<a href="https://ytlogos.github.io" style="color:#258FC6">Logos</a> 博客（ <a href="https://ytlogos.github.io" style="color:#258FC6">https://ytlogos.github.io</a> ），版权所有，侵权必究。</p>
+</div>
+</div>
+
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得文章不错，请作者喝杯咖啡！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/jGLlL0g4aH.png?imageslim" alt="TaoYan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/EBfhf7e6lG.png?imageslim" alt="TaoYan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/circos/" rel="tag"><i class="fa fa-tag"></i> circos</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/12/改善R语言代码的5个小技巧/" rel="next" title="改善R语言代码的5个小技巧">
+                <i class="fa fa-chevron-left"></i> 改善R语言代码的5个小技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ov520p4qw.bkt.clouddn.com/ytlogos/171017/Kh4BagCbCG.png?imageslim"
+               alt="TaoYan" />
+          <p class="site-author-name" itemprop="name">TaoYan</p>
+           
+              <p class="site-description motion-element" itemprop="description">R&Data Science&Bioinformatics</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/YTLogos" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TaoYANLogos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/bd001545cf0b" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://vip.biotrainee.com" title="生信技能树" target="_blank">生信技能树</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.sthda.com/english/" title="STHDA" target="_blank">STHDA</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sharpsightlabs.com" title="SHARP SIGHT LABS" target="_blank">SHARP SIGHT LABS</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://rosalind.info/problems/locations/" title="ROSALIND" target="_blank">ROSALIND</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.r-graph-gallery.com" title="R GRAPH GALLERY" target="_blank">R GRAPH GALLERY</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Circos的配置文件准备"><span class="nav-number">1.</span> <span class="nav-text">Circos的配置文件准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置生成的图片参数"><span class="nav-number">1.1.</span> <span class="nav-text">设置生成的图片参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置颜色、字体、填充模式的配置信息、"><span class="nav-number">1.2.</span> <span class="nav-text">设置颜色、字体、填充模式的配置信息、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统与debug参数"><span class="nav-number">1.3.</span> <span class="nav-text">系统与debug参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circos的使用参数"><span class="nav-number">2.</span> <span class="nav-text">Circos的使用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circos配置文件详解"><span class="nav-number">3.</span> <span class="nav-text">Circos配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ideogram-block显示染色体"><span class="nav-number">3.1.</span> <span class="nav-text">ideogram block显示染色体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ticks-block以刻度形式显示染色体大小"><span class="nav-number">3.2.</span> <span class="nav-text">ticks block以刻度形式显示染色体大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#links-block以曲线连接显示基因组内部之间的联系"><span class="nav-number">3.3.</span> <span class="nav-text">links block以曲线连接显示基因组内部之间的联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plots-block以直方图形式展示数据"><span class="nav-number">3.4.</span> <span class="nav-text">plots block以直方图形式展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plots-block以热图形式显示数据"><span class="nav-number">3.5.</span> <span class="nav-text">plots block以热图形式显示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plots-block以文本形式显示数据"><span class="nav-number">3.6.</span> <span class="nav-text">plots block以文本形式显示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rules-block放置常用的规则配置"><span class="nav-number">3.7.</span> <span class="nav-text">rules block放置常用的规则配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主配置文件"><span class="nav-number">3.8.</span> <span class="nav-text">主配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Circos命令绘图"><span class="nav-number">3.9.</span> <span class="nav-text">使用Circos命令绘图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TaoYan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Logos.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ytlogos.github.io/2018/07/20/Circos配置文件/';
+          this.page.identifier = '2018/07/20/Circos配置文件/';
+          this.page.title = 'Circos配置文件';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Logos.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "true",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("eCk2SIn1qQv7950CURz6Ybz3-gzGzoHsz", "mh2NS9HEcotcPN5TBwwMAKSk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("eCk2SIn1qQv7950CURz6Ybz3-gzGzoHsz", "mh2NS9HEcotcPN5TBwwMAKSk");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css">
